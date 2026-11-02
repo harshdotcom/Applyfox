@@ -1,157 +1,3213 @@
 companies:
+  - { name: "01c", ats: ashby, slug: 01c }
+  - { name: "0g", ats: ashby, slug: 0g }
+  - { name: "0x", ats: ashby, slug: 0x }
+  - { name: "10xteam", ats: ashby, slug: 10xteam }
+  - { name: "11x", ats: ashby, slug: 11x }
+  - { name: "1mind", ats: ashby, slug: 1mind }
   - { name: "1Password", ats: ashby, slug: 1password }
+  - { name: "3y Health", ats: ashby, slug: 3y-health }
+  - { name: "42dot", ats: ashby, slug: 42dot }
+  - { name: "8fleet Inc", ats: ashby, slug: 8fleet-inc }
+  - { name: "8returns", ats: ashby, slug: 8returns }
+  - { name: "8vc", ats: ashby, slug: 8vc }
+  - { name: "9 Mothers", ats: ashby, slug: 9-mothers }
+  - { name: "9fin", ats: ashby, slug: 9fin }
+  - { name: "A Place For Mom", ats: ashby, slug: a-place-for-mom }
+  - { name: "A Team", ats: ashby, slug: a-team }
+  - { name: "Abacum", ats: ashby, slug: abacum }
+  - { name: "Abby Care", ats: ashby, slug: abby-care }
+  - { name: "Abe", ats: ashby, slug: abe }
+  - { name: "Abound", ats: ashby, slug: abound }
+  - { name: "Abridge", ats: ashby, slug: abridge }
+  - { name: "Absorblms", ats: ashby, slug: absorblms }
+  - { name: "Accelevents", ats: ashby, slug: accelevents }
+  - { name: "Accord", ats: ashby, slug: accord }
+  - { name: "Accurx", ats: ashby, slug: accurx }
+  - { name: "Ace 1 Media", ats: ashby, slug: ace-1-media }
+  - { name: "Achilleshr", ats: ashby, slug: achilleshr }
+  - { name: "Achira", ats: ashby, slug: achira }
+  - { name: "Aclima", ats: ashby, slug: aclima }
+  - { name: "Acme", ats: ashby, slug: acme }
+  - { name: "Acorns", ats: ashby, slug: acorns }
+  - { name: "Acquird", ats: ashby, slug: acquird }
+  - { name: "Acquisition", ats: ashby, slug: acquisition }
+  - { name: "Adaption", ats: ashby, slug: adaption }
+  - { name: "Adaptive", ats: ashby, slug: adaptive }
+  - { name: "Adaptive Ml", ats: ashby, slug: adaptive-ml }
+  - { name: "Adaptivesecurity", ats: ashby, slug: adaptivesecurity }
+  - { name: "Adaptyv", ats: ashby, slug: adaptyv }
+  - { name: "Addi", ats: ashby, slug: addi }
+  - { name: "Adelphi Ai", ats: ashby, slug: adelphi-ai }
+  - { name: "Admiral", ats: ashby, slug: admiral }
+  - { name: "Adthena", ats: ashby, slug: adthena }
+  - { name: "Aegis Ai", ats: ashby, slug: aegis-ai }
+  - { name: "Aerovect", ats: ashby, slug: aerovect }
   - { name: "Aescape", ats: ashby, slug: aescape }
-  - { name: "Agave", ats: ashby, slug: agave }
-  - { name: "AgZen", ats: ashby, slug: agzen }
-  - { name: "AiPrise", ats: ashby, slug: aiprise }
-  - { name: "Allen Control Systems", ats: ashby, slug: allen-control-systems }
-  - { name: "Amplify", ats: ashby, slug: amplify }
+  - { name: "Agavegames", ats: ashby, slug: agavegames }
+  - { name: "Agent", ats: ashby, slug: agent }
+  - { name: "Agentio", ats: ashby, slug: agentio }
+  - { name: "Agentis Capital Advisors", ats: ashby, slug: agentis-capital-advisors }
+  - { name: "Agentmail", ats: ashby, slug: agentmail }
+  - { name: "Agi Inc", ats: ashby, slug: agi-inc }
+  - { name: "Agora", ats: ashby, slug: agora }
+  - { name: "Agreena", ats: ashby, slug: agreena }
+  - { name: "Aibidia", ats: ashby, slug: aibidia }
+  - { name: "Aidkit", ats: ashby, slug: aidkit }
+  - { name: "Aim4hire", ats: ashby, slug: aim4hire }
+  - { name: "Airapps", ats: ashby, slug: airapps }
+  - { name: "Airbyte", ats: ashby, slug: airbyte }
+  - { name: "Airgarage", ats: ashby, slug: airgarage }
+  - { name: "Airkit", ats: ashby, slug: airkit }
+  - { name: "Airops", ats: ashby, slug: airops }
+  - { name: "Airplane", ats: ashby, slug: airplane }
+  - { name: "Airtable", ats: ashby, slug: airtable }
+  - { name: "Airtasker", ats: ashby, slug: airtasker }
+  - { name: "Airwallex", ats: ashby, slug: airwallex }
+  - { name: "Airweave", ats: ashby, slug: airweave }
+  - { name: "Aisle", ats: ashby, slug: aisle }
+  - { name: "Aiwyn", ats: ashby, slug: aiwyn }
+  - { name: "Aizen", ats: ashby, slug: aizen }
+  - { name: "Ajax", ats: ashby, slug: ajax }
+  - { name: "Akasa", ats: ashby, slug: akasa }
+  - { name: "Akur8", ats: ashby, slug: akur8 }
+  - { name: "Alan", ats: ashby, slug: alan }
+  - { name: "Alby", ats: ashby, slug: alby }
+  - { name: "Alcazar Energy", ats: ashby, slug: alcazar-energy }
+  - { name: "Alchemy", ats: ashby, slug: alchemy }
+  - { name: "Alembic", ats: ashby, slug: alembic }
+  - { name: "Aleph", ats: ashby, slug: aleph }
+  - { name: "Alephalpha", ats: ashby, slug: alephalpha }
+  - { name: "Aletiq", ats: ashby, slug: aletiq }
+  - { name: "Algo1", ats: ashby, slug: algo1 }
+  - { name: "Allarahealth", ats: ashby, slug: allarahealth }
+  - { name: "Allica Bank", ats: ashby, slug: allica-bank }
+  - { name: "Allinbits", ats: ashby, slug: allinbits }
+  - { name: "Allium", ats: ashby, slug: allium }
+  - { name: "Alljoined", ats: ashby, slug: alljoined }
+  - { name: "Alloyenterprises", ats: ashby, slug: alloyenterprises }
+  - { name: "Allspice", ats: ashby, slug: allspice }
+  - { name: "Almabase", ats: ashby, slug: almabase }
+  - { name: "Almedia", ats: ashby, slug: almedia }
+  - { name: "Alotten Inc", ats: ashby, slug: alotten-inc }
+  - { name: "Alpaca", ats: ashby, slug: alpaca }
+  - { name: "Alpacahealth", ats: ashby, slug: alpacahealth }
+  - { name: "Alpha", ats: ashby, slug: alpha }
+  - { name: "Alpinex", ats: ashby, slug: alpinex }
+  - { name: "Altercall", ats: ashby, slug: altercall }
+  - { name: "Alternativepayments", ats: ashby, slug: alternativepayments }
+  - { name: "Altimate", ats: ashby, slug: altimate }
+  - { name: "Altura", ats: ashby, slug: altura }
+  - { name: "Amber", ats: ashby, slug: amber }
+  - { name: "Ambiencehealthcare", ats: ashby, slug: ambiencehealthcare }
+  - { name: "Amboss", ats: ashby, slug: amboss }
+  - { name: "Ambral", ats: ashby, slug: ambral }
+  - { name: "Ambrook", ats: ashby, slug: ambrook }
+  - { name: "Amca", ats: ashby, slug: amca }
+  - { name: "Ameba", ats: ashby, slug: ameba }
+  - { name: "American Housing", ats: ashby, slug: american-housing }
+  - { name: "Americanoperator", ats: ashby, slug: americanoperator }
+  - { name: "Amo", ats: ashby, slug: amo }
+  - { name: "Amper", ats: ashby, slug: amper }
+  - { name: "Amperos", ats: ashby, slug: amperos }
+  - { name: "Ampersand", ats: ashby, slug: ampersand }
+  - { name: "Amplitude", ats: ashby, slug: amplitude }
+  - { name: "Amplo", ats: ashby, slug: amplo }
+  - { name: "Anagram", ats: ashby, slug: anagram }
+  - { name: "Anam", ats: ashby, slug: anam }
+  - { name: "Anara", ats: ashby, slug: anara }
+  - { name: "Andela", ats: ashby, slug: andela }
+  - { name: "Andotechnologies", ats: ashby, slug: andotechnologies }
+  - { name: "Andromeda", ats: ashby, slug: andromeda }
+  - { name: "Angelinvest", ats: ashby, slug: angelinvest }
+  - { name: "Anglehealth", ats: ashby, slug: anglehealth }
+  - { name: "Anima", ats: ashby, slug: anima }
+  - { name: "Ankar", ats: ashby, slug: ankar }
+  - { name: "Ankorstore", ats: ashby, slug: ankorstore }
+  - { name: "Annaautismcare", ats: ashby, slug: annaautismcare }
+  - { name: "Anon", ats: ashby, slug: anon }
+  - { name: "Anrok", ats: ashby, slug: anrok }
+  - { name: "Ansiblehealth", ats: ashby, slug: ansiblehealth }
+  - { name: "Answersnow", ats: ashby, slug: answersnow }
+  - { name: "Antaiventures", ats: ashby, slug: antaiventures }
   - { name: "Antares", ats: ashby, slug: antares }
+  - { name: "Anterior", ats: ashby, slug: anterior }
   - { name: "Anthelion Capital", ats: ashby, slug: anthelioncap }
+  - { name: "Anthropic", ats: ashby, slug: anthropic }
+  - { name: "Antimetal", ats: ashby, slug: antimetal }
+  - { name: "Antithesis", ats: ashby, slug: antithesis }
+  - { name: "Anyscale", ats: ashby, slug: anyscale }
+  - { name: "Anysource", ats: ashby, slug: anysource }
+  - { name: "Anything", ats: ashby, slug: anything }
+  - { name: "Anyvan", ats: ashby, slug: anyvan }
+  - { name: "Apart", ats: ashby, slug: apart }
+  - { name: "Apella", ats: ashby, slug: apella }
+  - { name: "Apex Technology Inc", ats: ashby, slug: apex-technology-inc }
+  - { name: "Apexgrowth", ats: ashby, slug: apexgrowth }
+  - { name: "Apfusion", ats: ashby, slug: apfusion }
+  - { name: "Apify", ats: ashby, slug: apify }
+  - { name: "Apolink", ats: ashby, slug: apolink }
+  - { name: "Apollo Graphql", ats: ashby, slug: apollo-graphql }
+  - { name: "Apollo Information Systems", ats: ashby, slug: apollo-information-systems }
   - { name: "Applied Intuition", ats: ashby, slug: applied }
-  - { name: "Armadin", ats: ashby, slug: armadin }
+  - { name: "Appliedlabs", ats: ashby, slug: appliedlabs }
+  - { name: "Apply Opengradient", ats: ashby, slug: apply-opengradient }
+  - { name: "Appsmith", ats: ashby, slug: appsmith }
+  - { name: "April", ats: ashby, slug: april }
+  - { name: "Apron", ats: ashby, slug: apron }
+  - { name: "Aptosfoundation", ats: ashby, slug: aptosfoundation }
+  - { name: "Aquant", ats: ashby, slug: aquant }
+  - { name: "Aquark", ats: ashby, slug: aquark }
+  - { name: "Arago", ats: ashby, slug: arago }
+  - { name: "Arb Interactive", ats: ashby, slug: arb-interactive }
+  - { name: "Arbiter Ai", ats: ashby, slug: arbiter-ai }
+  - { name: "Arbor", ats: ashby, slug: arbor }
+  - { name: "Arborxr", ats: ashby, slug: arborxr }
+  - { name: "Arcada", ats: ashby, slug: arcada }
+  - { name: "Arcade", ats: ashby, slug: arcade }
+  - { name: "Arcade", ats: ashby, slug: arcade-ai }
+  - { name: "Arcadeai", ats: ashby, slug: arcadeai }
+  - { name: "Archive", ats: ashby, slug: archive }
+  - { name: "Ardea Partners", ats: ashby, slug: ardea-partners }
+  - { name: "Arena", ats: ashby, slug: arena }
+  - { name: "Argolabs", ats: ashby, slug: argolabs }
+  - { name: "Argus", ats: ashby, slug: argus }
+  - { name: "Ario", ats: ashby, slug: ario }
+  - { name: "Arizent", ats: ashby, slug: arizent }
+  - { name: "Arketa", ats: ashby, slug: arketa }
+  - { name: "Arlo", ats: ashby, slug: arlo }
+  - { name: "Arqu", ats: ashby, slug: arqu }
+  - { name: "Arrakis", ats: ashby, slug: arrakis }
+  - { name: "Array Behavioral Care", ats: ashby, slug: array-behavioral-care }
+  - { name: "Artafinance", ats: ashby, slug: artafinance }
+  - { name: "Artemisanalytics", ats: ashby, slug: artemisanalytics }
+  - { name: "Artemisxyz", ats: ashby, slug: artemisxyz }
+  - { name: "Artian", ats: ashby, slug: artian }
+  - { name: "Articul8", ats: ashby, slug: articul8 }
+  - { name: "Artie", ats: ashby, slug: artie }
+  - { name: "Artifact", ats: ashby, slug: artifact }
+  - { name: "Artisan", ats: ashby, slug: artisan }
+  - { name: "Artsy", ats: ashby, slug: artsy }
+  - { name: "Ascend Io", ats: ashby, slug: ascend-io }
+  - { name: "Ascertain", ats: ashby, slug: ascertain }
   - { name: "Ashby", ats: ashby, slug: ashby }
+  - { name: "Ashgro", ats: ashby, slug: ashgro }
+  - { name: "Aspora", ats: ashby, slug: aspora }
+  - { name: "Assembledhq", ats: ashby, slug: assembledhq }
+  - { name: "Assort Health", ats: ashby, slug: assorthealth }
+  - { name: "Assured", ats: ashby, slug: assured }
+  - { name: "Astera", ats: ashby, slug: astera }
+  - { name: "Asteriai", ats: ashby, slug: asteriai }
+  - { name: "Astra", ats: ashby, slug: astra }
+  - { name: "Astral", ats: ashby, slug: astral }
+  - { name: "Astro Mechanica", ats: ashby, slug: astro-mechanica }
+  - { name: "Astronomer", ats: ashby, slug: astronomer }
+  - { name: "Asula", ats: ashby, slug: asula }
+  - { name: "Ataraxis Ai", ats: ashby, slug: ataraxis-ai }
+  - { name: "Atg", ats: ashby, slug: atg }
+  - { name: "Athelas", ats: ashby, slug: athelas }
+  - { name: "Atlan", ats: ashby, slug: atlan }
+  - { name: "Atlas", ats: ashby, slug: atlas }
+  - { name: "Atlasonc", ats: ashby, slug: atlasonc }
+  - { name: "Atlassecurity", ats: ashby, slug: atlassecurity }
+  - { name: "Atmoicindustries", ats: ashby, slug: atmoicindustries }
+  - { name: "Atmos", ats: ashby, slug: atmos }
+  - { name: "Atob", ats: ashby, slug: atob }
+  - { name: "Atolio", ats: ashby, slug: atolio }
+  - { name: "Atomic", ats: ashby, slug: atomic }
+  - { name: "Atomic Financial", ats: ashby, slug: atomic-financial }
+  - { name: "Atomic Invest", ats: ashby, slug: atomic-invest }
+  - { name: "Atomicindustries", ats: ashby, slug: atomicindustries }
+  - { name: "Atomicsemi", ats: ashby, slug: atomicsemi }
+  - { name: "Atrato", ats: ashby, slug: atrato }
+  - { name: "Atroposhealth", ats: ashby, slug: atroposhealth }
+  - { name: "Atticus", ats: ashby, slug: atticus }
+  - { name: "Attio", ats: ashby, slug: attio }
+  - { name: "Auctor", ats: ashby, slug: auctor }
+  - { name: "Auditboard", ats: ashby, slug: auditboard }
+  - { name: "Aufinity Group Gmbh", ats: ashby, slug: aufinity-group-gmbh }
+  - { name: "Auger", ats: ashby, slug: auger }
+  - { name: "Augment", ats: ashby, slug: go-augment }
+  - { name: "Augmodo", ats: ashby, slug: augmodo }
+  - { name: "August", ats: ashby, slug: august }
+  - { name: "August Health", ats: ashby, slug: august-health }
   - { name: "Aurelian", ats: ashby, slug: aurelian }
-  - { name: "Backbone", ats: ashby, slug: backbone }
-  - { name: "Bags", ats: ashby, slug: bagsfm }
+  - { name: "Aureliussystems", ats: ashby, slug: aureliussystems }
+  - { name: "Aurora Solar", ats: ashby, slug: aurorasolar }
+  - { name: "Authenticins", ats: ashby, slug: authenticins }
+  - { name: "Authzed", ats: ashby, slug: authzed }
+  - { name: "Automat", ats: ashby, slug: automat }
+  - { name: "Autone", ats: ashby, slug: autone }
+  - { name: "Autoscience", ats: ashby, slug: autoscience }
+  - { name: "Ava Labs", ats: ashby, slug: ava-labs }
+  - { name: "Avala", ats: ashby, slug: avala }
+  - { name: "Avalanchefusion", ats: ashby, slug: avalanchefusion }
+  - { name: "Avaprotocol", ats: ashby, slug: avaprotocol }
+  - { name: "Avelios Medical", ats: ashby, slug: avelios-medical }
+  - { name: "Aven", ats: ashby, slug: aven }
+  - { name: "Avenue", ats: ashby, slug: avenue }
+  - { name: "Avid4", ats: ashby, slug: avid4 }
+  - { name: "Avoca", ats: ashby, slug: avoca }
+  - { name: "Avra", ats: ashby, slug: avra }
+  - { name: "Away", ats: ashby, slug: away }
+  - { name: "Awlstrategies", ats: ashby, slug: awlstrategies }
+  - { name: "Axelera", ats: ashby, slug: axelera }
+  - { name: "Axiom", ats: ashby, slug: axiom }
+  - { name: "Axiom Co", ats: ashby, slug: axiom-co }
+  - { name: "Axiombio", ats: ashby, slug: axiombio }
+  - { name: "Axion", ats: ashby, slug: axion }
+  - { name: "Axionray", ats: ashby, slug: axionray }
+  - { name: "Axle Careers", ats: ashby, slug: axle-careers }
+  - { name: "Axle Health", ats: ashby, slug: axle-health }
+  - { name: "Axle Mobility", ats: ashby, slug: axle-mobility }
+  - { name: "Axlora", ats: ashby, slug: axlora }
+  - { name: "Babbel", ats: ashby, slug: babbel }
+  - { name: "Babylonchain", ats: ashby, slug: babylonchain }
+  - { name: "Babylonlabs", ats: ashby, slug: babylonlabs }
+  - { name: "Backflip", ats: ashby, slug: backflip }
+  - { name: "Backmarket", ats: ashby, slug: backmarket }
+  - { name: "Backpack", ats: ashby, slug: backpack }
+  - { name: "Bags", ats: ashby, slug: bags }
+  - { name: "Bankjoy", ats: ashby, slug: bankjoy }
+  - { name: "Bantamcommunications", ats: ashby, slug: bantamcommunications }
+  - { name: "Bardo", ats: ashby, slug: bardo }
+  - { name: "Bariendo", ats: ashby, slug: bariendo }
+  - { name: "Barkbus", ats: ashby, slug: barkbus }
   - { name: "Barnes &amp; Thornburg LLP", ats: ashby, slug: barnes }
+  - { name: "Basata", ats: ashby, slug: basata }
+  - { name: "Base Operations", ats: ashby, slug: base-operations }
   - { name: "Base Power Company", ats: ashby, slug: base-power }
+  - { name: "Base0", ats: ashby, slug: base0 }
   - { name: "Baseten", ats: ashby, slug: baseten }
+  - { name: "Basiccapital", ats: ashby, slug: basiccapital }
+  - { name: "Basis", ats: ashby, slug: basis-ai }
+  - { name: "Basis Research", ats: ashby, slug: basis-research }
+  - { name: "Bastion", ats: ashby, slug: bastion }
+  - { name: "Baton", ats: ashby, slug: baton }
+  - { name: "Batoncorporation", ats: ashby, slug: batoncorporation }
+  - { name: "Battle Creek Games", ats: ashby, slug: battle-creek-games }
+  - { name: "Bayesianhealth", ats: ashby, slug: bayesianhealth }
+  - { name: "Beaconai", ats: ashby, slug: beaconai }
+  - { name: "Beacons", ats: ashby, slug: beacons }
+  - { name: "Beakon", ats: ashby, slug: beakon }
+  - { name: "Beam", ats: ashby, slug: beam }
+  - { name: "Beam Up", ats: ashby, slug: beam-up }
+  - { name: "Beamery", ats: ashby, slug: beamery }
+  - { name: "Beamimpact", ats: ashby, slug: beamimpact }
+  - { name: "Bear", ats: ashby, slug: bear }
+  - { name: "Bedrock", ats: ashby, slug: bedrock }
   - { name: "Bedrock Robotics Inc", ats: ashby, slug: bedrock-robotics }
-  - { name: "Bild AI", ats: ashby, slug: bild-ai }
+  - { name: "Bedrockocean", ats: ashby, slug: bedrockocean }
+  - { name: "Beeper", ats: ashby, slug: beeper }
+  - { name: "Believer", ats: ashby, slug: believer }
+  - { name: "Belvo", ats: ashby, slug: belvo }
+  - { name: "Bem", ats: ashby, slug: bem }
+  - { name: "Ben", ats: ashby, slug: ben }
+  - { name: "Bench", ats: ashby, slug: bench }
+  - { name: "Benchling", ats: ashby, slug: benchling }
+  - { name: "Benepass", ats: ashby, slug: benepass }
+  - { name: "Bentoml", ats: ashby, slug: bentoml }
+  - { name: "Beside", ats: ashby, slug: beside }
+  - { name: "Bespokelabs", ats: ashby, slug: bespokelabs }
+  - { name: "Bestow", ats: ashby, slug: bestow }
+  - { name: "Bettercloud", ats: ashby, slug: bettercloud }
+  - { name: "Bettermile", ats: ashby, slug: bettermile }
+  - { name: "Bettermoney", ats: ashby, slug: bettermoney }
+  - { name: "Betterup", ats: ashby, slug: betterup }
+  - { name: "Bevel", ats: ashby, slug: bevel }
+  - { name: "Beyondsports", ats: ashby, slug: beyondsports }
+  - { name: "Bhblasted", ats: ashby, slug: bhblasted }
+  - { name: "Biconomy", ats: ashby, slug: biconomy }
+  - { name: "Bifrost", ats: ashby, slug: bifrost }
+  - { name: "Big Leap Health", ats: ashby, slug: big-leap-health }
+  - { name: "Bigeye", ats: ashby, slug: bigeye }
+  - { name: "Biggergames", ats: ashby, slug: biggergames }
+  - { name: "Billie", ats: ashby, slug: billie }
+  - { name: "Billups", ats: ashby, slug: billups }
+  - { name: "Binalyze", ats: ashby, slug: binalyze }
+  - { name: "Bind", ats: ashby, slug: bind }
+  - { name: "Binti", ats: ashby, slug: binti }
+  - { name: "Bio", ats: ashby, slug: bio }
+  - { name: "Biofire", ats: ashby, slug: biofire }
+  - { name: "Bioptimizers", ats: ashby, slug: bioptimizers }
+  - { name: "Biorender", ats: ashby, slug: biorender }
+  - { name: "Bird", ats: ashby, slug: bird }
+  - { name: "Birdie", ats: ashby, slug: birdie }
+  - { name: "Bitcoin Talent Co", ats: ashby, slug: bitcoin-talent-co }
+  - { name: "Bitewell", ats: ashby, slug: bitewell }
+  - { name: "Bitnomial", ats: ashby, slug: bitnomial }
+  - { name: "Bitstack", ats: ashby, slug: bitstack }
+  - { name: "Bitvavo", ats: ashby, slug: bitvavo }
+  - { name: "Bizly", ats: ashby, slug: bizly }
+  - { name: "Bjak", ats: ashby, slug: bjak }
+  - { name: "Bjakcareer", ats: ashby, slug: bjakcareer }
+  - { name: "Blackbird Labs Inc", ats: ashby, slug: blackbird-labs-inc }
+  - { name: "Blackbox Strategies", ats: ashby, slug: blackbox-strategies }
+  - { name: "Blackpointcyber", ats: ashby, slug: blackpointcyber }
+  - { name: "Blacksmith", ats: ashby, slug: blacksmith }
+  - { name: "Bland", ats: ashby, slug: bland }
+  - { name: "Bland Ai", ats: ashby, slug: bland-ai }
+  - { name: "Blank Metal", ats: ashby, slug: blank-metal }
+  - { name: "Blankashby2", ats: ashby, slug: blankashby2 }
+  - { name: "Blast Io", ats: ashby, slug: blast-io }
+  - { name: "Blink", ats: ashby, slug: blink }
+  - { name: "Bliro", ats: ashby, slug: bliro }
+  - { name: "Blissway", ats: ashby, slug: blissway }
+  - { name: "Block Labs", ats: ashby, slug: block-labs }
+  - { name: "Blockdaemon", ats: ashby, slug: blockdaemon }
+  - { name: "Blockhouse", ats: ashby, slug: blockhouse }
+  - { name: "Blockit", ats: ashby, slug: blockit }
+  - { name: "Blockstream", ats: ashby, slug: blockstream }
+  - { name: "Blockworks", ats: ashby, slug: blockworks }
+  - { name: "Blossom Health", ats: ashby, slug: blossom-health }
+  - { name: "Blowfish", ats: ashby, slug: blowfish }
+  - { name: "Blp Digital", ats: ashby, slug: blp-digital }
+  - { name: "Blue Energy", ats: ashby, slug: blue-energy }
+  - { name: "Blueberrypediatrics", ats: ashby, slug: blueberrypediatrics }
+  - { name: "Bluenote", ats: ashby, slug: bluenote }
+  - { name: "Bluesky", ats: ashby, slug: bluesky }
+  - { name: "Blumen", ats: ashby, slug: blumen }
+  - { name: "Boam", ats: ashby, slug: boam }
+  - { name: "Boatsetter", ats: ashby, slug: boatsetter }
+  - { name: "Bobsled", ats: ashby, slug: bobsled }
+  - { name: "Bobyard", ats: ashby, slug: bobyard }
+  - { name: "Bodyard", ats: ashby, slug: bodyard }
+  - { name: "Bonfire", ats: ashby, slug: bonfire }
+  - { name: "Boomandbucket", ats: ashby, slug: boomandbucket }
+  - { name: "Boomi", ats: ashby, slug: boomi }
+  - { name: "Boon", ats: ashby, slug: boon }
+  - { name: "Boost", ats: ashby, slug: boost }
+  - { name: "Botanictonics", ats: ashby, slug: botanictonics }
+  - { name: "Bounce", ats: ashby, slug: bounce }
+  - { name: "Braiins", ats: ashby, slug: braiins }
   - { name: "Brain Co.", ats: ashby, slug: brainco }
-  - { name: "Bridger", ats: ashby, slug: bridger }
+  - { name: "Brainly", ats: ashby, slug: brainly }
+  - { name: "Braintrust", ats: ashby, slug: braintrust }
+  - { name: "Brale", ats: ashby, slug: brale }
+  - { name: "Branchinsurance", ats: ashby, slug: branchinsurance }
+  - { name: "Branchlab", ats: ashby, slug: branchlab }
+  - { name: "Brandlight", ats: ashby, slug: brandlight }
+  - { name: "Bratte", ats: ashby, slug: bratte }
+  - { name: "Bravehealth", ats: ashby, slug: bravehealth }
+  - { name: "Breadboard", ats: ashby, slug: breadboard }
+  - { name: "Breaker", ats: ashby, slug: breaker }
+  - { name: "Breakmark", ats: ashby, slug: breakmark }
+  - { name: "Bree", ats: ashby, slug: bree }
+  - { name: "Brellium", ats: ashby, slug: brellium }
+  - { name: "Brettonai", ats: ashby, slug: brettonai }
+  - { name: "Brex", ats: ashby, slug: brex }
+  - { name: "Bridge", ats: ashby, slug: bridge }
+  - { name: "Brightline", ats: ashby, slug: brightline }
+  - { name: "Brightmeds", ats: ashby, slug: brightmeds }
+  - { name: "Brightwheel", ats: ashby, slug: brightwheel }
+  - { name: "Brigit", ats: ashby, slug: brigit }
+  - { name: "Brimstone", ats: ashby, slug: brimstone }
+  - { name: "Brinc", ats: ashby, slug: brinc }
+  - { name: "Brisk Teaching", ats: ashby, slug: brisk-teaching }
+  - { name: "Broccoli", ats: ashby, slug: broccoli }
+  - { name: "Brooklyn Health", ats: ashby, slug: brooklyn-health }
+  - { name: "Browserbase", ats: ashby, slug: browserbase }
+  - { name: "Bubble", ats: ashby, slug: bubble }
+  - { name: "Buena", ats: ashby, slug: buena }
+  - { name: "Buffer", ats: ashby, slug: buffer }
+  - { name: "Builder Prime", ats: ashby, slug: builder-prime }
+  - { name: "Buildlinx", ats: ashby, slug: buildlinx }
+  - { name: "Buildout", ats: ashby, slug: buildout }
+  - { name: "Buildwithfern", ats: ashby, slug: buildwithfern }
+  - { name: "Built Robotics", ats: ashby, slug: built-robotics }
+  - { name: "Bullpen Talent", ats: ashby, slug: bullpen-talent }
+  - { name: "Bunch", ats: ashby, slug: bunch }
+  - { name: "Buoyant", ats: ashby, slug: buoyant }
+  - { name: "Bureau", ats: ashby, slug: bureau }
+  - { name: "Burklandassociates", ats: ashby, slug: burklandassociates }
+  - { name: "Butterflymx", ats: ashby, slug: butterflymx }
+  - { name: "Bynder", ats: ashby, slug: bynder }
+  - { name: "C Side", ats: ashby, slug: c-side }
+  - { name: "C0ffee", ats: ashby, slug: c0ffee }
+  - { name: "C1", ats: ashby, slug: c1 }
+  - { name: "Caldera", ats: ashby, slug: caldera }
+  - { name: "Callosum", ats: ashby, slug: callosum }
+  - { name: "Calm", ats: ashby, slug: calm }
+  - { name: "Camber", ats: ashby, slug: camber }
+  - { name: "Cambio", ats: ashby, slug: cambio }
+  - { name: "Cambium", ats: ashby, slug: cambium }
+  - { name: "Cambly", ats: ashby, slug: cambly }
+  - { name: "Campfire", ats: ashby, slug: campfire }
+  - { name: "Campus", ats: ashby, slug: campus }
+  - { name: "Camunda", ats: ashby, slug: camunda }
+  - { name: "Canals", ats: ashby, slug: canals }
+  - { name: "Candidhealth", ats: ashby, slug: candidhealth }
+  - { name: "Candidintelligence", ats: ashby, slug: candidintelligence }
+  - { name: "Cantina", ats: ashby, slug: cantina }
+  - { name: "Canvas Medical", ats: ashby, slug: canvas-medical }
+  - { name: "Capchase", ats: ashby, slug: capchase }
+  - { name: "Cape", ats: ashby, slug: cape }
+  - { name: "Capimoney", ats: ashby, slug: capimoney }
+  - { name: "Capsule", ats: ashby, slug: capsule }
+  - { name: "Captions", ats: ashby, slug: captions }
+  - { name: "Carbonre", ats: ashby, slug: carbonre }
+  - { name: "Carbonx", ats: ashby, slug: carbonx }
+  - { name: "Cardless", ats: ashby, slug: cardless }
+  - { name: "Carecar", ats: ashby, slug: carecar }
+  - { name: "Careerstrengo", ats: ashby, slug: careerstrengo }
+  - { name: "Cargado", ats: ashby, slug: cargado }
+  - { name: "Cargo One", ats: ashby, slug: cargo-one }
+  - { name: "Caribou", ats: ashby, slug: caribou }
+  - { name: "Carnot Ai", ats: ashby, slug: carnot-ai }
+  - { name: "Carry", ats: ashby, slug: carry }
   - { name: "Cartesia", ats: ashby, slug: cartesia }
-  - { name: "Cerebras Systems", ats: ashby, slug: cerebras }
-  - { name: "cfo.ai", ats: ashby, slug: runway }
+  - { name: "Cartloop", ats: ashby, slug: cartloop }
+  - { name: "Carwow", ats: ashby, slug: carwow }
+  - { name: "Cas", ats: ashby, slug: cas }
+  - { name: "Casa", ats: ashby, slug: casa }
+  - { name: "Casap", ats: ashby, slug: casap }
+  - { name: "Casca", ats: ashby, slug: casca }
+  - { name: "Casdin Capital", ats: ashby, slug: casdin-capital }
+  - { name: "Cased", ats: ashby, slug: cased }
+  - { name: "Cassidy", ats: ashby, slug: cassidy }
+  - { name: "Castle", ats: ashby, slug: castle }
+  - { name: "Catchafire", ats: ashby, slug: catchafire }
+  - { name: "Category Labs", ats: ashby, slug: category-labs }
+  - { name: "Catena Labs", ats: ashby, slug: catena-labs }
+  - { name: "Catio", ats: ashby, slug: catio }
+  - { name: "Causaly", ats: ashby, slug: causaly }
+  - { name: "Cbai", ats: ashby, slug: cbai }
+  - { name: "Ceilix", ats: ashby, slug: ceilix }
+  - { name: "Cellular Intelligence", ats: ashby, slug: cellular-intelligence }
+  - { name: "Census", ats: ashby, slug: census }
+  - { name: "Centari", ats: ashby, slug: centari }
+  - { name: "Center", ats: ashby, slug: center }
+  - { name: "Centerfield", ats: ashby, slug: centerfield }
+  - { name: "Centivo", ats: ashby, slug: centivo }
+  - { name: "Centralhq", ats: ashby, slug: centralhq }
+  - { name: "Centreforeffectivealtruism", ats: ashby, slug: centreforeffectivealtruism }
+  - { name: "Ceremonia", ats: ashby, slug: ceremonia }
+  - { name: "Certn", ats: ashby, slug: certn }
+  - { name: "Cerve", ats: ashby, slug: cerve }
+  - { name: "Chaidiscovery", ats: ashby, slug: chaidiscovery }
+  - { name: "Chainalysis", ats: ashby, slug: chainalysis }
+  - { name: "Chainalysis Careers", ats: ashby, slug: chainalysis-careers }
+  - { name: "Chainlink Labs", ats: ashby, slug: chainlink-labs }
+  - { name: "Chainlinklabs", ats: ashby, slug: chainlinklabs }
+  - { name: "Chainopera", ats: ashby, slug: chainopera }
+  - { name: "Chalice", ats: ashby, slug: chalice }
   - { name: "Chalk", ats: ashby, slug: chalk }
-  - { name: "Clay Labs", ats: ashby, slug: claylabs }
+  - { name: "Chambercardio", ats: ashby, slug: chambercardio }
+  - { name: "Change", ats: ashby, slug: change }
+  - { name: "Chapter", ats: ashby, slug: chapter }
+  - { name: "Character.AI", ats: ashby, slug: character }
+  - { name: "Characterbio", ats: ashby, slug: characterbio }
+  - { name: "Charge Robotics", ats: ashby, slug: charge-robotics }
+  - { name: "Charlie", ats: ashby, slug: charlie }
+  - { name: "Charthop", ats: ashby, slug: charthop }
+  - { name: "Chattermill", ats: ashby, slug: chattermill }
+  - { name: "Checkatrade", ats: ashby, slug: checkatrade }
+  - { name: "Checkbox Technology", ats: ashby, slug: checkbox-technology }
+  - { name: "Checkly", ats: ashby, slug: checkly }
+  - { name: "Checkout.com", ats: ashby, slug: checkout }
+  - { name: "Chestnut", ats: ashby, slug: chestnut }
+  - { name: "Chief", ats: ashby, slug: chief }
+  - { name: "Chilipiper", ats: ashby, slug: chilipiper }
+  - { name: "Chillchat", ats: ashby, slug: chillchat }
+  - { name: "Chipstack", ats: ashby, slug: chipstack }
+  - { name: "Choco", ats: ashby, slug: choco }
+  - { name: "Chromatic", ats: ashby, slug: chromatic }
+  - { name: "Chronosphere", ats: ashby, slug: chronosphere }
+  - { name: "Chronospherejobs", ats: ashby, slug: chronospherejobs }
+  - { name: "Cinder", ats: ashby, slug: cinder }
+  - { name: "Circle Health", ats: ashby, slug: circle-health }
+  - { name: "Circuithub", ats: ashby, slug: circuithub }
+  - { name: "Ciroos", ats: ashby, slug: ciroos }
+  - { name: "Citadel Ai", ats: ashby, slug: citadel-ai }
+  - { name: "Citizen", ats: ashby, slug: citizen }
+  - { name: "Civicmarketplace", ats: ashby, slug: civicmarketplace }
+  - { name: "Civilgrid", ats: ashby, slug: civilgrid }
+  - { name: "Claim Co", ats: ashby, slug: claim-co }
+  - { name: "Claim Health", ats: ashby, slug: claim-health }
+  - { name: "Clair", ats: ashby, slug: clair }
+  - { name: "Clarasight", ats: ashby, slug: clarasight }
+  - { name: "Clarify", ats: ashby, slug: clarify }
+  - { name: "Clarion", ats: ashby, slug: clarion }
+  - { name: "Clarisights", ats: ashby, slug: clarisights }
+  - { name: "Clarity", ats: ashby, slug: clarity }
+  - { name: "Claritypay", ats: ashby, slug: claritypay }
+  - { name: "Claritypediatrics", ats: ashby, slug: claritypediatrics }
+  - { name: "Clarium", ats: ashby, slug: clarium }
+  - { name: "Clasp", ats: ashby, slug: clasp }
+  - { name: "Clasp Group", ats: ashby, slug: clasp-group }
+  - { name: "Classavo", ats: ashby, slug: classavo }
+  - { name: "Classdojo", ats: ashby, slug: classdojo }
+  - { name: "Clay", ats: ashby, slug: claylabs }
+  - { name: "Clay", ats: ashby, slug: clay }
+  - { name: "Clean Nutraceuticals", ats: ashby, slug: clean-nutraceuticals }
+  - { name: "Clearbank", ats: ashby, slug: clearbank }
+  - { name: "Clearco", ats: ashby, slug: clearco }
+  - { name: "Clearvector", ats: ashby, slug: clearvector }
+  - { name: "Cleric", ats: ashby, slug: cleric }
+  - { name: "Clerk", ats: ashby, slug: clerk }
+  - { name: "ClickHouse", ats: ashby, slug: clickhouse }
+  - { name: "Clicklease", ats: ashby, slug: clicklease }
+  - { name: "Clickup", ats: ashby, slug: clickup }
+  - { name: "Climate Finance Solutions", ats: ashby, slug: climate-finance-solutions }
+  - { name: "Climatiq", ats: ashby, slug: climatiq }
+  - { name: "Clinicallyai", ats: ashby, slug: clinicallyai }
+  - { name: "Clipboard", ats: ashby, slug: clipboard }
+  - { name: "Clipbook", ats: ashby, slug: clipbook }
+  - { name: "Close", ats: ashby, slug: close }
+  - { name: "Cloudscaler", ats: ashby, slug: cloudscaler }
+  - { name: "Cloudtrucks", ats: ashby, slug: cloudtrucks }
+  - { name: "Cloudzero", ats: ashby, slug: cloudzero }
+  - { name: "Clove", ats: ashby, slug: clove }
+  - { name: "Clubhouse", ats: ashby, slug: clubhouse }
+  - { name: "Cluely", ats: ashby, slug: cluely }
+  - { name: "Coactive", ats: ashby, slug: coactive }
+  - { name: "Coalesce", ats: ashby, slug: coalesce }
+  - { name: "Coastal", ats: ashby, slug: coastal }
+  - { name: "Coastal Carbon", ats: ashby, slug: coastal-carbon }
+  - { name: "Cobot", ats: ashby, slug: cobot }
+  - { name: "Cococart", ats: ashby, slug: cococart }
+  - { name: "Cocodelivery", ats: ashby, slug: cocodelivery }
+  - { name: "Cocreate", ats: ashby, slug: cocreate }
+  - { name: "Codametrix", ats: ashby, slug: codametrix }
+  - { name: "Codat", ats: ashby, slug: codat }
+  - { name: "Codegen", ats: ashby, slug: codegen }
+  - { name: "Codeium", ats: ashby, slug: codeium }
+  - { name: "Coder", ats: ashby, slug: coder }
+  - { name: "Coderabbit", ats: ashby, slug: coderabbit }
+  - { name: "Codes Health", ats: ashby, slug: codes-health }
+  - { name: "Coefficientgiving", ats: ashby, slug: coefficientgiving }
+  - { name: "Coframe", ats: ashby, slug: coframe }
+  - { name: "Cogent Security", ats: ashby, slug: cogent-security }
   - { name: "Cognition", ats: ashby, slug: cognition }
   - { name: "Cohere", ats: ashby, slug: cohere }
-  - { name: "Color Health", ats: ashby, slug: color-health }
+  - { name: "Coinhako", ats: ashby, slug: coinhako }
+  - { name: "CoinTracker", ats: ashby, slug: cointracker }
+  - { name: "Collective", ats: ashby, slug: collective }
+  - { name: "Colonist", ats: ashby, slug: colonist }
+  - { name: "Column", ats: ashby, slug: column }
+  - { name: "Columntax", ats: ashby, slug: columntax }
+  - { name: "Comfy Org", ats: ashby, slug: comfy-org }
+  - { name: "Comind", ats: ashby, slug: comind }
+  - { name: "Comity", ats: ashby, slug: comity }
+  - { name: "Comm", ats: ashby, slug: comm }
+  - { name: "Commandbar", ats: ashby, slug: commandbar }
+  - { name: "Commit", ats: ashby, slug: commit }
+  - { name: "Common Fund", ats: ashby, slug: common-fund }
+  - { name: "Common Room", ats: ashby, slug: commonroom }
+  - { name: "Commons", ats: ashby, slug: commons }
+  - { name: "Commonware", ats: ashby, slug: commonware }
+  - { name: "Communityphone", ats: ashby, slug: communityphone }
+  - { name: "Commure", ats: ashby, slug: commure }
+  - { name: "Commure Athelas", ats: ashby, slug: commure-athelas }
+  - { name: "Compa", ats: ashby, slug: compa }
+  - { name: "Company", ats: ashby, slug: company }
+  - { name: "Compass Reg", ats: ashby, slug: compass-reg }
+  - { name: "Compass Surgical Partners", ats: ashby, slug: compass-surgical-partners }
+  - { name: "Complement", ats: ashby, slug: complement }
+  - { name: "Complete", ats: ashby, slug: complete }
   - { name: "Composio", ats: ashby, slug: composio }
-  - { name: "ConductorAI", ats: ashby, slug: conductorai }
+  - { name: "Composite", ats: ashby, slug: composite }
+  - { name: "Compound", ats: ashby, slug: compound }
+  - { name: "Compscience", ats: ashby, slug: compscience }
+  - { name: "Comstruct", ats: ashby, slug: comstruct }
+  - { name: "Comulate", ats: ashby, slug: comulate }
+  - { name: "Comun", ats: ashby, slug: comun }
+  - { name: "Conception", ats: ashby, slug: conception }
+  - { name: "Concourse", ats: ashby, slug: concourse }
+  - { name: "Conduct", ats: ashby, slug: conduct }
+  - { name: "Conductorai", ats: ashby, slug: conductorai }
+  - { name: "Conductorone", ats: ashby, slug: conductorone }
+  - { name: "Conduit", ats: ashby, slug: conduit }
+  - { name: "Conduit Health", ats: ashby, slug: conduit-health }
+  - { name: "Confiant", ats: ashby, slug: confiant }
   - { name: "Confluent", ats: ashby, slug: confluent }
-  - { name: "Cowboy Space Corp.", ats: ashby, slug: cowboyspace }
+  - { name: "Connecthum", ats: ashby, slug: connecthum }
+  - { name: "Connectly", ats: ashby, slug: connectly }
+  - { name: "Conscious Talent", ats: ashby, slug: conscious-talent }
+  - { name: "Console", ats: ashby, slug: console }
+  - { name: "Contentoo", ats: ashby, slug: contentoo }
+  - { name: "Continua", ats: ashby, slug: continua }
+  - { name: "Continue", ats: ashby, slug: continue }
+  - { name: "Contoro", ats: ashby, slug: contoro }
+  - { name: "Contra", ats: ashby, slug: contra }
+  - { name: "Contrast Security", ats: ashby, slug: contrast-security }
+  - { name: "Contribution Labs", ats: ashby, slug: contribution-labs }
+  - { name: "Conveo", ats: ashby, slug: conveo }
+  - { name: "Conversion", ats: ashby, slug: conversion }
+  - { name: "Convex", ats: ashby, slug: convex-dev }
+  - { name: "Convey", ats: ashby, slug: convey }
+  - { name: "Convictional", ats: ashby, slug: convictional }
+  - { name: "Coperniq", ats: ashby, slug: coperniq }
+  - { name: "Copilot", ats: ashby, slug: copilot }
+  - { name: "Copilot Money", ats: ashby, slug: copilot-money }
+  - { name: "Coral", ats: ashby, slug: coral }
+  - { name: "Coram Ai", ats: ashby, slug: coram-ai }
+  - { name: "Coreflow", ats: ashby, slug: coreflow }
+  - { name: "Coreoftheheart", ats: ashby, slug: coreoftheheart }
+  - { name: "Coreplan", ats: ashby, slug: coreplan }
+  - { name: "Coretylynt", ats: ashby, slug: coretylynt }
+  - { name: "Corevc", ats: ashby, slug: corevc }
+  - { name: "Coris", ats: ashby, slug: coris }
+  - { name: "Cortex", ats: ashby, slug: cortex }
+  - { name: "Corti", ats: ashby, slug: corti }
+  - { name: "Corvus", ats: ashby, slug: corvus }
+  - { name: "Corvus Robotics", ats: ashby, slug: corvus-robotics }
+  - { name: "Costanoavc", ats: ashby, slug: costanoavc }
+  - { name: "Cosuno", ats: ashby, slug: cosuno }
+  - { name: "Counsel", ats: ashby, slug: counsel }
+  - { name: "Count", ats: ashby, slug: count }
+  - { name: "Course", ats: ashby, slug: course }
+  - { name: "Coursecareers", ats: ashby, slug: coursecareers }
+  - { name: "Courtly", ats: ashby, slug: courtly }
+  - { name: "Coval", ats: ashby, slug: coval }
+  - { name: "Covenal", ats: ashby, slug: covenal }
+  - { name: "Coverbase", ats: ashby, slug: coverbase }
+  - { name: "Coverdash", ats: ashby, slug: coverdash }
+  - { name: "Cow Dao", ats: ashby, slug: cow-dao }
+  - { name: "Coworker", ats: ashby, slug: coworker }
+  - { name: "Cradlebio", ats: ashby, slug: cradlebio }
+  - { name: "Craftdocs", ats: ashby, slug: craftdocs }
+  - { name: "Creatify", ats: ashby, slug: creatify }
+  - { name: "Creatoriq", ats: ashby, slug: creatoriq }
+  - { name: "Credal", ats: ashby, slug: credal }
+  - { name: "Creditgenie", ats: ashby, slug: creditgenie }
+  - { name: "Creem", ats: ashby, slug: creem }
+  - { name: "Crete Professionals Alliance", ats: ashby, slug: crete-professionals-alliance }
+  - { name: "Crispgrowth", ats: ashby, slug: crispgrowth }
+  - { name: "Critical Energy", ats: ashby, slug: critical-energy }
+  - { name: "Criticalloop", ats: ashby, slug: criticalloop }
+  - { name: "Crogl", ats: ashby, slug: crogl }
+  - { name: "Crosby", ats: ashby, slug: crosby }
+  - { name: "Crossjoin Solutions", ats: ashby, slug: crossjoin-solutions }
+  - { name: "Crunchdao", ats: ashby, slug: crunchdao }
+  - { name: "Crusoe", ats: ashby, slug: crusoe }
+  - { name: "Cruxclimate", ats: ashby, slug: cruxclimate }
+  - { name: "Cryptio", ats: ashby, slug: cryptio }
+  - { name: "Cside", ats: ashby, slug: cside }
+  - { name: "Cube", ats: ashby, slug: cube }
+  - { name: "Cubesoftware", ats: ashby, slug: cubesoftware }
+  - { name: "Cubic3", ats: ashby, slug: cubic3 }
+  - { name: "Cubist", ats: ashby, slug: cubist }
+  - { name: "Cultureai", ats: ashby, slug: cultureai }
   - { name: "Cursor", ats: ashby, slug: cursor }
-  - { name: "Cylake, Inc", ats: ashby, slug: cylake-inc }
+  - { name: "Cybcube", ats: ashby, slug: cybcube }
+  - { name: "Cyberhaven", ats: ashby, slug: cyberhaven }
+  - { name: "Cybernut", ats: ashby, slug: cybernut }
+  - { name: "Cybersyn", ats: ashby, slug: cybersyn }
+  - { name: "Cybret", ats: ashby, slug: cybret }
+  - { name: "Cydea", ats: ashby, slug: cydea }
+  - { name: "Cylinderhealth", ats: ashby, slug: cylinderhealth }
   - { name: "Cyvl", ats: ashby, slug: cyvl }
+  - { name: "D Matrix", ats: ashby, slug: d-matrix }
+  - { name: "D2iq", ats: ashby, slug: d2iq }
+  - { name: "Dahlia Labs", ats: ashby, slug: dahlia-labs }
+  - { name: "Dailypay", ats: ashby, slug: dailypay }
+  - { name: "Dakota", ats: ashby, slug: dakota }
+  - { name: "Dandelion", ats: ashby, slug: dandelion }
+  - { name: "Dandy", ats: ashby, slug: dandy }
+  - { name: "Dapper", ats: ashby, slug: dapper }
+  - { name: "Darkroom", ats: ashby, slug: darkroom }
+  - { name: "Darwin", ats: ashby, slug: darwin }
+  - { name: "Dash0", ats: ashby, slug: dash0 }
+  - { name: "Dashworks", ats: ashby, slug: dashworks }
+  - { name: "Datacurve", ats: ashby, slug: datacurve }
+  - { name: "Datafold", ats: ashby, slug: datafold }
+  - { name: "Dataguard", ats: ashby, slug: dataguard }
+  - { name: "Datalab", ats: ashby, slug: datalab }
+  - { name: "Dataleap", ats: ashby, slug: dataleap }
+  - { name: "Datalogics", ats: ashby, slug: datalogics }
+  - { name: "Datastealth", ats: ashby, slug: datastealth }
+  - { name: "Datatonic", ats: ashby, slug: datatonic }
+  - { name: "Datologyai", ats: ashby, slug: datologyai }
+  - { name: "Dave", ats: ashby, slug: dave }
+  - { name: "David AI", ats: ashby, slug: david-ai }
+  - { name: "Davidenergy", ats: ashby, slug: davidenergy }
+  - { name: "Davistechnologymanagement", ats: ashby, slug: davistechnologymanagement }
+  - { name: "Day9", ats: ashby, slug: day9 }
+  - { name: "Daydream", ats: ashby, slug: daydream }
+  - { name: "Daydream Ai", ats: ashby, slug: daydream-ai }
+  - { name: "Dclimate", ats: ashby, slug: dclimate }
   - { name: "Decagon", ats: ashby, slug: decagon }
+  - { name: "Decimal", ats: ashby, slug: decimal }
+  - { name: "Dedale", ats: ashby, slug: dedale }
+  - { name: "Deductive", ats: ashby, slug: deductive }
   - { name: "Deel", ats: ashby, slug: deel }
-  - { name: "DriveWealth", ats: ashby, slug: drivewealth }
+  - { name: "Deepgram", ats: ashby, slug: deepgram }
+  - { name: "Deepjudge", ats: ashby, slug: deepjudge }
+  - { name: "Deepl", ats: ashby, slug: deepl }
+  - { name: "Deeploy", ats: ashby, slug: deeploy }
+  - { name: "Deepnote", ats: ashby, slug: deepnote }
+  - { name: "Deeptune", ats: ashby, slug: deeptune }
+  - { name: "Deepwalk", ats: ashby, slug: deepwalk }
+  - { name: "Definelycareers", ats: ashby, slug: definelycareers }
+  - { name: "Dehazelabs", ats: ashby, slug: dehazelabs }
+  - { name: "Delfa", ats: ashby, slug: delfa }
+  - { name: "Delian", ats: ashby, slug: delian }
+  - { name: "Delinea", ats: ashby, slug: delinea }
+  - { name: "Deliveroo", ats: ashby, slug: deliveroo }
+  - { name: "Delphi", ats: ashby, slug: delphi }
+  - { name: "Delphina", ats: ashby, slug: delphina }
+  - { name: "Delphos Labs", ats: ashby, slug: delphos-labs }
+  - { name: "Deltia", ats: ashby, slug: deltia }
+  - { name: "Delve", ats: ashby, slug: delve }
+  - { name: "Demandbase", ats: ashby, slug: demandbase }
+  - { name: "Deno", ats: ashby, slug: deno }
+  - { name: "Dentology", ats: ashby, slug: dentology }
+  - { name: "Deposco", ats: ashby, slug: deposco }
+  - { name: "Depthfirst", ats: ashby, slug: depthfirst }
+  - { name: "Designworkstalent", ats: ashby, slug: designworkstalent }
+  - { name: "Deta", ats: ashby, slug: deta }
+  - { name: "Develop Health", ats: ashby, slug: develop-health }
+  - { name: "Devsavant", ats: ashby, slug: devsavant }
+  - { name: "Di Ati", ats: ashby, slug: di-ati }
+  - { name: "Diagrid", ats: ashby, slug: diagrid }
+  - { name: "Dialo", ats: ashby, slug: dialo }
+  - { name: "Dialogueai", ats: ashby, slug: dialogueai }
+  - { name: "Dicefm", ats: ashby, slug: dicefm }
+  - { name: "Didask", ats: ashby, slug: didask }
+  - { name: "Diffit", ats: ashby, slug: diffit }
+  - { name: "Directive", ats: ashby, slug: directive }
+  - { name: "Dispatch", ats: ashby, slug: dispatch }
+  - { name: "Distributed Spectrum", ats: ashby, slug: distributed-spectrum }
+  - { name: "Distyl", ats: ashby, slug: distyl }
+  - { name: "Ditto", ats: ashby, slug: ditto }
+  - { name: "Dittoai", ats: ashby, slug: dittoai }
+  - { name: "Divineresearch", ats: ashby, slug: divineresearch }
+  - { name: "Docebo", ats: ashby, slug: docebo }
+  - { name: "Docker", ats: ashby, slug: docker }
+  - { name: "Docplanner", ats: ashby, slug: docplanner }
+  - { name: "Docs", ats: ashby, slug: docs }
+  - { name: "Doctronic", ats: ashby, slug: doctronic }
+  - { name: "Doinstruct", ats: ashby, slug: doinstruct }
+  - { name: "Doji", ats: ashby, slug: doji }
+  - { name: "Dolarapp", ats: ashby, slug: dolarapp }
+  - { name: "Donut", ats: ashby, slug: donut }
+  - { name: "Doodles", ats: ashby, slug: doodles }
+  - { name: "Doowii", ats: ashby, slug: doowii }
+  - { name: "Doppel", ats: ashby, slug: doppel }
+  - { name: "Doppler", ats: ashby, slug: doppler }
+  - { name: "Dorahacks", ats: ashby, slug: dorahacks }
+  - { name: "Dosespot", ats: ashby, slug: dosespot }
+  - { name: "Doss", ats: ashby, slug: doss }
+  - { name: "Dot Product", ats: ashby, slug: dot-product }
+  - { name: "Dotfile", ats: ashby, slug: dotfile }
+  - { name: "Dottxt", ats: ashby, slug: dottxt }
+  - { name: "Double", ats: ashby, slug: double }
+  - { name: "Double The Donation", ats: ashby, slug: double-the-donation }
+  - { name: "Doubledusk", ats: ashby, slug: doubledusk }
+  - { name: "Doublezero", ats: ashby, slug: doublezero }
+  - { name: "Dovetail", ats: ashby, slug: dovetail }
+  - { name: "Dovly", ats: ashby, slug: dovly }
+  - { name: "Drata", ats: ashby, slug: drata }
+  - { name: "Dropyacht", ats: ashby, slug: dropyacht }
+  - { name: "Dryft", ats: ashby, slug: dryft }
+  - { name: "Dstlry", ats: ashby, slug: dstlry }
+  - { name: "Dualentry", ats: ashby, slug: dualentry }
+  - { name: "Dubclub", ats: ashby, slug: dubclub }
+  - { name: "Duck Duck Go", ats: ashby, slug: duck-duck-go }
+  - { name: "Duckbill", ats: ashby, slug: duckbill }
+  - { name: "Duckduckgo", ats: ashby, slug: duckduckgo }
+  - { name: "Duet", ats: ashby, slug: duet }
+  - { name: "Duffel", ats: ashby, slug: duffel }
+  - { name: "Duna", ats: ashby, slug: duna }
+  - { name: "Dune", ats: ashby, slug: dune }
+  - { name: "Dune Security", ats: ashby, slug: dune-security }
+  - { name: "Duolingo", ats: ashby, slug: duolingo }
+  - { name: "Dusk", ats: ashby, slug: dusk }
   - { name: "Dust", ats: ashby, slug: dust }
+  - { name: "Duvo", ats: ashby, slug: duvo }
+  - { name: "Dyna Robotics", ats: ashby, slug: dyna-robotics }
+  - { name: "Dynamic", ats: ashby, slug: dynamic }
+  - { name: "E2B", ats: ashby, slug: e2b }
+  - { name: "Earnedwealth", ats: ashby, slug: earnedwealth }
+  - { name: "Earthforce", ats: ashby, slug: earthforce }
+  - { name: "Easygenerator", ats: ashby, slug: easygenerator }
+  - { name: "Ecarxgroup", ats: ashby, slug: ecarxgroup }
+  - { name: "Echo", ats: ashby, slug: echo }
+  - { name: "Echotwin", ats: ashby, slug: echotwin }
+  - { name: "Edge Node Ventures", ats: ashby, slug: edge-node-ventures }
+  - { name: "Edia", ats: ashby, slug: edia }
+  - { name: "Ediphi", ats: ashby, slug: ediphi }
+  - { name: "Edited", ats: ashby, slug: edited }
+  - { name: "Edlink", ats: ashby, slug: edlink }
+  - { name: "Edsights", ats: ashby, slug: edsights }
+  - { name: "Educationsuperhighway", ats: ashby, slug: educationsuperhighway }
+  - { name: "Eigen Labs", ats: ashby, slug: eigen-labs }
+  - { name: "EightSleep", ats: ashby, slug: eightsleep }
+  - { name: "Ekho", ats: ashby, slug: ekho }
+  - { name: "Ekumenlabs", ats: ashby, slug: ekumenlabs }
+  - { name: "Electric", ats: ashby, slug: electric }
+  - { name: "Electricai", ats: ashby, slug: electricai }
+  - { name: "Electronx", ats: ashby, slug: electronx }
+  - { name: "Element451", ats: ashby, slug: element451 }
+  - { name: "Element84", ats: ashby, slug: element84 }
+  - { name: "Elevate Labs", ats: ashby, slug: elevate-labs }
   - { name: "ElevenLabs", ats: ashby, slug: elevenlabs }
+  - { name: "Eli", ats: ashby, slug: eli }
+  - { name: "Elicit", ats: ashby, slug: elicit }
+  - { name: "EliseAI", ats: ashby, slug: eliseai }
+  - { name: "Ellamind", ats: ashby, slug: ellamind }
   - { name: "Ellipsis Labs", ats: ashby, slug: ellipsislabs }
+  - { name: "Elliptic", ats: ashby, slug: elliptic }
+  - { name: "Ello", ats: ashby, slug: ello }
+  - { name: "Eloquentai", ats: ashby, slug: eloquentai }
+  - { name: "Ema", ats: ashby, slug: ema }
+  - { name: "Embeddable", ats: ashby, slug: embeddable }
+  - { name: "Embedding Vc", ats: ashby, slug: embedding-vc }
+  - { name: "Emerald Ai", ats: ashby, slug: emerald-ai }
+  - { name: "Emergence Capital Partners", ats: ashby, slug: emergence-capital-partners }
+  - { name: "Emidat", ats: ashby, slug: emidat }
+  - { name: "Empirical", ats: ashby, slug: empirical }
+  - { name: "Empirical Security", ats: ashby, slug: empirical-security }
+  - { name: "Empora", ats: ashby, slug: empora }
+  - { name: "Empowerfinance", ats: ashby, slug: empowerfinance }
+  - { name: "Endeavor", ats: ashby, slug: endeavor }
+  - { name: "Endex", ats: ashby, slug: endex }
+  - { name: "Endgame", ats: ashby, slug: endgame }
+  - { name: "Engflow", ats: ashby, slug: engflow }
+  - { name: "Enode", ats: ashby, slug: enode }
+  - { name: "Enpal", ats: ashby, slug: enpal }
+  - { name: "Ens Labs", ats: ashby, slug: ens-labs }
+  - { name: "Enter Ai", ats: ashby, slug: enter-ai }
+  - { name: "Envoy", ats: ashby, slug: envoy }
+  - { name: "Enzo Health", ats: ashby, slug: enzo-health }
+  - { name: "Eos Atomics", ats: ashby, slug: eos-atomics }
+  - { name: "Eotlabs", ats: ashby, slug: eotlabs }
+  - { name: "Epay Policy", ats: ashby, slug: epay-policy }
+  - { name: "Ephemera", ats: ashby, slug: ephemera }
+  - { name: "Epidemic Sound", ats: ashby, slug: epidemic-sound }
+  - { name: "Episteme", ats: ashby, slug: episteme }
+  - { name: "Epistemix", ats: ashby, slug: epistemix }
+  - { name: "Eppo", ats: ashby, slug: eppo }
+  - { name: "Equal Ventures", ats: ashby, slug: equal-ventures }
+  - { name: "Equal1", ats: ashby, slug: equal1 }
+  - { name: "Equallytalent", ats: ashby, slug: equallytalent }
+  - { name: "Equals", ats: ashby, slug: equals }
+  - { name: "Equi", ats: ashby, slug: equi }
+  - { name: "Equip", ats: ashby, slug: equip }
+  - { name: "Ernest", ats: ashby, slug: ernest }
+  - { name: "Espresso", ats: ashby, slug: espresso }
+  - { name: "Essentialai", ats: ashby, slug: essentialai }
+  - { name: "Etched", ats: ashby, slug: etched }
+  - { name: "Ethereum Foundation", ats: ashby, slug: ethereum-foundation }
+  - { name: "Ethglobal", ats: ashby, slug: ethglobal }
+  - { name: "Ethyca", ats: ashby, slug: ethyca }
+  - { name: "Euphoric", ats: ashby, slug: euphoric }
+  - { name: "Eventual", ats: ashby, slug: eventual }
+  - { name: "Eventualcomputing", ats: ashby, slug: eventualcomputing }
+  - { name: "Evenup", ats: ashby, slug: evenup }
+  - { name: "Everai", ats: ashby, slug: everai }
+  - { name: "Everfield", ats: ashby, slug: everfield }
+  - { name: "Everops", ats: ashby, slug: everops }
+  - { name: "Evertune", ats: ashby, slug: evertune }
+  - { name: "Every Io", ats: ashby, slug: every-io }
+  - { name: "Everydayagents", ats: ashby, slug: everydayagents }
+  - { name: "Everywai", ats: ashby, slug: everywai }
   - { name: "Exa", ats: ashby, slug: exa }
-  - { name: "f7d8749a-72d6-407c-bf98-292ea630c73a", ats: ashby, slug: f7d8749a-72d6-407c-bf98-292ea630c73a }
-  - { name: "Fab2", ats: ashby, slug: fab2 }
-  - { name: "Faros", ats: ashby, slug: faros-ai }
-  - { name: "Fellow Insights Inc.", ats: ashby, slug: fellowai }
+  - { name: "Exegy", ats: ashby, slug: exegy }
+  - { name: "Exofreight", ats: ashby, slug: exofreight }
+  - { name: "Expa", ats: ashby, slug: expa }
+  - { name: "Exponential", ats: ashby, slug: exponential }
+  - { name: "Expressable", ats: ashby, slug: expressable }
+  - { name: "Extend", ats: ashby, slug: extend }
+  - { name: "Eye Security", ats: ashby, slug: eye-security }
+  - { name: "Eyebot", ats: ashby, slug: eyebot }
+  - { name: "Eztexting", ats: ashby, slug: eztexting }
+  - { name: "F2 Ai", ats: ashby, slug: f2-ai }
+  - { name: "Fable", ats: ashby, slug: fable }
+  - { name: "Fabrion", ats: ashby, slug: fabrion }
+  - { name: "Facilityone", ats: ashby, slug: facilityone }
+  - { name: "Faction", ats: ashby, slug: faction }
+  - { name: "Factorfellowship", ats: ashby, slug: factorfellowship }
+  - { name: "Factorhouse", ats: ashby, slug: factorhouse }
+  - { name: "Factory", ats: ashby, slug: factory }
+  - { name: "Faculty", ats: ashby, slug: faculty }
+  - { name: "Fairing", ats: ashby, slug: fairing }
+  - { name: "Fairsquaremedicare", ats: ashby, slug: fairsquaremedicare }
+  - { name: "Fal", ats: ashby, slug: fal }
+  - { name: "fal", ats: ashby, slug: fal-ai }
+  - { name: "Falconer", ats: ashby, slug: falconer }
+  - { name: "Fanalysis", ats: ashby, slug: fanalysis }
+  - { name: "Farewill", ats: ashby, slug: farewill }
+  - { name: "Farmersd40", ats: ashby, slug: farmersd40 }
+  - { name: "Farmraise", ats: ashby, slug: farmraise }
+  - { name: "Farsight", ats: ashby, slug: farsight }
+  - { name: "Fathom", ats: ashby, slug: fathom }
+  - { name: "Fauna Robotics", ats: ashby, slug: fauna-robotics }
+  - { name: "Featherlessai", ats: ashby, slug: featherlessai }
+  - { name: "Feathr", ats: ashby, slug: feathr }
+  - { name: "Feedbackfruits", ats: ashby, slug: feedbackfruits }
+  - { name: "Felix", ats: ashby, slug: felix }
+  - { name: "Fella", ats: ashby, slug: fella }
+  - { name: "Fermat", ats: ashby, slug: fermat }
+  - { name: "Fermataenergy", ats: ashby, slug: fermataenergy }
+  - { name: "Fern", ats: ashby, slug: fern }
+  - { name: "Ferovinum", ats: ashby, slug: ferovinum }
+  - { name: "Fetch Pet Health", ats: ashby, slug: fetch-pet-health }
+  - { name: "Fhiaremodeling", ats: ashby, slug: fhiaremodeling }
+  - { name: "Fiddler Ai", ats: ashby, slug: fiddler-ai }
+  - { name: "Fiducial", ats: ashby, slug: fiducial }
+  - { name: "Fieldguide", ats: ashby, slug: fieldguide }
+  - { name: "Figma", ats: ashby, slug: figma }
+  - { name: "Filed", ats: ashby, slug: filed }
+  - { name: "Filigran", ats: ashby, slug: filigran }
+  - { name: "Filmhub", ats: ashby, slug: filmhub }
+  - { name: "Fin", ats: ashby, slug: fin }
+  - { name: "Finalis", ats: ashby, slug: finalis }
+  - { name: "Finally", ats: ashby, slug: finally }
+  - { name: "Finalroundai", ats: ashby, slug: finalroundai }
+  - { name: "Finary", ats: ashby, slug: finary }
+  - { name: "Finch", ats: ashby, slug: finch }
+  - { name: "Finch Legal", ats: ashby, slug: finch-legal }
+  - { name: "Findarbor", ats: ashby, slug: findarbor }
+  - { name: "Finni Health", ats: ashby, slug: finni-health }
+  - { name: "Finnihealth", ats: ashby, slug: finnihealth }
+  - { name: "Finout", ats: ashby, slug: finout }
+  - { name: "Fintool", ats: ashby, slug: fintool }
+  - { name: "Finvari", ats: ashby, slug: finvari }
+  - { name: "Firecrawl", ats: ashby, slug: firecrawl }
+  - { name: "Firetiger", ats: ashby, slug: firetiger }
+  - { name: "Fireworks AI", ats: ashby, slug: fireworks }
+  - { name: "First Resonance", ats: ashby, slug: first-resonance }
+  - { name: "Firstbase", ats: ashby, slug: firstbase }
+  - { name: "Firstbaseio", ats: ashby, slug: firstbaseio }
+  - { name: "Firsthand", ats: ashby, slug: firsthand }
+  - { name: "Firstround", ats: ashby, slug: firstround }
+  - { name: "Firststreet", ats: ashby, slug: firststreet }
+  - { name: "Fitt", ats: ashby, slug: fitt }
+  - { name: "Five Ai", ats: ashby, slug: five-ai }
+  - { name: "Fizz", ats: ashby, slug: fizz }
+  - { name: "Flaglerhealth", ats: ashby, slug: flaglerhealth }
+  - { name: "Flagshiprtl", ats: ashby, slug: flagshiprtl }
+  - { name: "Flai", ats: ashby, slug: flai }
+  - { name: "Flankai", ats: ashby, slug: flankai }
+  - { name: "Flatfile", ats: ashby, slug: flatfile }
+  - { name: "Flawless", ats: ashby, slug: flawless }
+  - { name: "Fledge", ats: ashby, slug: fledge }
+  - { name: "Fleek", ats: ashby, slug: fleek }
+  - { name: "Fleetpulse", ats: ashby, slug: fleetpulse }
+  - { name: "Fleetworks", ats: ashby, slug: fleetworks }
+  - { name: "Flex Living", ats: ashby, slug: flex-living }
+  - { name: "Flick", ats: ashby, slug: flick }
+  - { name: "Flink", ats: ashby, slug: flink }
   - { name: "Flint", ats: ashby, slug: flint }
-  - { name: "Gearset", ats: ashby, slug: gearset }
+  - { name: "Flipper", ats: ashby, slug: flipper }
+  - { name: "Flipsidecrypto", ats: ashby, slug: flipsidecrypto }
+  - { name: "Flipturn", ats: ashby, slug: flipturn }
+  - { name: "Float", ats: ashby, slug: float }
+  - { name: "Floatme", ats: ashby, slug: floatme }
+  - { name: "Flock Safety", ats: ashby, slug: flocksafety }
+  - { name: "Flora", ats: ashby, slug: flora }
+  - { name: "Flosports", ats: ashby, slug: flosports }
+  - { name: "Flowcarbon", ats: ashby, slug: flowcarbon }
+  - { name: "Flowengineering", ats: ashby, slug: flowengineering }
+  - { name: "Flowhub", ats: ashby, slug: flowhub }
+  - { name: "Flox", ats: ashby, slug: flox }
+  - { name: "Fluidstack", ats: ashby, slug: fluidstack }
+  - { name: "Flutterflow", ats: ashby, slug: flutterflow }
+  - { name: "Flux", ats: ashby, slug: flux }
+  - { name: "Flux Computing", ats: ashby, slug: flux-computing }
+  - { name: "Fnatic", ats: ashby, slug: fnatic }
+  - { name: "Focal", ats: ashby, slug: focal }
+  - { name: "Focus", ats: ashby, slug: focus }
+  - { name: "Focus Ai", ats: ashby, slug: focus-ai }
+  - { name: "Focused", ats: ashby, slug: focused }
+  - { name: "Focused Energy", ats: ashby, slug: focused-energy }
+  - { name: "Foley", ats: ashby, slug: foley }
+  - { name: "Folio", ats: ashby, slug: folio }
+  - { name: "Fonoa", ats: ashby, slug: fonoa }
+  - { name: "Fonzi Ai", ats: ashby, slug: fonzi-ai }
+  - { name: "Foodhealthco", ats: ashby, slug: foodhealthco }
+  - { name: "Foresight", ats: ashby, slug: foresight }
+  - { name: "Foresite Labs Fl2024 006", ats: ashby, slug: foresite-labs-fl2024-006 }
+  - { name: "Form Energy", ats: ashby, slug: formenergy }
+  - { name: "Forma", ats: ashby, slug: forma }
+  - { name: "Formal", ats: ashby, slug: formal }
+  - { name: "Formance", ats: ashby, slug: formance }
+  - { name: "Forto", ats: ashby, slug: forto }
+  - { name: "Fortuna Health", ats: ashby, slug: fortuna-health }
+  - { name: "Fortytwo", ats: ashby, slug: fortytwo }
+  - { name: "Forum Ventures", ats: ashby, slug: forum-ventures }
+  - { name: "Found", ats: ashby, slug: found }
+  - { name: "Foundation", ats: ashby, slug: foundation }
+  - { name: "Foundational", ats: ashby, slug: foundational }
+  - { name: "Foundationhealthcareers", ats: ashby, slug: foundationhealthcareers }
+  - { name: "Foundry For Good", ats: ashby, slug: foundry-for-good }
+  - { name: "Foundry Robotics", ats: ashby, slug: foundry-robotics }
+  - { name: "Fourier", ats: ashby, slug: fourier }
+  - { name: "Foursquare", ats: ashby, slug: foursquare }
+  - { name: "Fourth Power", ats: ashby, slug: fourth-power }
+  - { name: "Foxelligroup", ats: ashby, slug: foxelligroup }
+  - { name: "Foxglove", ats: ashby, slug: foxglove }
+  - { name: "Fractional", ats: ashby, slug: fractional }
+  - { name: "Fractional Ai", ats: ashby, slug: fractional-ai }
+  - { name: "Frameai", ats: ashby, slug: frameai }
+  - { name: "Framenergy", ats: ashby, slug: framenergy }
+  - { name: "Frameplay", ats: ashby, slug: frameplay }
+  - { name: "Freckle", ats: ashby, slug: freckle }
+  - { name: "Freeagency", ats: ashby, slug: freeagency }
+  - { name: "Freed", ats: ashby, slug: freed }
+  - { name: "Freeplay", ats: ashby, slug: freeplay }
+  - { name: "Freetrade", ats: ashby, slug: freetrade }
+  - { name: "Frequence", ats: ashby, slug: frequence }
+  - { name: "Freshpaint", ats: ashby, slug: freshpaint }
+  - { name: "Friendliai", ats: ashby, slug: friendliai }
+  - { name: "Front", ats: ashby, slug: frontcareers }
+  - { name: "Fruitist", ats: ashby, slug: fruitist }
+  - { name: "Fs Studio", ats: ashby, slug: fs-studio }
+  - { name: "Ftmo", ats: ashby, slug: ftmo }
+  - { name: "Fuel Cycle", ats: ashby, slug: fuel-cycle }
+  - { name: "Fulcrum", ats: ashby, slug: fulcrum }
+  - { name: "Fulcrum Inc", ats: ashby, slug: fulcrum-inc }
+  - { name: "Fulcrum Research", ats: ashby, slug: fulcrum-research }
+  - { name: "FullStory", ats: ashby, slug: fullstory }
+  - { name: "Fundamentalresearchlabs", ats: ashby, slug: fundamentalresearchlabs }
+  - { name: "Fundingcircle", ats: ashby, slug: fundingcircle }
+  - { name: "Fundwell", ats: ashby, slug: fundwell }
+  - { name: "Furiosa Ai", ats: ashby, slug: furiosa-ai }
+  - { name: "Further", ats: ashby, slug: further }
+  - { name: "Furtherai", ats: ashby, slug: furtherai }
+  - { name: "Fuse", ats: ashby, slug: fuse }
+  - { name: "Fuser", ats: ashby, slug: fuser }
+  - { name: "Future Find", ats: ashby, slug: future-find }
+  - { name: "Futureaudioworkshop", ats: ashby, slug: futureaudioworkshop }
+  - { name: "Futurefitai", ats: ashby, slug: futurefitai }
+  - { name: "Futurice", ats: ashby, slug: futurice }
+  - { name: "Fwd People", ats: ashby, slug: fwd-people }
+  - { name: "Fyxer", ats: ashby, slug: fyxer }
+  - { name: "G2", ats: ashby, slug: g2 }
+  - { name: "G2i", ats: ashby, slug: g2i }
+  - { name: "Gadget", ats: ashby, slug: gadget }
+  - { name: "Gaiafamily", ats: ashby, slug: gaiafamily }
+  - { name: "Gallatin", ats: ashby, slug: gallatin }
+  - { name: "Galvany", ats: ashby, slug: galvany }
+  - { name: "Game Plan Tech", ats: ashby, slug: game-plan-tech }
+  - { name: "GameChanger", ats: ashby, slug: gamechanger }
+  - { name: "Gamma", ats: ashby, slug: gamma }
+  - { name: "Garage", ats: ashby, slug: garage }
+  - { name: "Garden", ats: ashby, slug: garden }
+  - { name: "Gardens", ats: ashby, slug: gardens }
   - { name: "Gecko Robotics", ats: ashby, slug: gecko-robotics }
-  - { name: "Genesis Molecular AI", ats: ashby, slug: genesis-molecular-ai }
+  - { name: "Gelato", ats: ashby, slug: gelato }
+  - { name: "Gem Technologies", ats: ashby, slug: gem-technologies }
+  - { name: "Gen Digital", ats: ashby, slug: gen-digital }
+  - { name: "Gendo", ats: ashby, slug: gendo }
+  - { name: "General Counsel Ai", ats: ashby, slug: general-counsel-ai }
+  - { name: "General Medicine", ats: ashby, slug: general-medicine }
+  - { name: "Generalintelligencecompany", ats: ashby, slug: generalintelligencecompany }
+  - { name: "Generalrobotics", ats: ashby, slug: generalrobotics }
+  - { name: "Generaltranslation", ats: ashby, slug: generaltranslation }
+  - { name: "Generate", ats: ashby, slug: generate }
+  - { name: "Genesis Ai", ats: ashby, slug: genesis-ai }
+  - { name: "Genesis Molecular Ai", ats: ashby, slug: genesis-molecular-ai }
+  - { name: "Genesis Therapeutics", ats: ashby, slug: genesis-therapeutics }
+  - { name: "Genies", ats: ashby, slug: genies }
   - { name: "Genius AI", ats: ashby, slug: geniusai }
-  - { name: "Goaly", ats: ashby, slug: goaly }
-  - { name: "Gritt Robotics", ats: ashby, slug: gritt }
-  - { name: "Grow Therapy", ats: ashby, slug: grow-therapy }
+  - { name: "Genmo", ats: ashby, slug: genmo }
+  - { name: "Genomics", ats: ashby, slug: genomics }
+  - { name: "Genomicsplc", ats: ashby, slug: genomicsplc }
+  - { name: "Genpeach", ats: ashby, slug: genpeach }
+  - { name: "Gensyn", ats: ashby, slug: gensyn }
+  - { name: "Geobrowser", ats: ashby, slug: geobrowser }
+  - { name: "Geoforce", ats: ashby, slug: geoforce }
+  - { name: "Getground", ats: ashby, slug: getground }
+  - { name: "Getpluto", ats: ashby, slug: getpluto }
+  - { name: "Getshogun", ats: ashby, slug: getshogun }
+  - { name: "Ghost", ats: ashby, slug: ghost }
+  - { name: "Gigaml", ats: ashby, slug: gigaml }
+  - { name: "Gimlet", ats: ashby, slug: gimlet }
+  - { name: "Gitbook", ats: ashby, slug: gitbook }
+  - { name: "Gitpod", ats: ashby, slug: gitpod }
+  - { name: "Gitstart", ats: ashby, slug: gitstart }
+  - { name: "Givebutter", ats: ashby, slug: givebutter }
+  - { name: "Glacier", ats: ashby, slug: glacier }
+  - { name: "Gladia", ats: ashby, slug: gladia }
+  - { name: "Glia", ats: ashby, slug: glia }
+  - { name: "Glide", ats: ashby, slug: glide }
+  - { name: "Glimp Se", ats: ashby, slug: glimp-se }
+  - { name: "Glimpse", ats: ashby, slug: glimpse }
+  - { name: "Glow25", ats: ashby, slug: glow25 }
+  - { name: "Glyphic", ats: ashby, slug: glyphic }
+  - { name: "Go Nimbly", ats: ashby, slug: go-nimbly }
+  - { name: "Goanagram", ats: ashby, slug: goanagram }
+  - { name: "Gohenry", ats: ashby, slug: gohenry }
+  - { name: "Going", ats: ashby, slug: going }
+  - { name: "Goldsky", ats: ashby, slug: goldsky }
+  - { name: "Golinks", ats: ashby, slug: golinks }
+  - { name: "Goodcover", ats: ashby, slug: goodcover }
+  - { name: "Gooddata", ats: ashby, slug: gooddata }
+  - { name: "Goodie Ai", ats: ashby, slug: goodie-ai }
+  - { name: "Goodlord", ats: ashby, slug: goodlord }
+  - { name: "Goodparty", ats: ashby, slug: goodparty }
+  - { name: "Goodship", ats: ashby, slug: goodship }
+  - { name: "Goodstack", ats: ashby, slug: goodstack }
+  - { name: "Goody", ats: ashby, slug: goody }
+  - { name: "Gorgias", ats: ashby, slug: gorgias }
+  - { name: "Gorilla", ats: ashby, slug: gorilla }
+  - { name: "Goteleport", ats: ashby, slug: goteleport }
+  - { name: "Gotphoto", ats: ashby, slug: gotphoto }
+  - { name: "Govdash", ats: ashby, slug: govdash }
+  - { name: "Goventi", ats: ashby, slug: goventi }
+  - { name: "Govwell", ats: ashby, slug: govwell }
+  - { name: "Govworx", ats: ashby, slug: govworx }
+  - { name: "Gptzero", ats: ashby, slug: gptzero }
+  - { name: "Gradia", ats: ashby, slug: gradia }
+  - { name: "Gradient", ats: ashby, slug: gradient }
+  - { name: "Gradient Labs", ats: ashby, slug: gradient-labs }
+  - { name: "Gradientnetwork", ats: ashby, slug: gradientnetwork }
+  - { name: "Grand", ats: ashby, slug: grand }
+  - { name: "Granica", ats: ashby, slug: granica }
+  - { name: "Granola", ats: ashby, slug: granola }
+  - { name: "Granted", ats: ashby, slug: granted }
+  - { name: "Graphite", ats: ashby, slug: graphite }
+  - { name: "Graphitehq", ats: ashby, slug: graphitehq }
+  - { name: "Gratia", ats: ashby, slug: gratia }
+  - { name: "Gravityclimate", ats: ashby, slug: gravityclimate }
+  - { name: "Gravitysketch", ats: ashby, slug: gravitysketch }
+  - { name: "Grayce", ats: ashby, slug: grayce }
+  - { name: "Graymatter Robotics", ats: ashby, slug: graymatter-robotics }
+  - { name: "Grayswanai", ats: ashby, slug: grayswanai }
+  - { name: "Greatquestion", ats: ashby, slug: greatquestion }
+  - { name: "Greenlite", ats: ashby, slug: greenlite }
+  - { name: "Greenlitecareers", ats: ashby, slug: greenlitecareers }
+  - { name: "Greenskygames", ats: ashby, slug: greenskygames }
+  - { name: "Greptile", ats: ashby, slug: greptile }
+  - { name: "Gretel", ats: ashby, slug: gretel }
+  - { name: "Greylock", ats: ashby, slug: greylock }
+  - { name: "Gridcare", ats: ashby, slug: gridcare }
+  - { name: "Gridium", ats: ashby, slug: gridium }
+  - { name: "Gridunity", ats: ashby, slug: gridunity }
+  - { name: "Gridverify", ats: ashby, slug: gridverify }
+  - { name: "Gridwise", ats: ashby, slug: gridwise }
+  - { name: "Griffin", ats: ashby, slug: griffin }
+  - { name: "Groombuggy", ats: ashby, slug: groombuggy }
+  - { name: "Groundnews", ats: ashby, slug: groundnews }
+  - { name: "Groundtruthlabs", ats: ashby, slug: groundtruthlabs }
+  - { name: "Growtherapy", ats: ashby, slug: growtherapy }
+  - { name: "Growthtroops", ats: ashby, slug: growthtroops }
+  - { name: "Gruntwork", ats: ashby, slug: gruntwork }
+  - { name: "Grvt", ats: ashby, slug: grvt }
+  - { name: "Gt Hq", ats: ashby, slug: gt-hq }
+  - { name: "Guaranteed", ats: ashby, slug: guaranteed }
+  - { name: "Guild", ats: ashby, slug: guild }
+  - { name: "Gumloop", ats: ashby, slug: gumloop }
+  - { name: "H2analytics", ats: ashby, slug: h2analytics }
+  - { name: "H3x Technologies", ats: ashby, slug: h3x-technologies }
+  - { name: "Haast", ats: ashby, slug: haast }
+  - { name: "HackerOne", ats: ashby, slug: hackerone }
   - { name: "Hadrian Automation", ats: ashby, slug: hadrian-automation }
+  - { name: "Halborn", ats: ashby, slug: halborn }
+  - { name: "Halliday", ats: ashby, slug: halliday }
+  - { name: "Halo Cures", ats: ashby, slug: halo-cures }
+  - { name: "Halobraid", ats: ashby, slug: halobraid }
+  - { name: "Halter", ats: ashby, slug: halter }
+  - { name: "Hamilton Ai", ats: ashby, slug: hamilton-ai }
+  - { name: "Hamster", ats: ashby, slug: hamster }
+  - { name: "Handshake", ats: ashby, slug: handshake }
+  - { name: "Handspring", ats: ashby, slug: handspring }
+  - { name: "Hang", ats: ashby, slug: hang }
+  - { name: "Hanover Park", ats: ashby, slug: hanover-park }
+  - { name: "Happeo", ats: ashby, slug: happeo }
+  - { name: "Happl", ats: ashby, slug: happl }
+  - { name: "Harmattan Ai", ats: ashby, slug: harmattan-ai }
+  - { name: "Harmonic", ats: ashby, slug: harmonic }
+  - { name: "Harperinsure", ats: ashby, slug: harperinsure }
+  - { name: "Hartbeat", ats: ashby, slug: hartbeat }
   - { name: "Harvey", ats: ashby, slug: harvey }
+  - { name: "Hashboard", ats: ashby, slug: hashboard }
+  - { name: "Hatch", ats: ashby, slug: hatch }
+  - { name: "Hauler Hero", ats: ashby, slug: hauler-hero }
+  - { name: "Haus", ats: ashby, slug: haus }
+  - { name: "Havocai", ats: ashby, slug: havocai }
+  - { name: "Hawk", ats: ashby, slug: hawk }
+  - { name: "Hawkeyeinnovations", ats: ashby, slug: hawkeyeinnovations }
+  - { name: "Haydenai", ats: ashby, slug: haydenai }
+  - { name: "Haystacknews", ats: ashby, slug: haystacknews }
+  - { name: "Hcompany", ats: ashby, slug: hcompany }
+  - { name: "Headstart", ats: ashby, slug: headstart }
+  - { name: "Healnow", ats: ashby, slug: healnow }
+  - { name: "Health Universe", ats: ashby, slug: health-universe }
+  - { name: "Healthaxis", ats: ashby, slug: healthaxis }
+  - { name: "Healthleap", ats: ashby, slug: healthleap }
+  - { name: "Healthmatch", ats: ashby, slug: healthmatch }
+  - { name: "Healthsherpa", ats: ashby, slug: healthsherpa }
+  - { name: "Healthtech 1", ats: ashby, slug: healthtech-1 }
+  - { name: "Hedra", ats: ashby, slug: hedra }
+  - { name: "Heirloomcarbon", ats: ashby, slug: heirloomcarbon }
+  - { name: "Helika", ats: ashby, slug: helika }
+  - { name: "Helion", ats: ashby, slug: helion }
+  - { name: "Helius", ats: ashby, slug: helius }
   - { name: "Heliux Inc.", ats: ashby, slug: heliux }
+  - { name: "Hellobrightline", ats: ashby, slug: hellobrightline }
+  - { name: "Hellohera", ats: ashby, slug: hellohera }
+  - { name: "Hellopatient", ats: ashby, slug: hellopatient }
+  - { name: "Help Scout", ats: ashby, slug: helpscout }
+  - { name: "Her", ats: ashby, slug: her }
+  - { name: "Hercules", ats: ashby, slug: hercules }
+  - { name: "Herojourneyclub", ats: ashby, slug: herojourneyclub }
   - { name: "Heron Power", ats: ashby, slug: heron-power }
-  - { name: "Hipp Health", ats: ashby, slug: hipp }
+  - { name: "Herondata", ats: ashby, slug: herondata }
+  - { name: "Hexa", ats: ashby, slug: hexa }
+  - { name: "Heyjobs", ats: ashby, slug: heyjobs }
+  - { name: "Heymilo", ats: ashby, slug: heymilo }
+  - { name: "Hifi", ats: ashby, slug: hifi }
+  - { name: "Higgsfieldai", ats: ashby, slug: higgsfieldai }
+  - { name: "Higharc", ats: ashby, slug: higharc }
+  - { name: "Highbeam", ats: ashby, slug: highbeam }
+  - { name: "Highlightai", ats: ashby, slug: highlightai }
+  - { name: "Highlightta", ats: ashby, slug: highlightta }
+  - { name: "Hiive", ats: ashby, slug: hiive }
+  - { name: "Hike Medical", ats: ashby, slug: hike-medical }
+  - { name: "Hilberts", ats: ashby, slug: hilberts }
+  - { name: "Hims And Hers", ats: ashby, slug: hims-and-hers }
+  - { name: "Himsandhers", ats: ashby, slug: himsandhers }
+  - { name: "Hinge Health", ats: ashby, slug: hinge-health }
+  - { name: "Hint", ats: ashby, slug: hint }
+  - { name: "Hipeople Official", ats: ashby, slug: hipeople-official }
+  - { name: "Hirehangar", ats: ashby, slug: hirehangar }
+  - { name: "Hivemq", ats: ashby, slug: hivemq }
+  - { name: "Hiverge", ats: ashby, slug: hiverge }
+  - { name: "Hivesmart Consulting", ats: ashby, slug: hivesmart-consulting }
   - { name: "Hiya", ats: ashby, slug: hiya }
-  - { name: "Hyphenate", ats: ashby, slug: hyphenate }
-  - { name: "Ibotta", ats: ashby, slug: ibotta }
+  - { name: "Hockeystack", ats: ashby, slug: hockeystack }
+  - { name: "Holywater", ats: ashby, slug: holywater }
+  - { name: "Homebase", ats: ashby, slug: homebase }
+  - { name: "Homebound", ats: ashby, slug: homebound }
+  - { name: "Homemade", ats: ashby, slug: homemade }
+  - { name: "Homera Health", ats: ashby, slug: homera-health }
+  - { name: "Homevision", ats: ashby, slug: homevision }
+  - { name: "Honeydew", ats: ashby, slug: honeydew }
+  - { name: "Hook", ats: ashby, slug: hook }
+  - { name: "Hopae", ats: ashby, slug: hopae }
+  - { name: "Hoplynk", ats: ashby, slug: hoplynk }
+  - { name: "Hopper", ats: ashby, slug: hopper }
+  - { name: "Horizon", ats: ashby, slug: horizon }
+  - { name: "Horizon3ai", ats: ashby, slug: horizon3ai }
+  - { name: "Hospitalio", ats: ashby, slug: hospitalio }
+  - { name: "Hotspexmedia", ats: ashby, slug: hotspexmedia }
+  - { name: "Hoxhunt", ats: ashby, slug: hoxhunt }
+  - { name: "Hoxtonfarms", ats: ashby, slug: hoxtonfarms }
+  - { name: "Hqo", ats: ashby, slug: hqo }
+  - { name: "Hubstaff", ats: ashby, slug: hubstaff }
+  - { name: "Hud", ats: ashby, slug: hud }
+  - { name: "Hudu", ats: ashby, slug: hudu }
+  - { name: "Hum Ai", ats: ashby, slug: hum-ai }
+  - { name: "Humaans", ats: ashby, slug: humaans }
+  - { name: "Human", ats: ashby, slug: human }
+  - { name: "Humanitec", ats: ashby, slug: humanitec }
+  - { name: "Humanitru", ats: ashby, slug: humanitru }
+  - { name: "Humanly", ats: ashby, slug: humanly }
+  - { name: "Humans And", ats: ashby, slug: humans-and }
+  - { name: "Humatahealth", ats: ashby, slug: humatahealth }
+  - { name: "Hustlewing", ats: ashby, slug: hustlewing }
+  - { name: "Hydra", ats: ashby, slug: hydra }
+  - { name: "Hyperbolic", ats: ashby, slug: hyperbolic }
+  - { name: "Hyperexponential", ats: ashby, slug: hyperexponential }
+  - { name: "Hyperhug", ats: ashby, slug: hyperhug }
+  - { name: "Hyperliminal", ats: ashby, slug: hyperliminal }
+  - { name: "Hyperscience", ats: ashby, slug: hyperscience }
+  - { name: "Hyperspell", ats: ashby, slug: hyperspell }
+  - { name: "I3d", ats: ashby, slug: i3d }
+  - { name: "Iacollaborative", ats: ashby, slug: iacollaborative }
+  - { name: "Iambic Therapeutics", ats: ashby, slug: iambic-therapeutics }
+  - { name: "Iceye", ats: ashby, slug: iceye }
   - { name: "Icon", ats: ashby, slug: icon }
+  - { name: "Iddqd", ats: ashby, slug: iddqd }
+  - { name: "Ideals", ats: ashby, slug: ideals }
+  - { name: "Ideogram", ats: ashby, slug: ideogram }
+  - { name: "Idler", ats: ashby, slug: idler }
+  - { name: "Ignite Reading", ats: ashby, slug: ignite-reading }
+  - { name: "Ignition", ats: ashby, slug: ignition }
+  - { name: "Illumio", ats: ashby, slug: illumio }
+  - { name: "Immersivelabs", ats: ashby, slug: immersivelabs }
+  - { name: "Impossible Foods", ats: ashby, slug: impossible-foods }
+  - { name: "Imprint", ats: ashby, slug: imprint }
+  - { name: "Improbable", ats: ashby, slug: improbable }
+  - { name: "Impulse", ats: ashby, slug: impulse }
+  - { name: "Inato", ats: ashby, slug: inato }
+  - { name: "Inbeat Agency", ats: ashby, slug: inbeat-agency }
+  - { name: "Incandescent", ats: ashby, slug: incandescent }
+  - { name: "Inceptive", ats: ashby, slug: inceptive }
   - { name: "incident.io", ats: ashby, slug: incident }
-  - { name: "Integrate", ats: ashby, slug: integrate }
-  - { name: "Jampack AI", ats: ashby, slug: jampack-ai }
+  - { name: "incident.io", ats: ashby, slug: incidentio }
+  - { name: "Indent", ats: ashby, slug: indent }
+  - { name: "Inductive Bio", ats: ashby, slug: inductive-bio }
+  - { name: "Industrious", ats: ashby, slug: industrious }
+  - { name: "Ineffable", ats: ashby, slug: ineffable }
+  - { name: "Inertia", ats: ashby, slug: inertia }
+  - { name: "Inferact", ats: ashby, slug: inferact }
+  - { name: "Inference", ats: ashby, slug: inference }
+  - { name: "Infinite Machine", ats: ashby, slug: infinite-machine }
+  - { name: "Infinitefield", ats: ashby, slug: infinitefield }
+  - { name: "Infinitus", ats: ashby, slug: infinitus }
+  - { name: "Infinity Constellation", ats: ashby, slug: infinity-constellation }
+  - { name: "Infisical", ats: ashby, slug: infisical }
+  - { name: "Inflectionio", ats: ashby, slug: inflectionio }
+  - { name: "Influxdata", ats: ashby, slug: influxdata }
+  - { name: "Infracost", ats: ashby, slug: infracost }
+  - { name: "Injective", ats: ashby, slug: injective }
+  - { name: "Injective Labs", ats: ashby, slug: injective-labs }
+  - { name: "Inkeep", ats: ashby, slug: inkeep }
+  - { name: "Innate", ats: ashby, slug: innate }
+  - { name: "Innatera", ats: ashby, slug: innatera }
+  - { name: "Inngest", ats: ashby, slug: inngest }
+  - { name: "Inrange", ats: ashby, slug: inrange }
+  - { name: "Inscribeai", ats: ashby, slug: inscribeai }
+  - { name: "Insitro", ats: ashby, slug: insitro }
+  - { name: "Inspectiv", ats: ashby, slug: inspectiv }
+  - { name: "Inspiration Commerce Group", ats: ashby, slug: inspiration-commerce-group }
+  - { name: "Instil", ats: ashby, slug: instil }
+  - { name: "Instructure", ats: ashby, slug: instructure }
+  - { name: "Integral", ats: ashby, slug: integral }
+  - { name: "Integrationapp", ats: ashby, slug: integrationapp }
+  - { name: "Intellistack", ats: ashby, slug: intellistack }
+  - { name: "Interplay", ats: ashby, slug: interplay }
+  - { name: "Intrinsic Safety", ats: ashby, slug: intrinsic-safety }
+  - { name: "Intrinsictech", ats: ashby, slug: intrinsictech }
+  - { name: "Intro", ats: ashby, slug: intro }
+  - { name: "Introzy", ats: ashby, slug: introzy }
+  - { name: "Intus", ats: ashby, slug: intus }
+  - { name: "Inversion Cap", ats: ashby, slug: inversion-cap }
+  - { name: "Invert", ats: ashby, slug: invert }
+  - { name: "Invopop", ats: ashby, slug: invopop }
+  - { name: "Inworld Ai", ats: ashby, slug: inworld-ai }
+  - { name: "Io Net", ats: ashby, slug: io-net }
+  - { name: "Iodinesoftware", ats: ashby, slug: iodinesoftware }
+  - { name: "Ionlace", ats: ashby, slug: ionlace }
+  - { name: "Ironclad", ats: ashby, slug: ironclad }
+  - { name: "Ironclad (alt)", ats: ashby, slug: ironcladhq }
+  - { name: "Irreducible", ats: ashby, slug: irreducible }
+  - { name: "Irregular", ats: ashby, slug: irregular }
+  - { name: "Isometric", ats: ashby, slug: isometric }
+  - { name: "Italic", ats: ashby, slug: italic }
+  - { name: "Iterative", ats: ashby, slug: iterative }
+  - { name: "Ithaca", ats: ashby, slug: ithaca }
+  - { name: "Iverify", ats: ashby, slug: iverify }
+  - { name: "Iyo", ats: ashby, slug: iyo }
+  - { name: "Izea", ats: ashby, slug: izea }
+  - { name: "Jack Jill External Ats", ats: ashby, slug: jack-jill-external-ats }
+  - { name: "Jampack Ai", ats: ashby, slug: jampack-ai }
+  - { name: "Jamssoftware", ats: ashby, slug: jamssoftware }
+  - { name: "Jane", ats: ashby, slug: jane }
+  - { name: "January", ats: ashby, slug: january }
+  - { name: "Jasper", ats: ashby, slug: jasper }
+  - { name: "Jasperai", ats: ashby, slug: jasperai }
+  - { name: "Jbs Dev", ats: ashby, slug: jbs-dev }
+  - { name: "Jellyfish", ats: ashby, slug: jellyfish }
+  - { name: "Jellyfishcareers", ats: ashby, slug: jellyfishcareers }
+  - { name: "Jenni Ai", ats: ashby, slug: jenni-ai }
+  - { name: "Jerry", ats: ashby, slug: jerry }
+  - { name: "Jigsaw", ats: ashby, slug: jigsaw }
+  - { name: "Jitter Video", ats: ashby, slug: jitter-video }
+  - { name: "Jobber", ats: ashby, slug: jobber }
+  - { name: "Jobs Page 4dc2685b Eb82 46d1 A3f9 1f0764dba814", ats: ashby, slug: jobs-page-4dc2685b-eb82-46d1-a3f9-1f0764dba814 }
+  - { name: "Jobs Valence", ats: ashby, slug: jobs-valence }
+  - { name: "Join9am", ats: ashby, slug: join9am }
+  - { name: "Joinarc", ats: ashby, slug: joinarc }
+  - { name: "Joinbetter", ats: ashby, slug: joinbetter }
+  - { name: "Joinforage", ats: ashby, slug: joinforage }
+  - { name: "Joinkular", ats: ashby, slug: joinkular }
+  - { name: "Joinsherpa", ats: ashby, slug: joinsherpa }
+  - { name: "Jointangelo", ats: ashby, slug: jointangelo }
+  - { name: "Joist Ai", ats: ashby, slug: joist-ai }
+  - { name: "Joko", ats: ashby, slug: joko }
+  - { name: "Joor", ats: ashby, slug: joor }
+  - { name: "Jordandigitalmarketing", ats: ashby, slug: jordandigitalmarketing }
+  - { name: "Josys", ats: ashby, slug: josys }
+  - { name: "Joyfulhealth", ats: ashby, slug: joyfulhealth }
+  - { name: "Joyteractive", ats: ashby, slug: joyteractive }
+  - { name: "Jua", ats: ashby, slug: jua }
+  - { name: "Judge Me", ats: ashby, slug: judge-me }
+  - { name: "Judgmentlabs", ats: ashby, slug: judgmentlabs }
   - { name: "Juicebox", ats: ashby, slug: juicebox }
   - { name: "Julius AI", ats: ashby, slug: julius }
-  - { name: "Klaviyo", ats: ashby, slug: klaviyo }
+  - { name: "Jump", ats: ashby, slug: jump }
+  - { name: "Jump App", ats: ashby, slug: jump-app }
+  - { name: "Junction", ats: ashby, slug: junction }
+  - { name: "Juni", ats: ashby, slug: juni }
+  - { name: "Junior", ats: ashby, slug: junior }
+  - { name: "Juniper Square", ats: ashby, slug: junipersquare }
+  - { name: "Juro", ats: ashby, slug: juro }
+  - { name: "K Id", ats: ashby, slug: k-id }
+  - { name: "K2space", ats: ashby, slug: k2space }
+  - { name: "K42", ats: ashby, slug: k42 }
+  - { name: "Kaizenlabs", ats: ashby, slug: kaizenlabs }
+  - { name: "Kalder", ats: ashby, slug: kalder }
+  - { name: "Kale", ats: ashby, slug: kale }
+  - { name: "Kalibri Labs", ats: ashby, slug: kalibri-labs }
+  - { name: "Kalos", ats: ashby, slug: kalos }
+  - { name: "Kalshi", ats: ashby, slug: kalshi }
+  - { name: "Katana", ats: ashby, slug: katana }
+  - { name: "Katapult Labs", ats: ashby, slug: katapult-labs }
+  - { name: "Kayak", ats: ashby, slug: kayak }
+  - { name: "Keel", ats: ashby, slug: keel }
+  - { name: "Keep", ats: ashby, slug: keep }
+  - { name: "Keeper", ats: ashby, slug: keeper }
+  - { name: "Kernel", ats: ashby, slug: kernel }
+  - { name: "Kestra", ats: ashby, slug: kestra }
+  - { name: "Kevins Natural Foods", ats: ashby, slug: kevins-natural-foods }
+  - { name: "Keycard Labs", ats: ashby, slug: keycard-labs }
+  - { name: "Keyrock", ats: ashby, slug: keyrock }
+  - { name: "Khan Tech", ats: ashby, slug: khan-tech }
+  - { name: "Kick", ats: ashby, slug: kick }
+  - { name: "Kikoff", ats: ashby, slug: kikoff }
+  - { name: "Kilocode", ats: ashby, slug: kilocode }
+  - { name: "Kin", ats: ashby, slug: kin }
+  - { name: "Kindred", ats: ashby, slug: kindred }
+  - { name: "Kingdom", ats: ashby, slug: kingdom }
+  - { name: "Kingdomsupercultures", ats: ashby, slug: kingdomsupercultures }
+  - { name: "Kinship", ats: ashby, slug: kinship }
+  - { name: "Kintsugi", ats: ashby, slug: kintsugi }
+  - { name: "Kira", ats: ashby, slug: kira }
+  - { name: "Kirin", ats: ashby, slug: kirin }
+  - { name: "Kiso Technology", ats: ashby, slug: kiso-technology }
+  - { name: "Kissmyapps", ats: ashby, slug: kissmyapps }
+  - { name: "Kit", ats: ashby, slug: kit }
+  - { name: "Kittl", ats: ashby, slug: kittl }
+  - { name: "Kiwi", ats: ashby, slug: kiwi }
+  - { name: "Kiwi Com", ats: ashby, slug: kiwi-com }
+  - { name: "Klarity", ats: ashby, slug: klarity }
+  - { name: "Kleinerperkinsfellows", ats: ashby, slug: kleinerperkinsfellows }
+  - { name: "Klim", ats: ashby, slug: klim }
+  - { name: "Klue", ats: ashby, slug: klue }
+  - { name: "Knock", ats: ashby, slug: knock }
+  - { name: "Knoetic", ats: ashby, slug: knoetic }
+  - { name: "Knot", ats: ashby, slug: knot }
+  - { name: "Knowledge Road", ats: ashby, slug: knowledge-road }
+  - { name: "Known", ats: ashby, slug: known }
+  - { name: "Knowtex", ats: ashby, slug: knowtex }
   - { name: "Koah", ats: ashby, slug: koahlabs }
+  - { name: "Kodex", ats: ashby, slug: kodex }
+  - { name: "Kodif", ats: ashby, slug: kodif }
+  - { name: "Kodifly", ats: ashby, slug: kodifly }
+  - { name: "Kog", ats: ashby, slug: kog }
   - { name: "Kognitos", ats: ashby, slug: kognitos }
-  - { name: "LangChain", ats: ashby, slug: langchain }
+  - { name: "Kognity", ats: ashby, slug: kognity }
+  - { name: "Koho", ats: ashby, slug: koho }
+  - { name: "Kojo", ats: ashby, slug: kojo }
+  - { name: "Kombo", ats: ashby, slug: kombo }
+  - { name: "Kong", ats: ashby, slug: kong }
+  - { name: "Konvu", ats: ashby, slug: konvu }
+  - { name: "Kota", ats: ashby, slug: kota }
+  - { name: "Kovo", ats: ashby, slug: kovo }
+  - { name: "Koyfin", ats: ashby, slug: koyfin }
+  - { name: "Krea", ats: ashby, slug: krea }
+  - { name: "Krepling", ats: ashby, slug: krepling }
+  - { name: "Kuru Labs", ats: ashby, slug: kuru-labs }
+  - { name: "Kustomer", ats: ashby, slug: kustomer }
+  - { name: "Kyanhealth", ats: ashby, slug: kyanhealth }
+  - { name: "Kyra", ats: ashby, slug: kyra }
+  - { name: "Lai", ats: ashby, slug: lai }
+  - { name: "Lambda", ats: ashby, slug: lambda }
+  - { name: "Lanai", ats: ashby, slug: lanai }
+  - { name: "Lancedb", ats: ashby, slug: lancedb }
+  - { name: "Landbase", ats: ashby, slug: landbase }
+  - { name: "Langchain", ats: ashby, slug: langchain }
+  - { name: "Langdock", ats: ashby, slug: langdock }
+  - { name: "Langfuse", ats: ashby, slug: langfuse }
+  - { name: "Lapel", ats: ashby, slug: lapel }
+  - { name: "Lark", ats: ashby, slug: lark }
+  - { name: "Lassie", ats: ashby, slug: lassie }
+  - { name: "Latamcent", ats: ashby, slug: latamcent }
+  - { name: "Latent", ats: ashby, slug: latent }
+  - { name: "Latentlabs", ats: ashby, slug: latentlabs }
+  - { name: "Latitud", ats: ashby, slug: latitud }
+  - { name: "Latitude", ats: ashby, slug: latitude }
+  - { name: "Latitudecareers", ats: ashby, slug: latitudecareers }
+  - { name: "Launchwellgroup", ats: ashby, slug: launchwellgroup }
+  - { name: "Laurel", ats: ashby, slug: laurel }
+  - { name: "Lavendo", ats: ashby, slug: lavendo }
+  - { name: "Lawhive", ats: ashby, slug: lawhive }
+  - { name: "Layerfi", ats: ashby, slug: layerfi }
+  - { name: "Layern", ats: ashby, slug: layern }
+  - { name: "Lazer", ats: ashby, slug: lazer }
+  - { name: "Leadbank", ats: ashby, slug: leadbank }
+  - { name: "Leandata", ats: ashby, slug: leandata }
+  - { name: "Leanlayer", ats: ashby, slug: leanlayer }
+  - { name: "Leanscale", ats: ashby, slug: leanscale }
+  - { name: "Leantech", ats: ashby, slug: leantech }
+  - { name: "Leantechniques", ats: ashby, slug: leantechniques }
+  - { name: "Leap", ats: ashby, slug: leap }
+  - { name: "Leapsome", ats: ashby, slug: leapsome }
+  - { name: "Learn Ashby", ats: ashby, slug: learn-ashby }
+  - { name: "Ledger", ats: ashby, slug: ledger }
+  - { name: "Legend Xyz", ats: ashby, slug: legend-xyz }
+  - { name: "Legionhealth", ats: ashby, slug: legionhealth }
+  - { name: "Legora", ats: ashby, slug: legora }
+  - { name: "Leland", ats: ashby, slug: leland }
+  - { name: "Lemfi", ats: ashby, slug: lemfi }
+  - { name: "Lemlist", ats: ashby, slug: lemlist }
+  - { name: "Lemon Markets", ats: ashby, slug: lemon-markets }
+  - { name: "Lemonade", ats: ashby, slug: lemonade }
+  - { name: "Lempire", ats: ashby, slug: lempire }
+  - { name: "Lendable", ats: ashby, slug: lendable }
+  - { name: "Leona", ats: ashby, slug: leona }
+  - { name: "Letta", ats: ashby, slug: letta }
+  - { name: "Levelpath", ats: ashby, slug: levelpath }
+  - { name: "Lexroom", ats: ashby, slug: lexroom }
+  - { name: "Lgads", ats: ashby, slug: lgads }
+  - { name: "Liblab", ats: ashby, slug: liblab }
+  - { name: "Life Space Digital", ats: ashby, slug: life-space-digital }
+  - { name: "Light Inc", ats: ashby, slug: light-inc }
+  - { name: "Lightdash", ats: ashby, slug: lightdash }
   - { name: "Lightfield", ats: ashby, slug: lightfield }
+  - { name: "Lightning", ats: ashby, slug: lightning }
+  - { name: "Lightsource", ats: ashby, slug: lightsource }
+  - { name: "Lightspark", ats: ashby, slug: lightspark }
+  - { name: "Lightspeed Commerce", ats: ashby, slug: lightspeed-commerce }
+  - { name: "Lightspeedhq", ats: ashby, slug: lightspeedhq }
+  - { name: "Lilt", ats: ashby, slug: lilt }
+  - { name: "Lilt Corporate", ats: ashby, slug: lilt-corporate }
+  - { name: "Lilt Production", ats: ashby, slug: lilt-production }
+  - { name: "Limbic", ats: ashby, slug: limbic }
+  - { name: "Limble", ats: ashby, slug: limble }
+  - { name: "Lime", ats: ashby, slug: lime }
+  - { name: "Limelight Steel", ats: ashby, slug: limelight-steel }
+  - { name: "Limitless", ats: ashby, slug: limitless }
+  - { name: "Lindushealth", ats: ashby, slug: lindushealth }
+  - { name: "Lindy", ats: ashby, slug: lindy }
   - { name: "Linear", ats: ashby, slug: linear }
+  - { name: "Lingopal", ats: ashby, slug: lingopal }
+  - { name: "Linktree", ats: ashby, slug: linktree }
+  - { name: "Linkup", ats: ashby, slug: linkup }
+  - { name: "Lio", ats: ashby, slug: lio }
+  - { name: "Liquid Ai", ats: ashby, slug: liquid-ai }
+  - { name: "Listen Labs", ats: ashby, slug: listenlabs }
+  - { name: "Literati", ats: ashby, slug: literati }
+  - { name: "Liv Golf", ats: ashby, slug: liv-golf }
+  - { name: "Liveflow", ats: ashby, slug: liveflow }
+  - { name: "Livekit", ats: ashby, slug: livekit }
+  - { name: "Livinghr", ats: ashby, slug: livinghr }
   - { name: "LlamaIndex", ats: ashby, slug: llamaindex }
-  - { name: "Magic", ats: ashby, slug: magic }
-  - { name: "Megazone Cloud US", ats: ashby, slug: megazone }
-  - { name: "Meow", ats: ashby, slug: meow }
+  - { name: "Lm Studio", ats: ashby, slug: lm-studio }
+  - { name: "Lmarena", ats: ashby, slug: lmarena }
+  - { name: "Loancrate", ats: ashby, slug: loancrate }
+  - { name: "Localkitchens", ats: ashby, slug: localkitchens }
+  - { name: "Loft Labs", ats: ashby, slug: loft-labs }
+  - { name: "Loopio", ats: ashby, slug: loopio }
+  - { name: "Lore", ats: ashby, slug: lore }
+  - { name: "Lorikeet", ats: ashby, slug: lorikeet }
+  - { name: "Lottie", ats: ashby, slug: lottie }
+  - { name: "Lotushealth", ats: ashby, slug: lotushealth }
+  - { name: "Lovable", ats: ashby, slug: lovable }
+  - { name: "Loveholidays", ats: ashby, slug: loveholidays }
+  - { name: "Lovelace", ats: ashby, slug: lovelace }
+  - { name: "Lowercarboncapital", ats: ashby, slug: lowercarboncapital }
+  - { name: "Lpadesignstudios", ats: ashby, slug: lpadesignstudios }
+  - { name: "Ltv", ats: ashby, slug: ltv }
+  - { name: "Lucidlink", ats: ashby, slug: lucidlink }
+  - { name: "Lucis", ats: ashby, slug: lucis }
+  - { name: "Lucra Sports", ats: ashby, slug: lucra-sports }
+  - { name: "Luma Ai", ats: ashby, slug: luma-ai }
+  - { name: "Luma AI", ats: ashby, slug: lumaai }
+  - { name: "Lumana", ats: ashby, slug: lumana }
+  - { name: "Lumilens", ats: ashby, slug: lumilens }
+  - { name: "Luminai", ats: ashby, slug: luminai }
+  - { name: "Luminary", ats: ashby, slug: luminary }
+  - { name: "Luminoai", ats: ashby, slug: luminoai }
+  - { name: "Luminovo", ats: ashby, slug: luminovo }
+  - { name: "Lunar", ats: ashby, slug: lunar }
+  - { name: "Luxor", ats: ashby, slug: luxor }
+  - { name: "Lydian", ats: ashby, slug: lydian }
+  - { name: "Lynk", ats: ashby, slug: lynk }
+  - { name: "Lyric", ats: ashby, slug: lyric }
+  - { name: "M Kopa", ats: ashby, slug: m-kopa }
+  - { name: "M13", ats: ashby, slug: m13 }
+  - { name: "Mach", ats: ashby, slug: mach }
+  - { name: "Mach9", ats: ashby, slug: mach9 }
+  - { name: "Machinery Partner", ats: ashby, slug: machinery-partner }
+  - { name: "Machinify", ats: ashby, slug: machinify }
+  - { name: "Madcitywindows", ats: ashby, slug: madcitywindows }
+  - { name: "Madecard", ats: ashby, slug: madecard }
+  - { name: "Madhive", ats: ashby, slug: madhive }
+  - { name: "Magentic", ats: ashby, slug: magentic }
+  - { name: "Magical", ats: ashby, slug: magical }
+  - { name: "Magicbrief", ats: ashby, slug: magicbrief }
+  - { name: "Magiceden", ats: ashby, slug: magiceden }
+  - { name: "Magicpatterns", ats: ashby, slug: magicpatterns }
+  - { name: "Magicschool", ats: ashby, slug: magicschool }
+  - { name: "Magna", ats: ashby, slug: magna }
+  - { name: "Magnadigital", ats: ashby, slug: magnadigital }
+  - { name: "Mahway", ats: ashby, slug: mahway }
+  - { name: "Mai", ats: ashby, slug: mai }
+  - { name: "Maihem", ats: ashby, slug: maihem }
+  - { name: "Maincode", ats: ashby, slug: maincode }
+  - { name: "Mainshares", ats: ashby, slug: mainshares }
+  - { name: "Mainstay", ats: ashby, slug: mainstay }
+  - { name: "Maisa", ats: ashby, slug: maisa }
+  - { name: "Mako", ats: ashby, slug: mako }
+  - { name: "Mandolin", ats: ashby, slug: mandolin }
+  - { name: "Maneuver Marketing", ats: ashby, slug: maneuver-marketing }
+  - { name: "Manex", ats: ashby, slug: manex }
+  - { name: "Mangomint", ats: ashby, slug: mangomint }
+  - { name: "Manifest Law", ats: ashby, slug: manifest-law }
+  - { name: "Manufactured", ats: ashby, slug: manufactured }
+  - { name: "Manusai", ats: ashby, slug: manusai }
+  - { name: "Mapbox", ats: ashby, slug: mapbox }
+  - { name: "Maple", ats: ashby, slug: maple }
+  - { name: "Marble", ats: ashby, slug: marble }
+  - { name: "Marcohire", ats: ashby, slug: marcohire }
+  - { name: "Marianaminerals", ats: ashby, slug: marianaminerals }
+  - { name: "Mariner Careers", ats: ashby, slug: mariner-careers }
+  - { name: "Markarch", ats: ashby, slug: markarch }
+  - { name: "Marloo", ats: ashby, slug: marloo }
+  - { name: "Marqeta", ats: ashby, slug: marqeta }
+  - { name: "Marshmallow", ats: ashby, slug: marshmallow }
+  - { name: "Martian", ats: ashby, slug: martian }
+  - { name: "Masabi", ats: ashby, slug: masabi }
+  - { name: "Mastodon", ats: ashby, slug: mastodon }
+  - { name: "Materia", ats: ashby, slug: materia }
+  - { name: "Materialsecurity", ats: ashby, slug: materialsecurity }
+  - { name: "Mathgpt", ats: ashby, slug: mathgpt }
+  - { name: "Matia", ats: ashby, slug: matia }
+  - { name: "Matician", ats: ashby, slug: matician }
+  - { name: "Maticrobots", ats: ashby, slug: maticrobots }
+  - { name: "Matter Intelligence", ats: ashby, slug: matter-intelligence }
+  - { name: "Matter Labs", ats: ashby, slug: matter-labs }
+  - { name: "Matterlabs", ats: ashby, slug: matterlabs }
+  - { name: "Matterworks", ats: ashby, slug: matterworks }
+  - { name: "Maven Agi", ats: ashby, slug: maven-agi }
+  - { name: "Maxhome", ats: ashby, slug: maxhome }
+  - { name: "Maxima", ats: ashby, slug: maxima }
+  - { name: "Maxima Consulting", ats: ashby, slug: maxima-consulting }
+  - { name: "Maximustribe", ats: ashby, slug: maximustribe }
+  - { name: "Maxrewards", ats: ashby, slug: maxrewards }
+  - { name: "Maybern", ats: ashby, slug: maybern }
+  - { name: "Maze", ats: ashby, slug: mazedesign }
+  - { name: "Mazehq", ats: ashby, slug: mazehq }
+  - { name: "Meadowmemorials", ats: ashby, slug: meadowmemorials }
+  - { name: "Mebe", ats: ashby, slug: mebe }
+  - { name: "Mechanism Ventures", ats: ashby, slug: mechanism-ventures }
+  - { name: "Mechanize", ats: ashby, slug: mechanize }
+  - { name: "Medal", ats: ashby, slug: medal }
+  - { name: "Medbill Ai", ats: ashby, slug: medbill-ai }
+  - { name: "Medely", ats: ashby, slug: medely }
+  - { name: "Medialicious", ats: ashby, slug: medialicious }
+  - { name: "Mednet", ats: ashby, slug: mednet }
+  - { name: "Medraai", ats: ashby, slug: medraai }
+  - { name: "Medscout", ats: ashby, slug: medscout }
+  - { name: "Medsender", ats: ashby, slug: medsender }
+  - { name: "Meetmarvin", ats: ashby, slug: meetmarvin }
+  - { name: "Meetpace", ats: ashby, slug: meetpace }
+  - { name: "Melotech", ats: ashby, slug: melotech }
+  - { name: "Mem", ats: ashby, slug: mem }
+  - { name: "Mem0", ats: ashby, slug: mem0 }
+  - { name: "Membrane", ats: ashby, slug: membrane }
+  - { name: "Memgpt", ats: ashby, slug: memgpt }
+  - { name: "Menlosecurity", ats: ashby, slug: menlosecurity }
+  - { name: "Mentis", ats: ashby, slug: mentis }
   - { name: "Mercor", ats: ashby, slug: mercor }
+  - { name: "Mercura", ats: ashby, slug: mercura }
+  - { name: "Mercury", ats: ashby, slug: mercury }
+  - { name: "Meridian", ats: ashby, slug: meridian }
+  - { name: "Meridian Ai", ats: ashby, slug: meridian-ai }
+  - { name: "Meridianlink", ats: ashby, slug: meridianlink }
+  - { name: "Meridio", ats: ashby, slug: meridio }
+  - { name: "Merkle", ats: ashby, slug: merkle }
+  - { name: "Meshcapade", ats: ashby, slug: meshcapade }
+  - { name: "Meshy", ats: ashby, slug: meshy }
+  - { name: "Messa", ats: ashby, slug: messa }
+  - { name: "Message Broadcast", ats: ashby, slug: message-broadcast }
+  - { name: "Messagebird", ats: ashby, slug: messagebird }
+  - { name: "Metadao", ats: ashby, slug: metadao }
+  - { name: "Metal", ats: ashby, slug: metal }
   - { name: "Metalenz", ats: ashby, slug: metalenz }
-  - { name: "Metamorphic", ats: ashby, slug: metamorphic }
-  - { name: "Midjourney", ats: ashby, slug: midjourney }
+  - { name: "Metamap", ats: ashby, slug: metamap }
+  - { name: "Metaplane", ats: ashby, slug: metaplane }
+  - { name: "Metaview", ats: ashby, slug: metaview }
+  - { name: "Metawork", ats: ashby, slug: metawork }
+  - { name: "Meter", ats: ashby, slug: meter }
+  - { name: "Method", ats: ashby, slug: method }
+  - { name: "Method Crm", ats: ashby, slug: method-crm }
+  - { name: "Methodical Careers", ats: ashby, slug: methodical-careers }
+  - { name: "Meticulous", ats: ashby, slug: meticulous }
+  - { name: "Metriport", ats: ashby, slug: metriport }
+  - { name: "Mexdigital", ats: ashby, slug: mexdigital }
+  - { name: "Mia Labs", ats: ashby, slug: mia-labs }
+  - { name: "Miaplaza", ats: ashby, slug: miaplaza }
+  - { name: "Miashare", ats: ashby, slug: miashare }
+  - { name: "Middesk", ats: ashby, slug: middesk }
+  - { name: "Midstream", ats: ashby, slug: midstream }
+  - { name: "Miga", ats: ashby, slug: miga }
+  - { name: "Migaku", ats: ashby, slug: migaku }
+  - { name: "Mimica", ats: ashby, slug: mimica }
+  - { name: "Mind Company", ats: ashby, slug: mind-company }
+  - { name: "Mindly", ats: ashby, slug: mindly }
+  - { name: "Mindpeak", ats: ashby, slug: mindpeak }
+  - { name: "Mindrobotics", ats: ashby, slug: mindrobotics }
+  - { name: "Mindvalley", ats: ashby, slug: mindvalley }
+  - { name: "Mintlify", ats: ashby, slug: mintlify }
+  - { name: "MintMCP", ats: ashby, slug: mintmcp }
+  - { name: "Miovision", ats: ashby, slug: miovision }
+  - { name: "Mirage", ats: ashby, slug: mirage }
+  - { name: "Miramace", ats: ashby, slug: miramace }
+  - { name: "Mirelo", ats: ashby, slug: mirelo }
+  - { name: "Miri", ats: ashby, slug: miri }
   - { name: "Miro", ats: ashby, slug: miro }
+  - { name: "Miter", ats: ashby, slug: miter }
+  - { name: "Mitiga Solutions", ats: ashby, slug: mitiga-solutions }
+  - { name: "Mnemonic", ats: ashby, slug: mnemonic }
+  - { name: "Mobasi", ats: ashby, slug: mobasi }
+  - { name: "Mobilefirst", ats: ashby, slug: mobilefirst }
   - { name: "Modal", ats: ashby, slug: modal }
-  - { name: "Morse Micro", ats: ashby, slug: morse-micro }
+  - { name: "Modefair", ats: ashby, slug: modefair }
+  - { name: "Modern Treasury", ats: ashby, slug: moderntreasury }
+  - { name: "Modernfi", ats: ashby, slug: modernfi }
+  - { name: "Moego", ats: ashby, slug: moego }
+  - { name: "Molecule", ats: ashby, slug: molecule }
+  - { name: "Molecule Software", ats: ashby, slug: molecule-software }
+  - { name: "Molg", ats: ashby, slug: molg }
+  - { name: "Mollie", ats: ashby, slug: mollie }
+  - { name: "Moment", ats: ashby, slug: moment }
+  - { name: "Momentic", ats: ashby, slug: momentic }
+  - { name: "Monaco", ats: ashby, slug: monaco }
+  - { name: "Monarchmoney", ats: ashby, slug: monarchmoney }
+  - { name: "Mondoo", ats: ashby, slug: mondoo }
+  - { name: "Moneyworld", ats: ashby, slug: moneyworld }
+  - { name: "Monitaur", ats: ashby, slug: monitaur }
+  - { name: "Monq", ats: ashby, slug: monq }
+  - { name: "Monsters", ats: ashby, slug: monsters }
+  - { name: "Monte Carlo", ats: ashby, slug: montecarlodata }
+  - { name: "Montu Uk", ats: ashby, slug: montu-uk }
+  - { name: "Monumental", ats: ashby, slug: monumental }
+  - { name: "Moonshot", ats: ashby, slug: moonshot }
+  - { name: "Moonshot Ai", ats: ashby, slug: moonshot-ai }
+  - { name: "Moonvalley Ai", ats: ashby, slug: moonvalley-ai }
+  - { name: "Moov", ats: ashby, slug: moov }
+  - { name: "Moovx", ats: ashby, slug: moovx }
+  - { name: "Moraleshr", ats: ashby, slug: moraleshr }
+  - { name: "Mosaic", ats: ashby, slug: mosaic }
+  - { name: "Mosey", ats: ashby, slug: mosey }
+  - { name: "Moss", ats: ashby, slug: moss }
+  - { name: "Motherduck", ats: ashby, slug: motherduck }
+  - { name: "Motion", ats: ashby, slug: motion }
+  - { name: "Motorway", ats: ashby, slug: motorway }
+  - { name: "Movementlabs", ats: ashby, slug: movementlabs }
+  - { name: "Moxfive", ats: ashby, slug: moxfive }
+  - { name: "Moxie", ats: ashby, slug: moxie }
+  - { name: "mParticle", ats: ashby, slug: mparticle }
+  - { name: "Msquared", ats: ashby, slug: msquared }
+  - { name: "Mubi", ats: ashby, slug: mubi }
+  - { name: "Mudflap", ats: ashby, slug: mudflap }
+  - { name: "Mui", ats: ashby, slug: mui }
+  - { name: "Multion", ats: ashby, slug: multion }
+  - { name: "Multiply", ats: ashby, slug: multiply }
+  - { name: "Multiverse", ats: ashby, slug: multiverse }
+  - { name: "Multivmlabs", ats: ashby, slug: multivmlabs }
+  - { name: "Munich Electrification", ats: ashby, slug: munich-electrification }
+  - { name: "Mural", ats: ashby, slug: mural }
+  - { name: "Museapp", ats: ashby, slug: museapp }
+  - { name: "Mutiny", ats: ashby, slug: mutiny }
+  - { name: "Mux", ats: ashby, slug: mux }
+  - { name: "Myedspacecareers", ats: ashby, slug: myedspacecareers }
+  - { name: "Myriad Ai", ats: ashby, slug: myriad-ai }
+  - { name: "Mysten Labs", ats: ashby, slug: mystenlabs }
+  - { name: "Mytomorrows", ats: ashby, slug: mytomorrows }
+  - { name: "Myvillage", ats: ashby, slug: myvillage }
   - { name: "N1", ats: ashby, slug: n1 }
+  - { name: "N43 Studio", ats: ashby, slug: n43-studio }
+  - { name: "n8n", ats: ashby, slug: n8n }
+  - { name: "Nabihealth", ats: ashby, slug: nabihealth }
+  - { name: "Nabla", ats: ashby, slug: nabla }
+  - { name: "Nabucasa", ats: ashby, slug: nabucasa }
+  - { name: "Nango", ats: ashby, slug: nango }
+  - { name: "Nano Qt", ats: ashby, slug: nano-qt }
+  - { name: "Naptha", ats: ashby, slug: naptha }
+  - { name: "Nascent", ats: ashby, slug: nascent }
+  - { name: "Nash", ats: ashby, slug: nash }
+  - { name: "Natcast", ats: ashby, slug: natcast }
+  - { name: "Nationgraph", ats: ashby, slug: nationgraph }
+  - { name: "Nativemarkets", ats: ashby, slug: nativemarkets }
+  - { name: "Natter", ats: ashby, slug: natter }
+  - { name: "Nautical Commerce", ats: ashby, slug: nautical-commerce }
+  - { name: "Nava Benefits", ats: ashby, slug: nava-benefits }
+  - { name: "Navattic", ats: ashby, slug: navattic }
+  - { name: "Navi", ats: ashby, slug: navi }
+  - { name: "Ndeavour", ats: ashby, slug: ndeavour }
+  - { name: "Neara", ats: ashby, slug: neara }
+  - { name: "Nectar Social", ats: ashby, slug: nectar-social }
+  - { name: "Negotiate Ai", ats: ashby, slug: negotiate-ai }
+  - { name: "Neko Health", ats: ashby, slug: neko-health }
+  - { name: "Nelo", ats: ashby, slug: nelo }
+  - { name: "Nen Creative", ats: ashby, slug: nen-creative }
+  - { name: "Neofinancial", ats: ashby, slug: neofinancial }
+  - { name: "Neon", ats: ashby, slug: neon }
+  - { name: "Neon Health", ats: ashby, slug: neon-health }
+  - { name: "Neonredwood", ats: ashby, slug: neonredwood }
+  - { name: "Neotaste", ats: ashby, slug: neotaste }
+  - { name: "Nerdwallet", ats: ashby, slug: nerdwallet }
+  - { name: "Nessolabs", ats: ashby, slug: nessolabs }
+  - { name: "Nest Health", ats: ashby, slug: nest-health }
+  - { name: "Nestveterinary", ats: ashby, slug: nestveterinary }
+  - { name: "Netboxlabs", ats: ashby, slug: netboxlabs }
+  - { name: "NETGEAR", ats: ashby, slug: netgear }
+  - { name: "Nethermind", ats: ashby, slug: nethermind }
   - { name: "Netic", ats: ashby, slug: netic }
+  - { name: "Netpreme", ats: ashby, slug: netpreme }
+  - { name: "Netwealth", ats: ashby, slug: netwealth }
+  - { name: "Networkright", ats: ashby, slug: networkright }
+  - { name: "Neuralconcept", ats: ashby, slug: neuralconcept }
+  - { name: "Neuroscale", ats: ashby, slug: neuroscale }
+  - { name: "Nevis", ats: ashby, slug: nevis }
+  - { name: "Nevoya", ats: ashby, slug: nevoya }
+  - { name: "Newform", ats: ashby, slug: newform }
+  - { name: "Newfront", ats: ashby, slug: newfront }
+  - { name: "Newlantern", ats: ashby, slug: newlantern }
+  - { name: "Neworbit", ats: ashby, slug: neworbit }
+  - { name: "Newschoolfoods", ats: ashby, slug: newschoolfoods }
+  - { name: "Newxel", ats: ashby, slug: newxel }
+  - { name: "Nextdata", ats: ashby, slug: nextdata }
+  - { name: "Nextlinklabs", ats: ashby, slug: nextlinklabs }
+  - { name: "Nextmatter", ats: ashby, slug: nextmatter }
+  - { name: "Nextpatient", ats: ashby, slug: nextpatient }
+  - { name: "Nexus Cognitive", ats: ashby, slug: nexus-cognitive }
+  - { name: "Nexxen", ats: ashby, slug: nexxen }
   - { name: "Niantic Spatial", ats: ashby, slug: niantic-spatial }
+  - { name: "Nightfall Ai", ats: ashby, slug: nightfall-ai }
+  - { name: "Nimbl", ats: ashby, slug: nimbl }
+  - { name: "Niramedical", ats: ashby, slug: niramedical }
+  - { name: "Nirvana", ats: ashby, slug: nirvana }
+  - { name: "Nivoda", ats: ashby, slug: nivoda }
+  - { name: "Noetica", ats: ashby, slug: noetica }
+  - { name: "Noise Labs", ats: ashby, slug: noise-labs }
+  - { name: "Nollahealth", ats: ashby, slug: nollahealth }
+  - { name: "Nomad", ats: ashby, slug: nomad }
+  - { name: "Nomic", ats: ashby, slug: nomic }
+  - { name: "Nomos", ats: ashby, slug: nomos }
   - { name: "Nooks", ats: ashby, slug: nooks }
+  - { name: "Norm Ai", ats: ashby, slug: norm-ai }
+  - { name: "Normalcomputing", ats: ashby, slug: normalcomputing }
+  - { name: "Normalcomputingai", ats: ashby, slug: normalcomputingai }
+  - { name: "Northslope Technologies", ats: ashby, slug: northslope-technologies }
   - { name: "Northwood Space", ats: ashby, slug: northwoodspace }
+  - { name: "Nory", ats: ashby, slug: nory }
+  - { name: "Nory Co", ats: ashby, slug: nory-co }
+  - { name: "Nosisbio", ats: ashby, slug: nosisbio }
+  - { name: "Notabene", ats: ashby, slug: notabene }
+  - { name: "Notable", ats: ashby, slug: notable }
   - { name: "Notion", ats: ashby, slug: notion }
-  - { name: "Old Mission", ats: ashby, slug: old-mission-capital }
-  - { name: "OLIX", ats: ashby, slug: olix }
+  - { name: "Novaprime", ats: ashby, slug: novaprime }
+  - { name: "Novel", ats: ashby, slug: novel }
+  - { name: "Novellia", ats: ashby, slug: novellia }
+  - { name: "Novo", ats: ashby, slug: novo }
+  - { name: "Nox Metals", ats: ashby, slug: nox-metals }
+  - { name: "Noya", ats: ashby, slug: noya }
+  - { name: "Noyo", ats: ashby, slug: noyo }
+  - { name: "Npx", ats: ashby, slug: npx }
+  - { name: "Ntegrity", ats: ashby, slug: ntegrity }
+  - { name: "Nudge", ats: ashby, slug: nudge }
+  - { name: "Nudgetext", ats: ashby, slug: nudgetext }
+  - { name: "Numeral", ats: ashby, slug: numeral }
+  - { name: "Numeric", ats: ashby, slug: numeric }
+  - { name: "Numosai", ats: ashby, slug: numosai }
+  - { name: "Nuna Inc.", ats: ashby, slug: nuna }
+  - { name: "Nuon", ats: ashby, slug: nuon }
+  - { name: "Nura Studios", ats: ashby, slug: nura-studios }
+  - { name: "Nursa", ats: ashby, slug: nursa }
+  - { name: "Nylas", ats: ashby, slug: nylas }
+  - { name: "Nymbl", ats: ashby, slug: nymbl }
+  - { name: "Oak", ats: ashby, slug: oak }
+  - { name: "Oakland Feather River Camp", ats: ashby, slug: oakland-feather-river-camp }
+  - { name: "Oakslab", ats: ashby, slug: oakslab }
+  - { name: "Oboe", ats: ashby, slug: oboe }
+  - { name: "Obrio", ats: ashby, slug: obrio }
+  - { name: "Observable Space", ats: ashby, slug: observable-space }
+  - { name: "Observeinc", ats: ashby, slug: observeinc }
+  - { name: "Obsidiansystems", ats: ashby, slug: obsidiansystems }
+  - { name: "Obviant", ats: ashby, slug: obviant }
+  - { name: "Obvio", ats: ashby, slug: obvio }
+  - { name: "Occam", ats: ashby, slug: occam }
+  - { name: "Ocp", ats: ashby, slug: ocp }
+  - { name: "Oden Technologies", ats: ashby, slug: oden-technologies }
+  - { name: "Odys Aviation", ats: ashby, slug: odys-aviation }
+  - { name: "Odysseyml", ats: ashby, slug: odysseyml }
+  - { name: "Offdeal", ats: ashby, slug: offdeal }
+  - { name: "Office Hours", ats: ashby, slug: office-hours }
+  - { name: "Offstream", ats: ashby, slug: offstream }
+  - { name: "Oh", ats: ashby, slug: oh }
+  - { name: "Old Well Labs", ats: ashby, slug: old-well-labs }
+  - { name: "Olive", ats: ashby, slug: olive }
+  - { name: "Olix", ats: ashby, slug: olix }
+  - { name: "Omafertility", ats: ashby, slug: omafertility }
+  - { name: "Omaze", ats: ashby, slug: omaze }
+  - { name: "Omi", ats: ashby, slug: omi }
+  - { name: "Omnea", ats: ashby, slug: omnea }
+  - { name: "Omni", ats: ashby, slug: omni }
+  - { name: "Omniscient", ats: ashby, slug: omniscient }
+  - { name: "Ona", ats: ashby, slug: ona }
+  - { name: "Ondeck Ai", ats: ashby, slug: ondeck-ai }
+  - { name: "One Pass Solutions", ats: ashby, slug: one-pass-solutions }
+  - { name: "One Text", ats: ashby, slug: one-text }
+  - { name: "Onebrief", ats: ashby, slug: onebrief }
+  - { name: "Onecrew", ats: ashby, slug: onecrew }
+  - { name: "Onehealth", ats: ashby, slug: onehealth }
   - { name: "OnePay", ats: ashby, slug: oneapp }
+  - { name: "Onepay", ats: ashby, slug: onepay }
+  - { name: "Oneschema", ats: ashby, slug: oneschema }
+  - { name: "Onhires", ats: ashby, slug: onhires }
+  - { name: "Onoshealth", ats: ashby, slug: onoshealth }
+  - { name: "Onramp", ats: ashby, slug: onramp }
+  - { name: "Ontic", ats: ashby, slug: ontic }
+  - { name: "Ontologize", ats: ashby, slug: ontologize }
+  - { name: "Onton", ats: ashby, slug: onton }
+  - { name: "Opal", ats: ashby, slug: opal }
+  - { name: "Opal Os", ats: ashby, slug: opal-os }
+  - { name: "Open Ledger", ats: ashby, slug: open-ledger }
   - { name: "OpenAI", ats: ashby, slug: openai }
-  - { name: "Pace", ats: ashby, slug: withpace }
-  - { name: "Pangram Labs", ats: ashby, slug: pangramlabs }
+  - { name: "Opendoor", ats: ashby, slug: opendoor }
+  - { name: "OpenEvidence", ats: ashby, slug: openevidence }
+  - { name: "Opengov", ats: ashby, slug: opengov }
+  - { name: "Opengovsg", ats: ashby, slug: opengovsg }
+  - { name: "Openhands", ats: ashby, slug: openhands }
+  - { name: "Openhomefoundation", ats: ashby, slug: openhomefoundation }
+  - { name: "Openloophealth", ats: ashby, slug: openloophealth }
+  - { name: "Openobserve Careers", ats: ashby, slug: openobserve-careers }
+  - { name: "Openphilanthropy", ats: ashby, slug: openphilanthropy }
+  - { name: "OpenRouter", ats: ashby, slug: openrouter }
+  - { name: "Opensea", ats: ashby, slug: opensea }
+  - { name: "Openstore", ats: ashby, slug: openstore }
+  - { name: "Operator", ats: ashby, slug: operator }
+  - { name: "Opfoundation", ats: ashby, slug: opfoundation }
+  - { name: "Oplabs", ats: ashby, slug: oplabs }
+  - { name: "Opslevel", ats: ashby, slug: opslevel }
+  - { name: "Optery", ats: ashby, slug: optery }
+  - { name: "Optimum", ats: ashby, slug: optimum }
+  - { name: "Optro", ats: ashby, slug: optro }
+  - { name: "Opus Training", ats: ashby, slug: opus-training }
+  - { name: "Opusclip", ats: ashby, slug: opusclip }
+  - { name: "Orb", ats: ashby, slug: orb }
+  - { name: "Orbem", ats: ashby, slug: orbem }
+  - { name: "Orbit", ats: ashby, slug: orbit }
+  - { name: "Orbital", ats: ashby, slug: orbital }
+  - { name: "Orbitalindustries", ats: ashby, slug: orbitalindustries }
+  - { name: "Orbitalmaterials", ats: ashby, slug: orbitalmaterials }
+  - { name: "Orby Ai", ats: ashby, slug: orby-ai }
+  - { name: "Orca", ats: ashby, slug: orca }
+  - { name: "Orchard", ats: ashby, slug: orchard }
+  - { name: "Orderful", ats: ashby, slug: orderful }
+  - { name: "Ordio", ats: ashby, slug: ordio }
+  - { name: "Orita", ats: ashby, slug: orita }
+  - { name: "Orum", ats: ashby, slug: orum }
+  - { name: "Oscilar", ats: ashby, slug: oscilar }
+  - { name: "Osmo", ats: ashby, slug: osmo }
+  - { name: "Oso", ats: ashby, slug: oso }
+  - { name: "Ostium", ats: ashby, slug: ostium }
+  - { name: "Ostrom", ats: ashby, slug: ostrom }
+  - { name: "Oumi", ats: ashby, slug: oumi }
+  - { name: "Ourritual", ats: ashby, slug: ourritual }
+  - { name: "Outersignal", ats: ashby, slug: outersignal }
+  - { name: "Outliant", ats: ashby, slug: outliant }
+  - { name: "Output", ats: ashby, slug: output }
+  - { name: "Outset", ats: ashby, slug: outset }
+  - { name: "Outsmart", ats: ashby, slug: outsmart }
+  - { name: "Outtake", ats: ashby, slug: outtake }
+  - { name: "Overflow", ats: ashby, slug: overflow }
+  - { name: "Overjet", ats: ashby, slug: overjet }
+  - { name: "Overview", ats: ashby, slug: overview }
+  - { name: "Overviewenergy", ats: ashby, slug: overviewenergy }
+  - { name: "Owner", ats: ashby, slug: owner }
+  - { name: "Oxio", ats: ashby, slug: oxio }
+  - { name: "Oxman", ats: ashby, slug: oxman }
+  - { name: "Oyster", ats: ashby, slug: oyster }
+  - { name: "Ozone", ats: ashby, slug: ozone }
+  - { name: "Pace", ats: ashby, slug: pace }
+  - { name: "Pacificfusion", ats: ashby, slug: pacificfusion }
+  - { name: "Pactfi", ats: ashby, slug: pactfi }
+  - { name: "Paddle", ats: ashby, slug: paddle }
+  - { name: "Padlet", ats: ashby, slug: padlet }
+  - { name: "Pageport", ats: ashby, slug: pageport }
+  - { name: "Pagos", ats: ashby, slug: pagos }
+  - { name: "Pahdo", ats: ashby, slug: pahdo }
+  - { name: "Paireyewear", ats: ashby, slug: paireyewear }
+  - { name: "Palette Media", ats: ashby, slug: palette-media }
+  - { name: "Palettelabs", ats: ashby, slug: palettelabs }
+  - { name: "Palladio", ats: ashby, slug: palladio }
+  - { name: "Palmstreet", ats: ashby, slug: palmstreet }
+  - { name: "Palup", ats: ashby, slug: palup }
+  - { name: "Pano Ai", ats: ashby, slug: pano-ai }
+  - { name: "Panoptyc", ats: ashby, slug: panoptyc }
+  - { name: "Parable", ats: ashby, slug: parable }
+  - { name: "Parabola Io", ats: ashby, slug: parabola-io }
+  - { name: "Paradigm", ats: ashby, slug: paradigm }
+  - { name: "Paradigm Ai", ats: ashby, slug: paradigm-ai }
+  - { name: "Paradigmai", ats: ashby, slug: paradigmai }
+  - { name: "Paradox", ats: ashby, slug: paradox }
+  - { name: "Parafin", ats: ashby, slug: parafin }
+  - { name: "Paraform", ats: ashby, slug: paraform }
+  - { name: "Paragon", ats: ashby, slug: paragon }
+  - { name: "Parallel Bio", ats: ashby, slug: parallel-bio }
+  - { name: "Parallel Biosystems", ats: ashby, slug: parallel-biosystems }
+  - { name: "Parallel Fluidics", ats: ashby, slug: parallel-fluidics }
+  - { name: "Parallel Web Systems", ats: ashby, slug: parallel }
+  - { name: "Parasol", ats: ashby, slug: parasol }
+  - { name: "Parcha", ats: ashby, slug: parcha }
+  - { name: "Pareto Ai", ats: ashby, slug: pareto-ai }
+  - { name: "Parity", ats: ashby, slug: parity }
+  - { name: "Pariveda", ats: ashby, slug: pariveda }
+  - { name: "Parkade", ats: ashby, slug: parkade }
+  - { name: "Parrot", ats: ashby, slug: parrot }
+  - { name: "Parspec", ats: ashby, slug: parspec }
+  - { name: "Partiful", ats: ashby, slug: partiful }
+  - { name: "Partisiablockchain", ats: ashby, slug: partisiablockchain }
+  - { name: "Partsbase", ats: ashby, slug: partsbase }
+  - { name: "Passage", ats: ashby, slug: passage }
+  - { name: "Passport", ats: ashby, slug: passport }
+  - { name: "Passthrough", ats: ashby, slug: passthrough }
+  - { name: "Pathmentalhealth", ats: ashby, slug: pathmentalhealth }
+  - { name: "Pathos", ats: ashby, slug: pathos }
+  - { name: "Patlytics", ats: ashby, slug: patlytics }
   - { name: "Patreon", ats: ashby, slug: patreon }
+  - { name: "Patrianna", ats: ashby, slug: patrianna }
+  - { name: "Patternlabs", ats: ashby, slug: patternlabs }
+  - { name: "Pavebank", ats: ashby, slug: pavebank }
+  - { name: "Pawp", ats: ashby, slug: pawp }
+  - { name: "Paxos", ats: ashby, slug: paxos }
+  - { name: "Payabli", ats: ashby, slug: payabli }
+  - { name: "Payflip", ats: ashby, slug: payflip }
+  - { name: "Payrails", ats: ashby, slug: payrails }
+  - { name: "Paysail", ats: ashby, slug: paysail }
+  - { name: "Payscale", ats: ashby, slug: payscale }
+  - { name: "Payzen Inc", ats: ashby, slug: payzen-inc }
+  - { name: "Pcg", ats: ashby, slug: pcg }
+  - { name: "Peakmetrics", ats: ashby, slug: peakmetrics }
+  - { name: "Pear", ats: ashby, slug: pear }
+  - { name: "Pear Vc", ats: ashby, slug: pear-vc }
+  - { name: "Pearl", ats: ashby, slug: pearl }
+  - { name: "Pearlhealth", ats: ashby, slug: pearlhealth }
+  - { name: "Pearlyplan", ats: ashby, slug: pearlyplan }
+  - { name: "Pearmill", ats: ashby, slug: pearmill }
+  - { name: "Pearpop", ats: ashby, slug: pearpop }
+  - { name: "Pebl", ats: ashby, slug: pebl }
+  - { name: "Peec", ats: ashby, slug: peec }
+  - { name: "Peek", ats: ashby, slug: peek }
+  - { name: "Peggy", ats: ashby, slug: peggy }
+  - { name: "Pennylane", ats: ashby, slug: pennylane }
+  - { name: "People Culture Talent", ats: ashby, slug: people-culture-talent }
+  - { name: "People Data Labs", ats: ashby, slug: people-data-labs }
+  - { name: "Peopleup", ats: ashby, slug: peopleup }
+  - { name: "Peppr", ats: ashby, slug: peppr }
+  - { name: "Percepta", ats: ashby, slug: percepta }
+  - { name: "Perchwell", ats: ashby, slug: perchwell }
+  - { name: "Percona", ats: ashby, slug: percona }
+  - { name: "Perfect Venue", ats: ashby, slug: perfect-venue }
+  - { name: "Periodic Labs", ats: ashby, slug: periodic-labs }
+  - { name: "Perk", ats: ashby, slug: perk }
+  - { name: "PermitFlow", ats: ashby, slug: permitflow }
+  - { name: "Permutive", ats: ashby, slug: permutive }
   - { name: "Perplexity", ats: ashby, slug: perplexity }
+  - { name: "Persimmons Ai", ats: ashby, slug: persimmons-ai }
   - { name: "Persona", ats: ashby, slug: persona }
-  - { name: "Phoebe", ats: ashby, slug: phoebe-work }
+  - { name: "Personio", ats: ashby, slug: personio }
+  - { name: "Petra Labs", ats: ashby, slug: petra-labs }
+  - { name: "Phantom", ats: ashby, slug: phantom }
+  - { name: "Phare", ats: ashby, slug: phare }
+  - { name: "Phare R1 R37", ats: ashby, slug: phare-r1-r37 }
+  - { name: "Phasebiolabs", ats: ashby, slug: phasebiolabs }
+  - { name: "Phia", ats: ashby, slug: phia }
+  - { name: "Phil", ats: ashby, slug: phil }
+  - { name: "Phlair", ats: ashby, slug: phlair }
+  - { name: "Phoenix", ats: ashby, slug: phoenix }
+  - { name: "Photoroom", ats: ashby, slug: photoroom }
+  - { name: "Phylax", ats: ashby, slug: phylax }
+  - { name: "Physicalintelligence", ats: ashby, slug: physicalintelligence }
+  - { name: "Pickaxe", ats: ashby, slug: pickaxe }
+  - { name: "Pickle", ats: ashby, slug: pickle }
+  - { name: "Picknik", ats: ashby, slug: picknik }
+  - { name: "Picogrid", ats: ashby, slug: picogrid }
   - { name: "Pika", ats: ashby, slug: pika }
+  - { name: "Pilgrim", ats: ashby, slug: pilgrim }
+  - { name: "Pilot Fiber", ats: ashby, slug: pilot-fiber }
   - { name: "Pinecone", ats: ashby, slug: pinecone }
+  - { name: "Pirros", ats: ashby, slug: pirros }
+  - { name: "Pivot", ats: ashby, slug: pivot }
+  - { name: "Pivotal Health", ats: ashby, slug: pivotal-health }
+  - { name: "Pivotrobotics", ats: ashby, slug: pivotrobotics }
+  - { name: "Pixaera", ats: ashby, slug: pixaera }
+  - { name: "Place Exchange", ats: ashby, slug: place-exchange }
+  - { name: "Plaid", ats: ashby, slug: plaid }
+  - { name: "Plain", ats: ashby, slug: plain }
+  - { name: "Plane", ats: ashby, slug: plane }
+  - { name: "Planehr", ats: ashby, slug: planehr }
+  - { name: "Planera", ats: ashby, slug: planera }
+  - { name: "Planetary Scale", ats: ashby, slug: planetary-scale }
+  - { name: "Planteria", ats: ashby, slug: planteria }
+  - { name: "Plantingspace", ats: ashby, slug: plantingspace }
+  - { name: "Plasma", ats: ashby, slug: plasma }
+  - { name: "Plasmidsaurus", ats: ashby, slug: plasmidsaurus }
+  - { name: "Platoapp", ats: ashby, slug: platoapp }
+  - { name: "Plaud", ats: ashby, slug: plaud }
+  - { name: "Plaud Ai", ats: ashby, slug: plaud-ai }
+  - { name: "Playai", ats: ashby, slug: playai }
+  - { name: "Playbook", ats: ashby, slug: playbook }
+  - { name: "Playerzero", ats: ashby, slug: playerzero }
+  - { name: "Playground", ats: ashby, slug: playground }
+  - { name: "Playht", ats: ashby, slug: playht }
+  - { name: "Playlab", ats: ashby, slug: playlab }
+  - { name: "Playpowerlabs", ats: ashby, slug: playpowerlabs }
+  - { name: "Playquell", ats: ashby, slug: playquell }
+  - { name: "Playson", ats: ashby, slug: playson }
+  - { name: "Please", ats: ashby, slug: please }
+  - { name: "Pleo", ats: ashby, slug: pleo }
+  - { name: "Plinth", ats: ashby, slug: plinth }
+  - { name: "Plots", ats: ashby, slug: plots }
+  - { name: "Plume Network", ats: ashby, slug: plume-network }
+  - { name: "Pluralfinance", ats: ashby, slug: pluralfinance }
+  - { name: "Pluralis Research", ats: ashby, slug: pluralis-research }
+  - { name: "Pml", ats: ashby, slug: pml }
+  - { name: "Pmmalliance", ats: ashby, slug: pmmalliance }
+  - { name: "Pocketprep", ats: ashby, slug: pocketprep }
+  - { name: "Pocus", ats: ashby, slug: pocus }
+  - { name: "Pod Network", ats: ashby, slug: pod-network }
+  - { name: "Podium Automation", ats: ashby, slug: podium-automation }
+  - { name: "Poetiq", ats: ashby, slug: poetiq }
+  - { name: "Point One Navigation", ats: ashby, slug: point-one-navigation }
+  - { name: "Pointe Advisory", ats: ashby, slug: pointe-advisory }
+  - { name: "Polar", ats: ashby, slug: polar }
+  - { name: "Polaranalytics", ats: ashby, slug: polaranalytics }
+  - { name: "Polarsteps", ats: ashby, slug: polarsteps }
+  - { name: "Polene Paris", ats: ashby, slug: polene-paris }
+  - { name: "Polyester", ats: ashby, slug: polyester }
+  - { name: "Polygon Labs", ats: ashby, slug: polygon-labs }
+  - { name: "Polymarket", ats: ashby, slug: polymarket }
+  - { name: "Polymath", ats: ashby, slug: polymath }
+  - { name: "Pomeloinc", ats: ashby, slug: pomeloinc }
+  - { name: "Pontosense", ats: ashby, slug: pontosense }
   - { name: "Poolside", ats: ashby, slug: poolside }
-  - { name: "Preference Model", ats: ashby, slug: preference-model }
+  - { name: "Popl", ats: ashby, slug: popl }
+  - { name: "Popsql", ats: ashby, slug: popsql }
+  - { name: "Posh", ats: ashby, slug: posh }
+  - { name: "Posh Ai", ats: ashby, slug: posh-ai }
+  - { name: "Poshmark", ats: ashby, slug: poshmark }
+  - { name: "Positive Development", ats: ashby, slug: positive-development }
+  - { name: "PostHog", ats: ashby, slug: posthog }
+  - { name: "Powerlattice", ats: ashby, slug: powerlattice }
+  - { name: "Powerline", ats: ashby, slug: powerline }
+  - { name: "Powerus", ats: ashby, slug: powerus }
+  - { name: "Pplwise", ats: ashby, slug: pplwise }
+  - { name: "Pragmaplatform", ats: ashby, slug: pragmaplatform }
+  - { name: "Pragmatike", ats: ashby, slug: pragmatike }
+  - { name: "Prairielearn", ats: ashby, slug: prairielearn }
+  - { name: "Praxipal", ats: ashby, slug: praxipal }
+  - { name: "Prefect", ats: ashby, slug: prefect }
+  - { name: "Prelim", ats: ashby, slug: prelim }
+  - { name: "Prelude", ats: ashby, slug: prelude }
+  - { name: "Preludesecurity", ats: ashby, slug: preludesecurity }
+  - { name: "Prepared911", ats: ashby, slug: prepared911 }
+  - { name: "Preply", ats: ashby, slug: preply }
+  - { name: "Primary", ats: ashby, slug: primary }
+  - { name: "Prime", ats: ashby, slug: prime }
+  - { name: "Primeintellect", ats: ashby, slug: primeintellect }
   - { name: "Primer", ats: ashby, slug: primer }
+  - { name: "Prior Labs", ats: ashby, slug: prior-labs }
+  - { name: "Prive", ats: ashby, slug: prive }
+  - { name: "Privy", ats: ashby, slug: privy }
+  - { name: "Probably Good", ats: ashby, slug: probably-good }
+  - { name: "Probablygenetic", ats: ashby, slug: probablygenetic }
+  - { name: "Probook", ats: ashby, slug: probook }
+  - { name: "Procurementsciences", ats: ashby, slug: procurementsciences }
+  - { name: "Procurify", ats: ashby, slug: procurify }
+  - { name: "Prodigy Education", ats: ashby, slug: prodigy-education }
+  - { name: "Product Updates", ats: ashby, slug: product-updates }
+  - { name: "Productwind", ats: ashby, slug: productwind }
+  - { name: "Profound", ats: ashby, slug: profound }
+  - { name: "Project Expedition", ats: ashby, slug: project-expedition }
+  - { name: "Projectgrowth", ats: ashby, slug: projectgrowth }
+  - { name: "Projectsbyif", ats: ashby, slug: projectsbyif }
+  - { name: "Prokeep", ats: ashby, slug: prokeep }
+  - { name: "Promise", ats: ashby, slug: promise }
+  - { name: "Promise Studios", ats: ashby, slug: promise-studios }
+  - { name: "Prompt", ats: ashby, slug: prompt }
+  - { name: "Proofofplay", ats: ashby, slug: proofofplay }
+  - { name: "Proofs", ats: ashby, slug: proofs }
+  - { name: "Propagate", ats: ashby, slug: propagate }
+  - { name: "Propel", ats: ashby, slug: propel }
+  - { name: "Propelus", ats: ashby, slug: propelus }
+  - { name: "Prophet Security", ats: ashby, slug: prophet-security }
+  - { name: "Prorata", ats: ashby, slug: prorata }
+  - { name: "Prosper Ai", ats: ashby, slug: prosper-ai }
+  - { name: "Prospyr", ats: ashby, slug: prospyr }
+  - { name: "Protectai", ats: ashby, slug: protectai }
+  - { name: "Protege", ats: ashby, slug: protege }
+  - { name: "Protegrity", ats: ashby, slug: protegrity }
+  - { name: "Protochain", ats: ashby, slug: protochain }
+  - { name: "Provable", ats: ashby, slug: provable }
+  - { name: "Proxima Fusion", ats: ashby, slug: proxima-fusion }
+  - { name: "Proximaai", ats: ashby, slug: proximaai }
+  - { name: "Pryzm", ats: ashby, slug: pryzm }
+  - { name: "Publiccloudgroup", ats: ashby, slug: publiccloudgroup }
+  - { name: "Pulley", ats: ashby, slug: pulley }
+  - { name: "Pulselive", ats: ashby, slug: pulselive }
   - { name: "Pylon", ats: ashby, slug: pylon-labs }
-  - { name: "Qumulo", ats: ashby, slug: qumulo }
+  - { name: "Pylon", ats: ashby, slug: pylon }
+  - { name: "Pythnetwork", ats: ashby, slug: pythnetwork }
+  - { name: "Pytho Ai", ats: ashby, slug: pytho-ai }
+  - { name: "Pyyne", ats: ashby, slug: pyyne }
+  - { name: "Qawolf", ats: ashby, slug: qawolf }
+  - { name: "Qed Ai", ats: ashby, slug: qed-ai }
+  - { name: "Qeystroke", ats: ashby, slug: qeystroke }
+  - { name: "Qih Group", ats: ashby, slug: qih-group }
+  - { name: "Qontext", ats: ashby, slug: qontext }
+  - { name: "Qualified", ats: ashby, slug: qualified }
+  - { name: "Qualified Health Pbc", ats: ashby, slug: qualified-health-pbc }
+  - { name: "Qualytics", ats: ashby, slug: qualytics }
+  - { name: "Quant Aq", ats: ashby, slug: quant-aq }
+  - { name: "Quanta", ats: ashby, slug: quanta }
+  - { name: "Quantilehealth", ats: ashby, slug: quantilehealth }
+  - { name: "Quantstamp", ats: ashby, slug: quantstamp }
+  - { name: "Quantum", ats: ashby, slug: quantum }
+  - { name: "Quantware", ats: ashby, slug: quantware }
+  - { name: "Quarks Tech", ats: ashby, slug: quarks-tech }
+  - { name: "Quartermaster", ats: ashby, slug: quartermaster }
+  - { name: "Quicknode", ats: ashby, slug: quicknode }
+  - { name: "Quilter", ats: ashby, slug: quilter }
+  - { name: "Quindar", ats: ashby, slug: quindar }
   - { name: "Quora", ats: ashby, slug: quora }
+  - { name: "Quotewell", ats: ashby, slug: quotewell }
+  - { name: "Qventus", ats: ashby, slug: qventus }
+  - { name: "Qwilr", ats: ashby, slug: qwilr }
+  - { name: "Rabbet", ats: ashby, slug: rabbet }
+  - { name: "Rabbithole", ats: ashby, slug: rabbithole }
+  - { name: "Rad AI", ats: ashby, slug: radai }
+  - { name: "Rad Intel", ats: ashby, slug: rad-intel }
+  - { name: "Radar", ats: ashby, slug: radar }
+  - { name: "Radiant Industries", ats: ashby, slug: radiant-industries }
+  - { name: "Radiantgraph", ats: ashby, slug: radiantgraph }
+  - { name: "Radiusai", ats: ashby, slug: radiusai }
+  - { name: "Raiku", ats: ashby, slug: raiku }
+  - { name: "Railway", ats: ashby, slug: railway }
+  - { name: "Rain", ats: ashby, slug: rain }
+  - { name: "Rain Ai Jobs", ats: ashby, slug: rain-ai-jobs }
+  - { name: "Rainfallhealth", ats: ashby, slug: rainfallhealth }
+  - { name: "Rainforest Pay", ats: ashby, slug: rainforest-pay }
+  - { name: "Rallyuxr", ats: ashby, slug: rallyuxr }
   - { name: "Ramp", ats: ashby, slug: ramp }
   - { name: "Range", ats: ashby, slug: range }
+  - { name: "Rapdev", ats: ashby, slug: rapdev }
+  - { name: "Rapid Pioneers", ats: ashby, slug: rapid-pioneers }
+  - { name: "Rasa", ats: ashby, slug: rasa }
+  - { name: "Rattle", ats: ashby, slug: rattle }
+  - { name: "Ravenna", ats: ashby, slug: ravenna }
+  - { name: "Ravio", ats: ashby, slug: ravio }
+  - { name: "Raycast", ats: ashby, slug: raycast }
+  - { name: "Raylu Ai", ats: ashby, slug: raylu-ai }
+  - { name: "Re Cap", ats: ashby, slug: re-cap }
+  - { name: "Reach", ats: ashby, slug: reach }
+  - { name: "Reacher", ats: ashby, slug: reacher }
+  - { name: "Read Ai", ats: ashby, slug: read-ai }
+  - { name: "Readme", ats: ashby, slug: readme }
+  - { name: "Ready", ats: ashby, slug: ready }
+  - { name: "Reaktor", ats: ashby, slug: reaktor }
+  - { name: "Real", ats: ashby, slug: real }
+  - { name: "Realfast", ats: ashby, slug: realfast }
+  - { name: "Realitydefender", ats: ashby, slug: realitydefender }
   - { name: "Realm", ats: ashby, slug: realmalliance }
+  - { name: "Rebecca School", ats: ashby, slug: rebecca-school }
+  - { name: "Rebel Space Technologies", ats: ashby, slug: rebel-space-technologies }
+  - { name: "Rebuy", ats: ashby, slug: rebuy }
+  - { name: "Recall", ats: ashby, slug: recall }
+  - { name: "Recraft", ats: ashby, slug: recraft }
+  - { name: "Red Oak", ats: ashby, slug: red-oak }
+  - { name: "Red6", ats: ashby, slug: red6 }
+  - { name: "Reddit", ats: ashby, slug: reddit }
   - { name: "Redgate", ats: ashby, slug: red-gate }
+  - { name: "Redpine", ats: ashby, slug: redpine }
+  - { name: "Reducto", ats: ashby, slug: reducto }
+  - { name: "Reedsy", ats: ashby, slug: reedsy }
+  - { name: "Reevo", ats: ashby, slug: reevo }
+  - { name: "Reference", ats: ashby, slug: reference }
   - { name: "Reflect Orbital", ats: ashby, slug: reflect-orbital }
-  - { name: "Relling", ats: ashby, slug: relling }
+  - { name: "Reflection AI", ats: ashby, slug: reflectionai }
+  - { name: "Reflex", ats: ashby, slug: reflex }
+  - { name: "Reflexrobotics", ats: ashby, slug: reflexrobotics }
+  - { name: "Reflow", ats: ashby, slug: reflow }
+  - { name: "Reframesystems", ats: ashby, slug: reframesystems }
+  - { name: "Regent", ats: ashby, slug: regent }
+  - { name: "Regressiongg", ats: ashby, slug: regressiongg }
+  - { name: "Rehire", ats: ashby, slug: rehire }
+  - { name: "Reinforce Labs Inc", ats: ashby, slug: reinforce-labs-inc }
+  - { name: "Reka", ats: ashby, slug: reka }
+  - { name: "Relationrx", ats: ashby, slug: relationrx }
+  - { name: "Relay", ats: ashby, slug: relay }
+  - { name: "Relayfi", ats: ashby, slug: relayfi }
+  - { name: "Relayprotocol", ats: ashby, slug: relayprotocol }
+  - { name: "Relevanceai", ats: ashby, slug: relevanceai }
+  - { name: "Relevize", ats: ashby, slug: relevize }
+  - { name: "Remarcable Inc", ats: ashby, slug: remarcable-inc }
+  - { name: "Rematter", ats: ashby, slug: rematter }
+  - { name: "Remberg", ats: ashby, slug: remberg }
+  - { name: "Remedyrobotics", ats: ashby, slug: remedyrobotics }
+  - { name: "Remi", ats: ashby, slug: remi }
+  - { name: "Remilia", ats: ashby, slug: remilia }
+  - { name: "Remo", ats: ashby, slug: remo }
+  - { name: "Render", ats: ashby, slug: render }
+  - { name: "Renderfoundation", ats: ashby, slug: renderfoundation }
+  - { name: "Renterra", ats: ashby, slug: renterra }
+  - { name: "Renuity", ats: ashby, slug: renuity }
+  - { name: "Reonic", ats: ashby, slug: reonic }
+  - { name: "Replicant", ats: ashby, slug: replicant }
+  - { name: "Replicate", ats: ashby, slug: replicate }
+  - { name: "Replicated", ats: ashby, slug: replicated }
   - { name: "Replit", ats: ashby, slug: replit }
-  - { name: "Resurgent Industries", ats: ashby, slug: resurgent-industries }
-  - { name: "Revel", ats: ashby, slug: revel }
-  - { name: "Rhoda AI", ats: ashby, slug: rhoda-ai }
+  - { name: "Replo", ats: ashby, slug: replo }
+  - { name: "Reprally", ats: ashby, slug: reprally }
+  - { name: "Reprise", ats: ashby, slug: reprise }
+  - { name: "Rerun", ats: ashby, slug: rerun }
+  - { name: "Rescale", ats: ashby, slug: rescale }
+  - { name: "Resend", ats: ashby, slug: resend }
+  - { name: "Reservoir", ats: ashby, slug: reservoir }
+  - { name: "Reset", ats: ashby, slug: reset }
+  - { name: "Resolvepay", ats: ashby, slug: resolvepay }
+  - { name: "Resourcely", ats: ashby, slug: resourcely }
+  - { name: "Resq", ats: ashby, slug: resq }
+  - { name: "Restream", ats: ashby, slug: restream }
+  - { name: "Retain", ats: ashby, slug: retain }
+  - { name: "Reteam", ats: ashby, slug: reteam }
+  - { name: "Retell AI", ats: ashby, slug: retell-ai }
+  - { name: "Retool", ats: ashby, slug: retool }
+  - { name: "Retro", ats: ashby, slug: retro }
+  - { name: "Rev", ats: ashby, slug: rev }
+  - { name: "Revelxdstudio", ats: ashby, slug: revelxdstudio }
+  - { name: "Revenium", ats: ashby, slug: revenium }
+  - { name: "RevenueCat", ats: ashby, slug: revenuecat }
+  - { name: "Revenuevessel", ats: ashby, slug: revenuevessel }
+  - { name: "Revic", ats: ashby, slug: revic }
+  - { name: "Revv Hq", ats: ashby, slug: revv-hq }
+  - { name: "Rewind", ats: ashby, slug: rewind }
+  - { name: "Rewst", ats: ashby, slug: rewst }
+  - { name: "Rho", ats: ashby, slug: rho }
+  - { name: "Rhoda Ai", ats: ashby, slug: rhoda-ai }
+  - { name: "Rhythms", ats: ashby, slug: rhythms }
+  - { name: "Ribbon Ai", ats: ashby, slug: ribbon-ai }
+  - { name: "Ridealso", ats: ashby, slug: ridealso }
+  - { name: "Rightfoot", ats: ashby, slug: rightfoot }
+  - { name: "Righthandtalent", ats: ashby, slug: righthandtalent }
   - { name: "Rilla", ats: ashby, slug: rilla }
-  - { name: "Rollout", ats: ashby, slug: rollout }
+  - { name: "Rillet", ats: ashby, slug: rillet }
+  - { name: "Risczero", ats: ashby, slug: risczero }
+  - { name: "Risklabs", ats: ashby, slug: risklabs }
+  - { name: "Ritewindow", ats: ashby, slug: ritewindow }
+  - { name: "River", ats: ashby, slug: river }
+  - { name: "Rivermont Schools", ats: ashby, slug: rivermont-schools }
+  - { name: "Riveron", ats: ashby, slug: riveron }
+  - { name: "Riza", ats: ashby, slug: riza }
+  - { name: "Roalddahl", ats: ashby, slug: roalddahl }
+  - { name: "Robin Ai", ats: ashby, slug: robin-ai }
+  - { name: "Robin Radar", ats: ashby, slug: robin-radar }
+  - { name: "Roboflow", ats: ashby, slug: roboflow }
+  - { name: "Rockerbox", ats: ashby, slug: rockerbox }
+  - { name: "Rocketco", ats: ashby, slug: rocketco }
+  - { name: "Rocketplace", ats: ashby, slug: rocketplace }
+  - { name: "Rocketsciencegg", ats: ashby, slug: rocketsciencegg }
+  - { name: "Rogerhealthcare", ats: ashby, slug: rogerhealthcare }
+  - { name: "Rogo", ats: ashby, slug: rogo }
+  - { name: "Rohlik", ats: ashby, slug: rohlik }
+  - { name: "Rollstack", ats: ashby, slug: rollstack }
+  - { name: "Rollup", ats: ashby, slug: rollup }
+  - { name: "Roompricegenie", ats: ashby, slug: roompricegenie }
+  - { name: "Rooser", ats: ashby, slug: rooser }
+  - { name: "Root Access", ats: ashby, slug: root-access }
+  - { name: "Rootglobal", ats: ashby, slug: rootglobal }
+  - { name: "Rootine", ats: ashby, slug: rootine }
+  - { name: "Roots Automation", ats: ashby, slug: roots-automation }
+  - { name: "Rothys", ats: ashby, slug: rothys }
+  - { name: "Routefusion", ats: ashby, slug: routefusion }
+  - { name: "Rowan", ats: ashby, slug: rowan }
+  - { name: "Rox Data Corp", ats: ashby, slug: rox-data-corp }
+  - { name: "Rubicon", ats: ashby, slug: rubicon }
+  - { name: "Rubiconmd", ats: ashby, slug: rubiconmd }
+  - { name: "Ruby Labs", ats: ashby, slug: ruby-labs }
+  - { name: "Rula", ats: ashby, slug: rula }
+  - { name: "Runa", ats: ashby, slug: runa }
+  - { name: "Rundoo", ats: ashby, slug: rundoo }
+  - { name: "Runetech", ats: ashby, slug: runetech }
+  - { name: "Runlayer", ats: ashby, slug: runlayer }
+  - { name: "Runna", ats: ashby, slug: runna }
+  - { name: "Runway", ats: ashby, slug: runway }
+  - { name: "Runway Ml", ats: ashby, slug: runway-ml }
+  - { name: "Rutter", ats: ashby, slug: rutter }
+  - { name: "Rwazi", ats: ashby, slug: rwazi }
+  - { name: "Rye", ats: ashby, slug: rye }
+  - { name: "Rythm", ats: ashby, slug: rythm }
+  - { name: "S2", ats: ashby, slug: s2 }
+  - { name: "Safebase", ats: ashby, slug: safebase }
+  - { name: "Safelease", ats: ashby, slug: safelease }
+  - { name: "Safety", ats: ashby, slug: safety }
+  - { name: "Safetykit", ats: ashby, slug: safetykit }
+  - { name: "Safi", ats: ashby, slug: safi }
+  - { name: "Sagecare", ats: ashby, slug: sagecare }
+  - { name: "Sahara", ats: ashby, slug: sahara }
+  - { name: "Sailorhealth", ats: ashby, slug: sailorhealth }
+  - { name: "Sainapse", ats: ashby, slug: sainapse }
+  - { name: "Sales Marker", ats: ashby, slug: sales-marker }
+  - { name: "Salesape Ai", ats: ashby, slug: salesape-ai }
+  - { name: "Salesjack", ats: ashby, slug: salesjack }
+  - { name: "Salespatriot", ats: ashby, slug: salespatriot }
+  - { name: "Salient", ats: ashby, slug: salient }
+  - { name: "Salonkee", ats: ashby, slug: salonkee }
+  - { name: "Saltz", ats: ashby, slug: saltz }
+  - { name: "Same", ats: ashby, slug: same }
+  - { name: "Sana Roles", ats: ashby, slug: sana-roles }
+  - { name: "Sandbar", ats: ashby, slug: sandbar }
+  - { name: "Sandboxaq", ats: ashby, slug: sandboxaq }
+  - { name: "Sandstone", ats: ashby, slug: sandstone }
+  - { name: "Sanity", ats: ashby, slug: sanity }
+  - { name: "Sapien", ats: ashby, slug: sapien }
+  - { name: "Sardine", ats: ashby, slug: sardine }
+  - { name: "Saris Ai", ats: ashby, slug: saris-ai }
   - { name: "Saronic Technologies", ats: ashby, slug: saronic }
-  - { name: "Scout AI", ats: ashby, slug: scout-ai }
+  - { name: "Satispay", ats: ashby, slug: satispay }
+  - { name: "Satoshilabs", ats: ashby, slug: satoshilabs }
+  - { name: "Saturn", ats: ashby, slug: saturn }
+  - { name: "Sauron", ats: ashby, slug: sauron }
+  - { name: "Savvy", ats: ashby, slug: savvy }
+  - { name: "Savvyinsurance Trellis", ats: ashby, slug: savvyinsurance-trellis }
+  - { name: "Sazabi", ats: ashby, slug: sazabi }
+  - { name: "Scale AI", ats: ashby, slug: scaleai }
+  - { name: "Scalemath", ats: ashby, slug: scalemath }
+  - { name: "Scaler", ats: ashby, slug: scaler }
+  - { name: "Scan Com", ats: ashby, slug: scan-com }
+  - { name: "Scarlet", ats: ashby, slug: scarlet }
+  - { name: "Scholarly", ats: ashby, slug: scholarly }
+  - { name: "Schoolhouse World", ats: ashby, slug: schoolhouse-world }
+  - { name: "Scicommedia", ats: ashby, slug: scicommedia }
+  - { name: "Scientech Research", ats: ashby, slug: scientech-research }
+  - { name: "Scratchpad", ats: ashby, slug: scratchpad }
+  - { name: "Screenverse", ats: ashby, slug: screenverse }
+  - { name: "Scribd", ats: ashby, slug: scribd }
+  - { name: "Scribdinc", ats: ashby, slug: scribdinc }
+  - { name: "Scribe", ats: ashby, slug: scribe }
+  - { name: "Scribe", ats: ashby, slug: scribehow }
+  - { name: "Scrunch", ats: ashby, slug: scrunch }
+  - { name: "Scrunch Ai", ats: ashby, slug: scrunch-ai }
+  - { name: "Se3", ats: ashby, slug: se3 }
+  - { name: "Sea12", ats: ashby, slug: sea12 }
+  - { name: "Sealed", ats: ashby, slug: sealed }
+  - { name: "Seamflow", ats: ashby, slug: seamflow }
+  - { name: "Searchable", ats: ashby, slug: searchable }
+  - { name: "Searchapi", ats: ashby, slug: searchapi }
+  - { name: "Searchlight", ats: ashby, slug: searchlight }
+  - { name: "Searchstax", ats: ashby, slug: searchstax }
+  - { name: "Seccl", ats: ashby, slug: seccl }
+  - { name: "Secfix", ats: ashby, slug: secfix }
+  - { name: "Secoda", ats: ashby, slug: secoda }
+  - { name: "Second Front Systems", ats: ashby, slug: second-front-systems }
+  - { name: "Second Nature", ats: ashby, slug: second-nature }
+  - { name: "Seconddinner", ats: ashby, slug: seconddinner }
+  - { name: "Securebio", ats: ashby, slug: securebio }
+  - { name: "Sei Labs", ats: ashby, slug: sei-labs }
+  - { name: "Seifoundation", ats: ashby, slug: seifoundation }
+  - { name: "Seis", ats: ashby, slug: seis }
+  - { name: "Select Labs", ats: ashby, slug: select-labs }
+  - { name: "Sellfire", ats: ashby, slug: sellfire }
   - { name: "Semgrep", ats: ashby, slug: semgrep }
+  - { name: "Semperis", ats: ashby, slug: semperis }
+  - { name: "Sensat", ats: ashby, slug: sensat }
+  - { name: "Sensmore", ats: ashby, slug: sensmore }
+  - { name: "Sensorfact", ats: ashby, slug: sensorfact }
+  - { name: "Sensorita", ats: ashby, slug: sensorita }
+  - { name: "Sent", ats: ashby, slug: sent }
+  - { name: "Sentient", ats: ashby, slug: sentient }
+  - { name: "Sentilink", ats: ashby, slug: sentilink }
+  - { name: "Sentra", ats: ashby, slug: sentra }
   - { name: "Sentry", ats: ashby, slug: sentry }
+  - { name: "Sequence", ats: ashby, slug: sequence }
+  - { name: "Sequoia", ats: ashby, slug: sequoia }
+  - { name: "Sereact", ats: ashby, slug: sereact }
+  - { name: "Seriesai", ats: ashby, slug: seriesai }
+  - { name: "Serpapi", ats: ashby, slug: serpapi }
   - { name: "Serval", ats: ashby, slug: serval }
+  - { name: "Servedwithhonor", ats: ashby, slug: servedwithhonor }
+  - { name: "Serverobotics", ats: ashby, slug: serverobotics }
+  - { name: "Servicebell", ats: ashby, slug: servicebell }
+  - { name: "Sesame", ats: ashby, slug: sesame }
+  - { name: "Sevaro", ats: ashby, slug: sevaro }
+  - { name: "Sevenai", ats: ashby, slug: sevenai }
+  - { name: "Sewer Ai", ats: ashby, slug: sewer-ai }
+  - { name: "SF Compute", ats: ashby, slug: sfcompute }
+  - { name: "Sf Tensor", ats: ashby, slug: sf-tensor }
+  - { name: "Sfg20", ats: ashby, slug: sfg20 }
+  - { name: "Sgnlai", ats: ashby, slug: sgnlai }
+  - { name: "Shadow", ats: ashby, slug: shadow }
+  - { name: "Shapes", ats: ashby, slug: shapes }
+  - { name: "Shapr3d", ats: ashby, slug: shapr3d }
+  - { name: "Shepherd", ats: ashby, slug: shepherd }
+  - { name: "Shift", ats: ashby, slug: shift }
+  - { name: "Shiftkey", ats: ashby, slug: shiftkey }
+  - { name: "Shiftsmart", ats: ashby, slug: shiftsmart }
+  - { name: "Shook", ats: ashby, slug: shook }
+  - { name: "Shopify", ats: ashby, slug: shopify }
+  - { name: "Shortstory", ats: ashby, slug: shortstory }
+  - { name: "Shuttlelabs", ats: ashby, slug: shuttlelabs }
+  - { name: "Sibill", ats: ashby, slug: sibill }
+  - { name: "Sidebar", ats: ashby, slug: sidebar }
+  - { name: "Siena", ats: ashby, slug: siena }
   - { name: "Sierra", ats: ashby, slug: sierra }
+  - { name: "Sierra Studio", ats: ashby, slug: sierra-studio }
+  - { name: "Sieve", ats: ashby, slug: sieve }
+  - { name: "Sift", ats: ashby, slug: sift }
+  - { name: "Siftstack", ats: ashby, slug: siftstack }
+  - { name: "Siftwell Analytics", ats: ashby, slug: siftwell-analytics }
+  - { name: "Signal Ai", ats: ashby, slug: signal-ai }
+  - { name: "Signalfire", ats: ashby, slug: signalfire }
+  - { name: "Signalwire", ats: ashby, slug: signalwire }
+  - { name: "Signoz", ats: ashby, slug: signoz }
+  - { name: "Sigp", ats: ashby, slug: sigp }
+  - { name: "Silktide", ats: ashby, slug: silktide }
+  - { name: "Silver", ats: ashby, slug: silver }
+  - { name: "Simondata", ats: ashby, slug: simondata }
+  - { name: "Simple Ai", ats: ashby, slug: simple-ai }
+  - { name: "Simpleclosure", ats: ashby, slug: simpleclosure }
+  - { name: "Simspace Corporation", ats: ashby, slug: simspace-corporation }
+  - { name: "Simular", ats: ashby, slug: simular }
+  - { name: "Singular", ats: ashby, slug: singular }
+  - { name: "Sio Logistics", ats: ashby, slug: sio-logistics }
+  - { name: "Siro", ats: ashby, slug: siro }
+  - { name: "Sisu", ats: ashby, slug: sisu }
+  - { name: "Sitemate", ats: ashby, slug: sitemate }
+  - { name: "Siteminder", ats: ashby, slug: siteminder }
+  - { name: "Skalar", ats: ashby, slug: skalar }
+  - { name: "Skelar", ats: ashby, slug: skelar }
+  - { name: "Sketch", ats: ashby, slug: sketch }
+  - { name: "Skillz", ats: ashby, slug: skillz }
+  - { name: "Skimmer", ats: ashby, slug: skimmer }
+  - { name: "Skip Loans", ats: ashby, slug: skip-loans }
   - { name: "Skydio", ats: ashby, slug: skydio }
+  - { name: "Skydropx", ats: ashby, slug: skydropx }
+  - { name: "Skyebioscience", ats: ashby, slug: skyebioscience }
+  - { name: "Skyflow", ats: ashby, slug: skyflow }
+  - { name: "Skymavis", ats: ashby, slug: skymavis }
+  - { name: "Skywatch", ats: ashby, slug: skywatch }
+  - { name: "Slab", ats: ashby, slug: slab }
+  - { name: "Slant", ats: ashby, slug: slant }
+  - { name: "Slash Financial", ats: ashby, slug: slash-financial }
+  - { name: "Slate", ats: ashby, slug: slate }
+  - { name: "Sleeper", ats: ashby, slug: sleeper }
+  - { name: "Slingshotai", ats: ashby, slug: slingshotai }
+  - { name: "Slope", ats: ashby, slug: slope }
+  - { name: "Smallpdf", ats: ashby, slug: smallpdf }
+  - { name: "Smalls", ats: ashby, slug: smalls }
+  - { name: "Smallstep", ats: ashby, slug: smallstep }
+  - { name: "Smarkets", ats: ashby, slug: smarkets }
+  - { name: "Smlxl", ats: ashby, slug: smlxl }
+  - { name: "Snapdocs", ats: ashby, slug: snapdocs }
+  - { name: "Snappy", ats: ashby, slug: snappy }
+  - { name: "Snaptrude", ats: ashby, slug: snaptrude }
+  - { name: "Snd", ats: ashby, slug: snd }
+  - { name: "Snowball", ats: ashby, slug: snowball }
   - { name: "Snowflake", ats: ashby, slug: snowflake }
-  - { name: "Snyk", ats: ashby, slug: snyk }
-  - { name: "Spruce Systems, Inc.", ats: ashby, slug: spruceid }
-  - { name: "Steel", ats: ashby, slug: steel }
+  - { name: "Soax", ats: ashby, slug: soax }
+  - { name: "Sobek Ai", ats: ashby, slug: sobek-ai }
+  - { name: "Socket", ats: ashby, slug: socket }
+  - { name: "Socotra", ats: ashby, slug: socotra }
+  - { name: "Socure", ats: ashby, slug: socure }
+  - { name: "Sofarocean", ats: ashby, slug: sofarocean }
+  - { name: "Softwareappsinc", ats: ashby, slug: softwareappsinc }
+  - { name: "Sola", ats: ashby, slug: sola }
+  - { name: "Sola Insurance", ats: ashby, slug: sola-insurance }
+  - { name: "Solace", ats: ashby, slug: solace }
+  - { name: "Solana Foundation", ats: ashby, slug: solanafoundation }
+  - { name: "Solcoa", ats: ashby, slug: solcoa }
+  - { name: "Solforge", ats: ashby, slug: solforge }
+  - { name: "Solid", ats: ashby, slug: solid }
+  - { name: "Solidgate", ats: ashby, slug: solidgate }
+  - { name: "Solidroad", ats: ashby, slug: solidroad }
+  - { name: "Solink", ats: ashby, slug: solink }
+  - { name: "Solvd", ats: ashby, slug: solvd }
+  - { name: "Solveintelligence", ats: ashby, slug: solveintelligence }
+  - { name: "Somethings", ats: ashby, slug: somethings }
+  - { name: "Somite Ai", ats: ashby, slug: somite-ai }
+  - { name: "Somnia", ats: ashby, slug: somnia }
+  - { name: "Sona", ats: ashby, slug: sona }
+  - { name: "Sonio", ats: ashby, slug: sonio }
+  - { name: "Sorare", ats: ashby, slug: sorare }
+  - { name: "Sorcerer", ats: ashby, slug: sorcerer }
+  - { name: "Sosafe", ats: ashby, slug: sosafe }
+  - { name: "Soshallwe", ats: ashby, slug: soshallwe }
+  - { name: "Source Health", ats: ashby, slug: source-health }
+  - { name: "Sourgum", ats: ashby, slug: sourgum }
+  - { name: "Southgeeks", ats: ashby, slug: southgeeks }
+  - { name: "Soxton", ats: ashby, slug: soxton }
+  - { name: "Space44", ats: ashby, slug: space44 }
+  - { name: "Spacecurve", ats: ashby, slug: spacecurve }
+  - { name: "Spaice Tech", ats: ashby, slug: spaice-tech }
+  - { name: "Spaitial", ats: ashby, slug: spaitial }
+  - { name: "Span", ats: ashby, slug: span }
+  - { name: "Spara", ats: ashby, slug: spara }
+  - { name: "Spare", ats: ashby, slug: spare }
+  - { name: "Speak", ats: ashby, slug: speak }
+  - { name: "Speakeasy", ats: ashby, slug: speakeasy }
+  - { name: "Spearbio", ats: ashby, slug: spearbio }
+  - { name: "Spearbit", ats: ashby, slug: spearbit }
+  - { name: "Speckle", ats: ashby, slug: speckle }
+  - { name: "Spekit", ats: ashby, slug: spekit }
+  - { name: "Spellbrush", ats: ashby, slug: spellbrush }
+  - { name: "Spexi", ats: ashby, slug: spexi }
+  - { name: "Sphere", ats: ashby, slug: sphere }
+  - { name: "Spherical", ats: ashby, slug: spherical }
+  - { name: "Sphinx", ats: ashby, slug: sphinx }
+  - { name: "Spikelabs", ats: ashby, slug: spikelabs }
+  - { name: "Spiritus", ats: ashby, slug: spiritus }
+  - { name: "Splitmetrics", ats: ashby, slug: splitmetrics }
+  - { name: "Spoton", ats: ashby, slug: spoton }
+  - { name: "Sprig", ats: ashby, slug: sprig }
+  - { name: "Springandbond", ats: ashby, slug: springandbond }
+  - { name: "Sprinter Health", ats: ashby, slug: sprinter-health }
+  - { name: "Sprout Ai", ats: ashby, slug: sprout-ai }
+  - { name: "Squad", ats: ashby, slug: squad }
+  - { name: "Squads", ats: ashby, slug: squads }
+  - { name: "Ssi", ats: ashby, slug: ssi }
+  - { name: "St Labs", ats: ashby, slug: st-labs }
+  - { name: "Stable", ats: ashby, slug: stable }
+  - { name: "Stack Ai", ats: ashby, slug: stack-ai }
+  - { name: "Stacker", ats: ashby, slug: stacker }
+  - { name: "Stackfix", ats: ashby, slug: stackfix }
+  - { name: "Stackone", ats: ashby, slug: stackone }
+  - { name: "Stacks", ats: ashby, slug: stacks }
+  - { name: "Stainlessapi", ats: ashby, slug: stainlessapi }
+  - { name: "Standardbots", ats: ashby, slug: standardbots }
+  - { name: "Standardfleet", ats: ashby, slug: standardfleet }
+  - { name: "Standinsurance", ats: ashby, slug: standinsurance }
+  - { name: "Starbridge", ats: ashby, slug: starbridge }
+  - { name: "Stargate Foundation", ats: ashby, slug: stargate-foundation }
+  - { name: "Starknetfoundation", ats: ashby, slug: starknetfoundation }
+  - { name: "Startplaying", ats: ashby, slug: startplaying }
+  - { name: "Stash", ats: ashby, slug: stash }
+  - { name: "Statewide", ats: ashby, slug: statewide }
+  - { name: "Stationlabs", ats: ashby, slug: stationlabs }
+  - { name: "Statisfy", ats: ashby, slug: statisfy }
+  - { name: "Statista", ats: ashby, slug: statista }
+  - { name: "Statsig", ats: ashby, slug: statsig }
+  - { name: "Stay22", ats: ashby, slug: stay22 }
+  - { name: "Stayai", ats: ashby, slug: stayai }
+  - { name: "Staycation", ats: ashby, slug: staycation }
+  - { name: "Steadily", ats: ashby, slug: steadily }
+  - { name: "Stealth Healthtech Startup", ats: ashby, slug: stealth-healthtech-startup }
+  - { name: "Stealth Start Up", ats: ashby, slug: stealth-start-up }
+  - { name: "Stealthventurecapitalfirm", ats: ashby, slug: stealthventurecapitalfirm }
+  - { name: "Stedi", ats: ashby, slug: stedi }
+  - { name: "Stellar", ats: ashby, slug: stellar }
+  - { name: "Stellar Health", ats: ashby, slug: stellar-health }
+  - { name: "Stellarentertainment", ats: ashby, slug: stellarentertainment }
+  - { name: "Stellic", ats: ashby, slug: stellic }
+  - { name: "Stelolabs", ats: ashby, slug: stelolabs }
+  - { name: "Stemma", ats: ashby, slug: stemma }
+  - { name: "Stepful", ats: ashby, slug: stepful }
+  - { name: "Steuerbot", ats: ashby, slug: steuerbot }
+  - { name: "Stickermule", ats: ashby, slug: stickermule }
+  - { name: "Stimulus", ats: ashby, slug: stimulus }
+  - { name: "Stora", ats: ashby, slug: stora }
   - { name: "Strada", ats: ashby, slug: stradahq }
-  - { name: "Subtotal", ats: ashby, slug: subtotal }
+  - { name: "Straia", ats: ashby, slug: straia }
+  - { name: "Strala Ai", ats: ashby, slug: strala-ai }
+  - { name: "Strategic Growth Partners", ats: ashby, slug: strategic-growth-partners }
+  - { name: "Stratum Ai", ats: ashby, slug: stratum-ai }
+  - { name: "Strava", ats: ashby, slug: strava }
+  - { name: "Stream", ats: ashby, slug: stream }
+  - { name: "Street Diligence", ats: ashby, slug: street-diligence }
+  - { name: "Streetgroup", ats: ashby, slug: streetgroup }
+  - { name: "Strella", ats: ashby, slug: strella }
+  - { name: "Strider Technologies", ats: ashby, slug: strider-technologies }
+  - { name: "Stripe", ats: ashby, slug: stripe }
+  - { name: "Strongdm", ats: ashby, slug: strongdm }
+  - { name: "Stronghold", ats: ashby, slug: stronghold }
+  - { name: "Structionsite", ats: ashby, slug: structionsite }
+  - { name: "Studyfetch", ats: ashby, slug: studyfetch }
+  - { name: "Stuut Ai", ats: ashby, slug: stuut-ai }
+  - { name: "Stytch", ats: ashby, slug: stytch }
+  - { name: "Sublime Security", ats: ashby, slug: sublime-security }
+  - { name: "Substack", ats: ashby, slug: substack }
+  - { name: "Subzero", ats: ashby, slug: subzero }
+  - { name: "Succinct", ats: ashby, slug: succinct }
+  - { name: "Suite Studios", ats: ashby, slug: suite-studios }
+  - { name: "Sully Ai", ats: ashby, slug: sully-ai }
+  - { name: "Summation", ats: ashby, slug: summation }
+  - { name: "Summerhealth", ats: ashby, slug: summerhealth }
+  - { name: "Sunbound", ats: ashby, slug: sunbound }
+  - { name: "Sunday", ats: ashby, slug: sunday }
   - { name: "Suno", ats: ashby, slug: suno }
+  - { name: "Sunrise", ats: ashby, slug: sunrise }
+  - { name: "Sunset", ats: ashby, slug: sunset }
   - { name: "Supabase", ats: ashby, slug: supabase }
-  - { name: "Swarm Aero", ats: ashby, slug: swarmaero }
+  - { name: "Superconductor", ats: ashby, slug: superconductor }
+  - { name: "Superdial", ats: ashby, slug: superdial }
+  - { name: "Superduper", ats: ashby, slug: superduper }
+  - { name: "Superevilmegacorp", ats: ashby, slug: superevilmegacorp }
+  - { name: "Superhuman", ats: ashby, slug: superhuman }
+  - { name: "Supermodular", ats: ashby, slug: supermodular }
+  - { name: "Superorder", ats: ashby, slug: superorder }
+  - { name: "Superplane", ats: ashby, slug: superplane }
+  - { name: "Superpower", ats: ashby, slug: superpower }
+  - { name: "Supertokens", ats: ashby, slug: supertokens }
+  - { name: "Surgimate", ats: ashby, slug: surgimate }
+  - { name: "Surreal", ats: ashby, slug: surreal }
+  - { name: "Susteon", ats: ashby, slug: susteon }
+  - { name: "Suzy", ats: ashby, slug: suzy }
+  - { name: "Svix", ats: ashby, slug: svix }
+  - { name: "Swan", ats: ashby, slug: swan }
+  - { name: "Swans", ats: ashby, slug: swans }
+  - { name: "Swap", ats: ashby, slug: swap }
+  - { name: "Swarmer", ats: ashby, slug: swarmer }
+  - { name: "Swarmia", ats: ashby, slug: swarmia }
+  - { name: "Sweatpals", ats: ashby, slug: sweatpals }
+  - { name: "Sweep", ats: ashby, slug: sweep }
+  - { name: "Switchboard Foundation", ats: ashby, slug: switchboard-foundation }
+  - { name: "Switchboard Hiring", ats: ashby, slug: switchboard-hiring }
+  - { name: "Sxaler", ats: ashby, slug: sxaler }
+  - { name: "Sybill Ai", ats: ashby, slug: sybill-ai }
+  - { name: "Sydecar", ats: ashby, slug: sydecar }
+  - { name: "Sygaldry Technologies", ats: ashby, slug: sygaldry-technologies }
+  - { name: "Sylvera", ats: ashby, slug: sylvera }
+  - { name: "Symbiotic", ats: ashby, slug: symbiotic }
+  - { name: "Symbolica Ai", ats: ashby, slug: symbolica-ai }
+  - { name: "Symmetry", ats: ashby, slug: symmetry }
+  - { name: "Syndica", ats: ashby, slug: syndica }
+  - { name: "Syndicate", ats: ashby, slug: syndicate }
+  - { name: "Syndr", ats: ashby, slug: syndr }
+  - { name: "Synonym", ats: ashby, slug: synonym }
+  - { name: "Synquery", ats: ashby, slug: synquery }
   - { name: "Synthesia", ats: ashby, slug: synthesia }
+  - { name: "Synthflow", ats: ashby, slug: synthflow }
+  - { name: "Syrup", ats: ashby, slug: syrup }
+  - { name: "System Initiative", ats: ashby, slug: system-initiative }
+  - { name: "System2", ats: ashby, slug: system2 }
+  - { name: "Taaraconnect", ats: ashby, slug: taaraconnect }
+  - { name: "Tabs", ats: ashby, slug: tabs }
+  - { name: "Tacto", ats: ashby, slug: tacto }
+  - { name: "Taekus", ats: ashby, slug: taekus }
+  - { name: "Tailor", ats: ashby, slug: tailor }
+  - { name: "Tailwind", ats: ashby, slug: tailwind }
+  - { name: "Tajir", ats: ashby, slug: tajir }
+  - { name: "Take2", ats: ashby, slug: take2 }
+  - { name: "Taktile", ats: ashby, slug: taktile }
+  - { name: "Talentdisruptors", ats: ashby, slug: talentdisruptors }
+  - { name: "Talentful", ats: ashby, slug: talentful }
+  - { name: "Talentsafari", ats: ashby, slug: talentsafari }
+  - { name: "Tales", ats: ashby, slug: tales }
+  - { name: "Talkiatry", ats: ashby, slug: talkiatry }
+  - { name: "Talntteam", ats: ashby, slug: talntteam }
   - { name: "Talos", ats: ashby, slug: talos-trading }
+  - { name: "Talos Network", ats: ashby, slug: talos-network }
+  - { name: "Tandem", ats: ashby, slug: tandem }
+  - { name: "Tandem Health", ats: ashby, slug: tandem-health }
+  - { name: "Tandempv", ats: ashby, slug: tandempv }
+  - { name: "Tango", ats: ashby, slug: tango }
+  - { name: "Tapcart", ats: ashby, slug: tapcart }
+  - { name: "Taptapsend", ats: ashby, slug: taptapsend }
+  - { name: "Tarro", ats: ashby, slug: tarro }
+  - { name: "Tasman", ats: ashby, slug: tasman }
+  - { name: "Tavahealth", ats: ashby, slug: tavahealth }
+  - { name: "Tavily", ats: ashby, slug: tavily }
   - { name: "Tavus", ats: ashby, slug: tavus }
-  - { name: "TELUS Digital", ats: ashby, slug: telus-digital }
-  - { name: "TensorWave", ats: ashby, slug: tensorwave }
+  - { name: "Taxo", ats: ashby, slug: taxo }
+  - { name: "Tdv", ats: ashby, slug: tdv }
+  - { name: "Teachfx", ats: ashby, slug: teachfx }
+  - { name: "Teal", ats: ashby, slug: teal }
+  - { name: "Teal Health", ats: ashby, slug: teal-health }
+  - { name: "Tealhq", ats: ashby, slug: tealhq }
+  - { name: "Teambridge", ats: ashby, slug: teambridge }
+  - { name: "Teamdynamix", ats: ashby, slug: teamdynamix }
+  - { name: "Teameigen", ats: ashby, slug: teameigen }
+  - { name: "Teamworks", ats: ashby, slug: teamworks }
+  - { name: "Tebi", ats: ashby, slug: tebi }
+  - { name: "Technitask", ats: ashby, slug: technitask }
+  - { name: "Techpolicyfellowship", ats: ashby, slug: techpolicyfellowship }
+  - { name: "Tectonai", ats: ashby, slug: tectonai }
+  - { name: "Teero", ats: ashby, slug: teero }
+  - { name: "Teleskope", ats: ashby, slug: teleskope }
+  - { name: "Telli", ats: ashby, slug: telli }
+  - { name: "Tellos", ats: ashby, slug: tellos }
+  - { name: "Telus Digital", ats: ashby, slug: telus-digital }
+  - { name: "Tem", ats: ashby, slug: tem }
+  - { name: "Tempo", ats: ashby, slug: tempo }
+  - { name: "Tempo Io", ats: ashby, slug: tempo-io }
+  - { name: "Tempo Xyz", ats: ashby, slug: tempo-xyz }
+  - { name: "Temporal", ats: ashby, slug: temporal }
+  - { name: "Tenex", ats: ashby, slug: tenex }
+  - { name: "Tenexlabs", ats: ashby, slug: tenexlabs }
+  - { name: "Tenjin", ats: ashby, slug: tenjin }
+  - { name: "Tennr", ats: ashby, slug: tennr }
+  - { name: "Tenor", ats: ashby, slug: tenor }
+  - { name: "Tensec", ats: ashby, slug: tensec }
+  - { name: "Tensorwave", ats: ashby, slug: tensorwave }
+  - { name: "Tensorzero", ats: ashby, slug: tensorzero }
+  - { name: "Terac", ats: ashby, slug: terac }
+  - { name: "Teraswitch", ats: ashby, slug: teraswitch }
+  - { name: "Terminal Industries", ats: ashby, slug: terminal-industries }
+  - { name: "Tern", ats: ashby, slug: tern }
+  - { name: "Ternary", ats: ashby, slug: ternary }
+  - { name: "Terraai", ats: ashby, slug: terraai }
+  - { name: "Terradot", ats: ashby, slug: terradot }
+  - { name: "Terrafirma", ats: ashby, slug: terrafirma }
   - { name: "Terranova", ats: ashby, slug: terranova }
+  - { name: "Terrarium", ats: ashby, slug: terrarium }
   - { name: "Tessera Labs", ats: ashby, slug: tessera-labs }
+  - { name: "Tesslcareers", ats: ashby, slug: tesslcareers }
+  - { name: "Texture", ats: ashby, slug: texture }
+  - { name: "Teya", ats: ashby, slug: teya }
+  - { name: "Teza Technologies", ats: ashby, slug: teza-technologies }
+  - { name: "Tgc", ats: ashby, slug: tgc }
+  - { name: "Thanksben", ats: ashby, slug: thanksben }
+  - { name: "That1detailer", ats: ashby, slug: that1detailer }
+  - { name: "Thatgamecompany", ats: ashby, slug: thatgamecompany }
   - { name: "The Exploration Company", ats: ashby, slug: the-exploration-company }
+  - { name: "The Flex", ats: ashby, slug: the-flex }
+  - { name: "The Global Talent Co", ats: ashby, slug: the-global-talent-co }
+  - { name: "The Studio", ats: ashby, slug: the-studio }
+  - { name: "Thebotcompany", ats: ashby, slug: thebotcompany }
+  - { name: "Themindcompany", ats: ashby, slug: themindcompany }
+  - { name: "Thera", ats: ashby, slug: thera }
+  - { name: "Thesis", ats: ashby, slug: thesis }
+  - { name: "Thewfsgroup", ats: ashby, slug: thewfsgroup }
+  - { name: "TheyDo", ats: ashby, slug: theydo }
+  - { name: "Third Space Therapy", ats: ashby, slug: third-space-therapy }
+  - { name: "Thirstysprout", ats: ashby, slug: thirstysprout }
+  - { name: "Thndr", ats: ashby, slug: thndr }
+  - { name: "Thought Machine", ats: ashby, slug: thought-machine }
+  - { name: "Thoughtful", ats: ashby, slug: thoughtful }
+  - { name: "Thoughtly", ats: ashby, slug: thoughtly }
+  - { name: "Thread Ai", ats: ashby, slug: thread-ai }
+  - { name: "Thresh Power", ats: ashby, slug: thresh-power }
+  - { name: "Thrill Labs", ats: ashby, slug: thrill-labs }
+  - { name: "Thumbtack", ats: ashby, slug: thumbtack }
+  - { name: "Tigerdata", ats: ashby, slug: tigerdata }
+  - { name: "Tigereye", ats: ashby, slug: tigereye }
+  - { name: "Tilde", ats: ashby, slug: tilde }
+  - { name: "Tilderesearch", ats: ashby, slug: tilderesearch }
+  - { name: "Tillo", ats: ashby, slug: tillo }
+  - { name: "Tilt", ats: ashby, slug: tilt }
+  - { name: "Tilthq", ats: ashby, slug: tilthq }
+  - { name: "Timely", ats: ashby, slug: timely }
+  - { name: "Timescale", ats: ashby, slug: timescale }
+  - { name: "Tin Can", ats: ashby, slug: tin-can }
+  - { name: "Tiplink", ats: ashby, slug: tiplink }
+  - { name: "Titan", ats: ashby, slug: titan }
+  - { name: "Titan Ai", ats: ashby, slug: titan-ai }
+  - { name: "Titan Msp", ats: ashby, slug: titan-msp }
+  - { name: "Tivita", ats: ashby, slug: tivita }
+  - { name: "Tks", ats: ashby, slug: tks }
+  - { name: "Togal Ai", ats: ashby, slug: togal-ai }
+  - { name: "Tokenmetrics", ats: ashby, slug: tokenmetrics }
+  - { name: "Toku", ats: ashby, slug: toku }
+  - { name: "Toma", ats: ashby, slug: toma }
+  - { name: "Tome", ats: ashby, slug: tome }
+  - { name: "Tomo", ats: ashby, slug: tomo }
+  - { name: "Toms", ats: ashby, slug: toms }
+  - { name: "Tonal", ats: ashby, slug: tonal }
+  - { name: "Tonicai", ats: ashby, slug: tonicai }
+  - { name: "Toogeza", ats: ashby, slug: toogeza }
+  - { name: "Toolsforhumanity", ats: ashby, slug: toolsforhumanity }
+  - { name: "Top Hat", ats: ashby, slug: top-hat }
+  - { name: "Topline Pro", ats: ashby, slug: topline-pro }
+  - { name: "Topologic", ats: ashby, slug: topologic }
+  - { name: "Tortus", ats: ashby, slug: tortus }
+  - { name: "Tourlane", ats: ashby, slug: tourlane }
+  - { name: "Traba", ats: ashby, slug: traba }
   - { name: "Trace", ats: ashby, slug: tracelabs }
+  - { name: "Tracebit", ats: ashby, slug: tracebit }
+  - { name: "Tracer", ats: ashby, slug: tracer }
+  - { name: "Tractable", ats: ashby, slug: tractable }
+  - { name: "Tradeify", ats: ashby, slug: tradeify }
+  - { name: "Trading212", ats: ashby, slug: trading212 }
+  - { name: "Trainline", ats: ashby, slug: trainline }
+  - { name: "Transform", ats: ashby, slug: transform }
+  - { name: "Transgrid Energy", ats: ashby, slug: transgrid-energy }
+  - { name: "Treasure", ats: ashby, slug: treasure }
+  - { name: "Treasuryprime", ats: ashby, slug: treasuryprime }
+  - { name: "Tremendous", ats: ashby, slug: tremendous }
+  - { name: "Tribe Ai", ats: ashby, slug: tribe-ai }
+  - { name: "Tribe Xyz", ats: ashby, slug: tribe-xyz }
+  - { name: "Triedge Investments", ats: ashby, slug: triedge-investments }
+  - { name: "Triggerdev", ats: ashby, slug: triggerdev }
+  - { name: "Trilitech", ats: ashby, slug: trilitech }
+  - { name: "Triumph Arcade", ats: ashby, slug: triumph-arcade }
+  - { name: "Tronic", ats: ashby, slug: tronic }
+  - { name: "Troveo", ats: ashby, slug: troveo }
+  - { name: "Trucksmarter", ats: ashby, slug: trucksmarter }
+  - { name: "Truelinkfinancial", ats: ashby, slug: truelinkfinancial }
+  - { name: "Truelogic", ats: ashby, slug: truelogic }
+  - { name: "Truemed", ats: ashby, slug: truemed }
+  - { name: "Trulioo", ats: ashby, slug: trulioo }
+  - { name: "Trunktools", ats: ashby, slug: trunktools }
+  - { name: "Truss", ats: ashby, slug: truss }
+  - { name: "Trust Wallet", ats: ashby, slug: trust-wallet }
+  - { name: "Trustlab", ats: ashby, slug: trustlab }
+  - { name: "Truthsystems", ats: ashby, slug: truthsystems }
+  - { name: "Truva", ats: ashby, slug: truva }
+  - { name: "Tryalma", ats: ashby, slug: tryalma }
+  - { name: "Tryprospect", ats: ashby, slug: tryprospect }
+  - { name: "Tryroam", ats: ashby, slug: tryroam }
+  - { name: "Tryvital", ats: ashby, slug: tryvital }
+  - { name: "turbopuffer", ats: ashby, slug: turbopuffer }
+  - { name: "Turion Space", ats: ashby, slug: turion-space }
+  - { name: "Turnkey", ats: ashby, slug: turnkey }
+  - { name: "Turnstile", ats: ashby, slug: turnstile }
+  - { name: "Turquoise Health", ats: ashby, slug: turquoise-health }
+  - { name: "Tuza", ats: ashby, slug: tuza }
+  - { name: "Twelve", ats: ashby, slug: twelve }
+  - { name: "Twelve Labs", ats: ashby, slug: twelve-labs }
+  - { name: "Twenty", ats: ashby, slug: twenty }
+  - { name: "Twin So", ats: ashby, slug: twin-so }
+  - { name: "Two Dots", ats: ashby, slug: two-dots }
+  - { name: "Tyba", ats: ashby, slug: tyba }
+  - { name: "Tycho Ai", ats: ashby, slug: tycho-ai }
+  - { name: "Tydo", ats: ashby, slug: tydo }
+  - { name: "Typescouts", ats: ashby, slug: typescouts }
+  - { name: "Tzafon", ats: ashby, slug: tzafon }
+  - { name: "Uberall", ats: ashby, slug: uberall }
+  - { name: "Udisc", ats: ashby, slug: udisc }
+  - { name: "UiPath", ats: ashby, slug: uipath }
+  - { name: "Ultralytics", ats: ashby, slug: ultralytics }
+  - { name: "Ulvetanna", ats: ashby, slug: ulvetanna }
+  - { name: "Umbrel", ats: ashby, slug: umbrel }
+  - { name: "Unblocked", ats: ashby, slug: unblocked }
   - { name: "Uncountable Inc.", ats: ashby, slug: uncountable }
-  - { name: "Valon Tech", ats: ashby, slug: valon }
+  - { name: "Unicourt", ats: ashby, slug: unicourt }
+  - { name: "Unify", ats: ashby, slug: unify }
+  - { name: "Union", ats: ashby, slug: union }
+  - { name: "Union Tech", ats: ashby, slug: union-tech }
+  - { name: "Uniswap", ats: ashby, slug: uniswap }
+  - { name: "Unit", ats: ashby, slug: unit }
+  - { name: "Unit410", ats: ashby, slug: unit410 }
+  - { name: "United Talent Agency", ats: ashby, slug: united-talent-agency }
+  - { name: "Uniti", ats: ashby, slug: uniti }
+  - { name: "Unity Advisory", ats: ashby, slug: unity-advisory }
+  - { name: "Universe Group", ats: ashby, slug: universe-group }
+  - { name: "Unlearn", ats: ashby, slug: unlearn }
+  - { name: "Unlikelyai", ats: ashby, slug: unlikelyai }
+  - { name: "Unlimitedindustries", ats: ashby, slug: unlimitedindustries }
+  - { name: "Unmind", ats: ashby, slug: unmind }
+  - { name: "Unstructured", ats: ashby, slug: unstructured }
+  - { name: "Unto Labs", ats: ashby, slug: unto-labs }
+  - { name: "Unwrap", ats: ashby, slug: unwrap }
+  - { name: "Upchurch", ats: ashby, slug: upchurch }
+  - { name: "Upcodes", ats: ashby, slug: upcodes }
+  - { name: "Upflow", ats: ashby, slug: upflow }
+  - { name: "Uplevel", ats: ashby, slug: uplevel }
+  - { name: "Upside", ats: ashby, slug: upside }
+  - { name: "Upside Tech", ats: ashby, slug: upside-tech }
+  - { name: "Upvest", ats: ashby, slug: upvest }
+  - { name: "Useful", ats: ashby, slug: useful }
+  - { name: "Usul", ats: ashby, slug: usul }
+  - { name: "Vacuumgroup", ats: ashby, slug: vacuumgroup }
+  - { name: "Valence", ats: ashby, slug: valence }
+  - { name: "Valeriehealth", ats: ashby, slug: valeriehealth }
+  - { name: "Valinor", ats: ashby, slug: valinor }
+  - { name: "Valon", ats: ashby, slug: valon }
+  - { name: "Valonvm", ats: ashby, slug: valonvm }
+  - { name: "Valthos", ats: ashby, slug: valthos }
+  - { name: "Vana", ats: ashby, slug: vana }
+  - { name: "Vance", ats: ashby, slug: vance }
+  - { name: "Vanilla", ats: ashby, slug: vanilla }
+  - { name: "Vanishid", ats: ashby, slug: vanishid }
   - { name: "Vanta", ats: ashby, slug: vanta }
+  - { name: "Vantage", ats: ashby, slug: vantage }
+  - { name: "Vantageanalytics", ats: ashby, slug: vantageanalytics }
+  - { name: "Vantagediscovery", ats: ashby, slug: vantagediscovery }
+  - { name: "Vantai", ats: ashby, slug: vantai }
+  - { name: "Vapi", ats: ashby, slug: vapi }
+  - { name: "Variant Fund", ats: ashby, slug: variant-fund }
+  - { name: "Vasco", ats: ashby, slug: vasco }
+  - { name: "Vaultplatform", ats: ashby, slug: vaultplatform }
+  - { name: "Vcluster", ats: ashby, slug: vcluster }
+  - { name: "Vector", ats: ashby, slug: vector }
+  - { name: "Veev", ats: ashby, slug: veev }
+  - { name: "Veezu", ats: ashby, slug: veezu }
+  - { name: "Vega", ats: ashby, slug: vega }
+  - { name: "Veho", ats: ashby, slug: veho }
+  - { name: "Vend Park", ats: ashby, slug: vend-park }
+  - { name: "Vendelux", ats: ashby, slug: vendelux }
+  - { name: "Venn", ats: ashby, slug: venn }
+  - { name: "Ventuals", ats: ashby, slug: ventuals }
+  - { name: "Vercel", ats: ashby, slug: vercel }
+  - { name: "Vercept", ats: ashby, slug: vercept }
+  - { name: "Verdance", ats: ashby, slug: verdance }
+  - { name: "Verge Genomics", ats: ashby, slug: verge-genomics }
+  - { name: "Verisoul", ats: ashby, slug: verisoul }
+  - { name: "Versemedical", ats: ashby, slug: versemedical }
+  - { name: "Vertical Aerospace", ats: ashby, slug: vertical-aerospace }
+  - { name: "Verticalsemi", ats: ashby, slug: verticalsemi }
+  - { name: "Vertice", ats: ashby, slug: vertice }
+  - { name: "Verto", ats: ashby, slug: verto }
+  - { name: "Vessev", ats: ashby, slug: vessev }
+  - { name: "Vetcove", ats: ashby, slug: vetcove }
+  - { name: "Vibe", ats: ashby, slug: vibe }
+  - { name: "Vibecode", ats: ashby, slug: vibecode }
+  - { name: "Vibiz", ats: ashby, slug: vibiz }
+  - { name: "Victorious", ats: ashby, slug: victorious }
+  - { name: "Vidmob", ats: ashby, slug: vidmob }
+  - { name: "Vidrush", ats: ashby, slug: vidrush }
   - { name: "Viggle AI", ats: ashby, slug: viggle }
+  - { name: "Village Labs", ats: ashby, slug: village-labs }
+  - { name: "Vinci4d", ats: ashby, slug: vinci4d }
+  - { name: "Vio", ats: ashby, slug: vio }
+  - { name: "Virahealth", ats: ashby, slug: virahealth }
+  - { name: "Virtahealth", ats: ashby, slug: virtahealth }
+  - { name: "Virtuous", ats: ashby, slug: virtuous }
+  - { name: "Visanahealth", ats: ashby, slug: visanahealth }
+  - { name: "Vistar", ats: ashby, slug: vistar }
+  - { name: "Vital", ats: ashby, slug: vital }
   - { name: "Vital Lyfe", ats: ashby, slug: vital-lyfe }
+  - { name: "Vitalize", ats: ashby, slug: vitalize }
+  - { name: "Vitl", ats: ashby, slug: vitl }
+  - { name: "Vitvio", ats: ashby, slug: vitvio }
+  - { name: "Vivian Health", ats: ashby, slug: vivian-health }
+  - { name: "Vivun", ats: ashby, slug: vivun }
+  - { name: "Vizcom", ats: ashby, slug: vizcom }
+  - { name: "Vizzia", ats: ashby, slug: vizzia }
+  - { name: "Vlogic", ats: ashby, slug: vlogic }
+  - { name: "Voicemod", ats: ashby, slug: voicemod }
+  - { name: "Voize", ats: ashby, slug: voize }
+  - { name: "Voker", ats: ashby, slug: voker }
+  - { name: "Voladynamics", ats: ashby, slug: voladynamics }
+  - { name: "Voldex", ats: ashby, slug: voldex }
+  - { name: "Volition Capital", ats: ashby, slug: volition-capital }
+  - { name: "Volka", ats: ashby, slug: volka }
+  - { name: "Volley Automation", ats: ashby, slug: volley-automation }
+  - { name: "Volopay", ats: ashby, slug: volopay }
+  - { name: "Voltrac", ats: ashby, slug: voltrac }
+  - { name: "Voodoo", ats: ashby, slug: voodoo }
+  - { name: "Vooma", ats: ashby, slug: vooma }
+  - { name: "Voomi Supply", ats: ashby, slug: voomi-supply }
+  - { name: "Vori", ats: ashby, slug: vori }
+  - { name: "Vote4anthony", ats: ashby, slug: vote4anthony }
+  - { name: "Vouch", ats: ashby, slug: vouch }
+  - { name: "Vow", ats: ashby, slug: vow }
+  - { name: "Voxel", ats: ashby, slug: voxel }
+  - { name: "Voyant Photonics", ats: ashby, slug: voyant-photonics }
+  - { name: "Vst", ats: ashby, slug: vst }
+  - { name: "Vultr", ats: ashby, slug: vultr }
+  - { name: "Vultron", ats: ashby, slug: vultron }
+  - { name: "Vynca", ats: ashby, slug: vynca }
+  - { name: "Vyro", ats: ashby, slug: vyro }
+  - { name: "Wagmo", ats: ashby, slug: wagmo }
   - { name: "Walrus", ats: ashby, slug: walrusfi }
+  - { name: "Walrus", ats: ashby, slug: walrus }
+  - { name: "Wand", ats: ashby, slug: wand }
+  - { name: "Wander", ats: ashby, slug: wander }
+  - { name: "Warp", ats: ashby, slug: warp }
+  - { name: "Watchpoint Labs", ats: ashby, slug: watchpoint-labs }
+  - { name: "Waterplan", ats: ashby, slug: waterplan }
+  - { name: "Watershed", ats: ashby, slug: watershed }
+  - { name: "Waveforms Ai", ats: ashby, slug: waveforms-ai }
+  - { name: "Wayflyer", ats: ashby, slug: wayflyer }
+  - { name: "We3", ats: ashby, slug: we3 }
+  - { name: "Wealth Com", ats: ashby, slug: wealth-com }
+  - { name: "Wealthsimple", ats: ashby, slug: wealthsimple }
+  - { name: "Weave", ats: ashby, slug: weave }
+  - { name: "Weave", ats: ashby, slug: workweave }
+  - { name: "Weave Grid", ats: ashby, slug: weave-grid }
   - { name: "Weaviate", ats: ashby, slug: weaviate }
+  - { name: "Webai", ats: ashby, slug: webai }
+  - { name: "Weekend", ats: ashby, slug: weekend }
+  - { name: "Weflow", ats: ashby, slug: weflow }
+  - { name: "Wellsheet", ats: ashby, slug: wellsheet }
+  - { name: "Welltech", ats: ashby, slug: welltech }
+  - { name: "Wellth", ats: ashby, slug: wellth }
+  - { name: "Wemod", ats: ashby, slug: wemod }
+  - { name: "Wemolo", ats: ashby, slug: wemolo }
+  - { name: "WeTransfer", ats: ashby, slug: wetransfer }
+  - { name: "Wetravel", ats: ashby, slug: wetravel }
+  - { name: "What3words", ats: ashby, slug: what3words }
+  - { name: "Whatnot", ats: ashby, slug: whatnot }
+  - { name: "Wheel", ats: ashby, slug: wheel }
+  - { name: "Wherobots", ats: ashby, slug: wherobots }
+  - { name: "Whippy", ats: ashby, slug: whippy }
+  - { name: "Whitecircle", ats: ashby, slug: whitecircle }
+  - { name: "Widgetfactory", ats: ashby, slug: widgetfactory }
+  - { name: "Willowvoice", ats: ashby, slug: willowvoice }
+  - { name: "Wincent", ats: ashby, slug: wincent }
+  - { name: "Windborne Systems", ats: ashby, slug: windborne-systems }
+  - { name: "Windmill", ats: ashby, slug: windmill }
+  - { name: "Windranger", ats: ashby, slug: windranger }
+  - { name: "Windsurf", ats: ashby, slug: windsurf }
+  - { name: "Winona", ats: ashby, slug: winona }
+  - { name: "Wiremock", ats: ashby, slug: wiremock }
+  - { name: "Wirescreen", ats: ashby, slug: wirescreen }
+  - { name: "Wiseradvisor", ats: ashby, slug: wiseradvisor }
+  - { name: "Wisp", ats: ashby, slug: wisp }
+  - { name: "Wispr Flow", ats: ashby, slug: wispr-flow }
+  - { name: "Wistia", ats: ashby, slug: wistia }
+  - { name: "Withcherry", ats: ashby, slug: withcherry }
+  - { name: "Withclutch", ats: ashby, slug: withclutch }
+  - { name: "Withco", ats: ashby, slug: withco }
+  - { name: "Withdaydream", ats: ashby, slug: withdaydream }
+  - { name: "Withflex", ats: ashby, slug: withflex }
+  - { name: "Withpulley", ats: ashby, slug: withpulley }
+  - { name: "Withwisdom", ats: ashby, slug: withwisdom }
+  - { name: "Witnessai", ats: ashby, slug: witnessai }
+  - { name: "Woebot Health", ats: ashby, slug: woebot-health }
+  - { name: "Woflow", ats: ashby, slug: woflow }
+  - { name: "Wokelo Ai", ats: ashby, slug: wokelo-ai }
+  - { name: "Wordsmith", ats: ashby, slug: wordsmith }
+  - { name: "Workerbase", ats: ashby, slug: workerbase }
+  - { name: "Workiva", ats: ashby, slug: workiva }
+  - { name: "Workmatelabs", ats: ashby, slug: workmatelabs }
+  - { name: "WorkOS", ats: ashby, slug: workos }
+  - { name: "Workos Inc", ats: ashby, slug: workos-inc }
+  - { name: "Workshop Ventures", ats: ashby, slug: workshop-ventures }
+  - { name: "Workshoplabs", ats: ashby, slug: workshoplabs }
+  - { name: "Workwhilejobs", ats: ashby, slug: workwhilejobs }
+  - { name: "Workyard", ats: ashby, slug: workyard }
+  - { name: "World Foundation", ats: ashby, slug: world-foundation }
+  - { name: "Worldlabs", ats: ashby, slug: worldlabs }
+  - { name: "Worldly", ats: ashby, slug: worldly }
+  - { name: "Worlds", ats: ashby, slug: worlds }
+  - { name: "Wormholelabs", ats: ashby, slug: wormholelabs }
+  - { name: "Woven", ats: ashby, slug: woven }
+  - { name: "Wraithwatch", ats: ashby, slug: wraithwatch }
+  - { name: "Wrapbook", ats: ashby, slug: wrapbook }
+  - { name: "Writer", ats: ashby, slug: writer }
+  - { name: "Wundergraph", ats: ashby, slug: wundergraph }
+  - { name: "Wursta", ats: ashby, slug: wursta }
+  - { name: "Wynd Labs", ats: ashby, slug: wynd-labs }
+  - { name: "Xalts", ats: ashby, slug: xalts }
+  - { name: "Xare", ats: ashby, slug: xare }
+  - { name: "XBOW", ats: ashby, slug: xbowcareers }
+  - { name: "Xelix", ats: ashby, slug: xelix }
+  - { name: "Xephyr", ats: ashby, slug: xephyr }
+  - { name: "Xero", ats: ashby, slug: xero }
+  - { name: "Xlabs", ats: ashby, slug: xlabs }
+  - { name: "Xmtplabs", ats: ashby, slug: xmtplabs }
+  - { name: "Xona Space", ats: ashby, slug: xona-space }
+  - { name: "Xpreso", ats: ashby, slug: xpreso }
+  - { name: "Xyz Reality", ats: ashby, slug: xyz-reality }
+  - { name: "Yazio", ats: ashby, slug: yazio }
+  - { name: "Ycombinator", ats: ashby, slug: ycombinator }
+  - { name: "Yellow3d", ats: ashby, slug: yellow3d }
+  - { name: "Yendo", ats: ashby, slug: yendo }
+  - { name: "Yepoda", ats: ashby, slug: yepoda }
+  - { name: "Yobi", ats: ashby, slug: yobi }
+  - { name: "Yondercard", ats: ashby, slug: yondercard }
+  - { name: "Yondr", ats: ashby, slug: yondr }
+  - { name: "Yotta", ats: ashby, slug: yotta }
+  - { name: "Youdotcom", ats: ashby, slug: youdotcom }
+  - { name: "Yourco", ats: ashby, slug: yourco }
+  - { name: "Yubo", ats: ashby, slug: yubo }
+  - { name: "Yumaai", ats: ashby, slug: yumaai }
+  - { name: "Yupp Ai", ats: ashby, slug: yupp-ai }
+  - { name: "Yutori", ats: ashby, slug: yutori }
+  - { name: "Zania", ats: ashby, slug: zania }
   - { name: "Zapier", ats: ashby, slug: zapier }
+  - { name: "Zauber", ats: ashby, slug: zauber }
+  - { name: "Zayzoon", ats: ashby, slug: zayzoon }
+  - { name: "Zeal Network", ats: ashby, slug: zeal-network }
+  - { name: "Zealy", ats: ashby, slug: zealy }
+  - { name: "Zed", ats: ashby, slug: zed }
+  - { name: "Zeely", ats: ashby, slug: zeely }
+  - { name: "Zefir", ats: ashby, slug: zefir }
+  - { name: "Zefr", ats: ashby, slug: zefr }
+  - { name: "Zello", ats: ashby, slug: zello }
+  - { name: "Zencastr", ats: ashby, slug: zencastr }
+  - { name: "Zendar", ats: ashby, slug: zendar }
+  - { name: "Zeno", ats: ashby, slug: zeno }
+  - { name: "Zeromark", ats: ashby, slug: zeromark }
+  - { name: "Zettabyte Space", ats: ashby, slug: zettabyte-space }
+  - { name: "Zip", ats: ashby, slug: zip }
+  - { name: "Ziplines", ats: ashby, slug: ziplines }
+  - { name: "Zippymh", ats: ashby, slug: zippymh }
+  - { name: "Zircuit", ats: ashby, slug: zircuit }
+  - { name: "Zoe", ats: ashby, slug: zoe }
+  - { name: "Zolplay", ats: ashby, slug: zolplay }
+  - { name: "Zowie", ats: ashby, slug: zowie }
+  - { name: "Zyphra", ats: ashby, slug: zyphra }
+  - { name: "Zzazz", ats: ashby, slug: zzazz }

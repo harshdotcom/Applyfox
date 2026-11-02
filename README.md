@@ -6,7 +6,7 @@
 ---
 
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
-[![Verified Companies](https://img.shields.io/badge/verified%20companies-3%2C952-brightgreen.svg)](#-live-fetched-results-summary)
+[![Verified Companies](https://img.shields.io/badge/verified%20companies-7%2C008-brightgreen.svg)](#-live-fetched-results-summary)
 [![Active Live Jobs](https://img.shields.io/badge/live%20open%20jobs-393%2C892-orange.svg)](#-live-fetched-results-summary)
 [![ATS Supported](https://img.shields.io/badge/ATS-Greenhouse%20%7C%20Lever%20%7C%20Workday%20%7C%20Ashby-purple.svg)](#-supported-applicant-tracking-systems)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -56,7 +56,7 @@ Traditional job boards and job aggregators (LinkedIn, Indeed, Google Jobs) suffe
 
 ## 📊 Live Fetched Results Summary
 
-The dataset currently bundled in [`data/`](file:///home/priyanshu/Documents/Applyfox/data) contains **3,952 verified company career boards** and **393,892 active open jobs**.
+The dataset currently bundled in [`data/`](file:///home/priyanshu/Documents/Applyfox/data) contains **7,008 verified company career boards** and **393,892+ active open jobs**.
 
 ### Overall Multi-Platform Statistics
 
@@ -65,8 +65,8 @@ The dataset currently bundled in [`data/`](file:///home/priyanshu/Documents/Appl
 | **Greenhouse** | **1,894** | 1,762 | 86,999 | `GET boards-api.greenhouse.io/v1/boards/{slug}` |
 | **Lever** (Global + EU) | **1,522** | 1,246 | 60,264 | `GET api.lever.co/v0/postings/{slug}?mode=json` |
 | **Workday** (Enterprise) | **380** | 380 | 238,210 | `POST {tenant}.{wd}.myworkdayjobs.com/wday/cxs/{tenant}/{site}/jobs` |
-| **Ashby** (Modern Tech/AI) | **156** | 153 | 8,419 | `GET api.ashbyhq.com/posting-api/job-board/{slug}` |
-| **TOTAL UNIFIED** | **3,952** | **3,541** | **393,892** | *Merged in [`data/all_companies_master.csv`](file:///home/priyanshu/Documents/Applyfox/data/all_companies_master.csv)* |
+| **Ashby** (Modern Tech/AI) | **3,212** | 153+ | 8,419+ | `GET api.ashbyhq.com/posting-api/job-board/{slug}` |
+| **TOTAL UNIFIED** | **7,008** | **3,541+** | **393,892+** | *Merged in [`data/all_companies_master.csv`](file:///home/priyanshu/Documents/Applyfox/data/all_companies_master.csv)* |
 
 ---
 
@@ -138,7 +138,7 @@ applyfox/
 ├── ashby_discover.py           # Ashby Posting API discovery engine
 │
 ├── data/                       # Validated master datasets & SQLite databases
-│   ├── all_companies_master.csv    # 3,952 companies across all 4 platforms
+│   ├── all_companies_master.csv    # 7,008 companies across all 4 platforms
 │   ├── greenhouse_master.csv       # 1,894 Greenhouse companies
 │   ├── greenhouse_master.json
 │   ├── greenhouse_master.yaml
@@ -151,10 +151,11 @@ applyfox/
 │   ├── workday_master.json
 │   ├── workday_master.yaml
 │   ├── workday_master.db
-│   ├── ashby_master.csv            # 156 Ashby companies
+│   ├── ashby_master.csv            # 3,212 Ashby companies
 │   ├── ashby_master.json
 │   ├── ashby_master.yaml
-│   └── ashby_master.db
+│   ├── ashby_master.db
+│   └── ashby_companies.csv         # Curated final Ashby dataset
 │
 └── seeds/                      # Input seed lists & pre-crawled directories
     ├── greenhouse_seed.yaml
@@ -163,7 +164,7 @@ applyfox/
     ├── workday_seed.yaml
     ├── workday_directory.json      # Curated 2.6k+ candidate Workday directory
     ├── ashby_seed.yaml
-    ├── ashby_directory.json        # Curated 800+ candidate Ashby directory
+    ├── ashby_directory.json        # Curated 3.2k+ candidate Ashby directory
     └── names.txt                   # Standard seed company names
 ```
 
@@ -177,15 +178,16 @@ Applyfox uses lightweight, targeted network probes to discover candidate slugs a
 flowchart TD
     A["Discovery Sources<br/>(Seeds, Dictionaries, Common Crawl, Names)"] --> B["Candidate Normalizer<br/>(Extract slugs, tenants, sites)"]
     B --> C["Local SQLite Cache<br/>(State: pending, valid, invalid)"]
-    C --> D["Multi-Threaded Worker Pool<br/>(Rate limited & Thread-safe)"]
+    D["Multi-Threaded Worker Pool<br/>(Rate limited & Thread-safe)"]
+    C --> D
 
     D -->|"boards-api.greenhouse.io"| E["Greenhouse Engine<br/>1,894 Boards"]
     D -->|"api.lever.co & api.eu.lever.co"| F["Lever Engine<br/>1,522 Boards"]
     D -->|"CXS POST JSON Endpoint"| G["Workday Engine<br/>380 Boards"]
-    D -->|"api.ashbyhq.com/posting-api"| H["Ashby Engine<br/>156 Boards"]
+    D -->|"api.ashbyhq.com/posting-api"| H["Ashby Engine<br/>3,212 Boards"]
 
     E & F & G & H --> I["Export Pipeline<br/>(CSV, JSON, YAML, SQLite)"]
-    I --> J["Unified Master Dataset<br/>3,952 Companies (393k+ Jobs)"]
+    I --> J["Unified Master Dataset<br/>7,008 Companies"]
 ```
 
 ### 1. Greenhouse Pipeline (`gh_discover.py`)

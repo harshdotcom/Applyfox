@@ -1,0 +1,157 @@
+companies:
+  - { name: "1Password", ats: ashby, slug: 1password }
+  - { name: "Aescape", ats: ashby, slug: aescape }
+  - { name: "Agave", ats: ashby, slug: agave }
+  - { name: "AgZen", ats: ashby, slug: agzen }
+  - { name: "AiPrise", ats: ashby, slug: aiprise }
+  - { name: "Allen Control Systems", ats: ashby, slug: allen-control-systems }
+  - { name: "Amplify", ats: ashby, slug: amplify }
+  - { name: "Antares", ats: ashby, slug: antares }
+  - { name: "Anthelion Capital", ats: ashby, slug: anthelioncap }
+  - { name: "Applied Intuition", ats: ashby, slug: applied }
+  - { name: "Armadin", ats: ashby, slug: armadin }
+  - { name: "Ashby", ats: ashby, slug: ashby }
+  - { name: "Aurelian", ats: ashby, slug: aurelian }
+  - { name: "Backbone", ats: ashby, slug: backbone }
+  - { name: "Bags", ats: ashby, slug: bagsfm }
+  - { name: "Barnes &amp; Thornburg LLP", ats: ashby, slug: barnes }
+  - { name: "Base Power Company", ats: ashby, slug: base-power }
+  - { name: "Baseten", ats: ashby, slug: baseten }
+  - { name: "Bedrock Robotics Inc", ats: ashby, slug: bedrock-robotics }
+  - { name: "Bild AI", ats: ashby, slug: bild-ai }
+  - { name: "Brain Co.", ats: ashby, slug: brainco }
+  - { name: "Bridger", ats: ashby, slug: bridger }
+  - { name: "Cartesia", ats: ashby, slug: cartesia }
+  - { name: "Cerebras Systems", ats: ashby, slug: cerebras }
+  - { name: "cfo.ai", ats: ashby, slug: runway }
+  - { name: "Chalk", ats: ashby, slug: chalk }
+  - { name: "Clay Labs", ats: ashby, slug: claylabs }
+  - { name: "Cognition", ats: ashby, slug: cognition }
+  - { name: "Cohere", ats: ashby, slug: cohere }
+  - { name: "Color Health", ats: ashby, slug: color-health }
+  - { name: "Composio", ats: ashby, slug: composio }
+  - { name: "ConductorAI", ats: ashby, slug: conductorai }
+  - { name: "Confluent", ats: ashby, slug: confluent }
+  - { name: "Cowboy Space Corp.", ats: ashby, slug: cowboyspace }
+  - { name: "Cursor", ats: ashby, slug: cursor }
+  - { name: "Cylake, Inc", ats: ashby, slug: cylake-inc }
+  - { name: "Cyvl", ats: ashby, slug: cyvl }
+  - { name: "Decagon", ats: ashby, slug: decagon }
+  - { name: "Deel", ats: ashby, slug: deel }
+  - { name: "DriveWealth", ats: ashby, slug: drivewealth }
+  - { name: "Dust", ats: ashby, slug: dust }
+  - { name: "ElevenLabs", ats: ashby, slug: elevenlabs }
+  - { name: "Ellipsis Labs", ats: ashby, slug: ellipsislabs }
+  - { name: "Exa", ats: ashby, slug: exa }
+  - { name: "f7d8749a-72d6-407c-bf98-292ea630c73a", ats: ashby, slug: f7d8749a-72d6-407c-bf98-292ea630c73a }
+  - { name: "Fab2", ats: ashby, slug: fab2 }
+  - { name: "Faros", ats: ashby, slug: faros-ai }
+  - { name: "Fellow Insights Inc.", ats: ashby, slug: fellowai }
+  - { name: "Flint", ats: ashby, slug: flint }
+  - { name: "Gearset", ats: ashby, slug: gearset }
+  - { name: "Gecko Robotics", ats: ashby, slug: gecko-robotics }
+  - { name: "Genesis Molecular AI", ats: ashby, slug: genesis-molecular-ai }
+  - { name: "Genius AI", ats: ashby, slug: geniusai }
+  - { name: "Goaly", ats: ashby, slug: goaly }
+  - { name: "Gritt Robotics", ats: ashby, slug: gritt }
+  - { name: "Grow Therapy", ats: ashby, slug: grow-therapy }
+  - { name: "Hadrian Automation", ats: ashby, slug: hadrian-automation }
+  - { name: "Harvey", ats: ashby, slug: harvey }
+  - { name: "Heliux Inc.", ats: ashby, slug: heliux }
+  - { name: "Heron Power", ats: ashby, slug: heron-power }
+  - { name: "Hipp Health", ats: ashby, slug: hipp }
+  - { name: "Hiya", ats: ashby, slug: hiya }
+  - { name: "Hyphenate", ats: ashby, slug: hyphenate }
+  - { name: "Ibotta", ats: ashby, slug: ibotta }
+  - { name: "Icon", ats: ashby, slug: icon }
+  - { name: "incident.io", ats: ashby, slug: incident }
+  - { name: "Integrate", ats: ashby, slug: integrate }
+  - { name: "Jampack AI", ats: ashby, slug: jampack-ai }
+  - { name: "Juicebox", ats: ashby, slug: juicebox }
+  - { name: "Julius AI", ats: ashby, slug: julius }
+  - { name: "Klaviyo", ats: ashby, slug: klaviyo }
+  - { name: "Koah", ats: ashby, slug: koahlabs }
+  - { name: "Kognitos", ats: ashby, slug: kognitos }
+  - { name: "LangChain", ats: ashby, slug: langchain }
+  - { name: "Lightfield", ats: ashby, slug: lightfield }
+  - { name: "Linear", ats: ashby, slug: linear }
+  - { name: "LlamaIndex", ats: ashby, slug: llamaindex }
+  - { name: "Magic", ats: ashby, slug: magic }
+  - { name: "Megazone Cloud US", ats: ashby, slug: megazone }
+  - { name: "Meow", ats: ashby, slug: meow }
+  - { name: "Mercor", ats: ashby, slug: mercor }
+  - { name: "Metalenz", ats: ashby, slug: metalenz }
+  - { name: "Metamorphic", ats: ashby, slug: metamorphic }
+  - { name: "Midjourney", ats: ashby, slug: midjourney }
+  - { name: "Miro", ats: ashby, slug: miro }
+  - { name: "Modal", ats: ashby, slug: modal }
+  - { name: "Morse Micro", ats: ashby, slug: morse-micro }
+  - { name: "N1", ats: ashby, slug: n1 }
+  - { name: "Netic", ats: ashby, slug: netic }
+  - { name: "Niantic Spatial", ats: ashby, slug: niantic-spatial }
+  - { name: "Nooks", ats: ashby, slug: nooks }
+  - { name: "Northwood Space", ats: ashby, slug: northwoodspace }
+  - { name: "Notion", ats: ashby, slug: notion }
+  - { name: "Old Mission", ats: ashby, slug: old-mission-capital }
+  - { name: "OLIX", ats: ashby, slug: olix }
+  - { name: "OnePay", ats: ashby, slug: oneapp }
+  - { name: "OpenAI", ats: ashby, slug: openai }
+  - { name: "Pace", ats: ashby, slug: withpace }
+  - { name: "Pangram Labs", ats: ashby, slug: pangramlabs }
+  - { name: "Patreon", ats: ashby, slug: patreon }
+  - { name: "Perplexity", ats: ashby, slug: perplexity }
+  - { name: "Persona", ats: ashby, slug: persona }
+  - { name: "Phoebe", ats: ashby, slug: phoebe-work }
+  - { name: "Pika", ats: ashby, slug: pika }
+  - { name: "Pinecone", ats: ashby, slug: pinecone }
+  - { name: "Poolside", ats: ashby, slug: poolside }
+  - { name: "Preference Model", ats: ashby, slug: preference-model }
+  - { name: "Primer", ats: ashby, slug: primer }
+  - { name: "Pylon", ats: ashby, slug: pylon-labs }
+  - { name: "Qumulo", ats: ashby, slug: qumulo }
+  - { name: "Quora", ats: ashby, slug: quora }
+  - { name: "Ramp", ats: ashby, slug: ramp }
+  - { name: "Range", ats: ashby, slug: range }
+  - { name: "Realm", ats: ashby, slug: realmalliance }
+  - { name: "Redgate", ats: ashby, slug: red-gate }
+  - { name: "Reflect Orbital", ats: ashby, slug: reflect-orbital }
+  - { name: "Relling", ats: ashby, slug: relling }
+  - { name: "Replit", ats: ashby, slug: replit }
+  - { name: "Resurgent Industries", ats: ashby, slug: resurgent-industries }
+  - { name: "Revel", ats: ashby, slug: revel }
+  - { name: "Rhoda AI", ats: ashby, slug: rhoda-ai }
+  - { name: "Rilla", ats: ashby, slug: rilla }
+  - { name: "Rollout", ats: ashby, slug: rollout }
+  - { name: "Saronic Technologies", ats: ashby, slug: saronic }
+  - { name: "Scout AI", ats: ashby, slug: scout-ai }
+  - { name: "Semgrep", ats: ashby, slug: semgrep }
+  - { name: "Sentry", ats: ashby, slug: sentry }
+  - { name: "Serval", ats: ashby, slug: serval }
+  - { name: "Sierra", ats: ashby, slug: sierra }
+  - { name: "Skydio", ats: ashby, slug: skydio }
+  - { name: "Snowflake", ats: ashby, slug: snowflake }
+  - { name: "Snyk", ats: ashby, slug: snyk }
+  - { name: "Spruce Systems, Inc.", ats: ashby, slug: spruceid }
+  - { name: "Steel", ats: ashby, slug: steel }
+  - { name: "Strada", ats: ashby, slug: stradahq }
+  - { name: "Subtotal", ats: ashby, slug: subtotal }
+  - { name: "Suno", ats: ashby, slug: suno }
+  - { name: "Supabase", ats: ashby, slug: supabase }
+  - { name: "Swarm Aero", ats: ashby, slug: swarmaero }
+  - { name: "Synthesia", ats: ashby, slug: synthesia }
+  - { name: "Talos", ats: ashby, slug: talos-trading }
+  - { name: "Tavus", ats: ashby, slug: tavus }
+  - { name: "TELUS Digital", ats: ashby, slug: telus-digital }
+  - { name: "TensorWave", ats: ashby, slug: tensorwave }
+  - { name: "Terranova", ats: ashby, slug: terranova }
+  - { name: "Tessera Labs", ats: ashby, slug: tessera-labs }
+  - { name: "The Exploration Company", ats: ashby, slug: the-exploration-company }
+  - { name: "Trace", ats: ashby, slug: tracelabs }
+  - { name: "Uncountable Inc.", ats: ashby, slug: uncountable }
+  - { name: "Valon Tech", ats: ashby, slug: valon }
+  - { name: "Vanta", ats: ashby, slug: vanta }
+  - { name: "Viggle AI", ats: ashby, slug: viggle }
+  - { name: "Vital Lyfe", ats: ashby, slug: vital-lyfe }
+  - { name: "Walrus", ats: ashby, slug: walrusfi }
+  - { name: "Weaviate", ats: ashby, slug: weaviate }
+  - { name: "Zapier", ats: ashby, slug: zapier }

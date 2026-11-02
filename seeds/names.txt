@@ -1,0 +1,30 @@
+Warby Parker
+Scale AI
+Brex
+Carta
+Duolingo
+Affirm
+Robinhood
+Zapier
+Grammarly
+Ramp
+Miro
+GitLab
+Supabase
+Notion
+DoorDash
+Okta
+Box
+Cockroach Labs
+Snyk
+Sourcegraph
+PagerDuty
+Datadog
+Braze
+Klaviyo
+Samsara
+Rubrik
+Confluent
+Snowflake
+Palantir
+

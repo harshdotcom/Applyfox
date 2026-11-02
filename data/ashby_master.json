@@ -1,0 +1,938 @@
+[
+  {
+    "name": "1Password",
+    "slug": "1password",
+    "open_jobs": 78,
+    "board_url": "https://jobs.ashbyhq.com/1password"
+  },
+  {
+    "name": "Aescape",
+    "slug": "aescape",
+    "open_jobs": 14,
+    "board_url": "https://jobs.ashbyhq.com/aescape"
+  },
+  {
+    "name": "Agave",
+    "slug": "agave",
+    "open_jobs": 10,
+    "board_url": "https://jobs.ashbyhq.com/agave"
+  },
+  {
+    "name": "AgZen",
+    "slug": "agzen",
+    "open_jobs": 5,
+    "board_url": "https://jobs.ashbyhq.com/agzen"
+  },
+  {
+    "name": "AiPrise",
+    "slug": "aiprise",
+    "open_jobs": 19,
+    "board_url": "https://jobs.ashbyhq.com/aiprise"
+  },
+  {
+    "name": "Allen Control Systems",
+    "slug": "allen-control-systems",
+    "open_jobs": 22,
+    "board_url": "https://jobs.ashbyhq.com/allen-control-systems"
+  },
+  {
+    "name": "Amplify",
+    "slug": "amplify",
+    "open_jobs": 35,
+    "board_url": "https://jobs.ashbyhq.com/amplify"
+  },
+  {
+    "name": "Antares",
+    "slug": "antares",
+    "open_jobs": 92,
+    "board_url": "https://jobs.ashbyhq.com/antares"
+  },
+  {
+    "name": "Anthelion Capital",
+    "slug": "anthelioncap",
+    "open_jobs": 1,
+    "board_url": "https://jobs.ashbyhq.com/anthelioncap"
+  },
+  {
+    "name": "Applied Intuition",
+    "slug": "applied",
+    "open_jobs": 321,
+    "board_url": "https://jobs.ashbyhq.com/applied"
+  },
+  {
+    "name": "Armadin",
+    "slug": "armadin",
+    "open_jobs": 28,
+    "board_url": "https://jobs.ashbyhq.com/armadin"
+  },
+  {
+    "name": "Ashby",
+    "slug": "ashby",
+    "open_jobs": 74,
+    "board_url": "https://jobs.ashbyhq.com/ashby"
+  },
+  {
+    "name": "Aurelian",
+    "slug": "aurelian",
+    "open_jobs": 8,
+    "board_url": "https://jobs.ashbyhq.com/aurelian"
+  },
+  {
+    "name": "Backbone",
+    "slug": "backbone",
+    "open_jobs": 3,
+    "board_url": "https://jobs.ashbyhq.com/backbone"
+  },
+  {
+    "name": "Bags",
+    "slug": "bagsfm",
+    "open_jobs": 11,
+    "board_url": "https://jobs.ashbyhq.com/bagsfm"
+  },
+  {
+    "name": "Barnes &amp; Thornburg LLP",
+    "slug": "barnes",
+    "open_jobs": 133,
+    "board_url": "https://jobs.ashbyhq.com/barnes"
+  },
+  {
+    "name": "Base Power Company",
+    "slug": "base-power",
+    "open_jobs": 191,
+    "board_url": "https://jobs.ashbyhq.com/base-power"
+  },
+  {
+    "name": "Baseten",
+    "slug": "baseten",
+    "open_jobs": 105,
+    "board_url": "https://jobs.ashbyhq.com/baseten"
+  },
+  {
+    "name": "Bedrock Robotics Inc",
+    "slug": "bedrock-robotics",
+    "open_jobs": 55,
+    "board_url": "https://jobs.ashbyhq.com/bedrock-robotics"
+  },
+  {
+    "name": "Bild AI",
+    "slug": "bild-ai",
+    "open_jobs": 4,
+    "board_url": "https://jobs.ashbyhq.com/bild-ai"
+  },
+  {
+    "name": "Brain Co.",
+    "slug": "brainco",
+    "open_jobs": 49,
+    "board_url": "https://jobs.ashbyhq.com/brainco"
+  },
+  {
+    "name": "Bridger",
+    "slug": "bridger",
+    "open_jobs": 3,
+    "board_url": "https://jobs.ashbyhq.com/bridger"
+  },
+  {
+    "name": "Cartesia",
+    "slug": "cartesia",
+    "open_jobs": 24,
+    "board_url": "https://jobs.ashbyhq.com/cartesia"
+  },
+  {
+    "name": "Cerebras Systems",
+    "slug": "cerebras",
+    "open_jobs": 116,
+    "board_url": "https://jobs.ashbyhq.com/cerebras"
+  },
+  {
+    "name": "cfo.ai",
+    "slug": "runway",
+    "open_jobs": 3,
+    "board_url": "https://jobs.ashbyhq.com/runway"
+  },
+  {
+    "name": "Chalk",
+    "slug": "chalk",
+    "open_jobs": 17,
+    "board_url": "https://jobs.ashbyhq.com/chalk"
+  },
+  {
+    "name": "Clay Labs",
+    "slug": "claylabs",
+    "open_jobs": 61,
+    "board_url": "https://jobs.ashbyhq.com/claylabs"
+  },
+  {
+    "name": "Cognition",
+    "slug": "cognition",
+    "open_jobs": 106,
+    "board_url": "https://jobs.ashbyhq.com/cognition"
+  },
+  {
+    "name": "Cohere",
+    "slug": "cohere",
+    "open_jobs": 120,
+    "board_url": "https://jobs.ashbyhq.com/cohere"
+  },
+  {
+    "name": "Color Health",
+    "slug": "color-health",
+    "open_jobs": 18,
+    "board_url": "https://jobs.ashbyhq.com/color-health"
+  },
+  {
+    "name": "Composio",
+    "slug": "composio",
+    "open_jobs": 31,
+    "board_url": "https://jobs.ashbyhq.com/composio"
+  },
+  {
+    "name": "ConductorAI",
+    "slug": "conductorai",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/conductorai"
+  },
+  {
+    "name": "Confluent",
+    "slug": "confluent",
+    "open_jobs": 0,
+    "board_url": "https://jobs.ashbyhq.com/confluent"
+  },
+  {
+    "name": "Cowboy Space Corp.",
+    "slug": "cowboyspace",
+    "open_jobs": 65,
+    "board_url": "https://jobs.ashbyhq.com/cowboyspace"
+  },
+  {
+    "name": "Cursor",
+    "slug": "cursor",
+    "open_jobs": 124,
+    "board_url": "https://jobs.ashbyhq.com/cursor"
+  },
+  {
+    "name": "Cylake, Inc",
+    "slug": "cylake-inc",
+    "open_jobs": 15,
+    "board_url": "https://jobs.ashbyhq.com/cylake-inc"
+  },
+  {
+    "name": "Cyvl",
+    "slug": "cyvl",
+    "open_jobs": 16,
+    "board_url": "https://jobs.ashbyhq.com/cyvl"
+  },
+  {
+    "name": "Decagon",
+    "slug": "decagon",
+    "open_jobs": 132,
+    "board_url": "https://jobs.ashbyhq.com/decagon"
+  },
+  {
+    "name": "Deel",
+    "slug": "deel",
+    "open_jobs": 0,
+    "board_url": "https://jobs.ashbyhq.com/deel"
+  },
+  {
+    "name": "DriveWealth",
+    "slug": "drivewealth",
+    "open_jobs": 27,
+    "board_url": "https://jobs.ashbyhq.com/drivewealth"
+  },
+  {
+    "name": "Dust",
+    "slug": "dust",
+    "open_jobs": 32,
+    "board_url": "https://jobs.ashbyhq.com/dust"
+  },
+  {
+    "name": "ElevenLabs",
+    "slug": "elevenlabs",
+    "open_jobs": 145,
+    "board_url": "https://jobs.ashbyhq.com/elevenlabs"
+  },
+  {
+    "name": "Ellipsis Labs",
+    "slug": "ellipsislabs",
+    "open_jobs": 14,
+    "board_url": "https://jobs.ashbyhq.com/ellipsislabs"
+  },
+  {
+    "name": "Exa",
+    "slug": "exa",
+    "open_jobs": 63,
+    "board_url": "https://jobs.ashbyhq.com/exa"
+  },
+  {
+    "name": "f7d8749a-72d6-407c-bf98-292ea630c73a",
+    "slug": "f7d8749a-72d6-407c-bf98-292ea630c73a",
+    "open_jobs": 680,
+    "board_url": "https://jobs.ashbyhq.com/f7d8749a-72d6-407c-bf98-292ea630c73a"
+  },
+  {
+    "name": "Fab2",
+    "slug": "fab2",
+    "open_jobs": 58,
+    "board_url": "https://jobs.ashbyhq.com/fab2"
+  },
+  {
+    "name": "Faros",
+    "slug": "faros-ai",
+    "open_jobs": 12,
+    "board_url": "https://jobs.ashbyhq.com/faros-ai"
+  },
+  {
+    "name": "Fellow Insights Inc.",
+    "slug": "fellowai",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/fellowai"
+  },
+  {
+    "name": "Flint",
+    "slug": "flint",
+    "open_jobs": 8,
+    "board_url": "https://jobs.ashbyhq.com/flint"
+  },
+  {
+    "name": "Gearset",
+    "slug": "gearset",
+    "open_jobs": 12,
+    "board_url": "https://jobs.ashbyhq.com/gearset"
+  },
+  {
+    "name": "Gecko Robotics",
+    "slug": "gecko-robotics",
+    "open_jobs": 21,
+    "board_url": "https://jobs.ashbyhq.com/gecko-robotics"
+  },
+  {
+    "name": "Genesis Molecular AI",
+    "slug": "genesis-molecular-ai",
+    "open_jobs": 11,
+    "board_url": "https://jobs.ashbyhq.com/genesis-molecular-ai"
+  },
+  {
+    "name": "Genius AI",
+    "slug": "geniusai",
+    "open_jobs": 16,
+    "board_url": "https://jobs.ashbyhq.com/geniusai"
+  },
+  {
+    "name": "Goaly",
+    "slug": "goaly",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/goaly"
+  },
+  {
+    "name": "Gritt Robotics",
+    "slug": "gritt",
+    "open_jobs": 18,
+    "board_url": "https://jobs.ashbyhq.com/gritt"
+  },
+  {
+    "name": "Grow Therapy",
+    "slug": "grow-therapy",
+    "open_jobs": 29,
+    "board_url": "https://jobs.ashbyhq.com/grow-therapy"
+  },
+  {
+    "name": "Hadrian Automation",
+    "slug": "hadrian-automation",
+    "open_jobs": 158,
+    "board_url": "https://jobs.ashbyhq.com/hadrian-automation"
+  },
+  {
+    "name": "Harvey",
+    "slug": "harvey",
+    "open_jobs": 379,
+    "board_url": "https://jobs.ashbyhq.com/harvey"
+  },
+  {
+    "name": "Heliux Inc.",
+    "slug": "heliux",
+    "open_jobs": 11,
+    "board_url": "https://jobs.ashbyhq.com/heliux"
+  },
+  {
+    "name": "Heron Power",
+    "slug": "heron-power",
+    "open_jobs": 51,
+    "board_url": "https://jobs.ashbyhq.com/heron-power"
+  },
+  {
+    "name": "Hipp Health",
+    "slug": "hipp",
+    "open_jobs": 10,
+    "board_url": "https://jobs.ashbyhq.com/hipp"
+  },
+  {
+    "name": "Hiya",
+    "slug": "hiya",
+    "open_jobs": 28,
+    "board_url": "https://jobs.ashbyhq.com/hiya"
+  },
+  {
+    "name": "Hyphenate",
+    "slug": "hyphenate",
+    "open_jobs": 15,
+    "board_url": "https://jobs.ashbyhq.com/hyphenate"
+  },
+  {
+    "name": "Ibotta",
+    "slug": "ibotta",
+    "open_jobs": 44,
+    "board_url": "https://jobs.ashbyhq.com/ibotta"
+  },
+  {
+    "name": "Icon",
+    "slug": "icon",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/icon"
+  },
+  {
+    "name": "incident.io",
+    "slug": "incident",
+    "open_jobs": 38,
+    "board_url": "https://jobs.ashbyhq.com/incident"
+  },
+  {
+    "name": "Integrate",
+    "slug": "integrate",
+    "open_jobs": 10,
+    "board_url": "https://jobs.ashbyhq.com/integrate"
+  },
+  {
+    "name": "Jampack AI",
+    "slug": "jampack-ai",
+    "open_jobs": 2,
+    "board_url": "https://jobs.ashbyhq.com/jampack-ai"
+  },
+  {
+    "name": "Juicebox",
+    "slug": "juicebox",
+    "open_jobs": 37,
+    "board_url": "https://jobs.ashbyhq.com/juicebox"
+  },
+  {
+    "name": "Julius AI",
+    "slug": "julius",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/julius"
+  },
+  {
+    "name": "Klaviyo",
+    "slug": "klaviyo",
+    "open_jobs": 0,
+    "board_url": "https://jobs.ashbyhq.com/klaviyo"
+  },
+  {
+    "name": "Koah",
+    "slug": "koahlabs",
+    "open_jobs": 9,
+    "board_url": "https://jobs.ashbyhq.com/koahlabs"
+  },
+  {
+    "name": "Kognitos",
+    "slug": "kognitos",
+    "open_jobs": 3,
+    "board_url": "https://jobs.ashbyhq.com/kognitos"
+  },
+  {
+    "name": "LangChain",
+    "slug": "langchain",
+    "open_jobs": 101,
+    "board_url": "https://jobs.ashbyhq.com/langchain"
+  },
+  {
+    "name": "Lightfield",
+    "slug": "lightfield",
+    "open_jobs": 25,
+    "board_url": "https://jobs.ashbyhq.com/lightfield"
+  },
+  {
+    "name": "Linear",
+    "slug": "linear",
+    "open_jobs": 31,
+    "board_url": "https://jobs.ashbyhq.com/linear"
+  },
+  {
+    "name": "LlamaIndex",
+    "slug": "llamaindex",
+    "open_jobs": 4,
+    "board_url": "https://jobs.ashbyhq.com/llamaindex"
+  },
+  {
+    "name": "Magic",
+    "slug": "magic",
+    "open_jobs": 10,
+    "board_url": "https://jobs.ashbyhq.com/magic"
+  },
+  {
+    "name": "Megazone Cloud US",
+    "slug": "megazone",
+    "open_jobs": 14,
+    "board_url": "https://jobs.ashbyhq.com/megazone"
+  },
+  {
+    "name": "Meow",
+    "slug": "meow",
+    "open_jobs": 7,
+    "board_url": "https://jobs.ashbyhq.com/meow"
+  },
+  {
+    "name": "Mercor",
+    "slug": "mercor",
+    "open_jobs": 108,
+    "board_url": "https://jobs.ashbyhq.com/mercor"
+  },
+  {
+    "name": "Metalenz",
+    "slug": "metalenz",
+    "open_jobs": 2,
+    "board_url": "https://jobs.ashbyhq.com/metalenz"
+  },
+  {
+    "name": "Metamorphic",
+    "slug": "metamorphic",
+    "open_jobs": 5,
+    "board_url": "https://jobs.ashbyhq.com/metamorphic"
+  },
+  {
+    "name": "Midjourney",
+    "slug": "midjourney",
+    "open_jobs": 17,
+    "board_url": "https://jobs.ashbyhq.com/midjourney"
+  },
+  {
+    "name": "Miro",
+    "slug": "miro",
+    "open_jobs": 18,
+    "board_url": "https://jobs.ashbyhq.com/miro"
+  },
+  {
+    "name": "Modal",
+    "slug": "modal",
+    "open_jobs": 43,
+    "board_url": "https://jobs.ashbyhq.com/modal"
+  },
+  {
+    "name": "Morse Micro",
+    "slug": "morse-micro",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/morse-micro"
+  },
+  {
+    "name": "N1",
+    "slug": "n1",
+    "open_jobs": 11,
+    "board_url": "https://jobs.ashbyhq.com/n1"
+  },
+  {
+    "name": "Netic",
+    "slug": "netic",
+    "open_jobs": 36,
+    "board_url": "https://jobs.ashbyhq.com/netic"
+  },
+  {
+    "name": "Niantic Spatial",
+    "slug": "niantic-spatial",
+    "open_jobs": 19,
+    "board_url": "https://jobs.ashbyhq.com/niantic-spatial"
+  },
+  {
+    "name": "Nooks",
+    "slug": "nooks",
+    "open_jobs": 54,
+    "board_url": "https://jobs.ashbyhq.com/nooks"
+  },
+  {
+    "name": "Northwood Space",
+    "slug": "northwoodspace",
+    "open_jobs": 60,
+    "board_url": "https://jobs.ashbyhq.com/northwoodspace"
+  },
+  {
+    "name": "Notion",
+    "slug": "notion",
+    "open_jobs": 149,
+    "board_url": "https://jobs.ashbyhq.com/notion"
+  },
+  {
+    "name": "Old Mission",
+    "slug": "old-mission-capital",
+    "open_jobs": 38,
+    "board_url": "https://jobs.ashbyhq.com/old-mission-capital"
+  },
+  {
+    "name": "OLIX",
+    "slug": "olix",
+    "open_jobs": 20,
+    "board_url": "https://jobs.ashbyhq.com/olix"
+  },
+  {
+    "name": "OnePay",
+    "slug": "oneapp",
+    "open_jobs": 42,
+    "board_url": "https://jobs.ashbyhq.com/oneapp"
+  },
+  {
+    "name": "OpenAI",
+    "slug": "openai",
+    "open_jobs": 809,
+    "board_url": "https://jobs.ashbyhq.com/openai"
+  },
+  {
+    "name": "Pace",
+    "slug": "withpace",
+    "open_jobs": 38,
+    "board_url": "https://jobs.ashbyhq.com/withpace"
+  },
+  {
+    "name": "Pangram Labs",
+    "slug": "pangramlabs",
+    "open_jobs": 15,
+    "board_url": "https://jobs.ashbyhq.com/pangramlabs"
+  },
+  {
+    "name": "Patreon",
+    "slug": "patreon",
+    "open_jobs": 19,
+    "board_url": "https://jobs.ashbyhq.com/patreon"
+  },
+  {
+    "name": "Perplexity",
+    "slug": "perplexity",
+    "open_jobs": 138,
+    "board_url": "https://jobs.ashbyhq.com/perplexity"
+  },
+  {
+    "name": "Persona",
+    "slug": "persona",
+    "open_jobs": 15,
+    "board_url": "https://jobs.ashbyhq.com/persona"
+  },
+  {
+    "name": "Phoebe",
+    "slug": "phoebe-work",
+    "open_jobs": 10,
+    "board_url": "https://jobs.ashbyhq.com/phoebe-work"
+  },
+  {
+    "name": "Pika",
+    "slug": "pika",
+    "open_jobs": 16,
+    "board_url": "https://jobs.ashbyhq.com/pika"
+  },
+  {
+    "name": "Pinecone",
+    "slug": "pinecone",
+    "open_jobs": 8,
+    "board_url": "https://jobs.ashbyhq.com/pinecone"
+  },
+  {
+    "name": "Poolside",
+    "slug": "poolside",
+    "open_jobs": 3,
+    "board_url": "https://jobs.ashbyhq.com/poolside"
+  },
+  {
+    "name": "Preference Model",
+    "slug": "preference-model",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/preference-model"
+  },
+  {
+    "name": "Primer",
+    "slug": "primer",
+    "open_jobs": 20,
+    "board_url": "https://jobs.ashbyhq.com/primer"
+  },
+  {
+    "name": "Pylon",
+    "slug": "pylon-labs",
+    "open_jobs": 15,
+    "board_url": "https://jobs.ashbyhq.com/pylon-labs"
+  },
+  {
+    "name": "Qumulo",
+    "slug": "qumulo",
+    "open_jobs": 22,
+    "board_url": "https://jobs.ashbyhq.com/qumulo"
+  },
+  {
+    "name": "Quora",
+    "slug": "quora",
+    "open_jobs": 9,
+    "board_url": "https://jobs.ashbyhq.com/quora"
+  },
+  {
+    "name": "Ramp",
+    "slug": "ramp",
+    "open_jobs": 173,
+    "board_url": "https://jobs.ashbyhq.com/ramp"
+  },
+  {
+    "name": "Range",
+    "slug": "range",
+    "open_jobs": 65,
+    "board_url": "https://jobs.ashbyhq.com/range"
+  },
+  {
+    "name": "Realm",
+    "slug": "realmalliance",
+    "open_jobs": 10,
+    "board_url": "https://jobs.ashbyhq.com/realmalliance"
+  },
+  {
+    "name": "Redgate",
+    "slug": "red-gate",
+    "open_jobs": 12,
+    "board_url": "https://jobs.ashbyhq.com/red-gate"
+  },
+  {
+    "name": "Reflect Orbital",
+    "slug": "reflect-orbital",
+    "open_jobs": 17,
+    "board_url": "https://jobs.ashbyhq.com/reflect-orbital"
+  },
+  {
+    "name": "Relling",
+    "slug": "relling",
+    "open_jobs": 12,
+    "board_url": "https://jobs.ashbyhq.com/relling"
+  },
+  {
+    "name": "Replit",
+    "slug": "replit",
+    "open_jobs": 34,
+    "board_url": "https://jobs.ashbyhq.com/replit"
+  },
+  {
+    "name": "Resurgent Industries",
+    "slug": "resurgent-industries",
+    "open_jobs": 15,
+    "board_url": "https://jobs.ashbyhq.com/resurgent-industries"
+  },
+  {
+    "name": "Revel",
+    "slug": "revel",
+    "open_jobs": 30,
+    "board_url": "https://jobs.ashbyhq.com/revel"
+  },
+  {
+    "name": "Rhoda AI",
+    "slug": "rhoda-ai",
+    "open_jobs": 42,
+    "board_url": "https://jobs.ashbyhq.com/rhoda-ai"
+  },
+  {
+    "name": "Rilla",
+    "slug": "rilla",
+    "open_jobs": 26,
+    "board_url": "https://jobs.ashbyhq.com/rilla"
+  },
+  {
+    "name": "Rollout",
+    "slug": "rollout",
+    "open_jobs": 2,
+    "board_url": "https://jobs.ashbyhq.com/rollout"
+  },
+  {
+    "name": "Saronic Technologies",
+    "slug": "saronic",
+    "open_jobs": 255,
+    "board_url": "https://jobs.ashbyhq.com/saronic"
+  },
+  {
+    "name": "Scout AI",
+    "slug": "scout-ai",
+    "open_jobs": 26,
+    "board_url": "https://jobs.ashbyhq.com/scout-ai"
+  },
+  {
+    "name": "Semgrep",
+    "slug": "semgrep",
+    "open_jobs": 13,
+    "board_url": "https://jobs.ashbyhq.com/semgrep"
+  },
+  {
+    "name": "Sentry",
+    "slug": "sentry",
+    "open_jobs": 40,
+    "board_url": "https://jobs.ashbyhq.com/sentry"
+  },
+  {
+    "name": "Serval",
+    "slug": "serval",
+    "open_jobs": 64,
+    "board_url": "https://jobs.ashbyhq.com/serval"
+  },
+  {
+    "name": "Sierra",
+    "slug": "sierra",
+    "open_jobs": 219,
+    "board_url": "https://jobs.ashbyhq.com/sierra"
+  },
+  {
+    "name": "Skydio",
+    "slug": "skydio",
+    "open_jobs": 187,
+    "board_url": "https://jobs.ashbyhq.com/skydio"
+  },
+  {
+    "name": "Snowflake",
+    "slug": "snowflake",
+    "open_jobs": 367,
+    "board_url": "https://jobs.ashbyhq.com/snowflake"
+  },
+  {
+    "name": "Snyk",
+    "slug": "snyk",
+    "open_jobs": 37,
+    "board_url": "https://jobs.ashbyhq.com/snyk"
+  },
+  {
+    "name": "Spruce Systems, Inc.",
+    "slug": "spruceid",
+    "open_jobs": 5,
+    "board_url": "https://jobs.ashbyhq.com/spruceid"
+  },
+  {
+    "name": "Steel",
+    "slug": "steel",
+    "open_jobs": 3,
+    "board_url": "https://jobs.ashbyhq.com/steel"
+  },
+  {
+    "name": "Strada",
+    "slug": "stradahq",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/stradahq"
+  },
+  {
+    "name": "Subtotal",
+    "slug": "subtotal",
+    "open_jobs": 2,
+    "board_url": "https://jobs.ashbyhq.com/subtotal"
+  },
+  {
+    "name": "Suno",
+    "slug": "suno",
+    "open_jobs": 71,
+    "board_url": "https://jobs.ashbyhq.com/suno"
+  },
+  {
+    "name": "Supabase",
+    "slug": "supabase",
+    "open_jobs": 68,
+    "board_url": "https://jobs.ashbyhq.com/supabase"
+  },
+  {
+    "name": "Swarm Aero",
+    "slug": "swarmaero",
+    "open_jobs": 47,
+    "board_url": "https://jobs.ashbyhq.com/swarmaero"
+  },
+  {
+    "name": "Synthesia",
+    "slug": "synthesia",
+    "open_jobs": 33,
+    "board_url": "https://jobs.ashbyhq.com/synthesia"
+  },
+  {
+    "name": "Talos",
+    "slug": "talos-trading",
+    "open_jobs": 21,
+    "board_url": "https://jobs.ashbyhq.com/talos-trading"
+  },
+  {
+    "name": "Tavus",
+    "slug": "tavus",
+    "open_jobs": 19,
+    "board_url": "https://jobs.ashbyhq.com/tavus"
+  },
+  {
+    "name": "TELUS Digital",
+    "slug": "telus-digital",
+    "open_jobs": 56,
+    "board_url": "https://jobs.ashbyhq.com/telus-digital"
+  },
+  {
+    "name": "TensorWave",
+    "slug": "tensorwave",
+    "open_jobs": 63,
+    "board_url": "https://jobs.ashbyhq.com/tensorwave"
+  },
+  {
+    "name": "Terranova",
+    "slug": "terranova",
+    "open_jobs": 11,
+    "board_url": "https://jobs.ashbyhq.com/terranova"
+  },
+  {
+    "name": "Tessera Labs",
+    "slug": "tessera-labs",
+    "open_jobs": 31,
+    "board_url": "https://jobs.ashbyhq.com/tessera-labs"
+  },
+  {
+    "name": "The Exploration Company",
+    "slug": "the-exploration-company",
+    "open_jobs": 116,
+    "board_url": "https://jobs.ashbyhq.com/the-exploration-company"
+  },
+  {
+    "name": "Trace",
+    "slug": "tracelabs",
+    "open_jobs": 4,
+    "board_url": "https://jobs.ashbyhq.com/tracelabs"
+  },
+  {
+    "name": "Uncountable Inc.",
+    "slug": "uncountable",
+    "open_jobs": 32,
+    "board_url": "https://jobs.ashbyhq.com/uncountable"
+  },
+  {
+    "name": "Valon Tech",
+    "slug": "valon",
+    "open_jobs": 28,
+    "board_url": "https://jobs.ashbyhq.com/valon"
+  },
+  {
+    "name": "Vanta",
+    "slug": "vanta",
+    "open_jobs": 79,
+    "board_url": "https://jobs.ashbyhq.com/vanta"
+  },
+  {
+    "name": "Viggle AI",
+    "slug": "viggle",
+    "open_jobs": 6,
+    "board_url": "https://jobs.ashbyhq.com/viggle"
+  },
+  {
+    "name": "Vital Lyfe",
+    "slug": "vital-lyfe",
+    "open_jobs": 13,
+    "board_url": "https://jobs.ashbyhq.com/vital-lyfe"
+  },
+  {
+    "name": "Walrus",
+    "slug": "walrusfi",
+    "open_jobs": 3,
+    "board_url": "https://jobs.ashbyhq.com/walrusfi"
+  },
+  {
+    "name": "Weaviate",
+    "slug": "weaviate",
+    "open_jobs": 2,
+    "board_url": "https://jobs.ashbyhq.com/weaviate"
+  },
+  {
+    "name": "Zapier",
+    "slug": "zapier",
+    "open_jobs": 11,
+    "board_url": "https://jobs.ashbyhq.com/zapier"
+  }
+]

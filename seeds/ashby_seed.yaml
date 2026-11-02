@@ -1,0 +1,50 @@
+companies:
+  - name: OpenAI
+    ats: ashby
+    slug: openai
+  - name: Ramp
+    ats: ashby
+    slug: ramp
+  - name: Linear
+    ats: ashby
+    slug: linear
+  - name: Perplexity
+    ats: ashby
+    slug: perplexity
+  - name: Cursor
+    ats: ashby
+    slug: cursor
+  - name: Sentry
+    ats: ashby
+    slug: sentry
+  - name: ElevenLabs
+    ats: ashby
+    slug: elevenlabs
+  - name: Cohere
+    ats: ashby
+    slug: cohere
+  - name: Harvey
+    ats: ashby
+    slug: harvey
+  - name: Ashby
+    ats: ashby
+    slug: ashby
+  - name: LangChain
+    ats: ashby
+    slug: langchain
+  - name: Vanta
+    ats: ashby
+    slug: vanta
+  - name: Replit
+    ats: ashby
+    slug: replit
+  - name: Synthesia
+    ats: ashby
+    slug: synthesia
+  - name: Quora
+    ats: ashby
+    slug: quora
+  - name: Pinecone
+    ats: ashby
+    slug: pinecone
+

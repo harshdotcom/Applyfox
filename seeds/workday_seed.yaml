@@ -1,0 +1,62 @@
+companies:
+  - name: Adobe
+    ats: workday
+    tenant: adobe
+    wd: wd5
+    site: external_experienced
+    url: https://adobe.wd5.myworkdayjobs.com/en-US/external_experienced
+  - name: Salesforce
+    ats: workday
+    tenant: salesforce
+    wd: wd12
+    site: External_Career_Site
+    url: https://salesforce.wd12.myworkdayjobs.com/en-US/External_Career_Site
+  - name: NVIDIA
+    ats: workday
+    tenant: nvidia
+    wd: wd5
+    site: NVIDIAExternalCareerSite
+    url: https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite
+  - name: Capital One
+    ats: workday
+    tenant: capitalone
+    wd: wd12
+    site: Capital_One
+    url: https://capitalone.wd12.myworkdayjobs.com/en-US/Capital_One
+  - name: Verizon
+    ats: workday
+    tenant: verizon
+    wd: wd12
+    site: verizon-careers
+    url: https://verizon.wd12.myworkdayjobs.com/en-US/verizon-careers
+  - name: Blue Origin
+    ats: workday
+    tenant: blueorigin
+    wd: wd5
+    site: blueorigin
+    url: https://blueorigin.wd5.myworkdayjobs.com/en-US/blueorigin
+  - name: Ciena
+    ats: workday
+    tenant: ciena
+    wd: wd5
+    site: Careers
+    url: https://ciena.wd5.myworkdayjobs.com/en-US/Careers
+  - name: Motorola Solutions
+    ats: workday
+    tenant: motorolasolutions
+    wd: wd5
+    site: Careers
+    url: https://motorolasolutions.wd5.myworkdayjobs.com/en-US/Careers
+  - name: Priceline
+    ats: workday
+    tenant: priceline
+    wd: wd1
+    site: Priceline
+    url: https://priceline.wd1.myworkdayjobs.com/en-US/Priceline
+  - name: Leidos
+    ats: workday
+    tenant: leidos
+    wd: wd5
+    site: External
+    url: https://leidos.wd5.myworkdayjobs.com/en-US/External
+

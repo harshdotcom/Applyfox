@@ -1,0 +1,35 @@
+companies:
+  - name: Spotify
+    ats: lever
+    slug: spotify
+  - name: Palantir Technologies
+    ats: lever
+    slug: palantir
+  - name: Coupa Software, Inc.
+    ats: lever
+    slug: coupa
+  - name: Kinsta
+    ats: lever
+    slug: kinsta
+  - name: Lever
+    ats: lever
+    slug: lever
+  - name: Shield AI
+    ats: lever
+    slug: shieldai
+  - name: Doola
+    ats: lever
+    slug: doola
+  - name: Mobileye
+    ats: lever
+    slug: mobileye
+  - name: Cirrus Logic
+    ats: lever
+    slug: cirrus
+  - name: ModSquad
+    ats: lever
+    slug: modsquad
+  - name: Included Health
+    ats: lever
+    slug: includedhealth
+

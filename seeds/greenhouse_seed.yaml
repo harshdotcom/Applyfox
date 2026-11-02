@@ -1,0 +1,50 @@
+companies:
+  - name: Airbnb
+    ats: greenhouse
+    slug: airbnb
+  - name: Stripe
+    ats: greenhouse
+    slug: stripe
+  - name: Figma
+    ats: greenhouse
+    slug: figma
+  - name: Databricks
+    ats: greenhouse
+    slug: databricks
+  - name: Pinterest
+    ats: greenhouse
+    slug: pinterest
+  - name: Lyft
+    ats: greenhouse
+    slug: lyft
+  - name: Instacart
+    ats: greenhouse
+    slug: instacart
+  - name: Coinbase
+    ats: greenhouse
+    slug: coinbase
+  - name: Discord
+    ats: greenhouse
+    slug: discord
+  - name: Reddit
+    ats: greenhouse
+    slug: reddit
+  - name: Cloudflare
+    ats: greenhouse
+    slug: cloudflare
+  - name: Twilio
+    ats: greenhouse
+    slug: twilio
+  - name: Anthropic
+    ats: greenhouse
+    slug: anthropic
+  - name: Gusto
+    ats: greenhouse
+    slug: gusto
+  - name: Vercel
+    ats: greenhouse
+    slug: vercel
+  - name: Asana
+    ats: greenhouse
+    slug: asana
+

@@ -1,0 +1,875 @@
+{
+  "count": 174,
+  "companies": [
+    {
+      "slug": "1password",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/1password"
+    },
+    {
+      "slug": "adept",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/adept"
+    },
+    {
+      "slug": "aescape",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/aescape"
+    },
+    {
+      "slug": "agave",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/agave"
+    },
+    {
+      "slug": "agzen",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/agzen"
+    },
+    {
+      "slug": "aiprise",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/aiprise"
+    },
+    {
+      "slug": "allen-control-systems",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/allen-control-systems"
+    },
+    {
+      "slug": "amplify",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/amplify"
+    },
+    {
+      "slug": "antares",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/antares"
+    },
+    {
+      "slug": "anthelioncap",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/anthelioncap"
+    },
+    {
+      "slug": "anysphere",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/anysphere"
+    },
+    {
+      "slug": "applied",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/applied"
+    },
+    {
+      "slug": "armadin",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/armadin"
+    },
+    {
+      "slug": "ashby",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/ashby"
+    },
+    {
+      "slug": "aurelian",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/aurelian"
+    },
+    {
+      "slug": "backbone",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/backbone"
+    },
+    {
+      "slug": "bagsfm",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/bagsfm"
+    },
+    {
+      "slug": "barnes",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/barnes"
+    },
+    {
+      "slug": "base-power",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/base-power"
+    },
+    {
+      "slug": "baseten",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/baseten"
+    },
+    {
+      "slug": "bedrock-robotics",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/bedrock-robotics"
+    },
+    {
+      "slug": "bild-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/bild-ai"
+    },
+    {
+      "slug": "brainco",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/brainco"
+    },
+    {
+      "slug": "bridger",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/bridger"
+    },
+    {
+      "slug": "cartesia",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cartesia"
+    },
+    {
+      "slug": "cerebras",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cerebras"
+    },
+    {
+      "slug": "chalk",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/chalk"
+    },
+    {
+      "slug": "character-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/character-ai"
+    },
+    {
+      "slug": "chroma",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/chroma"
+    },
+    {
+      "slug": "claylabs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/claylabs"
+    },
+    {
+      "slug": "cognition",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cognition"
+    },
+    {
+      "slug": "cohere",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cohere"
+    },
+    {
+      "slug": "color-health",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/color-health"
+    },
+    {
+      "slug": "composio",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/composio"
+    },
+    {
+      "slug": "conductorai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/conductorai"
+    },
+    {
+      "slug": "cowboyspace",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cowboyspace"
+    },
+    {
+      "slug": "cursor",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cursor"
+    },
+    {
+      "slug": "cylake-inc",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cylake-inc"
+    },
+    {
+      "slug": "cyvl",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/cyvl"
+    },
+    {
+      "slug": "decagon",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/decagon"
+    },
+    {
+      "slug": "deel",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/deel"
+    },
+    {
+      "slug": "descript",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/descript"
+    },
+    {
+      "slug": "drivewealth",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/drivewealth"
+    },
+    {
+      "slug": "dust",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/dust"
+    },
+    {
+      "slug": "elevenlabs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/elevenlabs"
+    },
+    {
+      "slug": "ellipsislabs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/ellipsislabs"
+    },
+    {
+      "slug": "exa",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/exa"
+    },
+    {
+      "slug": "f7d8749a-72d6-407c-bf98-292ea630c73a",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/f7d8749a-72d6-407c-bf98-292ea630c73a"
+    },
+    {
+      "slug": "fab2",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/fab2"
+    },
+    {
+      "slug": "fal",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/fal"
+    },
+    {
+      "slug": "faros-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/faros-ai"
+    },
+    {
+      "slug": "fellowai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/fellowai"
+    },
+    {
+      "slug": "flint",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/flint"
+    },
+    {
+      "slug": "gearset",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/gearset"
+    },
+    {
+      "slug": "gecko-robotics",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/gecko-robotics"
+    },
+    {
+      "slug": "genesis-molecular-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/genesis-molecular-ai"
+    },
+    {
+      "slug": "geniusai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/geniusai"
+    },
+    {
+      "slug": "glean",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/glean"
+    },
+    {
+      "slug": "goaly",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/goaly"
+    },
+    {
+      "slug": "gritt",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/gritt"
+    },
+    {
+      "slug": "groq",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/groq"
+    },
+    {
+      "slug": "grow-therapy",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/grow-therapy"
+    },
+    {
+      "slug": "hadrian-automation",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/hadrian-automation"
+    },
+    {
+      "slug": "harvey",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/harvey"
+    },
+    {
+      "slug": "hebbia",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/hebbia"
+    },
+    {
+      "slug": "heliux",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/heliux"
+    },
+    {
+      "slug": "heron-power",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/heron-power"
+    },
+    {
+      "slug": "hipp",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/hipp"
+    },
+    {
+      "slug": "hiya",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/hiya"
+    },
+    {
+      "slug": "hyphenate",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/hyphenate"
+    },
+    {
+      "slug": "ibotta",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/ibotta"
+    },
+    {
+      "slug": "icon",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/icon"
+    },
+    {
+      "slug": "incident",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/incident"
+    },
+    {
+      "slug": "inflection",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/inflection"
+    },
+    {
+      "slug": "integrate",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/integrate"
+    },
+    {
+      "slug": "jampack-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/jampack-ai"
+    },
+    {
+      "slug": "juicebox",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/juicebox"
+    },
+    {
+      "slug": "julius",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/julius"
+    },
+    {
+      "slug": "koahlabs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/koahlabs"
+    },
+    {
+      "slug": "kognitos",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/kognitos"
+    },
+    {
+      "slug": "langchain",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/langchain"
+    },
+    {
+      "slug": "lightfield",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/lightfield"
+    },
+    {
+      "slug": "lightning-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/lightning-ai"
+    },
+    {
+      "slug": "linear",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/linear"
+    },
+    {
+      "slug": "llamaindex",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/llamaindex"
+    },
+    {
+      "slug": "lovo",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/lovo"
+    },
+    {
+      "slug": "magic",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/magic"
+    },
+    {
+      "slug": "megazone",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/megazone"
+    },
+    {
+      "slug": "meow",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/meow"
+    },
+    {
+      "slug": "mercor",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/mercor"
+    },
+    {
+      "slug": "metalenz",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/metalenz"
+    },
+    {
+      "slug": "metamorphic",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/metamorphic"
+    },
+    {
+      "slug": "midjourney",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/midjourney"
+    },
+    {
+      "slug": "mistral",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/mistral"
+    },
+    {
+      "slug": "modal",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/modal"
+    },
+    {
+      "slug": "modal-labs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/modal-labs"
+    },
+    {
+      "slug": "morse-micro",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/morse-micro"
+    },
+    {
+      "slug": "n1",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/n1"
+    },
+    {
+      "slug": "netic",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/netic"
+    },
+    {
+      "slug": "niantic-spatial",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/niantic-spatial"
+    },
+    {
+      "slug": "nooks",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/nooks"
+    },
+    {
+      "slug": "northwoodspace",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/northwoodspace"
+    },
+    {
+      "slug": "notion",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/notion"
+    },
+    {
+      "slug": "old-mission-capital",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/old-mission-capital"
+    },
+    {
+      "slug": "olix",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/olix"
+    },
+    {
+      "slug": "oneapp",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/oneapp"
+    },
+    {
+      "slug": "openai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/openai"
+    },
+    {
+      "slug": "pangramlabs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/pangramlabs"
+    },
+    {
+      "slug": "patreon",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/patreon"
+    },
+    {
+      "slug": "perplexity",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/perplexity"
+    },
+    {
+      "slug": "persona",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/persona"
+    },
+    {
+      "slug": "phoebe-work",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/phoebe-work"
+    },
+    {
+      "slug": "pika",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/pika"
+    },
+    {
+      "slug": "pinecone",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/pinecone"
+    },
+    {
+      "slug": "poolside",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/poolside"
+    },
+    {
+      "slug": "preference-model",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/preference-model"
+    },
+    {
+      "slug": "primer",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/primer"
+    },
+    {
+      "slug": "pylon-labs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/pylon-labs"
+    },
+    {
+      "slug": "qdrant",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/qdrant"
+    },
+    {
+      "slug": "qumulo",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/qumulo"
+    },
+    {
+      "slug": "quora",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/quora"
+    },
+    {
+      "slug": "ramp",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/ramp"
+    },
+    {
+      "slug": "range",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/range"
+    },
+    {
+      "slug": "realmalliance",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/realmalliance"
+    },
+    {
+      "slug": "red-gate",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/red-gate"
+    },
+    {
+      "slug": "reflect-orbital",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/reflect-orbital"
+    },
+    {
+      "slug": "relling",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/relling"
+    },
+    {
+      "slug": "replicate",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/replicate"
+    },
+    {
+      "slug": "replit",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/replit"
+    },
+    {
+      "slug": "resurgent-industries",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/resurgent-industries"
+    },
+    {
+      "slug": "retool",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/retool"
+    },
+    {
+      "slug": "revel",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/revel"
+    },
+    {
+      "slug": "rhoda-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/rhoda-ai"
+    },
+    {
+      "slug": "rilla",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/rilla"
+    },
+    {
+      "slug": "rivianvw",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/rivianvw"
+    },
+    {
+      "slug": "rollout",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/rollout"
+    },
+    {
+      "slug": "runway",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/runway"
+    },
+    {
+      "slug": "saronic",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/saronic"
+    },
+    {
+      "slug": "scout-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/scout-ai"
+    },
+    {
+      "slug": "semgrep",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/semgrep"
+    },
+    {
+      "slug": "sentry",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/sentry"
+    },
+    {
+      "slug": "serval",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/serval"
+    },
+    {
+      "slug": "sierra",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/sierra"
+    },
+    {
+      "slug": "skyband",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/skyband"
+    },
+    {
+      "slug": "skydio",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/skydio"
+    },
+    {
+      "slug": "snowflake",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/snowflake"
+    },
+    {
+      "slug": "spruceid",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/spruceid"
+    },
+    {
+      "slug": "steel",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/steel"
+    },
+    {
+      "slug": "stradahq",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/stradahq"
+    },
+    {
+      "slug": "subtotal",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/subtotal"
+    },
+    {
+      "slug": "suno",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/suno"
+    },
+    {
+      "slug": "swarmaero",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/swarmaero"
+    },
+    {
+      "slug": "synthesia",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/synthesia"
+    },
+    {
+      "slug": "talos-trading",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/talos-trading"
+    },
+    {
+      "slug": "tavus",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/tavus"
+    },
+    {
+      "slug": "telus-digital",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/telus-digital"
+    },
+    {
+      "slug": "tensorwave",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/tensorwave"
+    },
+    {
+      "slug": "terranova",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/terranova"
+    },
+    {
+      "slug": "tessera-labs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/tessera-labs"
+    },
+    {
+      "slug": "the-exploration-company",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/the-exploration-company"
+    },
+    {
+      "slug": "together-ai",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/together-ai"
+    },
+    {
+      "slug": "tome",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/tome"
+    },
+    {
+      "slug": "tracelabs",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/tracelabs"
+    },
+    {
+      "slug": "uncountable",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/uncountable"
+    },
+    {
+      "slug": "valon",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/valon"
+    },
+    {
+      "slug": "vanta",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/vanta"
+    },
+    {
+      "slug": "viggle",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/viggle"
+    },
+    {
+      "slug": "vital-lyfe",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/vital-lyfe"
+    },
+    {
+      "slug": "walrusfi",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/walrusfi"
+    },
+    {
+      "slug": "weaviate",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/weaviate"
+    },
+    {
+      "slug": "weights-biases",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/weights-biases"
+    },
+    {
+      "slug": "whatnot",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/whatnot"
+    },
+    {
+      "slug": "withpace",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/withpace"
+    },
+    {
+      "slug": "xterra",
+      "name": null,
+      "board_url": "https://jobs.ashbyhq.com/xterra"
+    }
+  ]
+}

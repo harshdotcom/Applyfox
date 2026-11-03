@@ -1451,11 +1451,11 @@ HTML_PAGE = """<!DOCTYPE html>
                 <div class="creator-avatar">HJ</div>
                 <div>
                   <div class="creator-name">Harsh Jha</div>
-                  <div class="creator-title">IIT Indore Alumnus &bull; SDE</div>
+                  <div class="creator-title">IIT Indore Alumnus &bull; Senior AI Engineer</div>
                 </div>
               </div>
               <p class="creator-bio">
-                Software Development Engineer building scalable cloud-native architectures, agentic AI systems, and developer tools.
+                Senior AI Engineer building scalable cloud-native architectures, agentic AI systems, and developer tools.
               </p>
               
               <div class="creator-socials">

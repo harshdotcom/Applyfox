@@ -99,6 +99,12 @@ HTML_PAGE = """<!DOCTYPE html>
 
   * { box-sizing: border-box; }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
   body {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -113,29 +119,42 @@ HTML_PAGE = """<!DOCTYPE html>
   }
 
   /* Navigation Bar */
-  header {
-    background: rgba(250, 248, 245, 0.94);
+  header.app-header {
+    background: rgba(250, 248, 245, 0.95);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border-subtle);
-    padding: 12px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 10px 24px;
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
+  }
+  .header-inner {
+    max-width: 1540px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  .header-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
   .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
     cursor: pointer;
+    flex-shrink: 0;
   }
   .brand-badge {
     background: var(--accent-amber-light);
@@ -148,27 +167,35 @@ HTML_PAGE = """<!DOCTYPE html>
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
+  .header-nav-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   .nav-tabs {
     display: flex;
-    gap: 5px;
+    gap: 4px;
     background: #F0EDE8;
     padding: 4px;
     border-radius: 12px;
     border: 1px solid var(--border-subtle);
+    align-items: center;
   }
   .tab-btn {
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    padding: 7px 15px;
+    padding: 7px 14px;
     border-radius: 8px;
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
     gap: 7px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .tab-btn:hover {
     color: var(--text-primary);
@@ -178,6 +205,19 @@ HTML_PAGE = """<!DOCTYPE html>
     color: var(--text-primary);
     font-weight: 600;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+  .desktop-github-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+  }
+  .mobile-github-btn {
+    display: none;
+    text-decoration: none;
   }
 
   /* Main Container */
@@ -483,8 +523,23 @@ HTML_PAGE = """<!DOCTYPE html>
     margin: 36px 0 44px;
     box-shadow: var(--card-shadow);
   }
-  @media (max-width: 900px) {
-    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Newsreader', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-top: 5px;
   }
 
   /* Refined Warm CTA Banner */
@@ -542,6 +597,12 @@ HTML_PAGE = """<!DOCTYPE html>
     max-width: 580px;
     margin: 0 auto 28px;
     line-height: 1.6;
+  }
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
   }
 
   /* Comprehensive App Footer */
@@ -1193,39 +1254,386 @@ HTML_PAGE = """<!DOCTYPE html>
     display: none;
     z-index: 1000;
   }
+
+  /* ======================================================== */
+  /* MOBILE & TABLET RESPONSIVE STYLESYSTEM                   */
+  /* ======================================================== */
+  @media (max-width: 960px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    header.app-header {
+      padding: 8px 12px;
+    }
+    .header-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .header-brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .desktop-github-btn {
+      display: none !important;
+    }
+    .mobile-github-btn {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+    }
+    .header-nav-container {
+      width: 100%;
+      gap: 0;
+    }
+    .nav-tabs {
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 3px;
+      border-radius: 10px;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-btn {
+      padding: 6px 11px;
+      font-size: 0.78rem;
+      gap: 5px;
+    }
+    .stats-strip {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 20px 18px;
+    }
+    .workflow-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 12px 10px 36px;
+    }
+    .hero-section {
+      padding: 24px 8px 18px;
+    }
+    .hero-pill {
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .hero-title {
+      font-size: 2.15rem;
+      line-height: 1.18;
+      margin-bottom: 12px;
+    }
+    .hero-subtitle {
+      font-size: 0.94rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    .hero-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .section-heading {
+      margin: 36px 0 20px;
+    }
+    .section-title {
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+    .section-desc {
+      font-size: 0.88rem;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .feature-card {
+      padding: 20px 18px;
+    }
+    .step-card {
+      padding: 20px 18px;
+    }
+    .cta-banner {
+      padding: 32px 18px;
+      border-radius: 14px;
+      margin: 36px 0 28px;
+    }
+    .cta-title {
+      font-size: 1.85rem;
+      line-height: 1.22;
+    }
+    .cta-sub {
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+    .cta-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+    .cta-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .card {
+      padding: 18px 14px;
+      border-radius: 12px;
+    }
+    .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .banner-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+    .banner-actions .btn {
+      width: 100%;
+      flex: none;
+    }
+    .results-tabs {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .results-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .subtab-btn {
+      flex-shrink: 0;
+      padding: 7px 11px;
+      font-size: 0.78rem;
+    }
+    .preview-frame-container {
+      height: 520px;
+    }
+    #subtab-pdf {
+      height: 520px !important;
+    }
+    .tex-code {
+      height: 480px !important;
+      font-size: 0.76rem;
+      padding: 10px;
+    }
+    #baseTexContent {
+      height: 520px !important;
+      font-size: 0.76rem;
+      padding: 10px;
+    }
+    .workspace-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .workspace-meta {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    #actionDownloadButtons {
+      width: 100%;
+      gap: 6px;
+    }
+    #actionDownloadButtons .btn {
+      flex: 1 1 calc(50% - 6px);
+      justify-content: center;
+      padding: 6px 8px;
+      font-size: 0.75rem;
+    }
+    .sheet-pills {
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 6px;
+      flex-wrap: nowrap;
+    }
+    .sheet-pills::-webkit-scrollbar {
+      display: none;
+    }
+    .sheet-pill {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+    }
+    .controls-bar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+    .search-wrapper {
+      max-width: 100% !important;
+      width: 100%;
+    }
+    .pagination-bar {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 10px;
+    }
+    .page-info {
+      text-align: center;
+      font-size: 0.78rem;
+    }
+    .page-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3px;
+    }
+    .page-btn {
+      padding: 5px 8px;
+      font-size: 0.76rem;
+    }
+    #trackerSearch {
+      width: 100% !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .terminal-card {
+      padding: 12px 14px;
+      border-radius: 10px;
+    }
+    .terminal-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .terminal-body {
+      font-size: 0.72rem;
+      padding: 10px;
+      line-height: 1.45;
+    }
+    .app-footer {
+      padding: 26px 16px 20px;
+      border-radius: 14px;
+      margin-top: 28px;
+    }
+    .creator-card {
+      padding: 16px 14px;
+    }
+    .creator-socials {
+      gap: 6px;
+    }
+    .social-pill {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 16px;
+    }
+    .footer-bottom-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.78rem;
+      line-height: 1.2;
+    }
+    .hero-subtitle {
+      font-size: 0.88rem;
+    }
+    .stats-strip {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px 12px;
+      margin: 24px 0 32px;
+    }
+    .stat-num {
+      font-size: 1.65rem;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+    }
+    .toast {
+      bottom: 14px;
+      right: 14px;
+      left: 14px;
+      font-size: 0.8rem;
+      padding: 10px 14px;
+      text-align: center;
+    }
+  }
 </style>
 </head>
 <body>
 
   <!-- Top Header Navigation -->
-  <header>
-    <div class="brand" onclick="switchView('home')" title="Applyfox Home">
-      <span style="font-size: 1.3rem;">🦊</span>
-      <span>Applyfox</span>
-      <span class="brand-badge">STUDIO &bull; SHEETS</span>
-    </div>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-brand-row">
+        <div class="brand" onclick="switchView('home')" title="Applyfox Home">
+          <span style="font-size: 1.3rem;">🦊</span>
+          <span>Applyfox</span>
+          <span class="brand-badge">STUDIO &bull; SHEETS</span>
+        </div>
+        <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary mobile-github-btn" title="Contribute on GitHub">
+          <i class="fa-brands fa-github"></i> <span>GitHub</span>
+        </a>
+      </div>
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <nav class="nav-tabs">
-        <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
-          <i class="fa fa-sparkles"></i> Overview
-        </button>
-        <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
-          <i class="fa fa-wand-magic-sparkles"></i> Studio &amp; Tailor
-        </button>
-        <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
-          <i class="fa fa-table-list"></i> Portal Sheets (7,008)
-        </button>
-        <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
-          <i class="fa fa-clipboard-check"></i> Tracker (<span id="appCount">0</span>)
-        </button>
-        <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
-          <i class="fa fa-file-code"></i> Base main.tex
-        </button>
-      </nav>
-      <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 0.82rem;" title="Contribute on GitHub">
-        <i class="fa-brands fa-github"></i> <span>GitHub</span>
-      </a>
+      <div class="header-nav-container">
+        <nav class="nav-tabs" aria-label="Main Navigation">
+          <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
+            <i class="fa fa-sparkles"></i> <span>Overview</span>
+          </button>
+          <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
+            <i class="fa fa-wand-magic-sparkles"></i> <span>Studio &amp; Tailor</span>
+          </button>
+          <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
+            <i class="fa fa-table-list"></i> <span>Portal Sheets (7,008)</span>
+          </button>
+          <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
+            <i class="fa fa-clipboard-check"></i> <span>Tracker (<span id="appCount">0</span>)</span>
+          </button>
+          <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
+            <i class="fa fa-file-code"></i> <span>Base main.tex</span>
+          </button>
+        </nav>
+        <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary desktop-github-btn" title="Contribute on GitHub">
+          <i class="fa-brands fa-github"></i> <span>GitHub</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -1384,7 +1792,7 @@ HTML_PAGE = """<!DOCTYPE html>
         </div>
         <h2 class="cta-title">Ready to tailor your CV <em>for your next role?</em></h2>
         <p class="cta-sub">Launch the interactive CV Studio or explore 7,008 verified career boards across top tech startups, scaleups, and unicorns.</p>
-        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <div class="cta-actions">
           <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
             <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
           </button>

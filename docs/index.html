@@ -35,6 +35,12 @@
 
   * { box-sizing: border-box; }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
   body {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -49,29 +55,42 @@
   }
 
   /* Navigation Bar */
-  header {
-    background: rgba(250, 248, 245, 0.94);
+  header.app-header {
+    background: rgba(250, 248, 245, 0.95);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border-subtle);
-    padding: 12px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 10px 24px;
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
+  }
+  .header-inner {
+    max-width: 1540px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  .header-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
   .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
     cursor: pointer;
+    flex-shrink: 0;
   }
   .brand-badge {
     background: var(--accent-amber-light);
@@ -84,27 +103,35 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
+  .header-nav-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   .nav-tabs {
     display: flex;
-    gap: 5px;
+    gap: 4px;
     background: #F0EDE8;
     padding: 4px;
     border-radius: 12px;
     border: 1px solid var(--border-subtle);
+    align-items: center;
   }
   .tab-btn {
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    padding: 7px 15px;
+    padding: 7px 14px;
     border-radius: 8px;
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
     gap: 7px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .tab-btn:hover {
     color: var(--text-primary);
@@ -114,6 +141,19 @@
     color: var(--text-primary);
     font-weight: 600;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+  .desktop-github-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+  }
+  .mobile-github-btn {
+    display: none;
+    text-decoration: none;
   }
 
   /* Main Container */
@@ -419,8 +459,23 @@
     margin: 36px 0 44px;
     box-shadow: var(--card-shadow);
   }
-  @media (max-width: 900px) {
-    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Newsreader', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-top: 5px;
   }
 
   /* Refined Warm CTA Banner */
@@ -478,6 +533,12 @@
     max-width: 580px;
     margin: 0 auto 28px;
     line-height: 1.6;
+  }
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
   }
 
   /* Comprehensive App Footer */
@@ -1129,39 +1190,386 @@
     display: none;
     z-index: 1000;
   }
+
+  /* ======================================================== */
+  /* MOBILE & TABLET RESPONSIVE STYLESYSTEM                   */
+  /* ======================================================== */
+  @media (max-width: 960px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    header.app-header {
+      padding: 8px 12px;
+    }
+    .header-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .header-brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .desktop-github-btn {
+      display: none !important;
+    }
+    .mobile-github-btn {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+    }
+    .header-nav-container {
+      width: 100%;
+      gap: 0;
+    }
+    .nav-tabs {
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 3px;
+      border-radius: 10px;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-btn {
+      padding: 6px 11px;
+      font-size: 0.78rem;
+      gap: 5px;
+    }
+    .stats-strip {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 20px 18px;
+    }
+    .workflow-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 12px 10px 36px;
+    }
+    .hero-section {
+      padding: 24px 8px 18px;
+    }
+    .hero-pill {
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .hero-title {
+      font-size: 2.15rem;
+      line-height: 1.18;
+      margin-bottom: 12px;
+    }
+    .hero-subtitle {
+      font-size: 0.94rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    .hero-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .section-heading {
+      margin: 36px 0 20px;
+    }
+    .section-title {
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+    .section-desc {
+      font-size: 0.88rem;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .feature-card {
+      padding: 20px 18px;
+    }
+    .step-card {
+      padding: 20px 18px;
+    }
+    .cta-banner {
+      padding: 32px 18px;
+      border-radius: 14px;
+      margin: 36px 0 28px;
+    }
+    .cta-title {
+      font-size: 1.85rem;
+      line-height: 1.22;
+    }
+    .cta-sub {
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+    .cta-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+    .cta-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .card {
+      padding: 18px 14px;
+      border-radius: 12px;
+    }
+    .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .banner-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+    .banner-actions .btn {
+      width: 100%;
+      flex: none;
+    }
+    .results-tabs {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .results-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .subtab-btn {
+      flex-shrink: 0;
+      padding: 7px 11px;
+      font-size: 0.78rem;
+    }
+    .preview-frame-container {
+      height: 520px;
+    }
+    #subtab-pdf {
+      height: 520px !important;
+    }
+    .tex-code {
+      height: 480px !important;
+      font-size: 0.76rem;
+      padding: 10px;
+    }
+    #baseTexContent {
+      height: 520px !important;
+      font-size: 0.76rem;
+      padding: 10px;
+    }
+    .workspace-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .workspace-meta {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    #actionDownloadButtons {
+      width: 100%;
+      gap: 6px;
+    }
+    #actionDownloadButtons .btn {
+      flex: 1 1 calc(50% - 6px);
+      justify-content: center;
+      padding: 6px 8px;
+      font-size: 0.75rem;
+    }
+    .sheet-pills {
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 6px;
+      flex-wrap: nowrap;
+    }
+    .sheet-pills::-webkit-scrollbar {
+      display: none;
+    }
+    .sheet-pill {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+    }
+    .controls-bar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+    .search-wrapper {
+      max-width: 100% !important;
+      width: 100%;
+    }
+    .pagination-bar {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 10px;
+    }
+    .page-info {
+      text-align: center;
+      font-size: 0.78rem;
+    }
+    .page-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3px;
+    }
+    .page-btn {
+      padding: 5px 8px;
+      font-size: 0.76rem;
+    }
+    #trackerSearch {
+      width: 100% !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .terminal-card {
+      padding: 12px 14px;
+      border-radius: 10px;
+    }
+    .terminal-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .terminal-body {
+      font-size: 0.72rem;
+      padding: 10px;
+      line-height: 1.45;
+    }
+    .app-footer {
+      padding: 26px 16px 20px;
+      border-radius: 14px;
+      margin-top: 28px;
+    }
+    .creator-card {
+      padding: 16px 14px;
+    }
+    .creator-socials {
+      gap: 6px;
+    }
+    .social-pill {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 16px;
+    }
+    .footer-bottom-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.78rem;
+      line-height: 1.2;
+    }
+    .hero-subtitle {
+      font-size: 0.88rem;
+    }
+    .stats-strip {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px 12px;
+      margin: 24px 0 32px;
+    }
+    .stat-num {
+      font-size: 1.65rem;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+    }
+    .toast {
+      bottom: 14px;
+      right: 14px;
+      left: 14px;
+      font-size: 0.8rem;
+      padding: 10px 14px;
+      text-align: center;
+    }
+  }
 </style>
 </head>
 <body>
 
   <!-- Top Header Navigation -->
-  <header>
-    <div class="brand" onclick="switchView('home')" title="Applyfox Home">
-      <span style="font-size: 1.3rem;">🦊</span>
-      <span>Applyfox</span>
-      <span class="brand-badge">STUDIO &bull; SHEETS</span>
-    </div>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-brand-row">
+        <div class="brand" onclick="switchView('home')" title="Applyfox Home">
+          <span style="font-size: 1.3rem;">🦊</span>
+          <span>Applyfox</span>
+          <span class="brand-badge">STUDIO &bull; SHEETS</span>
+        </div>
+        <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary mobile-github-btn" title="Contribute on GitHub">
+          <i class="fa-brands fa-github"></i> <span>GitHub</span>
+        </a>
+      </div>
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <nav class="nav-tabs">
-        <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
-          <i class="fa fa-sparkles"></i> Overview
-        </button>
-        <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
-          <i class="fa fa-wand-magic-sparkles"></i> Studio &amp; Tailor
-        </button>
-        <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
-          <i class="fa fa-table-list"></i> Portal Sheets (7,008)
-        </button>
-        <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
-          <i class="fa fa-clipboard-check"></i> Tracker (<span id="appCount">0</span>)
-        </button>
-        <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
-          <i class="fa fa-file-code"></i> Base main.tex
-        </button>
-      </nav>
-      <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 0.82rem;" title="Contribute on GitHub">
-        <i class="fa-brands fa-github"></i> <span>GitHub</span>
-      </a>
+      <div class="header-nav-container">
+        <nav class="nav-tabs" aria-label="Main Navigation">
+          <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
+            <i class="fa fa-sparkles"></i> <span>Overview</span>
+          </button>
+          <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
+            <i class="fa fa-wand-magic-sparkles"></i> <span>Studio &amp; Tailor</span>
+          </button>
+          <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
+            <i class="fa fa-table-list"></i> <span>Portal Sheets (7,008)</span>
+          </button>
+          <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
+            <i class="fa fa-clipboard-check"></i> <span>Tracker (<span id="appCount">0</span>)</span>
+          </button>
+          <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
+            <i class="fa fa-file-code"></i> <span>Base main.tex</span>
+          </button>
+        </nav>
+        <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary desktop-github-btn" title="Contribute on GitHub">
+          <i class="fa-brands fa-github"></i> <span>GitHub</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -1320,7 +1728,7 @@
         </div>
         <h2 class="cta-title">Ready to tailor your CV <em>for your next role?</em></h2>
         <p class="cta-sub">Launch the interactive CV Studio or explore 7,008 verified career boards across top tech startups, scaleups, and unicorns.</p>
-        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <div class="cta-actions">
           <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
             <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
           </button>
@@ -1712,7 +2120,7 @@
 <script>
 const IS_GITHUB_PAGES = (window.location.hostname.endsWith('.github.io') || window.location.protocol === 'file:');
 const EMBEDDED_BASE_TEX = "%-------------------------\n% Resume in Latex\n%------------------------\n\n\\documentclass[letterpaper,11pt]{article}\n\n\\usepackage{latexsym}\n\\usepackage[empty]{fullpage}\n\\usepackage{titlesec}\n\\usepackage{marvosym}\n\\usepackage[usenames,dvipsnames]{color}\n\\usepackage{enumitem}\n\\usepackage[hidelinks]{hyperref}\n\\usepackage[english]{babel}\n\\usepackage{tabularx}\n\\usepackage{fontawesome5}\n\\usepackage{graphicx}\n\\ifdefined\\pdfgentounicode\n  \\input{glyphtounicode}\n  \\pdfgentounicode=1\n\\fi\n\n\\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}\n\n%----------PAGE MARGINS----------\n\\addtolength{\\oddsidemargin}{-0.6in}\n\\addtolength{\\textwidth}{1.19in}\n\\addtolength{\\topmargin}{-.7in}\n\\addtolength{\\textheight}{1.4in}\n\n\\raggedbottom\n\\raggedright\n\\setlength{\\tabcolsep}{0in}\n\n%----------SECTION FORMATTING----------\n\\titleformat{\\section}{\n  \\vspace{-4pt}\\scshape\\raggedright\\large\\bfseries\n}{}{0em}{}[\\titlerule \\vspace{-5pt}]\n\n%----------BULLET FORMATTING----------\n\\renewcommand\\labelitemi{$\\vcenter{\\hbox{\\small$\\circ$}}$}\n\n\\newcommand{\\resumeItem}[1]{\n  \\item[\\textbullet]\\small{\n    {#1 \\vspace{-2pt}}\n  }\n}\n\n%----------SUBHEADING----------\n\\newcommand{\\resumeSubheading}[4]{\n  \\vspace{-4pt}\\item\n    \\begin{tabular*}{1.0\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}\n      \\textbf{#1} & \\textbf{#2} \\\\\n      \\textit{#3} & \\textit{#4} \\\\\n    \\end{tabular*}\\vspace{-6pt}\n}\n\n%----------PROJECT HEADING----------\n% tabularx allows long project titles/technology stacks\n% to wrap without overlapping the GitHub link.\n\\newcommand{\\resumeProjectHeading}[2]{\n  \\vspace{-2pt}\\item\n    \\begin{tabularx}{\\textwidth}{@{}X r@{}}\n      \\small #1 & \\small #2 \\\\\n    \\end{tabularx}\n    \\vspace{-4pt}\n}\n\n%----------LISTS----------\n\\newcommand{\\resumeSubHeadingListStart}{\n  \\begin{itemize}[leftmargin=0in, label={}]\n}\n\n\\newcommand{\\resumeSubHeadingListEnd}{\n  \\end{itemize}\n}\n\n\\newcommand{\\resumeItemListStart}{\n  \\begin{itemize}[leftmargin=0.15in]\n}\n\n\\newcommand{\\resumeItemListEnd}{\n  \\end{itemize}\\vspace{-6pt}\n}\n\n%-------------------------------------------\n%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%\n%-------------------------------------------\n\n\\begin{document}\n\n%----------HEADER----------\n\\begin{center}\n    {\\huge \\textbf{Harsh Jha}} \\\\ \\vspace{6pt}\n    {\\faPhone \\ +91 7060286069} ~\n    {\\faEnvelope \\ \\href{mailto:harshptct@gmail.com}{harshj92002@gmail.com}} ~\n    {\\faLinkedin \\ \\href{https://www.linkedin.com/in/harshjha-iiti/}{LinkedIn}} ~\n    {\\faGithub \\ \\href{https://github.com/jhaharsh03}{GitHub}} ~\n    {\\faCode \\ \\href{https://leetcode.com/u/harshdotcom/}{LeetCode}}\n\\end{center}\n\n\n%-----------PROFILE-----------\n\\section{\\color{airforceblue}PROFILE}\n\\resumeItemListStart\n\n\\resumeItem{AI-focused Software Development Engineer with \\textbf{2.5 years of experience} building backend systems, AI-powered applications, cloud-native services, microservices, and production-grade software.}\n\n\\resumeItem{Hands-on experience designing and integrating \\textbf{LLM and agentic AI workflows} using LangChain, LangGraph, RAG, tool calling, prompt engineering, structured outputs, AWS Bedrock, and AWS Textract.}\n\n\\resumeItem{Strong backend and systems foundation across \\textbf{Go, Python, TypeScript, REST APIs, PostgreSQL, MongoDB, Docker, Kubernetes, AWS, and Azure}, with experience taking features from design through production.}\n\n\\resumeItem{Open-source maintainer of \\textbf{VitaTrack.ai}, an AI-powered healthcare platform for medical document extraction, report summarization, health-record organization, and intelligent health-data workflows.}\n\n\\resumeItemListEnd\n\n\n%-----------EDUCATION-----------\n\\section{\\color{airforceblue}EDUCATION}\n\\resumeSubHeadingListStart\n\n\\resumeSubheading\n{Indian Institute of Technology Indore (IIT Indore)}{Indore, India}\n{Bachelor of Technology (B.Tech.) in Civil Engineering}{2020 -- 2024}\n\n\\resumeSubHeadingListEnd\n\n\n%-----------TECHNICAL SKILLS-----------\n\\section{\\color{airforceblue}TECHNICAL SKILLS}\n\\resumeItemListStart\n\n\\resumeItem{\\textbf{AI / GenAI:} LLMs, AI Agents, Agentic AI, LangChain, LangGraph, RAG, Prompt Engineering, Tool Calling, Function Calling, LLM Integration, AI Workflow Automation}\n\n\\resumeItem{\\textbf{AI Engineering:} Agent Orchestration, Retrieval Pipelines, Vector Search, Embeddings, Context Engineering, Structured Outputs, Model Integration, AI Evaluation}\n\n\\resumeItem{\\textbf{Programming:} Python, Go, TypeScript, JavaScript, C++}\n\n\\resumeItem{\\textbf{Backend:} FastAPI, Gin, Fiber, Node.js, Express.js, REST APIs, gRPC, Microservices, API Gateway}\n\n\\resumeItem{\\textbf{Data:} PostgreSQL, MongoDB, MySQL, SQL Server, Redis}\n\n\\resumeItem{\\textbf{Cloud \\& AI Services:} AWS, Azure, AWS Bedrock, AWS Textract, Oracle Cloud Infrastructure}\n\n\\resumeItem{\\textbf{DevOps \\& Infrastructure:} Docker, Kubernetes, GitHub Actions, CI/CD, Containerized Deployment}\n\n\\resumeItem{\\textbf{Architecture:} System Design, Distributed Systems, Event-Driven Architecture, Microservices, Clean Architecture, SOLID Principles}\n\n\\resumeItem{\\textbf{Security:} JWT, RBAC, API Validation, Secure API Design}\n\n\\resumeItemListEnd\n\n\n%-----------WORK EXPERIENCE-----------\n\\section{\\color{airforceblue}WORK EXPERIENCE}\n\\resumeSubHeadingListStart\n\n\\resumeSubheading\n{Software Development Engineer - 2}{May 2024 -- Present}\n{SimplyPhi}{Bangalore, India}\n\n\\resumeItemListStart\n\n\\resumeItem{Designed and built scalable backend services using \\textbf{Go, Python, TypeScript, REST APIs, PostgreSQL, and microservices} for production business workflows.}\n\n\\resumeItem{Developed production-ready APIs for \\textbf{authentication, reporting, financial workflows, property operations, dashboard analytics, and business automation}, supporting multiple application workflows.}\n\n\\resumeItem{Engineered AI-powered workflows using \\textbf{LangChain, LangGraph, AI agents, LLM APIs, RAG pipelines, prompt engineering, tool calling, and structured outputs}.}\n\n\\resumeItem{Integrated \\textbf{LLM and AI services} into business applications for document understanding, report generation, data extraction, summarization, and intelligent workflow automation.}\n\n\\resumeItem{Built and deployed cloud-native services using \\textbf{Docker, Kubernetes, AWS, Azure, GitHub Actions, and CI/CD}, supporting reliable application delivery across environments.}\n\n\\resumeItem{Implemented secure application workflows using \\textbf{JWT authentication, RBAC, API validation, structured logging, and centralized error handling}.}\n\n\\resumeItem{Improved backend scalability and maintainability through \\textbf{Clean Architecture, modular service design, optimized database queries, caching, and reusable service components}.}\n\n\\resumeItem{Owned features end-to-end across \\textbf{requirements analysis, system design, development, testing, deployment, monitoring, debugging, and production support}.}\n\n\\resumeItemListEnd\n\n\\resumeSubHeadingListEnd\n\n\n%-----------PROJECTS-----------\n\\section{\\color{airforceblue}PROJECTS}\n\\resumeSubHeadingListStart\n\n%----------VITATRACK----------\n\\resumeProjectHeading\n{\\textbf{VitaTrack.ai -- AI Medical Report Platform} $|$ Go, Python, AWS, PostgreSQL}\n{\\href{https://github.com/harshdotcom/vitalTrack.ai-}{GitHub}}\n\n\\resumeItemListStart\n\n\\resumeItem{Developing an open-source AI healthcare platform for managing \\textbf{medical reports, prescriptions, symptoms, medications, health records, and daily health notes}.}\n\n\\resumeItem{Built secure \\textbf{Go backend APIs} and structured healthcare data workflows using \\textbf{PostgreSQL} for medical record management.}\n\n\\resumeItem{Integrated \\textbf{AWS Textract} to extract text and structured data from medical reports, prescriptions, and healthcare documents.}\n\n\\resumeItem{Integrated \\textbf{AWS Bedrock and LLMs} with prompt engineering to summarize medical reports and transform unstructured health data into structured, actionable information.}\n\n\\resumeItem{Designed AI workflows for \\textbf{medical document analysis, health-history tracking, report processing, and patient record organization}.}\n\n\\resumeItem{Built supporting \\textbf{Angular} interfaces for document uploads, health logs, dashboards, and medical data management.}\n\n\\resumeItemListEnd\n\n\n%----------AI AGENT WORKFLOW----------\n\\resumeProjectHeading\n{\\textbf{AI Agent Workflow System} $|$ Python, LangChain, LangGraph, LLMs}\n{\\href{https://github.com/harshdotcom/naukriAuto.Ai}{GitHub}}\n\n\\resumeItemListStart\n\n\\resumeItem{Engineered multi-step \\textbf{AI agent workflows} using Python, LangChain, LangGraph, and LLM APIs for intelligent automation and structured decision-making.}\n\n\\resumeItem{Designed stateful agent workflows for \\textbf{document processing, summarization, API integration, tool execution, and structured response generation}.}\n\n\\resumeItem{Implemented \\textbf{tool calling, prompt templates, reusable chains, memory, state management, and conditional workflow execution} for agent-driven automation.}\n\n\\resumeItem{Integrated AI agents with \\textbf{REST APIs and external tools} to execute tasks, process information, and support real-world business workflows.}\n\n\\resumeItemListEnd\n\n\\resumeSubHeadingListEnd\n\n\n%-----------CERTIFICATIONS-----------\n\\section{\\color{airforceblue}CERTIFICATIONS}\n\\resumeItemListStart\n\n\\resumeItem{\n\\href{https://academy.langchain.com/certificates/svjvl9l9fa}\n{\\textbf{Introduction to LangChain - Python} \u2014 LangChain Academy}\n}\n\n\\resumeItem{\n\\href{https://verify.skilljar.com/c/gbzedjz5dcde}\n{\\textbf{Introduction to Agent Skills} \u2014 Anthropic}\n}\n\n\\resumeItem{\n\\href{https://www.linkedin.com/in/harshjha-iiti/overlay/certifications/1170933565/multiple-media-viewer/?profileId=ACoAADN4Q84BhQseKYmEwHkPK7yzh0e_9nVq1kY}\n{\\textbf{Oracle Cloud Infrastructure 2025 Certified} \u2014 Oracle}\n}\n\n\\resumeItemListEnd\n\n\n%-----------ACHIEVEMENTS-----------\n\\section{\\color{airforceblue}ACHIEVEMENTS}\n\\resumeItemListStart\n\n\\resumeItem{Achieved a \\textbf{LeetCode Contest Rating of 1663}, placing in the \\textbf{top 6\\% globally}.}\n\n\\resumeItem{Open-source maintainer of \\textbf{VitaTrack.ai}, an AI-powered healthcare platform focused on medical document processing and intelligent health-data workflows.}\n\n\\resumeItemListEnd\n\n\n%-------------------------------------------\n\\end{document}";
-const EMBEDDED_PREVIEW_HTML = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Harsh Jha - CV (Base Master CV)</title>\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js\"><\\/script>\n<style>\n  :root {\n    --airforceblue: #5c8aab;\n    --text-color: #000000;\n    --paper-bg: #ffffff;\n    --link-color: #000000;\n    --line-color: #000000;\n  }\n  @page {\n    size: letter portrait;\n    margin: 0.35in 0.45in;\n  }\n  * {\n    box-sizing: border-box;\n  }\n  body {\n    background: #e5e7eb;\n    margin: 0;\n    padding: 16px 8px;\n    font-family: 'Times New Roman', Times, Cambria, Georgia, serif;\n    color: var(--text-color);\n    line-height: 1.25;\n    font-size: 10pt;\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n  .paper-page {\n    background: var(--paper-bg);\n    max-width: 8.5in;\n    min-height: 11in;\n    margin: 0 auto;\n    padding: 0.4in 0.5in;\n    box-shadow: 0 4px 20px rgba(0,0,0,0.15);\n    box-sizing: border-box;\n  }\n  .header-block {\n    text-align: center;\n    margin-bottom: 6px;\n  }\n  .header-name {\n    font-size: 20pt;\n    font-weight: bold;\n    letter-spacing: 0.5px;\n    margin: 0 0 4px 0;\n  }\n  .header-contacts {\n    font-size: 9.5pt;\n    color: #111;\n  }\n  .header-contacts a, .cv-link {\n    color: var(--text-color);\n    text-decoration: none;\n  }\n  .header-contacts a:hover, .cv-link:hover {\n    text-decoration: underline;\n  }\n  .contact-sep {\n    margin: 0 4px;\n    color: #666;\n  }\n  .section-title {\n    color: var(--airforceblue);\n    font-size: 11pt;\n    font-weight: bold;\n    text-transform: uppercase;\n    letter-spacing: 0.5px;\n    margin: 10px 0 2px 0;\n    border-bottom: 1px solid #111;\n    padding-bottom: 2px;\n  }\n  ul.resume-list {\n    margin: 2px 0 5px 0;\n    padding-left: 18px;\n  }\n  ul.resume-list li {\n    margin-bottom: 2.5px;\n    font-size: 9.8pt;\n    line-height: 1.28;\n  }\n  .subheading-row, .project-header-row {\n    display: flex;\n    justify-content: space-between;\n    align-items: baseline;\n    font-size: 9.8pt;\n    margin-top: 3px;\n  }\n  .sub-row {\n    margin-top: 1px;\n    margin-bottom: 2px;\n  }\n  .row-left {\n    text-align: left;\n  }\n  .row-right {\n    text-align: right;\n    white-space: nowrap;\n  }\n  .pipe-sep {\n    color: #333;\n    margin: 0 3px;\n  }\n  .tech-tag {\n    font-style: italic;\n    color: #111;\n  }\n  .entry-block {\n    margin-bottom: 5px;\n  }\n  @media print {\n    body {\n      background: none !important;\n      padding: 0 !important;\n      margin: 0 !important;\n    }\n    .paper-page {\n      box-shadow: none !important;\n      padding: 0.25in 0.35in !important;\n      max-width: 100% !important;\n      min-height: auto !important;\n      margin: 0 !important;\n    }\n  }\n</style>\n</head>\n<body>\n\n<div class=\"paper-page\" id=\"cvPaperDocument\">\n  <!-- HEADER -->\n  <div class=\"header-block\">\n    <div class=\"header-name\">Harsh Jha</div>\n    <div class=\"header-contacts\">\n      <i class=\"fa fa-phone\"></i> +91 7060286069\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fa fa-envelope\"></i> <a href=\"mailto:harshj92002@gmail.com\">harshj92002@gmail.com</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fab fa-linkedin\"></i> <a href=\"https://www.linkedin.com/in/harshjha-iiti/\" target=\"_blank\">LinkedIn</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fab fa-github\"></i> <a href=\"https://github.com/jhaharsh03\" target=\"_blank\">GitHub</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fa fa-code\"></i> <a href=\"https://leetcode.com/u/harshdotcom/\" target=\"_blank\">LeetCode</a>\n    </div>\n  </div>\n\n  <!-- PROFILE -->\n  <div class=\"section-title\">PROFILE</div>\n  <ul class=\"resume-list\">\n    <li>AI-focused Software Development Engineer with <strong>2.5 years of experience</strong> building backend systems, AI-powered applications, cloud-native services, microservices, and production-grade software.</li>\n<li>Hands-on experience designing and integrating <strong>LLM and agentic AI workflows</strong> using LangChain, LangGraph, RAG, tool calling, prompt engineering, structured outputs, AWS Bedrock, and AWS Textract.</li>\n<li>Strong backend and systems foundation across <strong>Go, Python, TypeScript, REST APIs, PostgreSQL, MongoDB, Docker, Kubernetes, AWS, and Azure</strong>, with experience taking features from design through production.</li>\n<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform for medical document extraction, report summarization, health-record organization, and intelligent health-data workflows.</li>\n  </ul>\n\n  <!-- EDUCATION -->\n  <div class=\"section-title\">EDUCATION</div>\n  \n        <div class=\"subheading-row\">\n            <div class=\"row-left\"><strong>Indian Institute of Technology Indore (IIT Indore)</strong></div>\n            <div class=\"row-right\"><strong>Indore, India</strong></div>\n        </div>\n        <div class=\"subheading-row sub-row\">\n            <div class=\"row-left\"><em>Bachelor of Technology (B.Tech.) in Civil Engineering</em></div>\n            <div class=\"row-right\"><em>2020 \u2013 2024</em></div>\n        </div>\n        \n\n  <!-- TECHNICAL SKILLS -->\n  <div class=\"section-title\">TECHNICAL SKILLS</div>\n  <ul class=\"resume-list\">\n    <li><strong>AI / GenAI:</strong> LLMs, AI Agents, Agentic AI, LangChain, LangGraph, RAG, Prompt Engineering, Tool Calling, Function Calling, LLM Integration, AI Workflow Automation</li>\n<li><strong>AI Engineering:</strong> Agent Orchestration, Retrieval Pipelines, Vector Search, Embeddings, Context Engineering, Structured Outputs, Model Integration, AI Evaluation</li>\n<li><strong>Programming:</strong> Python, Go, TypeScript, JavaScript, C++</li>\n<li><strong>Backend:</strong> FastAPI, Gin, Fiber, Node.js, Express.js, REST APIs, gRPC, Microservices, API Gateway</li>\n<li><strong>Data:</strong> PostgreSQL, MongoDB, MySQL, SQL Server, Redis</li>\n<li><strong>Cloud & AI Services:</strong> AWS, Azure, AWS Bedrock, AWS Textract, Oracle Cloud Infrastructure</li>\n<li><strong>DevOps & Infrastructure:</strong> Docker, Kubernetes, GitHub Actions, CI/CD, Containerized Deployment</li>\n<li><strong>Architecture:</strong> System Design, Distributed Systems, Event-Driven Architecture, Microservices, Clean Architecture, SOLID Principles</li>\n<li><strong>Security:</strong> JWT, RBAC, API Validation, Secure API Design</li>\n  </ul>\n\n  <!-- WORK EXPERIENCE -->\n  <div class=\"section-title\">WORK EXPERIENCE</div>\n  \n        <div class=\"entry-block\">\n            <div class=\"subheading-row\">\n                <div class=\"row-left\"><strong>Software Development Engineer - 2</strong></div>\n                <div class=\"row-right\"><strong>May 2024 \u2013 Present</strong></div>\n            </div>\n            <div class=\"subheading-row sub-row\">\n                <div class=\"row-left\"><em>SimplyPhi</em></div>\n                <div class=\"row-right\"><em>Bangalore, India</em></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Designed and built scalable backend services using <strong>Go, Python, TypeScript, REST APIs, PostgreSQL, and microservices</strong> for production business workflows.</li>\n<li>Developed production-ready APIs for <strong>authentication, reporting, financial workflows, property operations, dashboard analytics, and business automation</strong>, supporting multiple application workflows.</li>\n<li>Engineered AI-powered workflows using <strong>LangChain, LangGraph, AI agents, LLM APIs, RAG pipelines, prompt engineering, tool calling, and structured outputs</strong>.</li>\n<li>Integrated <strong>LLM and AI services</strong> into business applications for document understanding, report generation, data extraction, summarization, and intelligent workflow automation.</li>\n<li>Built and deployed cloud-native services using <strong>Docker, Kubernetes, AWS, Azure, GitHub Actions, and CI/CD</strong>, supporting reliable application delivery across environments.</li>\n<li>Implemented secure application workflows using <strong>JWT authentication, RBAC, API validation, structured logging, and centralized error handling</strong>.</li>\n<li>Improved backend scalability and maintainability through <strong>Clean Architecture, modular service design, optimized database queries, caching, and reusable service components</strong>.</li>\n<li>Owned features end-to-end across <strong>requirements analysis, system design, development, testing, deployment, monitoring, debugging, and production support</strong>.</li>\n            </ul>\n        </div>\n        \n\n  <!-- PROJECTS -->\n  <div class=\"section-title\">PROJECTS</div>\n  \n        <div class=\"entry-block\">\n            <div class=\"project-header-row\">\n                <div class=\"proj-left\"><strong><strong>VitaTrack.ai \u2013 AI Medical Report Platform</strong></strong> <span class=\"pipe-sep\">|</span> <span class=\"tech-tag\">Go, Python, AWS, PostgreSQL</span></div>\n                <div class=\"proj-right\"><a href=\"https://github.com/harshdotcom/vitalTrack.ai-\" target=\"_blank\" class=\"cv-link\">GitHub</a></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Developing an open-source AI healthcare platform for managing <strong>medical reports, prescriptions, symptoms, medications, health records, and daily health notes</strong>.</li>\n<li>Built secure <strong>Go backend APIs</strong> and structured healthcare data workflows using <strong>PostgreSQL</strong> for medical record management.</li>\n<li>Integrated <strong>AWS Textract</strong> to extract text and structured data from medical reports, prescriptions, and healthcare documents.</li>\n<li>Integrated <strong>AWS Bedrock and LLMs</strong> with prompt engineering to summarize medical reports and transform unstructured health data into structured, actionable information.</li>\n<li>Designed AI workflows for <strong>medical document analysis, health-history tracking, report processing, and patient record organization</strong>.</li>\n<li>Built supporting <strong>Angular</strong> interfaces for document uploads, health logs, dashboards, and medical data management.</li>\n            </ul>\n        </div>\n        \n        <div class=\"entry-block\">\n            <div class=\"project-header-row\">\n                <div class=\"proj-left\"><strong><strong>AI Agent Workflow System</strong></strong> <span class=\"pipe-sep\">|</span> <span class=\"tech-tag\">Python, LangChain, LangGraph, LLMs</span></div>\n                <div class=\"proj-right\"><a href=\"https://github.com/harshdotcom/naukriAuto.Ai\" target=\"_blank\" class=\"cv-link\">GitHub</a></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Engineered multi-step <strong>AI agent workflows</strong> using Python, LangChain, LangGraph, and LLM APIs for intelligent automation and structured decision-making.</li>\n<li>Designed stateful agent workflows for <strong>document processing, summarization, API integration, tool execution, and structured response generation</strong>.</li>\n<li>Implemented <strong>tool calling, prompt templates, reusable chains, memory, state management, and conditional workflow execution</strong> for agent-driven automation.</li>\n<li>Integrated AI agents with <strong>REST APIs and external tools</strong> to execute tasks, process information, and support real-world business workflows.</li>\n            </ul>\n        </div>\n        \n\n  <!-- CERTIFICATIONS -->\n  <div class=\"section-title\">CERTIFICATIONS</div>\n  <ul class=\"resume-list\">\n    <li><a href=\"https://academy.langchain.com/certificates/svjvl9l9fa\" target=\"_blank\" class=\"cv-link\"><strong>Introduction to LangChain - Python</strong> \u2014 LangChain Academy</a></li>\n<li><a href=\"https://verify.skilljar.com/c/gbzedjz5dcde\" target=\"_blank\" class=\"cv-link\"><strong>Introduction to Agent Skills</strong> \u2014 Anthropic</a></li>\n<li><a href=\"https://www.linkedin.com/in/harshjha-iiti/overlay/certifications/1170933565/multiple-media-viewer/?profileId=ACoAADN4Q84BhQseKYmEwHkPK7yzh0e_9nVq1kY\" target=\"_blank\" class=\"cv-link\"><strong>Oracle Cloud Infrastructure 2025 Certified</strong> \u2014 Oracle</a></li>\n  </ul>\n\n  <!-- ACHIEVEMENTS -->\n  <div class=\"section-title\">ACHIEVEMENTS</div>\n  <ul class=\"resume-list\">\n    <li>Achieved a <strong>LeetCode Contest Rating of 1663</strong>, placing in the <strong>top 6% globally</strong>.</li>\n<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform focused on medical document processing and intelligent health-data workflows.</li>\n  </ul>\n</div>\n\n<script>\nwindow.generateAndDownloadPdf = function(filename) {\n  const elem = document.getElementById(\"cvPaperDocument\");\n  const opt = {\n    margin: [0.3, 0.3, 0.3, 0.3],\n    filename: filename || \"Harsh_Jha_CV.pdf\",\n    image: { type: \"jpeg\", quality: 0.99 },\n    html2canvas: { scale: 2.5, useCORS: true, letterRendering: true },\n    jsPDF: { unit: \"in\", format: \"letter\", orientation: \"portrait\" }\n  };\n  if (typeof html2pdf !== \"undefined\") {\n    return html2pdf().set(opt).from(elem).save();\n  } else {\n    window.print();\n  }\n};\n<\\/script>\n\n</body>\n</html>\n";
+const EMBEDDED_PREVIEW_HTML = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Harsh Jha - CV (Base Master CV)</title>\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js\"><\\/script>\n<style>\n  :root {\n    --airforceblue: #5c8aab;\n    --text-color: #000000;\n    --paper-bg: #ffffff;\n    --link-color: #000000;\n    --line-color: #000000;\n  }\n  @page {\n    size: letter portrait;\n    margin: 0.35in 0.45in;\n  }\n  * {\n    box-sizing: border-box;\n  }\n  body {\n    background: #e5e7eb;\n    margin: 0;\n    padding: 16px 8px;\n    font-family: 'Times New Roman', Times, Cambria, Georgia, serif;\n    color: var(--text-color);\n    line-height: 1.25;\n    font-size: 10pt;\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n  .paper-page {\n    background: var(--paper-bg);\n    max-width: 8.5in;\n    min-height: 11in;\n    margin: 0 auto;\n    padding: 0.4in 0.5in;\n    box-shadow: 0 4px 20px rgba(0,0,0,0.15);\n    box-sizing: border-box;\n  }\n  .header-block {\n    text-align: center;\n    margin-bottom: 6px;\n  }\n  .header-name {\n    font-size: 20pt;\n    font-weight: bold;\n    letter-spacing: 0.5px;\n    margin: 0 0 4px 0;\n  }\n  .header-contacts {\n    font-size: 9.5pt;\n    color: #111;\n  }\n  .header-contacts a, .cv-link {\n    color: var(--text-color);\n    text-decoration: none;\n  }\n  .header-contacts a:hover, .cv-link:hover {\n    text-decoration: underline;\n  }\n  .contact-sep {\n    margin: 0 4px;\n    color: #666;\n  }\n  .section-title {\n    color: var(--airforceblue);\n    font-size: 11pt;\n    font-weight: bold;\n    text-transform: uppercase;\n    letter-spacing: 0.5px;\n    margin: 10px 0 2px 0;\n    border-bottom: 1px solid #111;\n    padding-bottom: 2px;\n  }\n  ul.resume-list {\n    margin: 2px 0 5px 0;\n    padding-left: 18px;\n  }\n  ul.resume-list li {\n    margin-bottom: 2.5px;\n    font-size: 9.8pt;\n    line-height: 1.28;\n  }\n  .subheading-row, .project-header-row {\n    display: flex;\n    justify-content: space-between;\n    align-items: baseline;\n    font-size: 9.8pt;\n    margin-top: 3px;\n  }\n  .sub-row {\n    margin-top: 1px;\n    margin-bottom: 2px;\n  }\n  .row-left {\n    text-align: left;\n  }\n  .row-right {\n    text-align: right;\n    white-space: nowrap;\n  }\n  .pipe-sep {\n    color: #333;\n    margin: 0 3px;\n  }\n  .tech-tag {\n    font-style: italic;\n    color: #111;\n  }\n  .entry-block {\n    margin-bottom: 5px;\n  }\n  @media (max-width: 768px) {\n    body {\n      padding: 4px !important;\n    }\n    .paper-page {\n      max-width: 100% !important;\n      min-height: auto !important;\n      padding: 16px 12px !important;\n      box-shadow: none !important;\n      border-radius: 6px;\n    }\n    .header-name {\n      font-size: 1.5rem !important;\n    }\n    .header-links {\n      font-size: 0.72rem !important;\n      flex-wrap: wrap !important;\n      gap: 4px 8px !important;\n    }\n    .entry-header-row, .project-header-row {\n      flex-direction: column !important;\n      align-items: flex-start !important;\n      gap: 2px !important;\n    }\n    .entry-right, .proj-right {\n      text-align: left !important;\n      font-size: 0.76rem !important;\n    }\n    .resume-list {\n      padding-left: 14px !important;\n    }\n  }\n  @media print {\n    body {\n      background: none !important;\n      padding: 0 !important;\n      margin: 0 !important;\n    }\n    .paper-page {\n      box-shadow: none !important;\n      padding: 0.25in 0.35in !important;\n      max-width: 100% !important;\n      min-height: auto !important;\n      margin: 0 !important;\n    }\n  }\n</style>\n</head>\n<body>\n\n<div class=\"paper-page\" id=\"cvPaperDocument\">\n  <!-- HEADER -->\n  <div class=\"header-block\">\n    <div class=\"header-name\">Harsh Jha</div>\n    <div class=\"header-contacts\">\n      <i class=\"fa fa-phone\"></i> +91 7060286069\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fa fa-envelope\"></i> <a href=\"mailto:harshj92002@gmail.com\">harshj92002@gmail.com</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fab fa-linkedin\"></i> <a href=\"https://www.linkedin.com/in/harshjha-iiti/\" target=\"_blank\">LinkedIn</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fab fa-github\"></i> <a href=\"https://github.com/jhaharsh03\" target=\"_blank\">GitHub</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fa fa-code\"></i> <a href=\"https://leetcode.com/u/harshdotcom/\" target=\"_blank\">LeetCode</a>\n    </div>\n  </div>\n\n  <!-- PROFILE -->\n  <div class=\"section-title\">PROFILE</div>\n  <ul class=\"resume-list\">\n    <li>AI-focused Software Development Engineer with <strong>2.5 years of experience</strong> building backend systems, AI-powered applications, cloud-native services, microservices, and production-grade software.</li>\n<li>Hands-on experience designing and integrating <strong>LLM and agentic AI workflows</strong> using LangChain, LangGraph, RAG, tool calling, prompt engineering, structured outputs, AWS Bedrock, and AWS Textract.</li>\n<li>Strong backend and systems foundation across <strong>Go, Python, TypeScript, REST APIs, PostgreSQL, MongoDB, Docker, Kubernetes, AWS, and Azure</strong>, with experience taking features from design through production.</li>\n<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform for medical document extraction, report summarization, health-record organization, and intelligent health-data workflows.</li>\n  </ul>\n\n  <!-- EDUCATION -->\n  <div class=\"section-title\">EDUCATION</div>\n  \n        <div class=\"subheading-row\">\n            <div class=\"row-left\"><strong>Indian Institute of Technology Indore (IIT Indore)</strong></div>\n            <div class=\"row-right\"><strong>Indore, India</strong></div>\n        </div>\n        <div class=\"subheading-row sub-row\">\n            <div class=\"row-left\"><em>Bachelor of Technology (B.Tech.) in Civil Engineering</em></div>\n            <div class=\"row-right\"><em>2020 \u2013 2024</em></div>\n        </div>\n        \n\n  <!-- TECHNICAL SKILLS -->\n  <div class=\"section-title\">TECHNICAL SKILLS</div>\n  <ul class=\"resume-list\">\n    <li><strong>AI / GenAI:</strong> LLMs, AI Agents, Agentic AI, LangChain, LangGraph, RAG, Prompt Engineering, Tool Calling, Function Calling, LLM Integration, AI Workflow Automation</li>\n<li><strong>AI Engineering:</strong> Agent Orchestration, Retrieval Pipelines, Vector Search, Embeddings, Context Engineering, Structured Outputs, Model Integration, AI Evaluation</li>\n<li><strong>Programming:</strong> Python, Go, TypeScript, JavaScript, C++</li>\n<li><strong>Backend:</strong> FastAPI, Gin, Fiber, Node.js, Express.js, REST APIs, gRPC, Microservices, API Gateway</li>\n<li><strong>Data:</strong> PostgreSQL, MongoDB, MySQL, SQL Server, Redis</li>\n<li><strong>Cloud & AI Services:</strong> AWS, Azure, AWS Bedrock, AWS Textract, Oracle Cloud Infrastructure</li>\n<li><strong>DevOps & Infrastructure:</strong> Docker, Kubernetes, GitHub Actions, CI/CD, Containerized Deployment</li>\n<li><strong>Architecture:</strong> System Design, Distributed Systems, Event-Driven Architecture, Microservices, Clean Architecture, SOLID Principles</li>\n<li><strong>Security:</strong> JWT, RBAC, API Validation, Secure API Design</li>\n  </ul>\n\n  <!-- WORK EXPERIENCE -->\n  <div class=\"section-title\">WORK EXPERIENCE</div>\n  \n        <div class=\"entry-block\">\n            <div class=\"subheading-row\">\n                <div class=\"row-left\"><strong>Software Development Engineer - 2</strong></div>\n                <div class=\"row-right\"><strong>May 2024 \u2013 Present</strong></div>\n            </div>\n            <div class=\"subheading-row sub-row\">\n                <div class=\"row-left\"><em>SimplyPhi</em></div>\n                <div class=\"row-right\"><em>Bangalore, India</em></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Designed and built scalable backend services using <strong>Go, Python, TypeScript, REST APIs, PostgreSQL, and microservices</strong> for production business workflows.</li>\n<li>Developed production-ready APIs for <strong>authentication, reporting, financial workflows, property operations, dashboard analytics, and business automation</strong>, supporting multiple application workflows.</li>\n<li>Engineered AI-powered workflows using <strong>LangChain, LangGraph, AI agents, LLM APIs, RAG pipelines, prompt engineering, tool calling, and structured outputs</strong>.</li>\n<li>Integrated <strong>LLM and AI services</strong> into business applications for document understanding, report generation, data extraction, summarization, and intelligent workflow automation.</li>\n<li>Built and deployed cloud-native services using <strong>Docker, Kubernetes, AWS, Azure, GitHub Actions, and CI/CD</strong>, supporting reliable application delivery across environments.</li>\n<li>Implemented secure application workflows using <strong>JWT authentication, RBAC, API validation, structured logging, and centralized error handling</strong>.</li>\n<li>Improved backend scalability and maintainability through <strong>Clean Architecture, modular service design, optimized database queries, caching, and reusable service components</strong>.</li>\n<li>Owned features end-to-end across <strong>requirements analysis, system design, development, testing, deployment, monitoring, debugging, and production support</strong>.</li>\n            </ul>\n        </div>\n        \n\n  <!-- PROJECTS -->\n  <div class=\"section-title\">PROJECTS</div>\n  \n        <div class=\"entry-block\">\n            <div class=\"project-header-row\">\n                <div class=\"proj-left\"><strong><strong>VitaTrack.ai \u2013 AI Medical Report Platform</strong></strong> <span class=\"pipe-sep\">|</span> <span class=\"tech-tag\">Go, Python, AWS, PostgreSQL</span></div>\n                <div class=\"proj-right\"><a href=\"https://github.com/harshdotcom/vitalTrack.ai-\" target=\"_blank\" class=\"cv-link\">GitHub</a></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Developing an open-source AI healthcare platform for managing <strong>medical reports, prescriptions, symptoms, medications, health records, and daily health notes</strong>.</li>\n<li>Built secure <strong>Go backend APIs</strong> and structured healthcare data workflows using <strong>PostgreSQL</strong> for medical record management.</li>\n<li>Integrated <strong>AWS Textract</strong> to extract text and structured data from medical reports, prescriptions, and healthcare documents.</li>\n<li>Integrated <strong>AWS Bedrock and LLMs</strong> with prompt engineering to summarize medical reports and transform unstructured health data into structured, actionable information.</li>\n<li>Designed AI workflows for <strong>medical document analysis, health-history tracking, report processing, and patient record organization</strong>.</li>\n<li>Built supporting <strong>Angular</strong> interfaces for document uploads, health logs, dashboards, and medical data management.</li>\n            </ul>\n        </div>\n        \n        <div class=\"entry-block\">\n            <div class=\"project-header-row\">\n                <div class=\"proj-left\"><strong><strong>AI Agent Workflow System</strong></strong> <span class=\"pipe-sep\">|</span> <span class=\"tech-tag\">Python, LangChain, LangGraph, LLMs</span></div>\n                <div class=\"proj-right\"><a href=\"https://github.com/harshdotcom/naukriAuto.Ai\" target=\"_blank\" class=\"cv-link\">GitHub</a></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Engineered multi-step <strong>AI agent workflows</strong> using Python, LangChain, LangGraph, and LLM APIs for intelligent automation and structured decision-making.</li>\n<li>Designed stateful agent workflows for <strong>document processing, summarization, API integration, tool execution, and structured response generation</strong>.</li>\n<li>Implemented <strong>tool calling, prompt templates, reusable chains, memory, state management, and conditional workflow execution</strong> for agent-driven automation.</li>\n<li>Integrated AI agents with <strong>REST APIs and external tools</strong> to execute tasks, process information, and support real-world business workflows.</li>\n            </ul>\n        </div>\n        \n\n  <!-- CERTIFICATIONS -->\n  <div class=\"section-title\">CERTIFICATIONS</div>\n  <ul class=\"resume-list\">\n    <li><a href=\"https://academy.langchain.com/certificates/svjvl9l9fa\" target=\"_blank\" class=\"cv-link\"><strong>Introduction to LangChain - Python</strong> \u2014 LangChain Academy</a></li>\n<li><a href=\"https://verify.skilljar.com/c/gbzedjz5dcde\" target=\"_blank\" class=\"cv-link\"><strong>Introduction to Agent Skills</strong> \u2014 Anthropic</a></li>\n<li><a href=\"https://www.linkedin.com/in/harshjha-iiti/overlay/certifications/1170933565/multiple-media-viewer/?profileId=ACoAADN4Q84BhQseKYmEwHkPK7yzh0e_9nVq1kY\" target=\"_blank\" class=\"cv-link\"><strong>Oracle Cloud Infrastructure 2025 Certified</strong> \u2014 Oracle</a></li>\n  </ul>\n\n  <!-- ACHIEVEMENTS -->\n  <div class=\"section-title\">ACHIEVEMENTS</div>\n  <ul class=\"resume-list\">\n    <li>Achieved a <strong>LeetCode Contest Rating of 1663</strong>, placing in the <strong>top 6% globally</strong>.</li>\n<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform focused on medical document processing and intelligent health-data workflows.</li>\n  </ul>\n</div>\n\n<script>\nwindow.generateAndDownloadPdf = function(filename) {\n  const elem = document.getElementById(\"cvPaperDocument\");\n  const opt = {\n    margin: [0.3, 0.3, 0.3, 0.3],\n    filename: filename || \"Harsh_Jha_CV.pdf\",\n    image: { type: \"jpeg\", quality: 0.99 },\n    html2canvas: { scale: 2.5, useCORS: true, letterRendering: true },\n    jsPDF: { unit: \"in\", format: \"letter\", orientation: \"portrait\" }\n  };\n  if (typeof html2pdf !== \"undefined\") {\n    return html2pdf().set(opt).from(elem).save();\n  } else {\n    window.print();\n  }\n};\n<\\/script>\n\n</body>\n</html>\n";
 const EMBEDDED_SUMMARIES = [{"key": "master", "title": "Master Directory", "subtitle": "All Platforms Aggregated", "badge_color": "neutral", "icon": "fa-globe", "total_count": 7008}, {"key": "ashby", "title": "Ashby Portals", "subtitle": "Modern Tech & High-Growth Startups", "badge_color": "purple", "icon": "fa-bolt", "total_count": 3212}, {"key": "greenhouse", "title": "Greenhouse Portals", "subtitle": "Global Enterprise & Tech Unicorns", "badge_color": "emerald", "icon": "fa-seedling", "total_count": 1894}, {"key": "lever", "title": "Lever Portals", "subtitle": "Fast-Scaling Software & Product Teams", "badge_color": "sky", "icon": "fa-sliders", "total_count": 1522}, {"key": "workday", "title": "Workday Portals", "subtitle": "Fortune 500 & Multinationals", "badge_color": "amber", "icon": "fa-building", "total_count": 380}];
 const EMBEDDED_ITEMS = [{"id": 1, "name": "#paid", "ats": "lever", "slug": "hashtagpaid", "open_jobs": "4", "board_url": "https://jobs.lever.co/hashtagpaid", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=%23paid", "levels_url": "https://www.levels.fyi/companies/paid/salaries", "google_jobs_url": "https://www.google.com/search?q=%23paid+jobs+careers"}, {"id": 2, "name": "01c", "ats": "ashby", "slug": "01c", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/01c", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=01c", "levels_url": "https://www.levels.fyi/companies/01c/salaries", "google_jobs_url": "https://www.google.com/search?q=01c+jobs+careers"}, {"id": 3, "name": "0g", "ats": "ashby", "slug": "0g", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/0g", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=0g", "levels_url": "https://www.levels.fyi/companies/0g/salaries", "google_jobs_url": "https://www.google.com/search?q=0g+jobs+careers"}, {"id": 4, "name": "0x", "ats": "ashby", "slug": "0x", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/0x", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=0x", "levels_url": "https://www.levels.fyi/companies/0x/salaries", "google_jobs_url": "https://www.google.com/search?q=0x+jobs+careers"}, {"id": 5, "name": "1-800 Contacts", "ats": "greenhouse", "slug": "1800contacts", "open_jobs": "9", "board_url": "https://boards.greenhouse.io/1800contacts", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1-800%20Contacts", "levels_url": "https://www.levels.fyi/companies/1-800-contacts/salaries", "google_jobs_url": "https://www.google.com/search?q=1-800%20Contacts+jobs+careers"}, {"id": 6, "name": "100MS", "ats": "lever", "slug": "100ms", "open_jobs": "9", "board_url": "https://jobs.lever.co/100ms", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=100MS", "levels_url": "https://www.levels.fyi/companies/100ms/salaries", "google_jobs_url": "https://www.google.com/search?q=100MS+jobs+careers"}, {"id": 7, "name": "10Beauty", "ats": "greenhouse", "slug": "10beauty", "open_jobs": "7", "board_url": "https://boards.greenhouse.io/10beauty", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=10Beauty", "levels_url": "https://www.levels.fyi/companies/10beauty/salaries", "google_jobs_url": "https://www.google.com/search?q=10Beauty+jobs+careers"}, {"id": 8, "name": "10xteam", "ats": "ashby", "slug": "10xteam", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/10xteam", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=10xteam", "levels_url": "https://www.levels.fyi/companies/10xteam/salaries", "google_jobs_url": "https://www.google.com/search?q=10xteam+jobs+careers"}, {"id": 9, "name": "11x", "ats": "ashby", "slug": "11x", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/11x", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=11x", "levels_url": "https://www.levels.fyi/companies/11x/salaries", "google_jobs_url": "https://www.google.com/search?q=11x+jobs+careers"}, {"id": 10, "name": "12twenty", "ats": "greenhouse", "slug": "12twenty", "open_jobs": "8", "board_url": "https://boards.greenhouse.io/12twenty", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=12twenty", "levels_url": "https://www.levels.fyi/companies/12twenty/salaries", "google_jobs_url": "https://www.google.com/search?q=12twenty+jobs+careers"}, {"id": 11, "name": "15Five", "ats": "lever", "slug": "15five", "open_jobs": "2", "board_url": "https://jobs.lever.co/15five", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=15Five", "levels_url": "https://www.levels.fyi/companies/15five/salaries", "google_jobs_url": "https://www.google.com/search?q=15Five+jobs+careers"}, {"id": 12, "name": "1inch", "ats": "lever", "slug": "1inch", "open_jobs": "6", "board_url": "https://jobs.lever.co/1inch", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1inch", "levels_url": "https://www.levels.fyi/companies/1inch/salaries", "google_jobs_url": "https://www.google.com/search?q=1inch+jobs+careers"}, {"id": 13, "name": "1mind", "ats": "ashby", "slug": "1mind", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/1mind", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1mind", "levels_url": "https://www.levels.fyi/companies/1mind/salaries", "google_jobs_url": "https://www.google.com/search?q=1mind+jobs+careers"}, {"id": 14, "name": "1Password", "ats": "ashby", "slug": "1password", "open_jobs": "78", "board_url": "https://jobs.ashbyhq.com/1password", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1Password", "levels_url": "https://www.levels.fyi/companies/1password/salaries", "google_jobs_url": "https://www.google.com/search?q=1Password+jobs+careers"}, {"id": 15, "name": "21st Century Home Health Services Inc.", "ats": "lever", "slug": "21hhs", "open_jobs": "354", "board_url": "https://jobs.lever.co/21hhs", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=21st%20Century%20Home%20Health%20Services%20Inc.", "levels_url": "https://www.levels.fyi/companies/21st-century-home-health-services-inc/salaries", "google_jobs_url": "https://www.google.com/search?q=21st%20Century%20Home%20Health%20Services%20Inc.+jobs+careers"}, {"id": 16, "name": "2Brains", "ats": "lever", "slug": "2brains", "open_jobs": "10", "board_url": "https://jobs.lever.co/2brains", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2Brains", "levels_url": "https://www.levels.fyi/companies/2brains/salaries", "google_jobs_url": "https://www.google.com/search?q=2Brains+jobs+careers"}, {"id": 17, "name": "2K", "ats": "greenhouse", "slug": "2k", "open_jobs": "91", "board_url": "https://boards.greenhouse.io/2k", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2K", "levels_url": "https://www.levels.fyi/companies/2k/salaries", "google_jobs_url": "https://www.google.com/search?q=2K+jobs+careers"}, {"id": 18, "name": "2nd Order Solutions", "ats": "lever", "slug": "2os", "open_jobs": "0", "board_url": "https://jobs.lever.co/2os", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2nd%20Order%20Solutions", "levels_url": "https://www.levels.fyi/companies/2nd-order-solutions/salaries", "google_jobs_url": "https://www.google.com/search?q=2nd%20Order%20Solutions+jobs+careers"}, {"id": 19, "name": "2U", "ats": "greenhouse", "slug": "2u", "open_jobs": "2", "board_url": "https://boards.greenhouse.io/2u", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2U", "levels_url": "https://www.levels.fyi/companies/2u/salaries", "google_jobs_url": "https://www.google.com/search?q=2U+jobs+careers"}, {"id": 20, "name": "31st Union", "ats": "greenhouse", "slug": "31stunion", "open_jobs": "9", "board_url": "https://boards.greenhouse.io/31stunion", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=31st%20Union", "levels_url": "https://www.levels.fyi/companies/31st-union/salaries", "google_jobs_url": "https://www.google.com/search?q=31st%20Union+jobs+careers"}, {"id": 21, "name": "360Learning", "ats": "lever", "slug": "360learning", "open_jobs": "45", "board_url": "https://jobs.lever.co/360learning", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=360Learning", "levels_url": "https://www.levels.fyi/companies/360learning/salaries", "google_jobs_url": "https://www.google.com/search?q=360Learning+jobs+careers"}, {"id": 22, "name": "3Cloud", "ats": "greenhouse", "slug": "3cloud", "open_jobs": "39", "board_url": "https://boards.greenhouse.io/3cloud", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3Cloud", "levels_url": "https://www.levels.fyi/companies/3cloud/salaries", "google_jobs_url": "https://www.google.com/search?q=3Cloud+jobs+careers"}, {"id": 23, "name": "3jane", "ats": "lever", "slug": "3jane", "open_jobs": "0", "board_url": "https://jobs.lever.co/3jane", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3jane", "levels_url": "https://www.levels.fyi/companies/3jane/salaries", "google_jobs_url": "https://www.google.com/search?q=3jane+jobs+careers"}, {"id": 24, "name": "3M", "ats": "workday", "slug": "3m:wd1:Search", "open_jobs": "755", "board_url": "https://3m.wd1.myworkdayjobs.com/en-US/Search", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3M", "levels_url": "https://www.levels.fyi/companies/3m/salaries", "google_jobs_url": "https://www.google.com/search?q=3M+jobs+careers"}, {"id": 25, "name": "3Pillarglobal", "ats": "lever", "slug": "3pillarglobal", "open_jobs": "0", "board_url": "https://jobs.lever.co/3pillarglobal", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3Pillarglobal", "levels_url": "https://www.levels.fyi/companies/3pillarglobal/salaries", "google_jobs_url": "https://www.google.com/search?q=3Pillarglobal+jobs+careers"}, {"id": 26, "name": "3Red Partners", "ats": "greenhouse", "slug": "3redpartners", "open_jobs": "7", "board_url": "https://boards.greenhouse.io/3redpartners", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3Red%20Partners", "levels_url": "https://www.levels.fyi/companies/3red-partners/salaries", "google_jobs_url": "https://www.google.com/search?q=3Red%20Partners+jobs+careers"}, {"id": 27, "name": "3y Health", "ats": "ashby", "slug": "3y-health", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/3y-health", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3y%20Health", "levels_url": "https://www.levels.fyi/companies/3y-health/salaries", "google_jobs_url": "https://www.google.com/search?q=3y%20Health+jobs+careers"}, {"id": 28, "name": "42dot", "ats": "ashby", "slug": "42dot", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/42dot", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=42dot", "levels_url": "https://www.levels.fyi/companies/42dot/salaries", "google_jobs_url": "https://www.google.com/search?q=42dot+jobs+careers"}, {"id": 29, "name": "4Front Ventures", "ats": "lever", "slug": "4front", "open_jobs": "10", "board_url": "https://jobs.lever.co/4front", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=4Front%20Ventures", "levels_url": "https://www.levels.fyi/companies/4front-ventures/salaries", "google_jobs_url": "https://www.google.com/search?q=4Front%20Ventures+jobs+careers"}, {"id": 30, "name": "5", "ats": "lever", "slug": "energy-by-5", "open_jobs": "0", "board_url": "https://jobs.lever.co/energy-by-5", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=5", "levels_url": "https://www.levels.fyi/companies/5/salaries", "google_jobs_url": "https://www.google.com/search?q=5+jobs+careers"}, {"id": 31, "name": "5AM Ventures", "ats": "lever", "slug": "5amventures", "open_jobs": "2", "board_url": "https://jobs.lever.co/5amventures", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=5AM%20Ventures", "levels_url": "https://www.levels.fyi/companies/5am-ventures/salaries", "google_jobs_url": "https://www.google.com/search?q=5AM%20Ventures+jobs+careers"}, {"id": 32, "name": "5CA", "ats": "greenhouse", "slug": "5ca", "open_jobs": "14", "board_url": "https://boards.greenhouse.io/5ca", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=5CA", "levels_url": "https://www.levels.fyi/companies/5ca/salaries", "google_jobs_url": "https://www.google.com/search?q=5CA+jobs+careers"}, {"id": 33, "name": "66degrees", "ats": "greenhouse", "slug": "66degrees", "open_jobs": "16", "board_url": "https://boards.greenhouse.io/66degrees", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=66degrees", "levels_url": "https://www.levels.fyi/companies/66degrees/salaries", "google_jobs_url": "https://www.google.com/search?q=66degrees+jobs+careers"}, {"id": 34, "name": "6sense", "ats": "greenhouse", "slug": "6sense", "open_jobs": "30", "board_url": "https://boards.greenhouse.io/6sense", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=6sense", "levels_url": "https://www.levels.fyi/companies/6sense/salaries", "google_jobs_url": "https://www.google.com/search?q=6sense+jobs+careers"}, {"id": 35, "name": "8am", "ats": "greenhouse", "slug": "affinipay1", "open_jobs": "27", "board_url": "https://boards.greenhouse.io/affinipay1", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8am", "levels_url": "https://www.levels.fyi/companies/8am/salaries", "google_jobs_url": "https://www.google.com/search?q=8am+jobs+careers"}, {"id": 36, "name": "8fleet Inc", "ats": "ashby", "slug": "8fleet-inc", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/8fleet-inc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8fleet%20Inc", "levels_url": "https://www.levels.fyi/companies/8fleet-inc/salaries", "google_jobs_url": "https://www.google.com/search?q=8fleet%20Inc+jobs+careers"}, {"id": 37, "name": "8returns", "ats": "ashby", "slug": "8returns", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/8returns", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8returns", "levels_url": "https://www.levels.fyi/companies/8returns/salaries", "google_jobs_url": "https://www.google.com/search?q=8returns+jobs+careers"}, {"id": 38, "name": "8vc", "ats": "ashby", "slug": "8vc", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/8vc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8vc", "levels_url": "https://www.levels.fyi/companies/8vc/salaries", "google_jobs_url": "https://www.google.com/search?q=8vc+jobs+careers"}, {"id": 39, "name": "9 Mothers", "ats": "ashby", "slug": "9-mothers", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/9-mothers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=9%20Mothers", "levels_url": "https://www.levels.fyi/companies/9-mothers/salaries", "google_jobs_url": "https://www.google.com/search?q=9%20Mothers+jobs+careers"}, {"id": 40, "name": "90 Seconds", "ats": "lever", "slug": "90seconds", "open_jobs": "8", "board_url": "https://jobs.lever.co/90seconds", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=90%20Seconds", "levels_url": "https://www.levels.fyi/companies/90-seconds/salaries", "google_jobs_url": "https://www.google.com/search?q=90%20Seconds+jobs+careers"}, {"id": 41, "name": "908 Devices", "ats": "greenhouse", "slug": "908devicesinc", "open_jobs": "2", "board_url": "https://boards.greenhouse.io/908devicesinc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=908%20Devices", "levels_url": "https://www.levels.fyi/companies/908-devices/salaries", "google_jobs_url": "https://www.google.com/search?q=908%20Devices+jobs+careers"}, {"id": 42, "name": "9fin", "ats": "ashby", "slug": "9fin", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/9fin", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=9fin", "levels_url": "https://www.levels.fyi/companies/9fin/salaries", "google_jobs_url": "https://www.google.com/search?q=9fin+jobs+careers"}, {"id": 43, "name": "[solidcore]", "ats": "lever", "slug": "solidcore", "open_jobs": "258", "board_url": "https://jobs.lever.co/solidcore", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=%5Bsolidcore%5D", "levels_url": "https://www.levels.fyi/companies/solidcore/salaries", "google_jobs_url": "https://www.google.com/search?q=%5Bsolidcore%5D+jobs+careers"}, {"id": 44, "name": "A Place For Mom", "ats": "ashby", "slug": "a-place-for-mom", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/a-place-for-mom", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=A%20Place%20For%20Mom", "levels_url": "https://www.levels.fyi/companies/a-place-for-mom/salaries", "google_jobs_url": "https://www.google.com/search?q=A%20Place%20For%20Mom+jobs+careers"}, {"id": 45, "name": "A Team", "ats": "ashby", "slug": "a-team", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/a-team", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=A%20Team", "levels_url": "https://www.levels.fyi/companies/a-team/salaries", "google_jobs_url": "https://www.google.com/search?q=A%20Team+jobs+careers"}, {"id": 46, "name": "A11", "ats": "greenhouse", "slug": "projectaservicesgmbhcokg", "open_jobs": "61", "board_url": "https://boards.greenhouse.io/projectaservicesgmbhcokg", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=A11", "levels_url": "https://www.levels.fyi/companies/a11/salaries", "google_jobs_url": "https://www.google.com/search?q=A11+jobs+careers"}, {"id": 47, "name": "Aaaie", "ats": "workday", "slug": "aaaie:wd1:CSAACareers2", "open_jobs": "2", "board_url": "https://aaaie.wd1.myworkdayjobs.com/en-US/CSAACareers2", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aaaie", "levels_url": "https://www.levels.fyi/companies/aaaie/salaries", "google_jobs_url": "https://www.google.com/search?q=Aaaie+jobs+careers"}, {"id": 48, "name": "Aave Labs", "ats": "lever", "slug": "aavelabs", "open_jobs": "16", "board_url": "https://jobs.eu.lever.co/aavelabs", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aave%20Labs", "levels_url": "https://www.levels.fyi/companies/aave-labs/salaries", "google_jobs_url": "https://www.google.com/search?q=Aave%20Labs+jobs+careers"}, {"id": 49, "name": "Aba", "ats": "workday", "slug": "aba:wd1:aba", "open_jobs": "25", "board_url": "https://aba.wd1.myworkdayjobs.com/en-US/aba", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aba", "levels_url": "https://www.levels.fyi/companies/aba/salaries", "google_jobs_url": "https://www.google.com/search?q=Aba+jobs+careers"}, {"id": 50, "name": "Abacum", "ats": "ashby", "slug": "abacum", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abacum", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abacum", "levels_url": "https://www.levels.fyi/companies/abacum/salaries", "google_jobs_url": "https://www.google.com/search?q=Abacum+jobs+careers"}, {"id": 51, "name": "ABACUS", "ats": "greenhouse", "slug": "abacus", "open_jobs": "44", "board_url": "https://boards.greenhouse.io/abacus", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ABACUS", "levels_url": "https://www.levels.fyi/companies/abacus/salaries", "google_jobs_url": "https://www.google.com/search?q=ABACUS+jobs+careers"}, {"id": 52, "name": "Abacus Insights", "ats": "greenhouse", "slug": "abacusinsights", "open_jobs": "19", "board_url": "https://boards.greenhouse.io/abacusinsights", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abacus%20Insights", "levels_url": "https://www.levels.fyi/companies/abacus-insights/salaries", "google_jobs_url": "https://www.google.com/search?q=Abacus%20Insights+jobs+careers"}, {"id": 53, "name": "Abb", "ats": "workday", "slug": "abb:wd3:external_career_page", "open_jobs": "2000", "board_url": "https://abb.wd3.myworkdayjobs.com/en-US/external_career_page", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abb", "levels_url": "https://www.levels.fyi/companies/abb/salaries", "google_jobs_url": "https://www.google.com/search?q=Abb+jobs+careers"}, {"id": 54, "name": "Abby Care", "ats": "ashby", "slug": "abby-care", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abby-care", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abby%20Care", "levels_url": "https://www.levels.fyi/companies/abby-care/salaries", "google_jobs_url": "https://www.google.com/search?q=Abby%20Care+jobs+careers"}, {"id": 55, "name": "Abe", "ats": "ashby", "slug": "abe", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abe", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abe", "levels_url": "https://www.levels.fyi/companies/abe/salaries", "google_jobs_url": "https://www.google.com/search?q=Abe+jobs+careers"}, {"id": 56, "name": "Abglobal", "ats": "workday", "slug": "abglobal:wd1:abcampuscareers", "open_jobs": "23", "board_url": "https://abglobal.wd1.myworkdayjobs.com/en-US/abcampuscareers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abglobal", "levels_url": "https://www.levels.fyi/companies/abglobal/salaries", "google_jobs_url": "https://www.google.com/search?q=Abglobal+jobs+careers"}, {"id": 57, "name": "Ably (UK)", "ats": "greenhouse", "slug": "ably30", "open_jobs": "5", "board_url": "https://boards.greenhouse.io/ably30", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Ably%20%28UK%29", "levels_url": "https://www.levels.fyi/companies/ably-uk/salaries", "google_jobs_url": "https://www.google.com/search?q=Ably%20%28UK%29+jobs+careers"}, {"id": 58, "name": "ABM Industries", "ats": "lever", "slug": "ableserve", "open_jobs": "79", "board_url": "https://jobs.lever.co/ableserve", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ABM%20Industries", "levels_url": "https://www.levels.fyi/companies/abm-industries/salaries", "google_jobs_url": "https://www.google.com/search?q=ABM%20Industries+jobs+careers"}, {"id": 59, "name": "Abnormal", "ats": "greenhouse", "slug": "abnormalsecurity", "open_jobs": "82", "board_url": "https://boards.greenhouse.io/abnormalsecurity", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abnormal", "levels_url": "https://www.levels.fyi/companies/abnormal/salaries", "google_jobs_url": "https://www.google.com/search?q=Abnormal+jobs+careers"}, {"id": 60, "name": "Abound", "ats": "ashby", "slug": "abound", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abound", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abound", "levels_url": "https://www.levels.fyi/companies/abound/salaries", "google_jobs_url": "https://www.google.com/search?q=Abound+jobs+careers"}, {"id": 61, "name": "Above and Beyond Therapy", "ats": "lever", "slug": "abtaba", "open_jobs": "257", "board_url": "https://jobs.lever.co/abtaba", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Above%20and%20Beyond%20Therapy", "levels_url": "https://www.levels.fyi/companies/above-and-beyond-therapy/salaries", "google_jobs_url": "https://www.google.com/search?q=Above%20and%20Beyond%20Therapy+jobs+careers"}, {"id": 62, "name": "Above Lending", "ats": "lever", "slug": "abovelending", "open_jobs": "3", "board_url": "https://jobs.lever.co/abovelending", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Above%20Lending", "levels_url": "https://www.levels.fyi/companies/above-lending/salaries", "google_jobs_url": "https://www.google.com/search?q=Above%20Lending+jobs+careers"}, {"id": 63, "name": "Abridge", "ats": "ashby", "slug": "abridge", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abridge", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abridge", "levels_url": "https://www.levels.fyi/companies/abridge/salaries", "google_jobs_url": "https://www.google.com/search?q=Abridge+jobs+careers"}, {"id": 64, "name": "Absorblms", "ats": "ashby", "slug": "absorblms", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/absorblms", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Absorblms", "levels_url": "https://www.levels.fyi/companies/absorblms/salaries", "google_jobs_url": "https://www.google.com/search?q=Absorblms+jobs+careers"}, {"id": 65, "name": "Abt", "ats": "lever", "slug": "abt", "open_jobs": "3", "board_url": "https://jobs.lever.co/abt", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abt", "levels_url": "https://www.levels.fyi/companies/abt/salaries", "google_jobs_url": "https://www.google.com/search?q=Abt+jobs+careers"}, {"id": 66, "name": "Abzena Inc.", "ats": "lever", "slug": "abzena", "open_jobs": "30", "board_url": "https://jobs.eu.lever.co/abzena", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abzena%20Inc.", "levels_url": "https://www.levels.fyi/companies/abzena-inc/salaries", "google_jobs_url": "https://www.google.com/search?q=Abzena%20Inc.+jobs+careers"}, {"id": 67, "name": "Accela", "ats": "greenhouse", "slug": "accela", "open_jobs": "8", "board_url": "https://boards.greenhouse.io/accela", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accela", "levels_url": "https://www.levels.fyi/companies/accela/salaries", "google_jobs_url": "https://www.google.com/search?q=Accela+jobs+careers"}, {"id": 68, "name": "Acceldata", "ats": "lever", "slug": "acceldata", "open_jobs": "36", "board_url": "https://jobs.lever.co/acceldata", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acceldata", "levels_url": "https://www.levels.fyi/companies/acceldata/salaries", "google_jobs_url": "https://www.google.com/search?q=Acceldata+jobs+careers"}, {"id": 69, "name": "Accelevents", "ats": "ashby", "slug": "accelevents", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/accelevents", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accelevents", "levels_url": "https://www.levels.fyi/companies/accelevents/salaries", "google_jobs_url": "https://www.google.com/search?q=Accelevents+jobs+careers"}, {"id": 70, "name": "Accenture Federal Services", "ats": "greenhouse", "slug": "accenturefederalservices", "open_jobs": "716", "board_url": "https://boards.greenhouse.io/accenturefederalservices", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accenture%20Federal%20Services", "levels_url": "https://www.levels.fyi/companies/accenture-federal-services/salaries", "google_jobs_url": "https://www.google.com/search?q=Accenture%20Federal%20Services+jobs+careers"}, {"id": 71, "name": "Access Softek", "ats": "lever", "slug": "accesssoftek", "open_jobs": "2", "board_url": "https://jobs.lever.co/accesssoftek", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Access%20Softek", "levels_url": "https://www.levels.fyi/companies/access-softek/salaries", "google_jobs_url": "https://www.google.com/search?q=Access%20Softek+jobs+careers"}, {"id": 72, "name": "Accord", "ats": "ashby", "slug": "accord", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/accord", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accord", "levels_url": "https://www.levels.fyi/companies/accord/salaries", "google_jobs_url": "https://www.google.com/search?q=Accord+jobs+careers"}, {"id": 73, "name": "Accurate Background", "ats": "lever", "slug": "accurate", "open_jobs": "0", "board_url": "https://jobs.lever.co/accurate", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accurate%20Background", "levels_url": "https://www.levels.fyi/companies/accurate-background/salaries", "google_jobs_url": "https://www.google.com/search?q=Accurate%20Background+jobs+careers"}, {"id": 74, "name": "Accurx", "ats": "ashby", "slug": "accurx", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/accurx", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accurx", "levels_url": "https://www.levels.fyi/companies/accurx/salaries", "google_jobs_url": "https://www.google.com/search?q=Accurx+jobs+careers"}, {"id": 75, "name": "AccuWeather Careers", "ats": "greenhouse", "slug": "accuweather", "open_jobs": "19", "board_url": "https://boards.greenhouse.io/accuweather", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=AccuWeather%20Careers", "levels_url": "https://www.levels.fyi/companies/accuweather-careers/salaries", "google_jobs_url": "https://www.google.com/search?q=AccuWeather%20Careers+jobs+careers"}, {"id": 76, "name": "Ace 1 Media", "ats": "ashby", "slug": "ace-1-media", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/ace-1-media", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Ace%201%20Media", "levels_url": "https://www.levels.fyi/companies/ace-1-media/salaries", "google_jobs_url": "https://www.google.com/search?q=Ace%201%20Media+jobs+careers"}, {"id": 77, "name": "Acehardware", "ats": "workday", "slug": "acehardware:wd1:External", "open_jobs": "155", "board_url": "https://acehardware.wd1.myworkdayjobs.com/en-US/External", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acehardware", "levels_url": "https://www.levels.fyi/companies/acehardware/salaries", "google_jobs_url": "https://www.google.com/search?q=Acehardware+jobs+careers"}, {"id": 78, "name": "Acehardware", "ats": "workday", "slug": "acehardware:wd1:external", "open_jobs": "155", "board_url": "https://acehardware.wd1.myworkdayjobs.com/en-US/external", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acehardware", "levels_url": "https://www.levels.fyi/companies/acehardware/salaries", "google_jobs_url": "https://www.google.com/search?q=Acehardware+jobs+careers"}, {"id": 79, "name": "Achievement First Network Support", "ats": "greenhouse", "slug": "achievementfirstnetworksupportcareers", "open_jobs": "4", "board_url": "https://boards.greenhouse.io/achievementfirstnetworksupportcareers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achievement%20First%20Network%20Support", "levels_url": "https://www.levels.fyi/companies/achievement-first-network-support/salaries", "google_jobs_url": "https://www.google.com/search?q=Achievement%20First%20Network%20Support+jobs+careers"}, {"id": 80, "name": "Achievers", "ats": "lever", "slug": "achievers", "open_jobs": "13", "board_url": "https://jobs.lever.co/achievers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achievers", "levels_url": "https://www.levels.fyi/companies/achievers/salaries", "google_jobs_url": "https://www.google.com/search?q=Achievers+jobs+careers"}, {"id": 81, "name": "Achilleshr", "ats": "ashby", "slug": "achilleshr", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/achilleshr", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achilleshr", "levels_url": "https://www.levels.fyi/companies/achilleshr/salaries", "google_jobs_url": "https://www.google.com/search?q=Achilleshr+jobs+careers"}, {"id": 82, "name": "Achira", "ats": "ashby", "slug": "achira", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/achira", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achira", "levels_url": "https://www.levels.fyi/companies/achira/salaries", "google_jobs_url": "https://www.google.com/search?q=Achira+jobs+careers"}, {"id": 83, "name": "ACI Learning", "ats": "greenhouse", "slug": "acilearning", "open_jobs": "4", "board_url": "https://boards.greenhouse.io/acilearning", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ACI%20Learning", "levels_url": "https://www.levels.fyi/companies/aci-learning/salaries", "google_jobs_url": "https://www.google.com/search?q=ACI%20Learning+jobs+careers"}, {"id": 84, "name": "Ackermann Group", "ats": "greenhouse", "slug": "ackermanngroup", "open_jobs": "17", "board_url": "https://boards.greenhouse.io/ackermanngroup", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Ackermann%20Group", "levels_url": "https://www.levels.fyi/companies/ackermann-group/salaries", "google_jobs_url": "https://www.google.com/search?q=Ackermann%20Group+jobs+careers"}, {"id": 85, "name": "Aclima", "ats": "ashby", "slug": "aclima", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/aclima", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aclima", "levels_url": "https://www.levels.fyi/companies/aclima/salaries", "google_jobs_url": "https://www.google.com/search?q=Aclima+jobs+careers"}, {"id": 86, "name": "ACLU of Northern California", "ats": "greenhouse", "slug": "aclunc", "open_jobs": "6", "board_url": "https://boards.greenhouse.io/aclunc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ACLU%20of%20Northern%20California", "levels_url": "https://www.levels.fyi/companies/aclu-of-northern-california/salaries", "google_jobs_url": "https://www.google.com/search?q=ACLU%20of%20Northern%20California+jobs+careers"}, {"id": 87, "name": "Acme", "ats": "ashby", "slug": "acme", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acme", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acme", "levels_url": "https://www.levels.fyi/companies/acme/salaries", "google_jobs_url": "https://www.google.com/search?q=Acme+jobs+careers"}, {"id": 88, "name": "ACORD Corporation", "ats": "lever", "slug": "acord", "open_jobs": "2", "board_url": "https://jobs.lever.co/acord", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ACORD%20Corporation", "levels_url": "https://www.levels.fyi/companies/acord-corporation/salaries", "google_jobs_url": "https://www.google.com/search?q=ACORD%20Corporation+jobs+careers"}, {"id": 89, "name": "Acorn Health - Internal", "ats": "greenhouse", "slug": "internalacornhealth", "open_jobs": "4", "board_url": "https://boards.greenhouse.io/internalacornhealth", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acorn%20Health%20-%20Internal", "levels_url": "https://www.levels.fyi/companies/acorn-health-internal/salaries", "google_jobs_url": "https://www.google.com/search?q=Acorn%20Health%20-%20Internal+jobs+careers"}, {"id": 90, "name": "Acorns", "ats": "ashby", "slug": "acorns", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acorns", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acorns", "levels_url": "https://www.levels.fyi/companies/acorns/salaries", "google_jobs_url": "https://www.google.com/search?q=Acorns+jobs+careers"}, {"id": 91, "name": "Acquia", "ats": "greenhouse", "slug": "acquia", "open_jobs": "6", "board_url": "https://boards.greenhouse.io/acquia", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acquia", "levels_url": "https://www.levels.fyi/companies/acquia/salaries", "google_jobs_url": "https://www.google.com/search?q=Acquia+jobs+careers"}, {"id": 92, "name": "Acquird", "ats": "ashby", "slug": "acquird", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acquird", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acquird", "levels_url": "https://www.levels.fyi/companies/acquird/salaries", "google_jobs_url": "https://www.google.com/search?q=Acquird+jobs+careers"}, {"id": 93, "name": "Acquisition", "ats": "ashby", "slug": "acquisition", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acquisition", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acquisition", "levels_url": "https://www.levels.fyi/companies/acquisition/salaries", "google_jobs_url": "https://www.google.com/search?q=Acquisition+jobs+careers"}, {"id": 94, "name": "Acron Aviation", "ats": "lever", "slug": "acronaviation", "open_jobs": "49", "board_url": "https://jobs.lever.co/acronaviation", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acron%20Aviation", "levels_url": "https://www.levels.fyi/companies/acron-aviation/salaries", "google_jobs_url": "https://www.google.com/search?q=Acron%20Aviation+jobs+careers"}, {"id": 95, "name": "Acselhealth", "ats": "lever", "slug": "acselhealth", "open_jobs": "2", "board_url": "https://jobs.lever.co/acselhealth", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acselhealth", "levels_url": "https://www.levels.fyi/companies/acselhealth/salaries", "google_jobs_url": "https://www.google.com/search?q=Acselhealth+jobs+careers"}, {"id": 96, "name": "Actian Corporation", "ats": "lever", "slug": "actian", "open_jobs": "2", "board_url": "https://jobs.lever.co/actian", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Actian%20Corporation", "levels_url": "https://www.levels.fyi/companies/actian-corporation/salaries", "google_jobs_url": "https://www.google.com/search?q=Actian%20Corporation+jobs+careers"}, {"id": 97, "name": "Action Property Management", "ats": "lever", "slug": "actionlife", "open_jobs": "63", "board_url": "https://jobs.lever.co/actionlife", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Action%20Property%20Management", "levels_url": "https://www.levels.fyi/companies/action-property-management/salaries", "google_jobs_url": "https://www.google.com/search?q=Action%20Property%20Management+jobs+careers"}, {"id": 98, "name": "Active Theory", "ats": "lever", "slug": "activetheory", "open_jobs": "4", "board_url": "https://jobs.lever.co/activetheory", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Active%20Theory", "levels_url": "https://www.levels.fyi/companies/active-theory/salaries", "google_jobs_url": "https://www.google.com/search?q=Active%20Theory+jobs+careers"}, {"id": 99, "name": "ActiveCampaign", "ats": "lever", "slug": "activecampaign", "open_jobs": "12", "board_url": "https://jobs.lever.co/activecampaign", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ActiveCampaign", "levels_url": "https://www.levels.fyi/companies/activecampaign/salaries", "google_jobs_url": "https://www.google.com/search?q=ActiveCampaign+jobs+careers"}, {"id": 100, "name": "Actriv", "ats": "lever", "slug": "actriv", "open_jobs": "1", "board_url": "https://jobs.lever.co/actriv", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Actriv", "levels_url": "https://www.levels.fyi/companies/actriv/salaries", "google_jobs_url": "https://www.google.com/search?q=Actriv+jobs+careers"}];
 let CURRENT_TAILORED_RESULT = null;

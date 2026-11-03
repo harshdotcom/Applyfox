@@ -471,6 +471,38 @@ def render_resume_to_html(tex_content: str, title_badge: str = "Preview") -> str
   .entry-block {{
     margin-bottom: 5px;
   }}
+  @media (max-width: 768px) {{
+    body {{
+      padding: 4px !important;
+    }}
+    .paper-page {{
+      max-width: 100% !important;
+      min-height: auto !important;
+      padding: 16px 12px !important;
+      box-shadow: none !important;
+      border-radius: 6px;
+    }}
+    .header-name {{
+      font-size: 1.5rem !important;
+    }}
+    .header-links {{
+      font-size: 0.72rem !important;
+      flex-wrap: wrap !important;
+      gap: 4px 8px !important;
+    }}
+    .entry-header-row, .project-header-row {{
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 2px !important;
+    }}
+    .entry-right, .proj-right {{
+      text-align: left !important;
+      font-size: 0.76rem !important;
+    }}
+    .resume-list {{
+      padding-left: 14px !important;
+    }}
+  }}
   @media print {{
     body {{
       background: none !important;

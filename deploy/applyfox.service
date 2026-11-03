@@ -1,0 +1,17 @@
+[Unit]
+Description=Applyfox CV Studio & Career Portals Engine
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/applyfox
+Environment="PATH=/var/www/applyfox/venv/bin:/usr/local/bin:/usr/bin"
+Environment="HOST=127.0.0.1"
+Environment="PORT=8080"
+ExecStart=/var/www/applyfox/venv/bin/python3 cv_service.py serve --host 127.0.0.1 --port 8080
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

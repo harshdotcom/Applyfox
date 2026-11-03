@@ -2557,13 +2557,16 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(data, ensure_ascii=False).encode("utf-8"))
 
 
-def run_server(port: int = 8080):
-    """Start local web server."""
-    server_address = ("127.0.0.1", port)
+def run_server(host: str = "0.0.0.0", port: int = 8080):
+    """Start web server."""
+    server_address = (host, port)
     httpd = ThreadingHTTPServer(server_address, CVAppRequestHandler)
+    display_host = "127.0.0.1" if host == "0.0.0.0" else host
     print(f"\n=======================================================")
     print(f" Applyfox CV Studio & Multi-Portal Sheets Engine")
-    print(f" Access URL: http://127.0.0.1:{port}")
+    print(f" Access URL: http://{display_host}:{port}")
+    if host == "0.0.0.0":
+        print(f" Bound to 0.0.0.0 (Ready for Cloud & Docker deployment)")
     print(f" Press Ctrl+C to stop.")
     print(f"=======================================================\n")
     try:
@@ -2575,4 +2578,4 @@ def run_server(port: int = 8080):
 
 
 if __name__ == "__main__":
-    run_server(8080)
+    run_server("0.0.0.0", int(os.getenv("PORT", "8080")))

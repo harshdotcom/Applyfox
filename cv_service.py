@@ -249,8 +249,9 @@ def main():
     subparsers = parser.add_subparsers(dest="command", help="Sub-commands")
 
     # serve
-    p_serve = subparsers.add_parser("serve", help="Launch interactive local Web Application")
-    p_serve.add_argument("--port", type=int, default=8080, help="Web server port (default: 8080)")
+    p_serve = subparsers.add_parser("serve", help="Launch interactive Web Application")
+    p_serve.add_argument("--host", default=os.getenv("HOST", "0.0.0.0"), help="Web server host (default: 0.0.0.0 or $HOST)")
+    p_serve.add_argument("--port", type=int, default=int(os.getenv("PORT", "8080")), help="Web server port (default: 8080 or $PORT)")
 
     # tailor
     p_tailor = subparsers.add_parser("tailor", help="Tailor CV per Job Description")
@@ -284,7 +285,7 @@ def main():
     args = parser.parse_args()
 
     if args.command == "serve":
-        run_server(port=args.port)
+        run_server(host=args.host, port=args.port)
     elif args.command == "tailor":
         cmd_tailor(args)
     elif args.command == "interactive":

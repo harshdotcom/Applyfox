@@ -466,61 +466,267 @@ HTML_PAGE = """<!DOCTYPE html>
     margin: 0;
   }
 
-  /* Stats Counter Strip */
+  /* Landing Page Dedicated Width & Spacing (Prevents Stretched Content) */
+  #view-home {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
   .stats-strip {
     background: #FFFFFF;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    padding: 24px 32px;
+    padding: 24px 28px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
-    margin: 44px 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin: 36px 0 44px;
     box-shadow: var(--card-shadow);
   }
-  .stat-item {
-    text-align: center;
-  }
-  .stat-num {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: 2.4rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-  .stat-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-secondary);
-    margin-top: 4px;
+  @media (max-width: 900px) {
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* Call To Action Box */
+  /* Refined Warm CTA Banner */
   .cta-banner {
-    background: #18181B;
-    color: #FFFFFF;
-    border-radius: 16px;
-    padding: 44px 32px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 56px 36px;
     text-align: center;
-    margin: 48px 0 20px;
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
+    margin: 54px 0 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 12px 32px -4px rgba(28, 25, 23, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0D9488, #F59E0B, #8B5CF6);
+  }
+  .cta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #F4FBF9;
+    border: 1px solid #CCFBF1;
+    color: var(--accent-emerald-dark);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 16px;
   }
   .cta-title {
-    font-family: 'Newsreader', serif;
-    font-size: 2.4rem;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 2.5rem;
     font-weight: 500;
+    color: var(--text-primary);
     margin: 0 0 12px;
     letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .cta-title em {
+    font-style: italic;
+    color: var(--accent-emerald);
   }
   .cta-sub {
     font-size: 1.02rem;
-    color: #A1A1AA;
+    color: var(--text-secondary);
     max-width: 580px;
     margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+
+  /* Comprehensive App Footer */
+  .app-footer {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    margin-top: 40px;
+    margin-bottom: 24px;
+    padding: 48px 36px 28px;
+    box-shadow: var(--card-shadow);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1.3fr;
+    gap: 40px;
+  }
+  @media (max-width: 960px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+  .footer-col-main .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .footer-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    max-width: 340px;
+  }
+  .contrib-card {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+  }
+  .contrib-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .contrib-text {
+    font-size: 0.82rem;
     line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0 0 12px 0;
+  }
+  .contrib-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+  .footer-heading {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    margin-bottom: 9px;
+  }
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.86rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.15s ease;
+  }
+  .footer-links a:hover {
+    color: var(--accent-emerald-dark);
+  }
+  .creator-card {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+  .creator-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .creator-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0D9488 0%, #065F46 100%);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
+  }
+  .creator-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+  .creator-title {
+    font-size: 0.78rem;
+    color: var(--accent-emerald-dark);
+    font-weight: 500;
+  }
+  .creator-bio {
+    font-size: 0.83rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+  }
+  .creator-socials {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .social-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .social-linkedin {
+    background: #F0F7FF;
+    color: #0A66C2;
+    border: 1px solid #D0E4FF;
+  }
+  .social-linkedin:hover {
+    background: #0A66C2;
+    color: #FFFFFF;
+  }
+  .social-instagram {
+    background: #FFF1F5;
+    color: #E1306C;
+    border: 1px solid #FFD1DF;
+  }
+  .social-instagram:hover {
+    background: #E1306C;
+    color: #FFFFFF;
+  }
+  .social-github {
+    background: #FFFFFF;
+    color: #18181B;
+    border: 1px solid #E4E4E7;
+  }
+  .social-github:hover {
+    background: #18181B;
+    color: #FFFFFF;
+  }
+  .footer-bottom {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid #EFECE6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 14px;
   }
 
   /* Cards */
@@ -999,23 +1205,28 @@ HTML_PAGE = """<!DOCTYPE html>
       <span class="brand-badge">STUDIO &bull; SHEETS</span>
     </div>
 
-    <nav class="nav-tabs">
-      <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
-        <i class="fa fa-sparkles"></i> Overview
-      </button>
-      <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
-        <i class="fa fa-wand-magic-sparkles"></i> Studio &amp; Tailor
-      </button>
-      <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
-        <i class="fa fa-table-list"></i> Portal Sheets (7,008)
-      </button>
-      <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
-        <i class="fa fa-clipboard-check"></i> Tracker (<span id="appCount">0</span>)
-      </button>
-      <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
-        <i class="fa fa-file-code"></i> Base main.tex
-      </button>
-    </nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <nav class="nav-tabs">
+        <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
+          <i class="fa fa-sparkles"></i> Overview
+        </button>
+        <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
+          <i class="fa fa-wand-magic-sparkles"></i> Studio &amp; Tailor
+        </button>
+        <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
+          <i class="fa fa-table-list"></i> Portal Sheets (7,008)
+        </button>
+        <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
+          <i class="fa fa-clipboard-check"></i> Tracker (<span id="appCount">0</span>)
+        </button>
+        <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
+          <i class="fa fa-file-code"></i> Base main.tex
+        </button>
+      </nav>
+      <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 0.82rem;" title="Contribute on GitHub">
+        <i class="fa-brands fa-github"></i> <span>GitHub</span>
+      </a>
+    </div>
   </header>
 
   <main>
@@ -1166,19 +1377,119 @@ HTML_PAGE = """<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- Call To Action Banner -->
+      <!-- Refined Warm CTA Banner -->
       <div class="cta-banner">
-        <h2 class="cta-title">Ready to tailor your CV for your next role?</h2>
-        <p class="cta-sub">Launch the interactive CV Studio or explore 7,000+ career boards across top tech startups and unicorns.</p>
-        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-          <button class="btn btn-primary btn-lg" style="background: #FFFFFF; color: #18181B;" onclick="switchView('tailor')">
-            <i class="fa fa-wand-magic-sparkles"></i> Open CV Studio
+        <div class="cta-pill">
+          <i class="fa fa-sparkles"></i> START TAILORING TODAY
+        </div>
+        <h2 class="cta-title">Ready to tailor your CV <em>for your next role?</em></h2>
+        <p class="cta-sub">Launch the interactive CV Studio or explore 7,008 verified career boards across top tech startups, scaleups, and unicorns.</p>
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
+            <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
           </button>
-          <button class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border-color: rgba(255,255,255,0.2);" onclick="switchView('portals')">
-            <i class="fa fa-table-list"></i> Browse Portal Sheets
+          <button class="btn btn-secondary btn-lg" onclick="switchView('portals')">
+            <i class="fa fa-table-list"></i> Explore 7,008 Portal Sheets
           </button>
         </div>
       </div>
+
+      <!-- ========================================== -->
+      <!-- FOOTER: CREATOR & OPEN SOURCE CONTRIBUTION -->
+      <!-- ========================================== -->
+      <footer class="app-footer">
+        <div class="footer-inner">
+          <!-- Col 1: Brand & Open Source Contributions -->
+          <div class="footer-col footer-col-main">
+            <div class="footer-brand">
+              <span style="font-size: 1.4rem;">🦊</span>
+              <span style="font-weight: 700; font-size: 1.15rem; color: var(--text-primary); letter-spacing: -0.02em;">Applyfox</span>
+              <span class="brand-badge">STUDIO &bull; SHEETS</span>
+            </div>
+            <p class="footer-desc">
+              An open-source, local-first career intelligence platform and Overleaf-grade LaTeX CV studio engineered for developers.
+            </p>
+
+            <div class="contrib-card">
+              <div class="contrib-header">
+                <i class="fa-brands fa-github" style="font-size: 1.15rem; color: #18181B;"></i>
+                <span style="font-weight: 600; font-size: 0.88rem; color: #18181B;">Open Source Contributions</span>
+              </div>
+              <p class="contrib-text">
+                Applyfox is open-source! We welcome community contributions &mdash; add new ATS career boards, improve CV tailoring algorithms, or submit LaTeX templates.
+              </p>
+              <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary contrib-btn">
+                <i class="fa-solid fa-code-fork"></i> Star &amp; Contribute on GitHub &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Workspace & Portal Links -->
+          <div class="footer-col">
+            <div class="footer-heading">WORKSPACE NAVIGATION</div>
+            <ul class="footer-links">
+              <li><a href="#" onclick="switchView('tailor'); return false;"><i class="fa fa-wand-magic-sparkles"></i> CV Studio &amp; Tailor</a></li>
+              <li><a href="#" onclick="switchView('portals'); return false;"><i class="fa fa-table-list"></i> Portal Sheets (7,008)</a></li>
+              <li><a href="#" onclick="switchView('tracker'); return false;"><i class="fa fa-clipboard-check"></i> Applications Tracker</a></li>
+              <li><a href="#" onclick="switchView('base-cv'); return false;"><i class="fa fa-file-code"></i> Base LaTeX main.tex</a></li>
+            </ul>
+
+            <div class="footer-heading" style="margin-top: 22px;">CAREER PORTALS</div>
+            <ul class="footer-links">
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('master'); return false;"><i class="fa fa-globe"></i> Master Sheet (7,008)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('ashby'); return false;"><i class="fa fa-bolt"></i> Ashby Boards (3,212)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('greenhouse'); return false;"><i class="fa fa-seedling"></i> Greenhouse Portals (1,894)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('lever'); return false;"><i class="fa fa-sliders"></i> Lever Boards (1,522)</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Creator Attribution & Profiles -->
+          <div class="footer-col footer-col-creator">
+            <div class="footer-heading">CRAFTED &amp; ENGINEERED BY</div>
+            <div class="creator-card">
+              <div class="creator-header">
+                <div class="creator-avatar">HJ</div>
+                <div>
+                  <div class="creator-name">Harsh Jha</div>
+                  <div class="creator-title">IIT Indore Alumnus &bull; SDE</div>
+                </div>
+              </div>
+              <p class="creator-bio">
+                Software Development Engineer building scalable cloud-native architectures, agentic AI systems, and developer tools.
+              </p>
+              
+              <div class="creator-socials">
+                <a href="https://www.linkedin.com/in/harshjha-iiti/" target="_blank" rel="noopener noreferrer" class="social-pill social-linkedin" title="Connect on LinkedIn">
+                  <i class="fa-brands fa-linkedin"></i>
+                  <span>LinkedIn</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
+                </a>
+                <a href="https://www.instagram.com/jhaharsh03/" target="_blank" rel="noopener noreferrer" class="social-pill social-instagram" title="Follow on Instagram">
+                  <i class="fa-brands fa-instagram"></i>
+                  <span>Instagram</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
+                </a>
+                <a href="https://github.com/jhaharsh03" target="_blank" rel="noopener noreferrer" class="social-pill social-github" title="Follow on GitHub">
+                  <i class="fa-brands fa-github"></i>
+                  <span>GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Copyright & Meta -->
+        <div class="footer-bottom">
+          <div>
+            &copy; 2026 Applyfox &bull; Designed &amp; Developed by <strong>Harsh Jha</strong> &bull; Open Source under MIT License.
+          </div>
+          <div class="footer-bottom-badges">
+            <span class="chip chip-skill"><i class="fa-solid fa-bolt"></i> Tectonic XeTeX Engine</span>
+            <span class="chip chip-score"><i class="fa-solid fa-shield-halved"></i> 100% Local &amp; Private</span>
+          </div>
+        </div>
+      </footer>
     </div>
 
     <!-- ========================================== -->

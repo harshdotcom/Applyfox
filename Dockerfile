@@ -35,3 +35,4 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 8080
 
 CMD ["python3", "cv_service.py", "serve"]
+

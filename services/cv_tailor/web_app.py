@@ -2,6 +2,8 @@
 """
 web_app.py - High-performance local web application & API server for Applyfox.
 Features:
+  - Default Frontpage / Product Overview showcasing complete platform capabilities
+  - Dedicated Workspaces for CV Studio, Paginated Multi-Portal Sheets, Tracker, and Base CV
   - Editorial warm-paper minimalist design system inspired by Pi & Pixel / modern dev tools
   - On-demand server-side paginated multi-sheet directory (Master, Ashby, Greenhouse, Lever, Workday)
   - Genuine Overleaf-grade LaTeX PDF compilation engine (standalone Tectonic core)
@@ -112,11 +114,11 @@ HTML_PAGE = """<!DOCTYPE html>
 
   /* Navigation Bar */
   header {
-    background: rgba(250, 248, 245, 0.92);
+    background: rgba(250, 248, 245, 0.94);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border-subtle);
-    padding: 14px 32px;
+    padding: 12px 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -133,6 +135,7 @@ HTML_PAGE = """<!DOCTYPE html>
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
+    cursor: pointer;
   }
   .brand-badge {
     background: var(--accent-amber-light);
@@ -140,14 +143,14 @@ HTML_PAGE = """<!DOCTYPE html>
     border: 1px solid #FDE68A;
     padding: 2px 8px;
     border-radius: var(--radius-pill);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
   .nav-tabs {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     background: #F0EDE8;
     padding: 4px;
     border-radius: 12px;
@@ -157,15 +160,15 @@ HTML_PAGE = """<!DOCTYPE html>
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    padding: 8px 16px;
+    padding: 7px 15px;
     border-radius: 8px;
-    font-size: 0.86rem;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
   }
   .tab-btn:hover {
     color: var(--text-primary);
@@ -177,11 +180,52 @@ HTML_PAGE = """<!DOCTYPE html>
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   }
 
-  /* Editorial Hero Header */
+  /* Main Container */
+  main {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 20px 28px 48px;
+  }
+
+  /* Workspace Compact Header */
+  .workspace-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0 18px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #EFECE6;
+  }
+  .workspace-breadcrumb {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .workspace-breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .workspace-breadcrumb a:hover {
+    color: var(--text-primary);
+  }
+  .workspace-breadcrumb strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .workspace-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* Editorial Hero Header (Landing Page Only) */
   .hero-section {
     text-align: center;
-    padding: 36px 20px 20px;
-    max-width: 900px;
+    padding: 56px 20px 32px;
+    max-width: 960px;
     margin: 0 auto;
   }
   .hero-pill {
@@ -191,12 +235,12 @@ HTML_PAGE = """<!DOCTYPE html>
     background: #FFFFFF;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-pill);
-    padding: 4px 14px;
-    font-size: 0.72rem;
+    padding: 5px 16px;
+    font-size: 0.74rem;
     font-weight: 600;
     color: var(--text-secondary);
     letter-spacing: 0.08em;
-    margin-bottom: 16px;
+    margin-bottom: 22px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.02);
   }
   .hero-dot {
@@ -208,12 +252,12 @@ HTML_PAGE = """<!DOCTYPE html>
   }
   .hero-title {
     font-family: 'Newsreader', Georgia, serif;
-    font-size: 2.85rem;
+    font-size: 3.4rem;
     font-weight: 500;
-    line-height: 1.18;
+    line-height: 1.15;
     color: var(--text-primary);
-    margin: 0 0 12px;
-    letter-spacing: -0.025em;
+    margin: 0 0 16px;
+    letter-spacing: -0.03em;
   }
   .hero-accent {
     color: var(--accent-emerald);
@@ -221,18 +265,262 @@ HTML_PAGE = """<!DOCTYPE html>
     font-weight: 400;
   }
   .hero-subtitle {
-    font-size: 1.02rem;
-    line-height: 1.55;
+    font-size: 1.12rem;
+    line-height: 1.6;
     color: var(--text-secondary);
-    margin: 0 auto;
-    max-width: 680px;
+    margin: 0 auto 32px;
+    max-width: 720px;
+  }
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
   }
 
-  /* Main Container */
-  main {
-    max-width: 1540px;
+  /* Live Interactive Terminal Card */
+  .terminal-card {
+    background: #18181B;
+    border-radius: 14px;
+    padding: 16px 20px;
+    color: #F4F4F5;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
+  }
+  .terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #27272A;
+    margin-bottom: 14px;
+  }
+  .traffic-lights {
+    display: flex;
+    gap: 7px;
+  }
+  .traffic-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #EF4444; }
+  .dot-yellow { background: #F59E0B; }
+  .dot-green { background: #10B981; }
+  .terminal-tag {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 5px;
+    letter-spacing: 0.04em;
+  }
+  .terminal-body {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #D4D4D8;
+    background: #09090B;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  .terminal-token-kw { color: #F472B6; }
+  .terminal-token-cmd { color: #60A5FA; }
+  .terminal-token-arg { color: #34D399; }
+  .terminal-token-comment { color: #71717A; font-style: italic; }
+
+  /* Feature Cards Grid */
+  .section-heading {
+    text-align: center;
+    margin: 50px 0 24px;
+  }
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-emerald);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Newsreader', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+  }
+  .section-desc {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    max-width: 600px;
     margin: 0 auto;
-    padding: 20px 28px 48px;
+    line-height: 1.5;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .feature-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--border-hover);
+  }
+  .feature-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+  }
+  .icon-purple { background: #FAF5FF; color: #7E22CE; border: 1px solid #F3E8FF; }
+  .icon-emerald { background: #ECFDF5; color: #047857; border: 1px solid #D1FAE5; }
+  .icon-sky { background: #F0F9FF; color: #0369A1; border: 1px solid #E0F2FE; }
+  .icon-amber { background: #FFFBEB; color: #B45309; border: 1px solid #FEF3C7; }
+
+  .feature-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .feature-text {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+  }
+  .feature-link {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+  .feature-link:hover {
+    color: var(--accent-emerald);
+  }
+
+  /* Workflow Steps */
+  .workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 28px;
+  }
+  @media (max-width: 900px) {
+    .workflow-grid { grid-template-columns: 1fr; }
+  }
+  .step-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    position: relative;
+    box-shadow: var(--card-shadow);
+  }
+  .step-num {
+    font-family: 'Newsreader', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #E7E5E4;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .step-text {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Stats Counter Strip */
+  .stats-strip {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin: 44px 0;
+    box-shadow: var(--card-shadow);
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Call To Action Box */
+  .cta-banner {
+    background: #18181B;
+    color: #FFFFFF;
+    border-radius: 16px;
+    padding: 44px 32px;
+    text-align: center;
+    margin: 48px 0 20px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
+  }
+  .cta-title {
+    font-family: 'Newsreader', serif;
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .cta-sub {
+    font-size: 1.02rem;
+    color: #A1A1AA;
+    max-width: 580px;
+    margin: 0 auto 28px;
+    line-height: 1.5;
   }
 
   /* Cards */
@@ -336,14 +624,19 @@ HTML_PAGE = """<!DOCTYPE html>
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 9px 16px;
+    padding: 9px 18px;
     border-radius: 8px;
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s ease;
     border: 1px solid transparent;
     text-decoration: none;
+  }
+  .btn-lg {
+    padding: 11px 22px;
+    font-size: 0.94rem;
+    border-radius: 10px;
   }
   .btn-primary {
     background: var(--accent-ink);
@@ -385,54 +678,6 @@ HTML_PAGE = """<!DOCTYPE html>
     display: flex;
     gap: 10px;
     margin-top: 18px;
-  }
-
-  /* Floating Terminal / Compiler Status Banner */
-  .terminal-card {
-    background: #18181B;
-    border-radius: 12px;
-    padding: 12px 16px;
-    color: #F4F4F5;
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-  }
-  .terminal-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .traffic-lights {
-    display: flex;
-    gap: 6px;
-  }
-  .traffic-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-  }
-  .dot-red { background: #EF4444; }
-  .dot-yellow { background: #F59E0B; }
-  .dot-green { background: #10B981; }
-  .terminal-tag {
-    background: rgba(16, 185, 129, 0.15);
-    color: #34D399;
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    letter-spacing: 0.04em;
-  }
-  .terminal-right {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    color: #A1A1AA;
-    display: flex;
-    align-items: center;
-    gap: 8px;
   }
 
   /* Results Tabs */
@@ -728,12 +973,6 @@ HTML_PAGE = """<!DOCTYPE html>
     cursor: not-allowed;
   }
 
-  /* Status Tags in Tracker */
-  .status-applied { background: #EFF6FF; color: #1D4ED8; }
-  .status-interviewing { background: #FEF3C7; color: #B45309; }
-  .status-offer { background: #ECFDF5; color: #047857; }
-  .status-rejected { background: #FEE2E2; color: #B91C1C; }
-
   /* Toast notification */
   .toast {
     position: fixed;
@@ -754,53 +993,214 @@ HTML_PAGE = """<!DOCTYPE html>
 
   <!-- Top Header Navigation -->
   <header>
-    <div class="brand">
+    <div class="brand" onclick="switchView('home')" title="Applyfox Home">
       <span style="font-size: 1.3rem;">🦊</span>
       <span>Applyfox</span>
       <span class="brand-badge">STUDIO &bull; SHEETS</span>
     </div>
 
     <nav class="nav-tabs">
-      <button class="tab-btn active" onclick="switchView('tailor')">
+      <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
+        <i class="fa fa-sparkles"></i> Overview
+      </button>
+      <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
         <i class="fa fa-wand-magic-sparkles"></i> Studio &amp; Tailor
       </button>
-      <button class="tab-btn" onclick="switchView('portals')">
+      <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
         <i class="fa fa-table-list"></i> Portal Sheets (7,008)
       </button>
-      <button class="tab-btn" onclick="switchView('tracker')">
-        <i class="fa fa-clipboard-check"></i> Applications Tracker (<span id="appCount">0</span>)
+      <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
+        <i class="fa fa-clipboard-check"></i> Tracker (<span id="appCount">0</span>)
       </button>
-      <button class="tab-btn" onclick="switchView('base-cv')">
+      <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
         <i class="fa fa-file-code"></i> Base main.tex
       </button>
     </nav>
   </header>
 
-  <!-- Editorial Hero Header -->
-  <div class="hero-section">
-    <div class="hero-pill">
-      <span class="hero-dot"></span>
-      <span>7,008 CAREER BOARDS &bull; OVERLEAF LATEX CORE &bull; V2.4</span>
-    </div>
-    <h1 class="hero-title">
-      The career application studio <span class="hero-accent">built for code.</span>
-    </h1>
-    <p class="hero-subtitle">
-      Author and tailor authentic Overleaf-grade LaTeX CVs for any JD. Browse 7,000+ verified career boards across Ashby, Greenhouse, Lever, and Workday with live salary and review intelligence.
-    </p>
-  </div>
-
   <main>
     <!-- ========================================== -->
-    <!-- TAB 1: CV STUDIO & TAILOR                   -->
+    <!-- VIEW 0: HOME / PRODUCT OVERVIEW FRONTPAGE   -->
     <!-- ========================================== -->
-    <div id="view-tailor">
+    <div id="view-home">
+      <div class="hero-section">
+        <div class="hero-pill">
+          <span class="hero-dot"></span>
+          <span>7,008 CAREER BOARDS &bull; OVERLEAF LATEX CORE &bull; V2.4</span>
+        </div>
+        <h1 class="hero-title">
+          The career application studio <span class="hero-accent">built for code.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Author and tailor authentic Overleaf-grade LaTeX CVs for any JD. Explore 7,000+ verified career boards across Ashby, Greenhouse, Lever, and Workday with live salary and review intelligence.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
+            <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="switchView('portals')">
+            <i class="fa fa-table-list"></i> Explore 7,008 Portal Sheets
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="switchView('tracker')">
+            <i class="fa fa-clipboard-check"></i> View My Applications
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Interactive Terminal Architecture Showcase -->
+      <div class="terminal-card" style="max-width: 960px; margin: 0 auto 36px;">
+        <div class="terminal-header">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="traffic-lights">
+              <span class="traffic-dot dot-red"></span>
+              <span class="traffic-dot dot-yellow"></span>
+              <span class="traffic-dot dot-green"></span>
+            </div>
+            <span class="terminal-tag">STANDALONE TECTONIC COMPILER &bull; XE-TEX CORE</span>
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #A1A1AA;">
+            <i class="fa fa-bolt" style="color: #FBBF24;"></i> 1.97s BUILD &bull; 1-PAGE OVERLEAF FIT
+          </div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-token-comment">% Applyfox intelligent JD targeting engine</div>
+          <div><span class="terminal-token-cmd">\\documentclass</span>[letterpaper,11pt]{article}</div>
+          <div><span class="terminal-token-cmd">\\section</span>{<span class="terminal-token-arg">PROFILE</span>}</div>
+          <div>&nbsp;&nbsp;<span class="terminal-token-cmd">\\resumeItem</span>{AI-focused Engineer with <span class="terminal-token-cmd">\\textbf</span>{2.5 years of experience} building production-grade <span class="terminal-token-kw">LLM workflows</span> and <span class="terminal-token-kw">agentic AI systems</span>.}</div>
+          <div><span class="terminal-token-cmd">\\section</span>{<span class="terminal-token-arg">TECHNICAL SKILLS</span>}</div>
+          <div>&nbsp;&nbsp;<span class="terminal-token-cmd">\\resumeItem</span>{<span class="terminal-token-cmd">\\textbf</span>{AI/GenAI:} <span class="terminal-token-kw">LangChain, LangGraph, RAG, Tool Calling, Vector Search</span>, Python, Go}</div>
+        </div>
+      </div>
+
+      <!-- Platform Statistics Strip -->
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div class="stat-num">7,008</div>
+          <div class="stat-label">Verified Career Boards</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3,212</div>
+          <div class="stat-label">Ashby Portals</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1,894</div>
+          <div class="stat-label">Greenhouse Pipelines</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1,522</div>
+          <div class="stat-label">Lever Companies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">&lt; 2.0s</div>
+          <div class="stat-label">LaTeX Compilation</div>
+        </div>
+      </div>
+
+      <!-- Feature Grid: What Applyfox Does -->
+      <div class="section-heading">
+        <span class="section-tag">ENGINEERED FOR PRODUCTION</span>
+        <h2 class="section-title">Everything you need to land top tech roles</h2>
+        <p class="section-desc">Applyfox is an end-to-end local platform that combines real LaTeX typesetting, career board intelligence, and meticulous application tracking.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card" onclick="switchView('tailor')">
+          <div>
+            <div class="feature-icon-wrapper icon-purple"><i class="fa fa-file-pdf"></i></div>
+            <h3 class="feature-title">Overleaf-Grade LaTeX Engine</h3>
+            <p class="feature-text">Embedded standalone Tectonic XeTeX engine that compiles genuine binary PDFs directly from LaTeX source code. Zero HTML print artifacts, pristine typography, and clickable hyperref links.</p>
+          </div>
+          <span class="feature-link">Open Studio &rarr;</span>
+        </div>
+
+        <div class="feature-card" onclick="switchView('tailor')">
+          <div>
+            <div class="feature-icon-wrapper icon-emerald"><i class="fa fa-wand-magic-sparkles"></i></div>
+            <h3 class="feature-title">Intelligent JD-Tailored Sections</h3>
+            <p class="feature-text">Analyzes any target job description and precisely re-aligns PROFILE, TECHNICAL SKILLS, and project tech stack headers while strictly preserving authentic candidate background.</p>
+          </div>
+          <span class="feature-link">Tailor a CV &rarr;</span>
+        </div>
+
+        <div class="feature-card" onclick="switchView('portals')">
+          <div>
+            <div class="feature-icon-wrapper icon-sky"><i class="fa fa-table-list"></i></div>
+            <h3 class="feature-title">Multi-Portal Career Sheets</h3>
+            <p class="feature-text">Explore 7,008 career boards with instant server-side pagination across Ashby, Greenhouse, Lever, and Workday, integrated with direct Levels.fyi salary data and Glassdoor reviews.</p>
+          </div>
+          <span class="feature-link">Browse Sheets &rarr;</span>
+        </div>
+
+        <div class="feature-card" onclick="switchView('tracker')">
+          <div>
+            <div class="feature-icon-wrapper icon-amber"><i class="fa fa-clipboard-check"></i></div>
+            <h3 class="feature-title">Master Tracker &amp; Version Vault</h3>
+            <p class="feature-text">Automatically records every application in your master sheet and archives the exact tailored .tex and compiled .pdf for seamless interview preparation.</p>
+          </div>
+          <span class="feature-link">View Tracker &rarr;</span>
+        </div>
+      </div>
+
+      <!-- 3-Step Workflow -->
+      <div class="section-heading" style="margin-top: 60px;">
+        <span class="section-tag">SEAMLESS WORKFLOW</span>
+        <h2 class="section-title">How Applyfox works</h2>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h4 class="step-title">Select Company or Paste JD</h4>
+          <p class="step-text">Choose from 7,008 indexed career boards or enter your target role and paste the job responsibilities.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4 class="step-title">Instant ATS Alignment</h4>
+          <p class="step-text">Inspect section diffs for PROFILE, SKILLS, and PROJECTS to review targeted keyword adjustments.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4 class="step-title">1-Click PDF &amp; Archive</h4>
+          <p class="step-text">Compile an authentic Overleaf-quality PDF with one click, while auto-logging the application in your master tracker.</p>
+        </div>
+      </div>
+
+      <!-- Call To Action Banner -->
+      <div class="cta-banner">
+        <h2 class="cta-title">Ready to tailor your CV for your next role?</h2>
+        <p class="cta-sub">Launch the interactive CV Studio or explore 7,000+ career boards across top tech startups and unicorns.</p>
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-lg" style="background: #FFFFFF; color: #18181B;" onclick="switchView('tailor')">
+            <i class="fa fa-wand-magic-sparkles"></i> Open CV Studio
+          </button>
+          <button class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border-color: rgba(255,255,255,0.2);" onclick="switchView('portals')">
+            <i class="fa fa-table-list"></i> Browse Portal Sheets
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: CV STUDIO & TAILOR WORKSPACE       -->
+    <!-- ========================================== -->
+    <div id="view-tailor" style="display: none;">
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>CV Studio &amp; Tailor</strong>
+        </div>
+        <div class="workspace-meta">
+          <span class="chip chip-skill"><i class="fa fa-user"></i> Harsh Jha (IIT Indore)</span>
+          <span class="chip chip-score"><i class="fa fa-bolt"></i> Tectonic XeTeX Engine Active</span>
+        </div>
+      </div>
+
       <div class="tailor-layout">
         <!-- Left Column: Input Form -->
         <div class="card">
           <div class="card-header">
             <div class="card-title"><i class="fa fa-pen-to-square"></i> Job Application Details</div>
-            <span style="font-size: 0.8rem; color: var(--text-secondary);">Candidate: <strong>Harsh Jha</strong></span>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Targeted ATS Alignment</span>
           </div>
 
           <form id="tailorForm" onsubmit="event.preventDefault(); handleTailor();">
@@ -864,35 +1264,23 @@ HTML_PAGE = """<!DOCTYPE html>
 
         <!-- Right Column: Studio Output & Preview -->
         <div class="card" id="resultsCard" style="min-height: 600px;">
-          <!-- Floating Developer Diagnostics Bar -->
-          <div class="terminal-card">
-            <div class="terminal-left">
-              <div class="traffic-lights">
-                <span class="traffic-dot dot-red"></span>
-                <span class="traffic-dot dot-yellow"></span>
-                <span class="traffic-dot dot-green"></span>
-              </div>
-              <span class="terminal-tag">LIVE TECTONIC COMPILER &bull; XE-TEX</span>
-            </div>
-            <div class="terminal-right">
-              <span><i class="fa fa-bolt" style="color: #FBBF24;"></i> 1-PAGE OVERLEAF QUALITY</span>
-            </div>
-          </div>
-
           <div class="card-header">
             <div class="card-title"><i class="fa fa-eye"></i> Tailored CV Studio Preview</div>
             <div id="actionDownloadButtons" style="display: none; gap: 8px; flex-wrap: wrap;">
-              <button id="btnDownloadPdf" class="btn btn-primary" onclick="downloadPdf()"><i class="fa fa-file-pdf"></i> Download PDF</button>
-              <button class="btn btn-secondary" onclick="recompilePdf()"><i class="fa fa-arrows-rotate"></i> Recompile TeX</button>
-              <button class="btn btn-secondary" onclick="downloadTex()"><i class="fa fa-download"></i> Download .tex</button>
-              <button class="btn btn-secondary" onclick="copyTex()"><i class="fa fa-copy"></i> Copy TeX</button>
+              <button id="btnDownloadPdf" class="btn btn-primary btn-sm" onclick="downloadPdf()"><i class="fa fa-file-pdf"></i> Download PDF</button>
+              <button class="btn btn-secondary btn-sm" onclick="recompilePdf()"><i class="fa fa-arrows-rotate"></i> Recompile TeX</button>
+              <button class="btn btn-secondary btn-sm" onclick="downloadTex()"><i class="fa fa-download"></i> Download .tex</button>
+              <button class="btn btn-secondary btn-sm" onclick="copyTex()"><i class="fa fa-copy"></i> Copy TeX</button>
             </div>
           </div>
 
-          <div id="emptyState" style="text-align: center; padding: 100px 20px; color: var(--text-secondary);">
+          <div id="emptyState" style="text-align: center; padding: 90px 20px; color: var(--text-secondary);">
             <i class="fa fa-file-invoice" style="font-size: 3rem; margin-bottom: 14px; opacity: 0.35;"></i>
             <h3 style="margin: 0 0 6px 0; color: var(--text-primary); font-family: 'Newsreader', serif; font-size: 1.6rem;">No CV tailored yet</h3>
-            <p style="margin: 0; font-size: 0.92rem; max-width: 480px; margin: 0 auto;">Enter target company and job description on the left (or pick a company from the <strong>Portal Sheets</strong> tab) and click <strong>Tailor CV</strong>.</p>
+            <p style="margin: 0 0 16px 0; font-size: 0.92rem; max-width: 480px; margin-left: auto; margin-right: auto;">Enter target company and job description on the left (or pick a company from the <strong>Portal Sheets</strong> tab) and click <strong>1. Tailor CV</strong>.</p>
+            <button class="btn btn-secondary btn-sm" onclick="loadBaseCvInStudio()">
+              <i class="fa fa-eye"></i> Preview Base CV Right Now
+            </button>
           </div>
 
           <div id="outputContent" style="display: none;">
@@ -940,19 +1328,20 @@ HTML_PAGE = """<!DOCTYPE html>
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 2: PORTAL SHEETS (PAGINATED DIRECTORY)  -->
+    <!-- VIEW 2: PORTAL SHEETS WORKSPACE            -->
     <!-- ========================================== -->
     <div id="view-portals" style="display: none;">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title"><i class="fa fa-table-list"></i> Verified ATS Career Portals &amp; Directory Sheets</div>
-            <div style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 4px;">
-              Fast on-demand paginated sheets across 7,008 career portals. Integrated with direct Glassdoor reviews and Levels.fyi compensation data.
-            </div>
-          </div>
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>ATS Career Portal Sheets (7,008 Boards)</strong>
         </div>
+        <div class="workspace-meta">
+          <span class="chip chip-skill"><i class="fa fa-chart-line"></i> Levels.fyi Integrated</span>
+          <span class="chip chip-score"><i class="fa fa-star"></i> Glassdoor Reviews</span>
+        </div>
+      </div>
 
+      <div class="card">
         <!-- Sheet Selector Pills -->
         <div class="sheet-tabs-container">
           <div class="sheet-pills" id="sheetPillsContainer">
@@ -1010,15 +1399,23 @@ HTML_PAGE = """<!DOCTYPE html>
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 3: APPLICATIONS TRACKER ("THE SHEET")   -->
+    <!-- VIEW 3: APPLICATIONS TRACKER WORKSPACE      -->
     <!-- ========================================== -->
     <div id="view-tracker" style="display: none;">
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>Applications Tracker ("The Sheet")</strong>
+        </div>
+        <div class="workspace-meta">
+          <a href="/api/export_csv" class="btn btn-secondary btn-sm" style="text-decoration: none;"><i class="fa fa-file-csv"></i> Export CSV</a>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><i class="fa fa-table"></i> Master Job Applications Tracker ("The Sheet")</div>
+          <div class="card-title"><i class="fa fa-table"></i> Master Tracked Applications</div>
           <div style="display: flex; gap: 8px;">
             <input type="text" id="trackerSearch" placeholder="Search company or title..." oninput="filterTrackerTable()" style="width: 250px; padding: 6px 10px;">
-            <a href="/api/export_csv" class="btn btn-secondary btn-sm" style="text-decoration: none;"><i class="fa fa-file-csv"></i> Export CSV</a>
           </div>
         </div>
 
@@ -1045,14 +1442,19 @@ HTML_PAGE = """<!DOCTYPE html>
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 4: BASE CV LATEX SOURCE                -->
+    <!-- VIEW 4: BASE CV LATEX SOURCE WORKSPACE     -->
     <!-- ========================================== -->
     <div id="view-base-cv" style="display: none;">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><i class="fa fa-file-code"></i> Base CV LaTeX Source &mdash; data/main.tex</div>
-          <span style="font-size: 0.8rem; color: var(--text-secondary);">Candidate: Harsh Jha &bull; IIT Indore</span>
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>Base CV LaTeX Source &mdash; data/main.tex</strong>
         </div>
+        <div class="workspace-meta">
+          <span class="chip chip-skill"><i class="fa fa-graduation-cap"></i> IIT Indore</span>
+        </div>
+      </div>
+
+      <div class="card">
         <textarea id="baseTexContent" class="tex-code" style="height: 750px;" readonly></textarea>
       </div>
     </div>
@@ -1080,8 +1482,9 @@ window.addEventListener("DOMContentLoaded", () => {
   loadPortalSheetsSummary();
 });
 
-// View Navigation
+// View Navigation: 'home', 'tailor', 'portals', 'tracker', 'base-cv'
 function switchView(viewName) {
+  document.getElementById("view-home").style.display = (viewName === 'home') ? 'block' : 'none';
   document.getElementById("view-tailor").style.display = (viewName === 'tailor') ? 'block' : 'none';
   document.getElementById("view-portals").style.display = (viewName === 'portals') ? 'block' : 'none';
   document.getElementById("view-tracker").style.display = (viewName === 'tracker') ? 'block' : 'none';
@@ -1089,16 +1492,30 @@ function switchView(viewName) {
 
   const btns = document.querySelectorAll(".nav-tabs .tab-btn");
   btns.forEach(b => b.classList.remove("active"));
-  if (viewName === 'tailor') btns[0].classList.add("active");
-  if (viewName === 'portals') {
-    btns[1].classList.add("active");
+  
+  if (viewName === 'home') {
+    const btn = document.getElementById("navBtn-home");
+    if (btn) btn.classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'tailor') {
+    const btn = document.getElementById("navBtn-tailor");
+    if (btn) btn.classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'portals') {
+    const btn = document.getElementById("navBtn-portals");
+    if (btn) btn.classList.add("active");
     loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
-  }
-  if (viewName === 'tracker') {
-    btns[2].classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'tracker') {
+    const btn = document.getElementById("navBtn-tracker");
+    if (btn) btn.classList.add("active");
     loadTrackerData();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'base-cv') {
+    const btn = document.getElementById("navBtn-base-cv");
+    if (btn) btn.classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  if (viewName === 'base-cv') btns[3].classList.add("active");
 }
 
 // Subtabs in CV Studio
@@ -1331,7 +1748,7 @@ function renderPortalTable(data) {
 
 function renderPortalPagination(data) {
   const info = document.getElementById("portalPageInfo");
-  info.textContent = `Showing ${data.start_index}&ndash;${data.end_index} of ${data.total_filtered.toLocaleString()} companies in ${data.sheet_title}`;
+  info.innerHTML = `Showing ${data.start_index}&ndash;${data.end_index} of <strong>${data.total_filtered.toLocaleString()}</strong> companies in <strong>${escapeHtml(data.sheet_title)}</strong>`;
 
   const nav = document.getElementById("portalPageNav");
   const totalPages = data.total_pages;
@@ -1342,7 +1759,6 @@ function renderPortalPagination(data) {
     <button class="page-btn" onclick="gotoPortalPage(${current - 1})" ${current <= 1 ? 'disabled' : ''}>Prev</button>
   `;
 
-  // Render a smart window of 5 pages
   const startP = Math.max(1, current - 2);
   const endP = Math.min(totalPages, current + 2);
 
@@ -1372,6 +1788,44 @@ function useCompanyInStudio(name, url) {
   }
   document.getElementById("jdText").focus();
   showToast(`Pre-filled ${name} in Studio! Paste the Job Description to tailor.`);
+}
+
+async function loadBaseCvInStudio() {
+  showToast("Loading Base CV into Studio...");
+  try {
+    const res = await fetch("/api/base_tex");
+    const data = await res.json();
+    if (!data.tex) throw new Error("Base LaTeX source not found");
+    
+    document.getElementById("tailoredTexArea").value = data.tex;
+    document.getElementById("companyName").value = "Base Master CV";
+    document.getElementById("jobTitle").value = "Software Development Engineer";
+
+    const recompileRes = await fetch("/api/recompile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tailored_tex: data.tex, company: "Base Master CV" })
+    });
+    const recompileData = await recompileRes.json();
+    if (recompileData.preview_html) {
+      document.getElementById("cvPreviewFrame").srcdoc = recompileData.preview_html;
+    }
+    if (recompileData.preview_url) {
+      CURRENT_PDF_PREVIEW_URL = recompileData.preview_url;
+      document.getElementById("pdfPreviewFrame").src = recompileData.preview_url;
+    }
+
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("outputContent").style.display = "block";
+    document.getElementById("actionDownloadButtons").style.display = "flex";
+    document.getElementById("scoreBadge").textContent = "Base Profile";
+    document.getElementById("archetypeBadge").textContent = "Master Template";
+    document.getElementById("prioritySkillsChips").innerHTML = '<span class="chip chip-skill"><i class="fa fa-code"></i> data/main.tex</span>';
+    switchSubTab("preview");
+    showToast("Base CV loaded in Studio!");
+  } catch (e) {
+    showToast("Failed to load base CV: " + e.message);
+  }
 }
 
 // -------------------------------------------------------------
@@ -1909,7 +2363,7 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
                 self.send_json(404, {"error": "Application not found"})
 
         else:
-            self.send_json(404, {"error": "Not Found"})
+            self.send_json(404, {"error": "Endpoint not found"})
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)

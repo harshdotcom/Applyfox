@@ -1240,7 +1240,7 @@ HTML_PAGE = """<!DOCTYPE html>
           <span>7,008 CAREER BOARDS &bull; OVERLEAF LATEX CORE &bull; V2.4</span>
         </div>
         <h1 class="hero-title">
-          The career application studio <span class="hero-accent">built for code.</span>
+          The career application studio <span class="hero-accent">built for software engineers.</span>
         </h1>
         <p class="hero-subtitle">
           Author and tailor authentic Overleaf-grade LaTeX CVs for any JD. Explore 7,000+ verified career boards across Ashby, Greenhouse, Lever, and Workday with live salary and review intelligence.

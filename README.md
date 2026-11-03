@@ -293,6 +293,13 @@ Applyfox includes an intelligent LaTeX CV tailoring engine and persistent job ap
   - Tracks **Company Name**, **Job Title**, **Application Date**, **Referral Status & Referrer Name/Contact**, **Match Score**, and **Archive Path**.
 - **Full Version Archival & Real PDF Artifacts**:
   - Stores each application in `data/applications/<APP-ID>_<company>/` with the exact `.tex` source, compiled `.pdf`, full metadata JSON, and paper preview for future reference and interview prep.
+- **Multi-Portal Directory Sheets & Career Intelligence**:
+  - Browse **7,008 career boards** across dedicated sheets: **Master (7,008)**, **Ashby (3,212)**, **Greenhouse (1,894)**, **Lever (1,522)**, and **Workday (380)**.
+  - On-demand server-side pagination with isolated sheet loading (loads only 25–100 rows at a time, preserving speed and memory).
+  - Integrated with **Levels.fyi** (live compensation benchmarks) and **Glassdoor** (interview reviews & ratings).
+  - 1-click **"Tailor CV"** action to load any company and career board URL straight into the Studio.
+- **Editorial Minimalist Design System**:
+  - Warm organic paper canvas with subtle architectural grid, editorial serif typography, and dark developer diagnostics bar inspired by modern developer animation and coding studios.
 - **Interactive Web Studio**:
   - Built-in local web server with autocomplete across **7,008 verified companies**, live compiled PDF preview, visual paper preview, section diffs, editable LaTeX source with instant recompile, and 1-click PDF download.
 

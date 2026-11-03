@@ -1774,6 +1774,7 @@ HTML_PAGE = """<!DOCTYPE html>
   <div id="toast" class="toast"></div>
 
 <script>
+/* GITHUB_PAGES_EMBEDDED_DATA */
 let CURRENT_TAILORED_RESULT = null;
 let TRACKED_APPLICATIONS = [];
 let CURRENT_PDF_PREVIEW_URL = "";
@@ -1921,18 +1922,29 @@ function toggleReferralFields() {
 async function loadCompaniesAutocomplete() {
   try {
     const res = await fetch("/api/companies");
+    if (!res.ok) throw new Error("No backend");
     const data = await res.json();
     const datalist = document.getElementById("companyList");
     datalist.innerHTML = data.map(c => `<option value="${escapeHtml(c)}"></option>`).join("");
-  } catch (e) {}
+  } catch (e) {
+    if (typeof EMBEDDED_ITEMS !== 'undefined') {
+      const datalist = document.getElementById("companyList");
+      datalist.innerHTML = EMBEDDED_ITEMS.map(c => `<option value="${escapeHtml(c.name)}"></option>`).join("");
+    }
+  }
 }
 
 async function loadBaseTex() {
   try {
     const res = await fetch("/api/base_tex");
-    const text = await res.text();
-    document.getElementById("baseTexContent").value = text;
-  } catch(e) {}
+    if (!res.ok) throw new Error("No backend");
+    const data = await res.json();
+    document.getElementById("baseTexContent").value = data.tex || "";
+  } catch(e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      document.getElementById("baseTexContent").value = EMBEDDED_BASE_TEX;
+    }
+  }
 }
 
 // -------------------------------------------------------------
@@ -1941,22 +1953,29 @@ async function loadBaseTex() {
 async function loadPortalSheetsSummary() {
   try {
     const res = await fetch("/api/portals/summary");
+    if (!res.ok) throw new Error("No backend");
     const summaries = await res.json();
-    const container = document.getElementById("sheetPillsContainer");
-
-    container.innerHTML = summaries.map(s => {
-      const activeClass = (s.key === CURRENT_SHEET_KEY) ? "active" : "";
-      return `
-        <button class="sheet-pill ${activeClass}" onclick="switchPortalSheet('${s.key}')">
-          <i class="fa ${s.icon}"></i>
-          <span>${s.title}</span>
-          <span class="count-badge">${s.total_count.toLocaleString()}</span>
-        </button>
-      `;
-    }).join("");
+    renderPortalSheetsSummary(summaries);
   } catch (e) {
-    console.error("Failed to load sheet summaries", e);
+    if (typeof EMBEDDED_SUMMARIES !== 'undefined') {
+      renderPortalSheetsSummary(EMBEDDED_SUMMARIES);
+    }
   }
+}
+
+function renderPortalSheetsSummary(summaries) {
+  const container = document.getElementById("sheetPillsContainer");
+  if (!container || !Array.isArray(summaries)) return;
+  container.innerHTML = summaries.map(s => {
+    const activeClass = (s.key === CURRENT_SHEET_KEY) ? "active" : "";
+    return `
+      <button class="sheet-pill ${activeClass}" onclick="switchPortalSheet('${s.key}')">
+        <i class="fa ${s.icon}"></i>
+        <span>${s.title}</span>
+        <span class="count-badge">${s.total_count.toLocaleString()}</span>
+      </button>
+    `;
+  }).join("");
 }
 
 function switchPortalSheet(sheetKey) {
@@ -1990,15 +2009,51 @@ async function loadPortalSheetPage(sheetKey, page, limit, query) {
       sheet: sheetKey,
       page: page,
       limit: limit,
-      q: query
+      q: query || ""
     });
     const res = await fetch(`/api/portals?${params.toString()}`);
+    if (!res.ok) throw new Error("API not reachable");
     const data = await res.json();
 
     renderPortalTable(data);
     renderPortalPagination(data);
   } catch (e) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #DC2626; padding: 40px;">Failed to load sheet data: ${escapeHtml(e.message)}</td></tr>`;
+    if (typeof EMBEDDED_ITEMS !== 'undefined') {
+      let filtered = EMBEDDED_ITEMS;
+      if (sheetKey !== 'master') {
+        filtered = filtered.filter(i => (i.ats || '').toLowerCase().includes(sheetKey.toLowerCase()));
+      }
+      if (query) {
+        const q = query.toLowerCase();
+        filtered = filtered.filter(i => (i.name || '').toLowerCase().includes(q) || (i.slug || '').toLowerCase().includes(q));
+      }
+      const total = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / limit));
+      const curPage = Math.min(page, totalPages);
+      const start = (curPage - 1) * limit;
+      const end = start + limit;
+      const slice = filtered.slice(start, end);
+
+      const staticData = {
+        sheet_key: sheetKey,
+        sheet_title: sheetKey.toUpperCase() + " Portals",
+        sheet_subtitle: "Verified Tech Companies",
+        total_in_sheet: 7008,
+        total_filtered: total,
+        page: curPage,
+        limit: limit,
+        total_pages: totalPages,
+        has_next: curPage < totalPages,
+        has_prev: curPage > 1,
+        start_index: total === 0 ? 0 : start + 1,
+        end_index: Math.min(end, total),
+        items: slice
+      };
+      renderPortalTable(staticData);
+      renderPortalPagination(staticData);
+    } else {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #DC2626; padding: 40px;">Failed to load sheet data: ${escapeHtml(e.message)}</td></tr>`;
+    }
   }
 }
 
@@ -2135,6 +2190,21 @@ async function loadBaseCvInStudio() {
     switchSubTab("preview");
     showToast("Base CV loaded in Studio!");
   } catch (e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      document.getElementById("tailoredTexArea").value = EMBEDDED_BASE_TEX;
+      document.getElementById("companyName").value = "Base Master CV";
+      document.getElementById("jobTitle").value = "Software Development Engineer";
+      document.getElementById("cvPreviewFrame").srcdoc = EMBEDDED_PREVIEW_HTML;
+      document.getElementById("emptyState").style.display = "none";
+      document.getElementById("outputContent").style.display = "block";
+      document.getElementById("actionDownloadButtons").style.display = "flex";
+      document.getElementById("scoreBadge").textContent = "Base Profile";
+      document.getElementById("archetypeBadge").textContent = "Master Template";
+      document.getElementById("prioritySkillsChips").innerHTML = '<span class="chip chip-skill"><i class="fa fa-code"></i> data/main.tex</span>';
+      switchSubTab("preview");
+      showToast("Base CV loaded in Studio!");
+      return;
+    }
     showToast("Failed to load base CV: " + e.message);
   }
 }
@@ -2182,6 +2252,10 @@ async function handleTailor() {
 
     const data = await resp.json();
     if (!resp.ok) {
+      if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+        simulateStaticTailor(company, title, jd);
+        return true;
+      }
       showToast("Error: " + (data.error || "Failed to tailor CV"));
       alert("Error: " + (data.error || "Failed to tailor CV"));
       return false;
@@ -2230,6 +2304,10 @@ async function handleTailor() {
     showToast(`Successfully tailored CV for ${company}! Click 'Save & Track Job' to record it.`);
     return true;
   } catch (e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      simulateStaticTailor(company, title, jd);
+      return true;
+    }
     showToast("Request failed: " + e.message);
     return false;
   } finally {
@@ -2238,6 +2316,60 @@ async function handleTailor() {
       btnTailor.innerHTML = origHtml;
     }
   }
+}
+
+function simulateStaticTailor(company, title, jd) {
+  const jdLower = (jd || "").toLowerCase();
+  const candidateSkills = ["Python", "Go", "TypeScript", "LangChain", "LangGraph", "RAG", "LLM APIs", "Docker", "Kubernetes", "PostgreSQL", "Redis", "FastAPI", "AWS", "REST APIs", "Microservices"];
+  let matched = candidateSkills.filter(s => jdLower.includes(s.toLowerCase()));
+  if (matched.length === 0) matched = ["Python", "LangChain", "REST APIs", "Docker", "PostgreSQL", "FastAPI"];
+
+  const simScore = Math.min(98, Math.max(76, 70 + matched.length * 4));
+  let simTex = (typeof EMBEDDED_BASE_TEX !== 'undefined') ? EMBEDDED_BASE_TEX : "";
+
+  const simData = {
+    success: true,
+    company: company,
+    job_title: title || "Software Engineer",
+    tailored_tex: simTex,
+    preview_html: (typeof EMBEDDED_PREVIEW_HTML !== 'undefined') ? EMBEDDED_PREVIEW_HTML : "",
+    analysis: {
+      match_score: simScore,
+      archetype: jdLower.includes("ai") ? "ai_engineer" : "backend_engineer",
+      top_priorities: matched.slice(0, 6),
+      profile_summary: "AI-focused Software Development Engineer tailored for " + company
+    },
+    profile_diff: "--- Base Profile\\n+++ Tailored Profile\\n@@ -1,3 +1,3 @@\\n- AI-focused Software Development Engineer with 2.5 years experience\\n+ AI-focused Engineer tailored for " + company + ": specializing in " + matched.slice(0, 3).join(", "),
+    skills_diff: "--- Base Technical Skills\\n+++ Tailored Skills\\n@@ -1,4 +1,4 @@\\n- AI/GenAI: LLMs, LangChain, RAG, Prompt Engineering\\n+ AI/GenAI: " + matched.join(", "),
+    projects_diff: "--- Base Project Tech Stack\\n+++ Tailored Project Tech Stack\\n@@ -1,2 +1,2 @@\\n- VitaTrack.ai [Go, Python, FastAPI, PostgreSQL, AWS Bedrock]\\n+ VitaTrack.ai [Go, Python, " + matched.slice(0, 3).join(", ") + "]"
+  };
+
+  CURRENT_TAILORED_RESULT = simData;
+  document.getElementById("emptyState").style.display = "none";
+  document.getElementById("outputContent").style.display = "block";
+  document.getElementById("actionDownloadButtons").style.display = "flex";
+  document.getElementById("scoreBadge").textContent = `Match: ${simData.analysis.match_score}%`;
+  document.getElementById("archetypeBadge").textContent = `Archetype: ${simData.analysis.archetype.replace('_', ' ')}`;
+  document.getElementById("prioritySkillsChips").innerHTML = simData.analysis.top_priorities.map(s => `<span class="chip chip-skill">${s}</span>`).join("");
+  document.getElementById("cvPreviewFrame").srcdoc = simData.preview_html;
+  document.getElementById("tailoredTexArea").value = simData.tailored_tex;
+
+  document.getElementById("diffViewContainer").innerHTML = `
+    <div style="margin-bottom: 16px;">
+      <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">PROFILE Changes</h4>
+      <div class="diff-box">${renderDiffLines(simData.profile_diff)}</div>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">TECHNICAL SKILLS Changes</h4>
+      <div class="diff-box">${renderDiffLines(simData.skills_diff)}</div>
+    </div>
+    <div>
+      <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">PROJECTS Changes</h4>
+      <div class="diff-box">${renderDiffLines(simData.projects_diff)}</div>
+    </div>
+  `;
+
+  showToast(`Tailored CV generated for ${company}! (GitHub Pages Interactive Demo)`);
 }
 
 function renderDiffLines(diffStr) {
@@ -2492,6 +2624,15 @@ async function downloadPdf() {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     showToast("Genuine Overleaf-grade PDF downloaded successfully!");
   } catch (e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      downloadTex();
+      alert(`Downloaded tailored LaTeX source (.tex)!
+
+Note: To compile binary Overleaf PDFs directly via the embedded Tectonic XeTeX engine, run Applyfox locally or via Docker:
+
+$ python3 cv_service.py serve`);
+      return;
+    }
     showToast("Download failed: " + e.message);
   } finally {
     if (btn) {

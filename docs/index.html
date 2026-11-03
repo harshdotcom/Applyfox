@@ -1,0 +1,2612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applyfox &mdash; The Career Studio for Engineers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --bg-warm: #FAF8F5;
+    --card-bg: #FFFFFF;
+    --border-subtle: #E7E5E4;
+    --border-hover: #D6D3D1;
+    --border-dark: #18181B;
+    --text-primary: #1C1917;
+    --text-secondary: #78716C;
+    --text-muted: #A8A29E;
+    --accent-emerald: #0D9488;
+    --accent-emerald-dark: #0F766E;
+    --accent-emerald-light: #CCFBF1;
+    --accent-amber: #D97706;
+    --accent-amber-light: #FEF3C7;
+    --accent-ink: #18181B;
+    --accent-ink-hover: #27272A;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 24px -4px rgba(28, 25, 23, 0.04);
+    --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 16px 32px -4px rgba(28, 25, 23, 0.07);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-pill: 9999px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-warm);
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.032) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.032) 1px, transparent 1px);
+    background-size: 36px 36px;
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Navigation Bar */
+  header {
+    background: rgba(250, 248, 245, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 12px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+  }
+  .brand-badge {
+    background: var(--accent-amber-light);
+    color: var(--accent-amber);
+    border: 1px solid #FDE68A;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 5px;
+    background: #F0EDE8;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 7px 15px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .tab-btn:hover {
+    color: var(--text-primary);
+  }
+  .tab-btn.active {
+    background: #FFFFFF;
+    color: var(--text-primary);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Main Container */
+  main {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 20px 28px 48px;
+  }
+
+  /* Workspace Compact Header */
+  .workspace-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0 18px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #EFECE6;
+  }
+  .workspace-breadcrumb {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .workspace-breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .workspace-breadcrumb a:hover {
+    color: var(--text-primary);
+  }
+  .workspace-breadcrumb strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .workspace-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* Editorial Hero Header (Landing Page Only) */
+  .hero-section {
+    text-align: center;
+    padding: 56px 20px 32px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    padding: 5px 16px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  }
+  .hero-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-emerald);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .hero-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 3.4rem;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin: 0 0 16px;
+    letter-spacing: -0.03em;
+  }
+  .hero-accent {
+    color: var(--accent-emerald);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .hero-subtitle {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 auto 32px;
+    max-width: 720px;
+  }
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+  }
+
+  /* Live Interactive Terminal Card */
+  .terminal-card {
+    background: #18181B;
+    border-radius: 14px;
+    padding: 16px 20px;
+    color: #F4F4F5;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
+  }
+  .terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #27272A;
+    margin-bottom: 14px;
+  }
+  .traffic-lights {
+    display: flex;
+    gap: 7px;
+  }
+  .traffic-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #EF4444; }
+  .dot-yellow { background: #F59E0B; }
+  .dot-green { background: #10B981; }
+  .terminal-tag {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 5px;
+    letter-spacing: 0.04em;
+  }
+  .terminal-body {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #D4D4D8;
+    background: #09090B;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  .terminal-token-kw { color: #F472B6; }
+  .terminal-token-cmd { color: #60A5FA; }
+  .terminal-token-arg { color: #34D399; }
+  .terminal-token-comment { color: #71717A; font-style: italic; }
+
+  /* Feature Cards Grid */
+  .section-heading {
+    text-align: center;
+    margin: 50px 0 24px;
+  }
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-emerald);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Newsreader', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+  }
+  .section-desc {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .feature-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--border-hover);
+  }
+  .feature-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+  }
+  .icon-purple { background: #FAF5FF; color: #7E22CE; border: 1px solid #F3E8FF; }
+  .icon-emerald { background: #ECFDF5; color: #047857; border: 1px solid #D1FAE5; }
+  .icon-sky { background: #F0F9FF; color: #0369A1; border: 1px solid #E0F2FE; }
+  .icon-amber { background: #FFFBEB; color: #B45309; border: 1px solid #FEF3C7; }
+
+  .feature-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .feature-text {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+  }
+  .feature-link {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+  .feature-link:hover {
+    color: var(--accent-emerald);
+  }
+
+  /* Workflow Steps */
+  .workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 28px;
+  }
+  @media (max-width: 900px) {
+    .workflow-grid { grid-template-columns: 1fr; }
+  }
+  .step-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    position: relative;
+    box-shadow: var(--card-shadow);
+  }
+  .step-num {
+    font-family: 'Newsreader', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #E7E5E4;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .step-text {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Landing Page Dedicated Width & Spacing (Prevents Stretched Content) */
+  #view-home {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .stats-strip {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin: 36px 0 44px;
+    box-shadow: var(--card-shadow);
+  }
+  @media (max-width: 900px) {
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Refined Warm CTA Banner */
+  .cta-banner {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 56px 36px;
+    text-align: center;
+    margin: 54px 0 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 12px 32px -4px rgba(28, 25, 23, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0D9488, #F59E0B, #8B5CF6);
+  }
+  .cta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #F4FBF9;
+    border: 1px solid #CCFBF1;
+    color: var(--accent-emerald-dark);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 16px;
+  }
+  .cta-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .cta-title em {
+    font-style: italic;
+    color: var(--accent-emerald);
+  }
+  .cta-sub {
+    font-size: 1.02rem;
+    color: var(--text-secondary);
+    max-width: 580px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+
+  /* Comprehensive App Footer */
+  .app-footer {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    margin-top: 40px;
+    margin-bottom: 24px;
+    padding: 48px 36px 28px;
+    box-shadow: var(--card-shadow);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1.3fr;
+    gap: 40px;
+  }
+  @media (max-width: 960px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+  .footer-col-main .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .footer-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    max-width: 340px;
+  }
+  .contrib-card {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+  }
+  .contrib-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .contrib-text {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0 0 12px 0;
+  }
+  .contrib-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+  .footer-heading {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    margin-bottom: 9px;
+  }
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.86rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.15s ease;
+  }
+  .footer-links a:hover {
+    color: var(--accent-emerald-dark);
+  }
+  .creator-card {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+  .creator-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .creator-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0D9488 0%, #065F46 100%);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
+  }
+  .creator-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+  .creator-title {
+    font-size: 0.78rem;
+    color: var(--accent-emerald-dark);
+    font-weight: 500;
+  }
+  .creator-bio {
+    font-size: 0.83rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+  }
+  .creator-socials {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .social-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .social-linkedin {
+    background: #F0F7FF;
+    color: #0A66C2;
+    border: 1px solid #D0E4FF;
+  }
+  .social-linkedin:hover {
+    background: #0A66C2;
+    color: #FFFFFF;
+  }
+  .social-instagram {
+    background: #FFF1F5;
+    color: #E1306C;
+    border: 1px solid #FFD1DF;
+  }
+  .social-instagram:hover {
+    background: #E1306C;
+    color: #FFFFFF;
+  }
+  .social-github {
+    background: #FFFFFF;
+    color: #18181B;
+    border: 1px solid #E4E4E7;
+  }
+  .social-github:hover {
+    background: #18181B;
+    color: #FFFFFF;
+  }
+  .footer-bottom {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid #EFECE6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F2EFE9;
+  }
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  /* Tailor 2-Column Grid Layout */
+  .tailor-layout {
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 1100px) {
+    .tailor-layout { grid-template-columns: 1fr; }
+  }
+
+  /* Forms */
+  .form-group {
+    margin-bottom: 14px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  input[type="text"], input[type="url"], textarea, select {
+    width: 100%;
+    padding: 10px 12px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-hover);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.88rem;
+    transition: all 0.15s ease;
+  }
+  input[type="text"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-ink);
+    box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.45;
+  }
+
+  /* Referral Box */
+  .referral-box {
+    background: #FAF8F5;
+    border: 1px dashed #D6D3D1;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 6px;
+  }
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Action Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+  .btn-lg {
+    padding: 11px 22px;
+    font-size: 0.94rem;
+    border-radius: 10px;
+  }
+  .btn-primary {
+    background: var(--accent-ink);
+    color: #FFFFFF;
+    border-color: var(--accent-ink);
+  }
+  .btn-primary:hover {
+    background: var(--accent-ink-hover);
+    border-color: var(--accent-ink-hover);
+  }
+  .btn-success {
+    background: #059669;
+    color: #FFFFFF;
+    border-color: #059669;
+  }
+  .btn-success:hover {
+    background: #047857;
+    border-color: #047857;
+  }
+  .btn-secondary {
+    background: #FFFFFF;
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+  }
+  .btn-secondary:hover {
+    background: #F5F5F4;
+    border-color: #A8A29E;
+  }
+  .btn-sm {
+    padding: 5px 10px;
+    font-size: 0.78rem;
+    border-radius: 6px;
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .banner-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  /* Results Tabs */
+  .results-tabs {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 16px;
+  }
+  .subtab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .subtab-btn:hover {
+    color: var(--text-primary);
+  }
+  .subtab-btn.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-ink);
+    font-weight: 600;
+  }
+
+  /* Chips */
+  .meta-chips {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .chip {
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 0.76rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .chip-score { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+  .chip-archetype { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+  .chip-skill { background: #F5F5F4; color: #44403C; border: 1px solid #E7E5E4; font-weight: 500; }
+
+  /* Frame Previews */
+  .preview-frame-container {
+    background: #E5E5E5;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 780px;
+  }
+  .preview-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .tex-code {
+    width: 100%;
+    height: 650px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.84rem;
+    background: #FAF8F5;
+    color: #1C1917;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 14px;
+    line-height: 1.5;
+  }
+
+  /* Diffs */
+  .diff-box {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    max-height: 260px;
+    overflow-y: auto;
+    line-height: 1.45;
+  }
+  .diff-line { padding: 1px 4px; border-radius: 3px; }
+  .diff-added { background: rgba(16, 185, 129, 0.15); color: #065F46; }
+  .diff-removed { background: rgba(239, 68, 68, 0.15); color: #991B1B; }
+  .diff-chunk { color: #2563EB; font-weight: 600; }
+  .diff-header { color: #6B7280; }
+
+  /* Portal Directory Sheets */
+  .sheet-tabs-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .sheet-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .sheet-pill {
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s;
+  }
+  .sheet-pill:hover {
+    border-color: var(--border-dark);
+    color: var(--text-primary);
+  }
+  .sheet-pill.active {
+    background: var(--accent-ink);
+    color: #FFFFFF;
+    border-color: var(--accent-ink);
+    font-weight: 600;
+  }
+  .sheet-pill .count-badge {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+  }
+  .sheet-pill.active .count-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+  }
+
+  /* Search & Controls Bar */
+  .controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .search-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 440px;
+  }
+  .search-wrapper i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .search-input {
+    padding-left: 34px !important;
+  }
+
+  /* Directory & Tracker Table */
+  .table-container {
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow-x: auto;
+    background: #FFFFFF;
+  }
+  table.sheet-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+    text-align: left;
+  }
+  table.sheet-table th {
+    background: #FAF8F5;
+    padding: 10px 14px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  table.sheet-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #F5F3EF;
+    vertical-align: middle;
+  }
+  table.sheet-table tr:hover td {
+    background: #FAF8F5;
+  }
+
+  /* Portal Badges */
+  .portal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .badge-ashby { background: #FAF5FF; color: #7E22CE; border: 1px solid #F3E8FF; }
+  .badge-greenhouse { background: #ECFDF5; color: #047857; border: 1px solid #D1FAE5; }
+  .badge-lever { background: #F0F9FF; color: #0369A1; border: 1px solid #E0F2FE; }
+  .badge-workday { background: #FFFBEB; color: #B45309; border: 1px solid #FEF3C7; }
+  .badge-other { background: #F5F5F4; color: #57534E; border: 1px solid #E7E5E4; }
+
+  .ext-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: #F5F5F4;
+    border: 1px solid var(--border-subtle);
+    transition: all 0.15s;
+  }
+  .ext-link:hover {
+    background: #E7E5E4;
+    border-color: #D6D3D1;
+  }
+  .intel-link {
+    font-size: 0.72rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 4px;
+  }
+  .intel-levels { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
+  .intel-glassdoor { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
+
+  /* Pagination Bar */
+  .pagination-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #FAF8F5;
+    border-top: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .page-info {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+  .page-nav {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .page-btn {
+    padding: 5px 10px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .page-btn:hover:not(:disabled) {
+    background: #F5F5F4;
+    border-color: #A8A29E;
+  }
+  .page-btn.active {
+    background: var(--accent-ink);
+    color: #FFFFFF;
+    border-color: var(--accent-ink);
+    font-weight: 600;
+  }
+  .page-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* Toast notification */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #18181B;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    font-size: 0.88rem;
+    display: none;
+    z-index: 1000;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="brand" onclick="switchView('home')" title="Applyfox Home">
+      <span style="font-size: 1.3rem;">🦊</span>
+      <span>Applyfox</span>
+      <span class="brand-badge">STUDIO &bull; SHEETS</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <nav class="nav-tabs">
+        <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
+          <i class="fa fa-sparkles"></i> Overview
+        </button>
+        <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
+          <i class="fa fa-wand-magic-sparkles"></i> Studio &amp; Tailor
+        </button>
+        <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
+          <i class="fa fa-table-list"></i> Portal Sheets (7,008)
+        </button>
+        <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
+          <i class="fa fa-clipboard-check"></i> Tracker (<span id="appCount">0</span>)
+        </button>
+        <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
+          <i class="fa fa-file-code"></i> Base main.tex
+        </button>
+      </nav>
+      <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 0.82rem;" title="Contribute on GitHub">
+        <i class="fa-brands fa-github"></i> <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================== -->
+    <!-- VIEW 0: HOME / PRODUCT OVERVIEW FRONTPAGE   -->
+    <!-- ========================================== -->
+    <div id="view-home">
+      <div class="hero-section">
+        <div class="hero-pill">
+          <span class="hero-dot"></span>
+          <span>7,008 CAREER BOARDS &bull; OVERLEAF LATEX CORE &bull; V2.4</span>
+        </div>
+        <h1 class="hero-title">
+          The career application studio <span class="hero-accent">built for code.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Author and tailor authentic Overleaf-grade LaTeX CVs for any JD. Explore 7,000+ verified career boards across Ashby, Greenhouse, Lever, and Workday with live salary and review intelligence.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
+            <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="switchView('portals')">
+            <i class="fa fa-table-list"></i> Explore 7,008 Portal Sheets
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="switchView('tracker')">
+            <i class="fa fa-clipboard-check"></i> View My Applications
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Interactive Terminal Architecture Showcase -->
+      <div class="terminal-card" style="max-width: 960px; margin: 0 auto 36px;">
+        <div class="terminal-header">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="traffic-lights">
+              <span class="traffic-dot dot-red"></span>
+              <span class="traffic-dot dot-yellow"></span>
+              <span class="traffic-dot dot-green"></span>
+            </div>
+            <span class="terminal-tag">STANDALONE TECTONIC COMPILER &bull; XE-TEX CORE</span>
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #A1A1AA;">
+            <i class="fa fa-bolt" style="color: #FBBF24;"></i> 1.97s BUILD &bull; 1-PAGE OVERLEAF FIT
+          </div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-token-comment">% Applyfox intelligent JD targeting engine</div>
+          <div><span class="terminal-token-cmd">\documentclass</span>[letterpaper,11pt]{article}</div>
+          <div><span class="terminal-token-cmd">\section</span>{<span class="terminal-token-arg">PROFILE</span>}</div>
+          <div>&nbsp;&nbsp;<span class="terminal-token-cmd">\resumeItem</span>{AI-focused Engineer with <span class="terminal-token-cmd">\textbf</span>{2.5 years of experience} building production-grade <span class="terminal-token-kw">LLM workflows</span> and <span class="terminal-token-kw">agentic AI systems</span>.}</div>
+          <div><span class="terminal-token-cmd">\section</span>{<span class="terminal-token-arg">TECHNICAL SKILLS</span>}</div>
+          <div>&nbsp;&nbsp;<span class="terminal-token-cmd">\resumeItem</span>{<span class="terminal-token-cmd">\textbf</span>{AI/GenAI:} <span class="terminal-token-kw">LangChain, LangGraph, RAG, Tool Calling, Vector Search</span>, Python, Go}</div>
+        </div>
+      </div>
+
+      <!-- Platform Statistics Strip -->
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div class="stat-num">7,008</div>
+          <div class="stat-label">Verified Career Boards</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3,212</div>
+          <div class="stat-label">Ashby Portals</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1,894</div>
+          <div class="stat-label">Greenhouse Pipelines</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1,522</div>
+          <div class="stat-label">Lever Companies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">&lt; 2.0s</div>
+          <div class="stat-label">LaTeX Compilation</div>
+        </div>
+      </div>
+
+      <!-- Feature Grid: What Applyfox Does -->
+      <div class="section-heading">
+        <span class="section-tag">ENGINEERED FOR PRODUCTION</span>
+        <h2 class="section-title">Everything you need to land top tech roles</h2>
+        <p class="section-desc">Applyfox is an end-to-end local platform that combines real LaTeX typesetting, career board intelligence, and meticulous application tracking.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card" onclick="switchView('tailor')">
+          <div>
+            <div class="feature-icon-wrapper icon-purple"><i class="fa fa-file-pdf"></i></div>
+            <h3 class="feature-title">Overleaf-Grade LaTeX Engine</h3>
+            <p class="feature-text">Embedded standalone Tectonic XeTeX engine that compiles genuine binary PDFs directly from LaTeX source code. Zero HTML print artifacts, pristine typography, and clickable hyperref links.</p>
+          </div>
+          <span class="feature-link">Open Studio &rarr;</span>
+        </div>
+
+        <div class="feature-card" onclick="switchView('tailor')">
+          <div>
+            <div class="feature-icon-wrapper icon-emerald"><i class="fa fa-wand-magic-sparkles"></i></div>
+            <h3 class="feature-title">Intelligent JD-Tailored Sections</h3>
+            <p class="feature-text">Analyzes any target job description and precisely re-aligns PROFILE, TECHNICAL SKILLS, and project tech stack headers while strictly preserving authentic candidate background.</p>
+          </div>
+          <span class="feature-link">Tailor a CV &rarr;</span>
+        </div>
+
+        <div class="feature-card" onclick="switchView('portals')">
+          <div>
+            <div class="feature-icon-wrapper icon-sky"><i class="fa fa-table-list"></i></div>
+            <h3 class="feature-title">Multi-Portal Career Sheets</h3>
+            <p class="feature-text">Explore 7,008 career boards with instant server-side pagination across Ashby, Greenhouse, Lever, and Workday, integrated with direct Levels.fyi salary data and Glassdoor reviews.</p>
+          </div>
+          <span class="feature-link">Browse Sheets &rarr;</span>
+        </div>
+
+        <div class="feature-card" onclick="switchView('tracker')">
+          <div>
+            <div class="feature-icon-wrapper icon-amber"><i class="fa fa-clipboard-check"></i></div>
+            <h3 class="feature-title">Master Tracker &amp; Version Vault</h3>
+            <p class="feature-text">Automatically records every application in your master sheet and archives the exact tailored .tex and compiled .pdf for seamless interview preparation.</p>
+          </div>
+          <span class="feature-link">View Tracker &rarr;</span>
+        </div>
+      </div>
+
+      <!-- 3-Step Workflow -->
+      <div class="section-heading" style="margin-top: 60px;">
+        <span class="section-tag">SEAMLESS WORKFLOW</span>
+        <h2 class="section-title">How Applyfox works</h2>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h4 class="step-title">Select Company or Paste JD</h4>
+          <p class="step-text">Choose from 7,008 indexed career boards or enter your target role and paste the job responsibilities.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4 class="step-title">Instant ATS Alignment</h4>
+          <p class="step-text">Inspect section diffs for PROFILE, SKILLS, and PROJECTS to review targeted keyword adjustments.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4 class="step-title">1-Click PDF &amp; Archive</h4>
+          <p class="step-text">Compile an authentic Overleaf-quality PDF with one click, while auto-logging the application in your master tracker.</p>
+        </div>
+      </div>
+
+      <!-- Refined Warm CTA Banner -->
+      <div class="cta-banner">
+        <div class="cta-pill">
+          <i class="fa fa-sparkles"></i> START TAILORING TODAY
+        </div>
+        <h2 class="cta-title">Ready to tailor your CV <em>for your next role?</em></h2>
+        <p class="cta-sub">Launch the interactive CV Studio or explore 7,008 verified career boards across top tech startups, scaleups, and unicorns.</p>
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
+            <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="switchView('portals')">
+            <i class="fa fa-table-list"></i> Explore 7,008 Portal Sheets
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- FOOTER: CREATOR & OPEN SOURCE CONTRIBUTION -->
+      <!-- ========================================== -->
+      <footer class="app-footer">
+        <div class="footer-inner">
+          <!-- Col 1: Brand & Open Source Contributions -->
+          <div class="footer-col footer-col-main">
+            <div class="footer-brand">
+              <span style="font-size: 1.4rem;">🦊</span>
+              <span style="font-weight: 700; font-size: 1.15rem; color: var(--text-primary); letter-spacing: -0.02em;">Applyfox</span>
+              <span class="brand-badge">STUDIO &bull; SHEETS</span>
+            </div>
+            <p class="footer-desc">
+              An open-source, local-first career intelligence platform and Overleaf-grade LaTeX CV studio engineered for developers.
+            </p>
+
+            <div class="contrib-card">
+              <div class="contrib-header">
+                <i class="fa-brands fa-github" style="font-size: 1.15rem; color: #18181B;"></i>
+                <span style="font-weight: 600; font-size: 0.88rem; color: #18181B;">Open Source Contributions</span>
+              </div>
+              <p class="contrib-text">
+                Applyfox is open-source! We welcome community contributions &mdash; add new ATS career boards, improve CV tailoring algorithms, or submit LaTeX templates.
+              </p>
+              <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary contrib-btn">
+                <i class="fa-solid fa-code-fork"></i> Star &amp; Contribute on GitHub &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Workspace & Portal Links -->
+          <div class="footer-col">
+            <div class="footer-heading">WORKSPACE NAVIGATION</div>
+            <ul class="footer-links">
+              <li><a href="#" onclick="switchView('tailor'); return false;"><i class="fa fa-wand-magic-sparkles"></i> CV Studio &amp; Tailor</a></li>
+              <li><a href="#" onclick="switchView('portals'); return false;"><i class="fa fa-table-list"></i> Portal Sheets (7,008)</a></li>
+              <li><a href="#" onclick="switchView('tracker'); return false;"><i class="fa fa-clipboard-check"></i> Applications Tracker</a></li>
+              <li><a href="#" onclick="switchView('base-cv'); return false;"><i class="fa fa-file-code"></i> Base LaTeX main.tex</a></li>
+            </ul>
+
+            <div class="footer-heading" style="margin-top: 22px;">CAREER PORTALS</div>
+            <ul class="footer-links">
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('master'); return false;"><i class="fa fa-globe"></i> Master Sheet (7,008)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('ashby'); return false;"><i class="fa fa-bolt"></i> Ashby Boards (3,212)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('greenhouse'); return false;"><i class="fa fa-seedling"></i> Greenhouse Portals (1,894)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('lever'); return false;"><i class="fa fa-sliders"></i> Lever Boards (1,522)</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Creator Attribution & Profiles -->
+          <div class="footer-col footer-col-creator">
+            <div class="footer-heading">CRAFTED &amp; ENGINEERED BY</div>
+            <div class="creator-card">
+              <div class="creator-header">
+                <div class="creator-avatar">HJ</div>
+                <div>
+                  <div class="creator-name">Harsh Jha</div>
+                  <div class="creator-title">IIT Indore Alumnus &bull; SDE</div>
+                </div>
+              </div>
+              <p class="creator-bio">
+                Software Development Engineer building scalable cloud-native architectures, agentic AI systems, and developer tools.
+              </p>
+              
+              <div class="creator-socials">
+                <a href="https://www.linkedin.com/in/harshjha-iiti/" target="_blank" rel="noopener noreferrer" class="social-pill social-linkedin" title="Connect on LinkedIn">
+                  <i class="fa-brands fa-linkedin"></i>
+                  <span>LinkedIn</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
+                </a>
+                <a href="https://www.instagram.com/jhaharsh03/" target="_blank" rel="noopener noreferrer" class="social-pill social-instagram" title="Follow on Instagram">
+                  <i class="fa-brands fa-instagram"></i>
+                  <span>Instagram</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
+                </a>
+                <a href="https://github.com/jhaharsh03" target="_blank" rel="noopener noreferrer" class="social-pill social-github" title="Follow on GitHub">
+                  <i class="fa-brands fa-github"></i>
+                  <span>GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Copyright & Meta -->
+        <div class="footer-bottom">
+          <div>
+            &copy; 2026 Applyfox &bull; Designed &amp; Developed by <strong>Harsh Jha</strong> &bull; Open Source under MIT License.
+          </div>
+          <div class="footer-bottom-badges">
+            <span class="chip chip-skill"><i class="fa-solid fa-bolt"></i> Tectonic XeTeX Engine</span>
+            <span class="chip chip-score"><i class="fa-solid fa-shield-halved"></i> 100% Local &amp; Private</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: CV STUDIO & TAILOR WORKSPACE       -->
+    <!-- ========================================== -->
+    <div id="view-tailor" style="display: none;">
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>CV Studio &amp; Tailor</strong>
+        </div>
+        <div class="workspace-meta">
+          <span class="chip chip-skill"><i class="fa fa-user"></i> Harsh Jha (IIT Indore)</span>
+          <span class="chip chip-score"><i class="fa fa-bolt"></i> Tectonic XeTeX Engine Active</span>
+        </div>
+      </div>
+
+      <div class="tailor-layout">
+        <!-- Left Column: Input Form -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fa fa-pen-to-square"></i> Job Application Details</div>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Targeted ATS Alignment</span>
+          </div>
+
+          <form id="tailorForm" onsubmit="event.preventDefault(); handleTailor();">
+            <div class="form-group">
+              <label for="companyName">Target Company Name *</label>
+              <input type="text" id="companyName" placeholder="e.g. Infrrd, Stripe, OpenAI, Notion..." list="companyList" required>
+              <datalist id="companyList"></datalist>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="jobTitle">Job Title / Role</label>
+                <input type="text" id="jobTitle" placeholder="e.g. Python Developer (Gen AI)">
+              </div>
+              <div class="form-group">
+                <label for="jobUrl">Job Posting / ATS URL</label>
+                <input type="text" id="jobUrl" placeholder="https://jobs.ashbyhq.com/...">
+              </div>
+            </div>
+
+            <!-- Referral Section -->
+            <div class="referral-box">
+              <label class="checkbox-label">
+                <input type="checkbox" id="hasReferral" onchange="toggleReferralFields()">
+                <span><i class="fa fa-user-tag" style="color: var(--accent-emerald);"></i> I have an Employee Referral for this job</span>
+              </label>
+              <div id="referralFields" style="display: none; margin-top: 10px;">
+                <div class="form-row">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label for="referralName">Referrer Name</label>
+                    <input type="text" id="referralName" placeholder="e.g. Alex Doe">
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label for="referralContact">Referrer Email / LinkedIn</label>
+                    <input type="text" id="referralContact" placeholder="alex@company.com">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 14px;">
+              <label for="jdText">Paste Job Description (JD) *</label>
+              <textarea id="jdText" placeholder="Paste the job requirements, responsibilities, and required tech stack here..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="appNotes">Personal Application Notes (Optional)</label>
+              <input type="text" id="appNotes" placeholder="e.g. Recruiter message sent on LinkedIn, applied via Ashby portal">
+            </div>
+
+            <div class="banner-actions">
+              <button type="button" id="btnTailor" class="btn btn-primary" style="flex: 1;" onclick="handleTailor()">
+                <i class="fa fa-wand-magic-sparkles"></i> 1. Tailor CV
+              </button>
+              <button type="button" id="btnSaveApp" class="btn btn-success" style="flex: 1;" onclick="handleSaveApplication()">
+                <i class="fa fa-floppy-disk"></i> 2. Save &amp; Track Job
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right Column: Studio Output & Preview -->
+        <div class="card" id="resultsCard" style="min-height: 600px;">
+          <div class="card-header">
+            <div class="card-title"><i class="fa fa-eye"></i> Tailored CV Studio Preview</div>
+            <div id="actionDownloadButtons" style="display: none; gap: 8px; flex-wrap: wrap;">
+              <button id="btnDownloadPdf" class="btn btn-primary btn-sm" onclick="downloadPdf()"><i class="fa fa-file-pdf"></i> Download PDF</button>
+              <button class="btn btn-secondary btn-sm" onclick="recompilePdf()"><i class="fa fa-arrows-rotate"></i> Recompile TeX</button>
+              <button class="btn btn-secondary btn-sm" onclick="downloadTex()"><i class="fa fa-download"></i> Download .tex</button>
+              <button class="btn btn-secondary btn-sm" onclick="copyTex()"><i class="fa fa-copy"></i> Copy TeX</button>
+            </div>
+          </div>
+
+          <div id="emptyState" style="text-align: center; padding: 90px 20px; color: var(--text-secondary);">
+            <i class="fa fa-file-invoice" style="font-size: 3rem; margin-bottom: 14px; opacity: 0.35;"></i>
+            <h3 style="margin: 0 0 6px 0; color: var(--text-primary); font-family: 'Newsreader', serif; font-size: 1.6rem;">No CV tailored yet</h3>
+            <p style="margin: 0 0 16px 0; font-size: 0.92rem; max-width: 480px; margin-left: auto; margin-right: auto;">Enter target company and job description on the left (or pick a company from the <strong>Portal Sheets</strong> tab) and click <strong>1. Tailor CV</strong>.</p>
+            <button class="btn btn-secondary btn-sm" onclick="loadBaseCvInStudio()">
+              <i class="fa fa-eye"></i> Preview Base CV Right Now
+            </button>
+          </div>
+
+          <div id="outputContent" style="display: none;">
+            <!-- Metadata Bar -->
+            <div class="meta-chips">
+              <span class="chip chip-score" id="scoreBadge">Match: 0%</span>
+              <span class="chip chip-archetype" id="archetypeBadge">Archetype: -</span>
+              <span id="prioritySkillsChips" style="display: flex; gap: 6px; flex-wrap: wrap;"></span>
+            </div>
+
+            <!-- Subtabs -->
+            <div class="results-tabs">
+              <button class="subtab-btn active" id="subtabBtn-preview" onclick="switchSubTab('preview')"><i class="fa fa-file-lines"></i> Visual Paper Preview</button>
+              <button class="subtab-btn" id="subtabBtn-pdf" onclick="switchSubTab('pdf')"><i class="fa fa-file-pdf"></i> Compiled LaTeX PDF</button>
+              <button class="subtab-btn" id="subtabBtn-diff" onclick="switchSubTab('diff')"><i class="fa fa-code-compare"></i> Section Diffs</button>
+              <button class="subtab-btn" id="subtabBtn-tex" onclick="switchSubTab('tex')"><i class="fa fa-code"></i> LaTeX Source</button>
+            </div>
+
+            <!-- Subtab 1: Visual Paper Preview -->
+            <div id="subtab-preview" class="preview-frame-container">
+              <iframe id="cvPreviewFrame" class="preview-frame"></iframe>
+            </div>
+
+            <!-- Subtab 2: Compiled LaTeX PDF -->
+            <div id="subtab-pdf" style="display: none; height: 780px; background: #525659; border-radius: 8px; overflow: hidden;">
+              <iframe id="pdfPreviewFrame" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- Subtab 3: Diffs -->
+            <div id="subtab-diff" style="display: none;">
+              <div id="diffViewContainer"></div>
+            </div>
+
+            <!-- Subtab 4: TeX Code -->
+            <div id="subtab-tex" style="display: none;">
+              <div style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.82rem; color: var(--text-secondary);"><i class="fa fa-pencil"></i> You can edit this LaTeX source directly and click <strong>Recompile TeX</strong> to update both previews.</span>
+                <button class="btn btn-primary btn-sm" onclick="recompilePdf()"><i class="fa fa-arrows-rotate"></i> Recompile TeX</button>
+              </div>
+              <textarea id="tailoredTexArea" class="tex-code" style="height: 650px;"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: PORTAL SHEETS WORKSPACE            -->
+    <!-- ========================================== -->
+    <div id="view-portals" style="display: none;">
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>ATS Career Portal Sheets (7,008 Boards)</strong>
+        </div>
+        <div class="workspace-meta">
+          <span class="chip chip-skill"><i class="fa fa-chart-line"></i> Levels.fyi Integrated</span>
+          <span class="chip chip-score"><i class="fa fa-star"></i> Glassdoor Reviews</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <!-- Sheet Selector Pills -->
+        <div class="sheet-tabs-container">
+          <div class="sheet-pills" id="sheetPillsContainer">
+            <!-- Rendered dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Search & Control Bar -->
+        <div class="controls-bar">
+          <div class="search-wrapper">
+            <i class="fa fa-magnifying-glass"></i>
+            <input type="text" id="portalSearch" class="search-input" placeholder="Search companies by name, slug, or portal..." oninput="onPortalSearchInput(this.value)">
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span style="font-size: 0.82rem; color: var(--text-secondary);">Per page:</span>
+            <select id="portalLimitSelect" onchange="onPortalLimitChange(this.value)" style="width: auto; padding: 6px 10px; font-size: 0.82rem;">
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Paginated Table -->
+        <div class="table-container">
+          <table class="sheet-table" id="portalTable">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th>Company Name</th>
+                <th>Portal / ATS</th>
+                <th>Open Roles</th>
+                <th>Career Board</th>
+                <th>Intelligence Links</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="portalTableBody">
+              <tr>
+                <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                  <i class="fa fa-spinner fa-spin"></i> Loading directory sheet...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Pagination Footer -->
+          <div class="pagination-bar" id="portalPaginationBar">
+            <div class="page-info" id="portalPageInfo">Showing 0 of 0</div>
+            <div class="page-nav" id="portalPageNav"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: APPLICATIONS TRACKER WORKSPACE      -->
+    <!-- ========================================== -->
+    <div id="view-tracker" style="display: none;">
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>Applications Tracker ("The Sheet")</strong>
+        </div>
+        <div class="workspace-meta">
+          <a href="/api/export_csv" class="btn btn-secondary btn-sm" style="text-decoration: none;"><i class="fa fa-file-csv"></i> Export CSV</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><i class="fa fa-table"></i> Master Tracked Applications</div>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="trackerSearch" placeholder="Search company or title..." oninput="filterTrackerTable()" style="width: 250px; padding: 6px 10px;">
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="sheet-table" id="trackerTable">
+            <thead>
+              <tr>
+                <th>Date Applied</th>
+                <th>Company</th>
+                <th>Job Title</th>
+                <th>Status</th>
+                <th>Referral</th>
+                <th>Match Score</th>
+                <th>Key Skills Targeted</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="trackerTableBody">
+              <tr><td colspan="8" style="text-align: center; color: var(--text-secondary); padding: 40px;">No job applications tracked yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: BASE CV LATEX SOURCE WORKSPACE     -->
+    <!-- ========================================== -->
+    <div id="view-base-cv" style="display: none;">
+      <div class="workspace-bar">
+        <div class="workspace-breadcrumb">
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>Base CV LaTeX Source &mdash; data/main.tex</strong>
+        </div>
+        <div class="workspace-meta">
+          <span class="chip chip-skill"><i class="fa fa-graduation-cap"></i> IIT Indore</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <textarea id="baseTexContent" class="tex-code" style="height: 750px;" readonly></textarea>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+<script>
+const IS_GITHUB_PAGES = (window.location.hostname.endsWith('.github.io') || window.location.protocol === 'file:');
+const EMBEDDED_BASE_TEX = "%-------------------------\n% Resume in Latex\n%------------------------\n\n\\documentclass[letterpaper,11pt]{article}\n\n\\usepackage{latexsym}\n\\usepackage[empty]{fullpage}\n\\usepackage{titlesec}\n\\usepackage{marvosym}\n\\usepackage[usenames,dvipsnames]{color}\n\\usepackage{enumitem}\n\\usepackage[hidelinks]{hyperref}\n\\usepackage[english]{babel}\n\\usepackage{tabularx}\n\\usepackage{fontawesome5}\n\\usepackage{graphicx}\n\\ifdefined\\pdfgentounicode\n  \\input{glyphtounicode}\n  \\pdfgentounicode=1\n\\fi\n\n\\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}\n\n%----------PAGE MARGINS----------\n\\addtolength{\\oddsidemargin}{-0.6in}\n\\addtolength{\\textwidth}{1.19in}\n\\addtolength{\\topmargin}{-.7in}\n\\addtolength{\\textheight}{1.4in}\n\n\\raggedbottom\n\\raggedright\n\\setlength{\\tabcolsep}{0in}\n\n%----------SECTION FORMATTING----------\n\\titleformat{\\section}{\n  \\vspace{-4pt}\\scshape\\raggedright\\large\\bfseries\n}{}{0em}{}[\\titlerule \\vspace{-5pt}]\n\n%----------BULLET FORMATTING----------\n\\renewcommand\\labelitemi{$\\vcenter{\\hbox{\\small$\\circ$}}$}\n\n\\newcommand{\\resumeItem}[1]{\n  \\item[\\textbullet]\\small{\n    {#1 \\vspace{-2pt}}\n  }\n}\n\n%----------SUBHEADING----------\n\\newcommand{\\resumeSubheading}[4]{\n  \\vspace{-4pt}\\item\n    \\begin{tabular*}{1.0\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}\n      \\textbf{#1} & \\textbf{#2} \\\\\n      \\textit{#3} & \\textit{#4} \\\\\n    \\end{tabular*}\\vspace{-6pt}\n}\n\n%----------PROJECT HEADING----------\n% tabularx allows long project titles/technology stacks\n% to wrap without overlapping the GitHub link.\n\\newcommand{\\resumeProjectHeading}[2]{\n  \\vspace{-2pt}\\item\n    \\begin{tabularx}{\\textwidth}{@{}X r@{}}\n      \\small #1 & \\small #2 \\\\\n    \\end{tabularx}\n    \\vspace{-4pt}\n}\n\n%----------LISTS----------\n\\newcommand{\\resumeSubHeadingListStart}{\n  \\begin{itemize}[leftmargin=0in, label={}]\n}\n\n\\newcommand{\\resumeSubHeadingListEnd}{\n  \\end{itemize}\n}\n\n\\newcommand{\\resumeItemListStart}{\n  \\begin{itemize}[leftmargin=0.15in]\n}\n\n\\newcommand{\\resumeItemListEnd}{\n  \\end{itemize}\\vspace{-6pt}\n}\n\n%-------------------------------------------\n%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%\n%-------------------------------------------\n\n\\begin{document}\n\n%----------HEADER----------\n\\begin{center}\n    {\\huge \\textbf{Harsh Jha}} \\\\ \\vspace{6pt}\n    {\\faPhone \\ +91 7060286069} ~\n    {\\faEnvelope \\ \\href{mailto:harshptct@gmail.com}{harshj92002@gmail.com}} ~\n    {\\faLinkedin \\ \\href{https://www.linkedin.com/in/harshjha-iiti/}{LinkedIn}} ~\n    {\\faGithub \\ \\href{https://github.com/jhaharsh03}{GitHub}} ~\n    {\\faCode \\ \\href{https://leetcode.com/u/harshdotcom/}{LeetCode}}\n\\end{center}\n\n\n%-----------PROFILE-----------\n\\section{\\color{airforceblue}PROFILE}\n\\resumeItemListStart\n\n\\resumeItem{AI-focused Software Development Engineer with \\textbf{2.5 years of experience} building backend systems, AI-powered applications, cloud-native services, microservices, and production-grade software.}\n\n\\resumeItem{Hands-on experience designing and integrating \\textbf{LLM and agentic AI workflows} using LangChain, LangGraph, RAG, tool calling, prompt engineering, structured outputs, AWS Bedrock, and AWS Textract.}\n\n\\resumeItem{Strong backend and systems foundation across \\textbf{Go, Python, TypeScript, REST APIs, PostgreSQL, MongoDB, Docker, Kubernetes, AWS, and Azure}, with experience taking features from design through production.}\n\n\\resumeItem{Open-source maintainer of \\textbf{VitaTrack.ai}, an AI-powered healthcare platform for medical document extraction, report summarization, health-record organization, and intelligent health-data workflows.}\n\n\\resumeItemListEnd\n\n\n%-----------EDUCATION-----------\n\\section{\\color{airforceblue}EDUCATION}\n\\resumeSubHeadingListStart\n\n\\resumeSubheading\n{Indian Institute of Technology Indore (IIT Indore)}{Indore, India}\n{Bachelor of Technology (B.Tech.) in Civil Engineering}{2020 -- 2024}\n\n\\resumeSubHeadingListEnd\n\n\n%-----------TECHNICAL SKILLS-----------\n\\section{\\color{airforceblue}TECHNICAL SKILLS}\n\\resumeItemListStart\n\n\\resumeItem{\\textbf{AI / GenAI:} LLMs, AI Agents, Agentic AI, LangChain, LangGraph, RAG, Prompt Engineering, Tool Calling, Function Calling, LLM Integration, AI Workflow Automation}\n\n\\resumeItem{\\textbf{AI Engineering:} Agent Orchestration, Retrieval Pipelines, Vector Search, Embeddings, Context Engineering, Structured Outputs, Model Integration, AI Evaluation}\n\n\\resumeItem{\\textbf{Programming:} Python, Go, TypeScript, JavaScript, C++}\n\n\\resumeItem{\\textbf{Backend:} FastAPI, Gin, Fiber, Node.js, Express.js, REST APIs, gRPC, Microservices, API Gateway}\n\n\\resumeItem{\\textbf{Data:} PostgreSQL, MongoDB, MySQL, SQL Server, Redis}\n\n\\resumeItem{\\textbf{Cloud \\& AI Services:} AWS, Azure, AWS Bedrock, AWS Textract, Oracle Cloud Infrastructure}\n\n\\resumeItem{\\textbf{DevOps \\& Infrastructure:} Docker, Kubernetes, GitHub Actions, CI/CD, Containerized Deployment}\n\n\\resumeItem{\\textbf{Architecture:} System Design, Distributed Systems, Event-Driven Architecture, Microservices, Clean Architecture, SOLID Principles}\n\n\\resumeItem{\\textbf{Security:} JWT, RBAC, API Validation, Secure API Design}\n\n\\resumeItemListEnd\n\n\n%-----------WORK EXPERIENCE-----------\n\\section{\\color{airforceblue}WORK EXPERIENCE}\n\\resumeSubHeadingListStart\n\n\\resumeSubheading\n{Software Development Engineer - 2}{May 2024 -- Present}\n{SimplyPhi}{Bangalore, India}\n\n\\resumeItemListStart\n\n\\resumeItem{Designed and built scalable backend services using \\textbf{Go, Python, TypeScript, REST APIs, PostgreSQL, and microservices} for production business workflows.}\n\n\\resumeItem{Developed production-ready APIs for \\textbf{authentication, reporting, financial workflows, property operations, dashboard analytics, and business automation}, supporting multiple application workflows.}\n\n\\resumeItem{Engineered AI-powered workflows using \\textbf{LangChain, LangGraph, AI agents, LLM APIs, RAG pipelines, prompt engineering, tool calling, and structured outputs}.}\n\n\\resumeItem{Integrated \\textbf{LLM and AI services} into business applications for document understanding, report generation, data extraction, summarization, and intelligent workflow automation.}\n\n\\resumeItem{Built and deployed cloud-native services using \\textbf{Docker, Kubernetes, AWS, Azure, GitHub Actions, and CI/CD}, supporting reliable application delivery across environments.}\n\n\\resumeItem{Implemented secure application workflows using \\textbf{JWT authentication, RBAC, API validation, structured logging, and centralized error handling}.}\n\n\\resumeItem{Improved backend scalability and maintainability through \\textbf{Clean Architecture, modular service design, optimized database queries, caching, and reusable service components}.}\n\n\\resumeItem{Owned features end-to-end across \\textbf{requirements analysis, system design, development, testing, deployment, monitoring, debugging, and production support}.}\n\n\\resumeItemListEnd\n\n\\resumeSubHeadingListEnd\n\n\n%-----------PROJECTS-----------\n\\section{\\color{airforceblue}PROJECTS}\n\\resumeSubHeadingListStart\n\n%----------VITATRACK----------\n\\resumeProjectHeading\n{\\textbf{VitaTrack.ai -- AI Medical Report Platform} $|$ Go, Python, AWS, PostgreSQL}\n{\\href{https://github.com/harshdotcom/vitalTrack.ai-}{GitHub}}\n\n\\resumeItemListStart\n\n\\resumeItem{Developing an open-source AI healthcare platform for managing \\textbf{medical reports, prescriptions, symptoms, medications, health records, and daily health notes}.}\n\n\\resumeItem{Built secure \\textbf{Go backend APIs} and structured healthcare data workflows using \\textbf{PostgreSQL} for medical record management.}\n\n\\resumeItem{Integrated \\textbf{AWS Textract} to extract text and structured data from medical reports, prescriptions, and healthcare documents.}\n\n\\resumeItem{Integrated \\textbf{AWS Bedrock and LLMs} with prompt engineering to summarize medical reports and transform unstructured health data into structured, actionable information.}\n\n\\resumeItem{Designed AI workflows for \\textbf{medical document analysis, health-history tracking, report processing, and patient record organization}.}\n\n\\resumeItem{Built supporting \\textbf{Angular} interfaces for document uploads, health logs, dashboards, and medical data management.}\n\n\\resumeItemListEnd\n\n\n%----------AI AGENT WORKFLOW----------\n\\resumeProjectHeading\n{\\textbf{AI Agent Workflow System} $|$ Python, LangChain, LangGraph, LLMs}\n{\\href{https://github.com/harshdotcom/naukriAuto.Ai}{GitHub}}\n\n\\resumeItemListStart\n\n\\resumeItem{Engineered multi-step \\textbf{AI agent workflows} using Python, LangChain, LangGraph, and LLM APIs for intelligent automation and structured decision-making.}\n\n\\resumeItem{Designed stateful agent workflows for \\textbf{document processing, summarization, API integration, tool execution, and structured response generation}.}\n\n\\resumeItem{Implemented \\textbf{tool calling, prompt templates, reusable chains, memory, state management, and conditional workflow execution} for agent-driven automation.}\n\n\\resumeItem{Integrated AI agents with \\textbf{REST APIs and external tools} to execute tasks, process information, and support real-world business workflows.}\n\n\\resumeItemListEnd\n\n\\resumeSubHeadingListEnd\n\n\n%-----------CERTIFICATIONS-----------\n\\section{\\color{airforceblue}CERTIFICATIONS}\n\\resumeItemListStart\n\n\\resumeItem{\n\\href{https://academy.langchain.com/certificates/svjvl9l9fa}\n{\\textbf{Introduction to LangChain - Python} \u2014 LangChain Academy}\n}\n\n\\resumeItem{\n\\href{https://verify.skilljar.com/c/gbzedjz5dcde}\n{\\textbf{Introduction to Agent Skills} \u2014 Anthropic}\n}\n\n\\resumeItem{\n\\href{https://www.linkedin.com/in/harshjha-iiti/overlay/certifications/1170933565/multiple-media-viewer/?profileId=ACoAADN4Q84BhQseKYmEwHkPK7yzh0e_9nVq1kY}\n{\\textbf{Oracle Cloud Infrastructure 2025 Certified} \u2014 Oracle}\n}\n\n\\resumeItemListEnd\n\n\n%-----------ACHIEVEMENTS-----------\n\\section{\\color{airforceblue}ACHIEVEMENTS}\n\\resumeItemListStart\n\n\\resumeItem{Achieved a \\textbf{LeetCode Contest Rating of 1663}, placing in the \\textbf{top 6\\% globally}.}\n\n\\resumeItem{Open-source maintainer of \\textbf{VitaTrack.ai}, an AI-powered healthcare platform focused on medical document processing and intelligent health-data workflows.}\n\n\\resumeItemListEnd\n\n\n%-------------------------------------------\n\\end{document}";
+const EMBEDDED_PREVIEW_HTML = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Harsh Jha - CV (Base Master CV)</title>\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js\"><\\/script>\n<style>\n  :root {\n    --airforceblue: #5c8aab;\n    --text-color: #000000;\n    --paper-bg: #ffffff;\n    --link-color: #000000;\n    --line-color: #000000;\n  }\n  @page {\n    size: letter portrait;\n    margin: 0.35in 0.45in;\n  }\n  * {\n    box-sizing: border-box;\n  }\n  body {\n    background: #e5e7eb;\n    margin: 0;\n    padding: 16px 8px;\n    font-family: 'Times New Roman', Times, Cambria, Georgia, serif;\n    color: var(--text-color);\n    line-height: 1.25;\n    font-size: 10pt;\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n  .paper-page {\n    background: var(--paper-bg);\n    max-width: 8.5in;\n    min-height: 11in;\n    margin: 0 auto;\n    padding: 0.4in 0.5in;\n    box-shadow: 0 4px 20px rgba(0,0,0,0.15);\n    box-sizing: border-box;\n  }\n  .header-block {\n    text-align: center;\n    margin-bottom: 6px;\n  }\n  .header-name {\n    font-size: 20pt;\n    font-weight: bold;\n    letter-spacing: 0.5px;\n    margin: 0 0 4px 0;\n  }\n  .header-contacts {\n    font-size: 9.5pt;\n    color: #111;\n  }\n  .header-contacts a, .cv-link {\n    color: var(--text-color);\n    text-decoration: none;\n  }\n  .header-contacts a:hover, .cv-link:hover {\n    text-decoration: underline;\n  }\n  .contact-sep {\n    margin: 0 4px;\n    color: #666;\n  }\n  .section-title {\n    color: var(--airforceblue);\n    font-size: 11pt;\n    font-weight: bold;\n    text-transform: uppercase;\n    letter-spacing: 0.5px;\n    margin: 10px 0 2px 0;\n    border-bottom: 1px solid #111;\n    padding-bottom: 2px;\n  }\n  ul.resume-list {\n    margin: 2px 0 5px 0;\n    padding-left: 18px;\n  }\n  ul.resume-list li {\n    margin-bottom: 2.5px;\n    font-size: 9.8pt;\n    line-height: 1.28;\n  }\n  .subheading-row, .project-header-row {\n    display: flex;\n    justify-content: space-between;\n    align-items: baseline;\n    font-size: 9.8pt;\n    margin-top: 3px;\n  }\n  .sub-row {\n    margin-top: 1px;\n    margin-bottom: 2px;\n  }\n  .row-left {\n    text-align: left;\n  }\n  .row-right {\n    text-align: right;\n    white-space: nowrap;\n  }\n  .pipe-sep {\n    color: #333;\n    margin: 0 3px;\n  }\n  .tech-tag {\n    font-style: italic;\n    color: #111;\n  }\n  .entry-block {\n    margin-bottom: 5px;\n  }\n  @media print {\n    body {\n      background: none !important;\n      padding: 0 !important;\n      margin: 0 !important;\n    }\n    .paper-page {\n      box-shadow: none !important;\n      padding: 0.25in 0.35in !important;\n      max-width: 100% !important;\n      min-height: auto !important;\n      margin: 0 !important;\n    }\n  }\n</style>\n</head>\n<body>\n\n<div class=\"paper-page\" id=\"cvPaperDocument\">\n  <!-- HEADER -->\n  <div class=\"header-block\">\n    <div class=\"header-name\">Harsh Jha</div>\n    <div class=\"header-contacts\">\n      <i class=\"fa fa-phone\"></i> +91 7060286069\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fa fa-envelope\"></i> <a href=\"mailto:harshj92002@gmail.com\">harshj92002@gmail.com</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fab fa-linkedin\"></i> <a href=\"https://www.linkedin.com/in/harshjha-iiti/\" target=\"_blank\">LinkedIn</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fab fa-github\"></i> <a href=\"https://github.com/jhaharsh03\" target=\"_blank\">GitHub</a>\n      <span class=\"contact-sep\">~</span>\n      <i class=\"fa fa-code\"></i> <a href=\"https://leetcode.com/u/harshdotcom/\" target=\"_blank\">LeetCode</a>\n    </div>\n  </div>\n\n  <!-- PROFILE -->\n  <div class=\"section-title\">PROFILE</div>\n  <ul class=\"resume-list\">\n    <li>AI-focused Software Development Engineer with <strong>2.5 years of experience</strong> building backend systems, AI-powered applications, cloud-native services, microservices, and production-grade software.</li>\n<li>Hands-on experience designing and integrating <strong>LLM and agentic AI workflows</strong> using LangChain, LangGraph, RAG, tool calling, prompt engineering, structured outputs, AWS Bedrock, and AWS Textract.</li>\n<li>Strong backend and systems foundation across <strong>Go, Python, TypeScript, REST APIs, PostgreSQL, MongoDB, Docker, Kubernetes, AWS, and Azure</strong>, with experience taking features from design through production.</li>\n<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform for medical document extraction, report summarization, health-record organization, and intelligent health-data workflows.</li>\n  </ul>\n\n  <!-- EDUCATION -->\n  <div class=\"section-title\">EDUCATION</div>\n  \n        <div class=\"subheading-row\">\n            <div class=\"row-left\"><strong>Indian Institute of Technology Indore (IIT Indore)</strong></div>\n            <div class=\"row-right\"><strong>Indore, India</strong></div>\n        </div>\n        <div class=\"subheading-row sub-row\">\n            <div class=\"row-left\"><em>Bachelor of Technology (B.Tech.) in Civil Engineering</em></div>\n            <div class=\"row-right\"><em>2020 \u2013 2024</em></div>\n        </div>\n        \n\n  <!-- TECHNICAL SKILLS -->\n  <div class=\"section-title\">TECHNICAL SKILLS</div>\n  <ul class=\"resume-list\">\n    <li><strong>AI / GenAI:</strong> LLMs, AI Agents, Agentic AI, LangChain, LangGraph, RAG, Prompt Engineering, Tool Calling, Function Calling, LLM Integration, AI Workflow Automation</li>\n<li><strong>AI Engineering:</strong> Agent Orchestration, Retrieval Pipelines, Vector Search, Embeddings, Context Engineering, Structured Outputs, Model Integration, AI Evaluation</li>\n<li><strong>Programming:</strong> Python, Go, TypeScript, JavaScript, C++</li>\n<li><strong>Backend:</strong> FastAPI, Gin, Fiber, Node.js, Express.js, REST APIs, gRPC, Microservices, API Gateway</li>\n<li><strong>Data:</strong> PostgreSQL, MongoDB, MySQL, SQL Server, Redis</li>\n<li><strong>Cloud & AI Services:</strong> AWS, Azure, AWS Bedrock, AWS Textract, Oracle Cloud Infrastructure</li>\n<li><strong>DevOps & Infrastructure:</strong> Docker, Kubernetes, GitHub Actions, CI/CD, Containerized Deployment</li>\n<li><strong>Architecture:</strong> System Design, Distributed Systems, Event-Driven Architecture, Microservices, Clean Architecture, SOLID Principles</li>\n<li><strong>Security:</strong> JWT, RBAC, API Validation, Secure API Design</li>\n  </ul>\n\n  <!-- WORK EXPERIENCE -->\n  <div class=\"section-title\">WORK EXPERIENCE</div>\n  \n        <div class=\"entry-block\">\n            <div class=\"subheading-row\">\n                <div class=\"row-left\"><strong>Software Development Engineer - 2</strong></div>\n                <div class=\"row-right\"><strong>May 2024 \u2013 Present</strong></div>\n            </div>\n            <div class=\"subheading-row sub-row\">\n                <div class=\"row-left\"><em>SimplyPhi</em></div>\n                <div class=\"row-right\"><em>Bangalore, India</em></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Designed and built scalable backend services using <strong>Go, Python, TypeScript, REST APIs, PostgreSQL, and microservices</strong> for production business workflows.</li>\n<li>Developed production-ready APIs for <strong>authentication, reporting, financial workflows, property operations, dashboard analytics, and business automation</strong>, supporting multiple application workflows.</li>\n<li>Engineered AI-powered workflows using <strong>LangChain, LangGraph, AI agents, LLM APIs, RAG pipelines, prompt engineering, tool calling, and structured outputs</strong>.</li>\n<li>Integrated <strong>LLM and AI services</strong> into business applications for document understanding, report generation, data extraction, summarization, and intelligent workflow automation.</li>\n<li>Built and deployed cloud-native services using <strong>Docker, Kubernetes, AWS, Azure, GitHub Actions, and CI/CD</strong>, supporting reliable application delivery across environments.</li>\n<li>Implemented secure application workflows using <strong>JWT authentication, RBAC, API validation, structured logging, and centralized error handling</strong>.</li>\n<li>Improved backend scalability and maintainability through <strong>Clean Architecture, modular service design, optimized database queries, caching, and reusable service components</strong>.</li>\n<li>Owned features end-to-end across <strong>requirements analysis, system design, development, testing, deployment, monitoring, debugging, and production support</strong>.</li>\n            </ul>\n        </div>\n        \n\n  <!-- PROJECTS -->\n  <div class=\"section-title\">PROJECTS</div>\n  \n        <div class=\"entry-block\">\n            <div class=\"project-header-row\">\n                <div class=\"proj-left\"><strong><strong>VitaTrack.ai \u2013 AI Medical Report Platform</strong></strong> <span class=\"pipe-sep\">|</span> <span class=\"tech-tag\">Go, Python, AWS, PostgreSQL</span></div>\n                <div class=\"proj-right\"><a href=\"https://github.com/harshdotcom/vitalTrack.ai-\" target=\"_blank\" class=\"cv-link\">GitHub</a></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Developing an open-source AI healthcare platform for managing <strong>medical reports, prescriptions, symptoms, medications, health records, and daily health notes</strong>.</li>\n<li>Built secure <strong>Go backend APIs</strong> and structured healthcare data workflows using <strong>PostgreSQL</strong> for medical record management.</li>\n<li>Integrated <strong>AWS Textract</strong> to extract text and structured data from medical reports, prescriptions, and healthcare documents.</li>\n<li>Integrated <strong>AWS Bedrock and LLMs</strong> with prompt engineering to summarize medical reports and transform unstructured health data into structured, actionable information.</li>\n<li>Designed AI workflows for <strong>medical document analysis, health-history tracking, report processing, and patient record organization</strong>.</li>\n<li>Built supporting <strong>Angular</strong> interfaces for document uploads, health logs, dashboards, and medical data management.</li>\n            </ul>\n        </div>\n        \n        <div class=\"entry-block\">\n            <div class=\"project-header-row\">\n                <div class=\"proj-left\"><strong><strong>AI Agent Workflow System</strong></strong> <span class=\"pipe-sep\">|</span> <span class=\"tech-tag\">Python, LangChain, LangGraph, LLMs</span></div>\n                <div class=\"proj-right\"><a href=\"https://github.com/harshdotcom/naukriAuto.Ai\" target=\"_blank\" class=\"cv-link\">GitHub</a></div>\n            </div>\n            <ul class=\"resume-list\">\n                <li>Engineered multi-step <strong>AI agent workflows</strong> using Python, LangChain, LangGraph, and LLM APIs for intelligent automation and structured decision-making.</li>\n<li>Designed stateful agent workflows for <strong>document processing, summarization, API integration, tool execution, and structured response generation</strong>.</li>\n<li>Implemented <strong>tool calling, prompt templates, reusable chains, memory, state management, and conditional workflow execution</strong> for agent-driven automation.</li>\n<li>Integrated AI agents with <strong>REST APIs and external tools</strong> to execute tasks, process information, and support real-world business workflows.</li>\n            </ul>\n        </div>\n        \n\n  <!-- CERTIFICATIONS -->\n  <div class=\"section-title\">CERTIFICATIONS</div>\n  <ul class=\"resume-list\">\n    <li><a href=\"https://academy.langchain.com/certificates/svjvl9l9fa\" target=\"_blank\" class=\"cv-link\"><strong>Introduction to LangChain - Python</strong> \u2014 LangChain Academy</a></li>\n<li><a href=\"https://verify.skilljar.com/c/gbzedjz5dcde\" target=\"_blank\" class=\"cv-link\"><strong>Introduction to Agent Skills</strong> \u2014 Anthropic</a></li>\n<li><a href=\"https://www.linkedin.com/in/harshjha-iiti/overlay/certifications/1170933565/multiple-media-viewer/?profileId=ACoAADN4Q84BhQseKYmEwHkPK7yzh0e_9nVq1kY\" target=\"_blank\" class=\"cv-link\"><strong>Oracle Cloud Infrastructure 2025 Certified</strong> \u2014 Oracle</a></li>\n  </ul>\n\n  <!-- ACHIEVEMENTS -->\n  <div class=\"section-title\">ACHIEVEMENTS</div>\n  <ul class=\"resume-list\">\n    <li>Achieved a <strong>LeetCode Contest Rating of 1663</strong>, placing in the <strong>top 6% globally</strong>.</li>\n<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform focused on medical document processing and intelligent health-data workflows.</li>\n  </ul>\n</div>\n\n<script>\nwindow.generateAndDownloadPdf = function(filename) {\n  const elem = document.getElementById(\"cvPaperDocument\");\n  const opt = {\n    margin: [0.3, 0.3, 0.3, 0.3],\n    filename: filename || \"Harsh_Jha_CV.pdf\",\n    image: { type: \"jpeg\", quality: 0.99 },\n    html2canvas: { scale: 2.5, useCORS: true, letterRendering: true },\n    jsPDF: { unit: \"in\", format: \"letter\", orientation: \"portrait\" }\n  };\n  if (typeof html2pdf !== \"undefined\") {\n    return html2pdf().set(opt).from(elem).save();\n  } else {\n    window.print();\n  }\n};\n<\\/script>\n\n</body>\n</html>\n";
+const EMBEDDED_SUMMARIES = [{"key": "master", "title": "Master Directory", "subtitle": "All Platforms Aggregated", "badge_color": "neutral", "icon": "fa-globe", "total_count": 7008}, {"key": "ashby", "title": "Ashby Portals", "subtitle": "Modern Tech & High-Growth Startups", "badge_color": "purple", "icon": "fa-bolt", "total_count": 3212}, {"key": "greenhouse", "title": "Greenhouse Portals", "subtitle": "Global Enterprise & Tech Unicorns", "badge_color": "emerald", "icon": "fa-seedling", "total_count": 1894}, {"key": "lever", "title": "Lever Portals", "subtitle": "Fast-Scaling Software & Product Teams", "badge_color": "sky", "icon": "fa-sliders", "total_count": 1522}, {"key": "workday", "title": "Workday Portals", "subtitle": "Fortune 500 & Multinationals", "badge_color": "amber", "icon": "fa-building", "total_count": 380}];
+const EMBEDDED_ITEMS = [{"id": 1, "name": "#paid", "ats": "lever", "slug": "hashtagpaid", "open_jobs": "4", "board_url": "https://jobs.lever.co/hashtagpaid", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=%23paid", "levels_url": "https://www.levels.fyi/companies/paid/salaries", "google_jobs_url": "https://www.google.com/search?q=%23paid+jobs+careers"}, {"id": 2, "name": "01c", "ats": "ashby", "slug": "01c", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/01c", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=01c", "levels_url": "https://www.levels.fyi/companies/01c/salaries", "google_jobs_url": "https://www.google.com/search?q=01c+jobs+careers"}, {"id": 3, "name": "0g", "ats": "ashby", "slug": "0g", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/0g", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=0g", "levels_url": "https://www.levels.fyi/companies/0g/salaries", "google_jobs_url": "https://www.google.com/search?q=0g+jobs+careers"}, {"id": 4, "name": "0x", "ats": "ashby", "slug": "0x", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/0x", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=0x", "levels_url": "https://www.levels.fyi/companies/0x/salaries", "google_jobs_url": "https://www.google.com/search?q=0x+jobs+careers"}, {"id": 5, "name": "1-800 Contacts", "ats": "greenhouse", "slug": "1800contacts", "open_jobs": "9", "board_url": "https://boards.greenhouse.io/1800contacts", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1-800%20Contacts", "levels_url": "https://www.levels.fyi/companies/1-800-contacts/salaries", "google_jobs_url": "https://www.google.com/search?q=1-800%20Contacts+jobs+careers"}, {"id": 6, "name": "100MS", "ats": "lever", "slug": "100ms", "open_jobs": "9", "board_url": "https://jobs.lever.co/100ms", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=100MS", "levels_url": "https://www.levels.fyi/companies/100ms/salaries", "google_jobs_url": "https://www.google.com/search?q=100MS+jobs+careers"}, {"id": 7, "name": "10Beauty", "ats": "greenhouse", "slug": "10beauty", "open_jobs": "7", "board_url": "https://boards.greenhouse.io/10beauty", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=10Beauty", "levels_url": "https://www.levels.fyi/companies/10beauty/salaries", "google_jobs_url": "https://www.google.com/search?q=10Beauty+jobs+careers"}, {"id": 8, "name": "10xteam", "ats": "ashby", "slug": "10xteam", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/10xteam", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=10xteam", "levels_url": "https://www.levels.fyi/companies/10xteam/salaries", "google_jobs_url": "https://www.google.com/search?q=10xteam+jobs+careers"}, {"id": 9, "name": "11x", "ats": "ashby", "slug": "11x", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/11x", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=11x", "levels_url": "https://www.levels.fyi/companies/11x/salaries", "google_jobs_url": "https://www.google.com/search?q=11x+jobs+careers"}, {"id": 10, "name": "12twenty", "ats": "greenhouse", "slug": "12twenty", "open_jobs": "8", "board_url": "https://boards.greenhouse.io/12twenty", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=12twenty", "levels_url": "https://www.levels.fyi/companies/12twenty/salaries", "google_jobs_url": "https://www.google.com/search?q=12twenty+jobs+careers"}, {"id": 11, "name": "15Five", "ats": "lever", "slug": "15five", "open_jobs": "2", "board_url": "https://jobs.lever.co/15five", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=15Five", "levels_url": "https://www.levels.fyi/companies/15five/salaries", "google_jobs_url": "https://www.google.com/search?q=15Five+jobs+careers"}, {"id": 12, "name": "1inch", "ats": "lever", "slug": "1inch", "open_jobs": "6", "board_url": "https://jobs.lever.co/1inch", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1inch", "levels_url": "https://www.levels.fyi/companies/1inch/salaries", "google_jobs_url": "https://www.google.com/search?q=1inch+jobs+careers"}, {"id": 13, "name": "1mind", "ats": "ashby", "slug": "1mind", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/1mind", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1mind", "levels_url": "https://www.levels.fyi/companies/1mind/salaries", "google_jobs_url": "https://www.google.com/search?q=1mind+jobs+careers"}, {"id": 14, "name": "1Password", "ats": "ashby", "slug": "1password", "open_jobs": "78", "board_url": "https://jobs.ashbyhq.com/1password", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=1Password", "levels_url": "https://www.levels.fyi/companies/1password/salaries", "google_jobs_url": "https://www.google.com/search?q=1Password+jobs+careers"}, {"id": 15, "name": "21st Century Home Health Services Inc.", "ats": "lever", "slug": "21hhs", "open_jobs": "354", "board_url": "https://jobs.lever.co/21hhs", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=21st%20Century%20Home%20Health%20Services%20Inc.", "levels_url": "https://www.levels.fyi/companies/21st-century-home-health-services-inc/salaries", "google_jobs_url": "https://www.google.com/search?q=21st%20Century%20Home%20Health%20Services%20Inc.+jobs+careers"}, {"id": 16, "name": "2Brains", "ats": "lever", "slug": "2brains", "open_jobs": "10", "board_url": "https://jobs.lever.co/2brains", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2Brains", "levels_url": "https://www.levels.fyi/companies/2brains/salaries", "google_jobs_url": "https://www.google.com/search?q=2Brains+jobs+careers"}, {"id": 17, "name": "2K", "ats": "greenhouse", "slug": "2k", "open_jobs": "91", "board_url": "https://boards.greenhouse.io/2k", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2K", "levels_url": "https://www.levels.fyi/companies/2k/salaries", "google_jobs_url": "https://www.google.com/search?q=2K+jobs+careers"}, {"id": 18, "name": "2nd Order Solutions", "ats": "lever", "slug": "2os", "open_jobs": "0", "board_url": "https://jobs.lever.co/2os", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2nd%20Order%20Solutions", "levels_url": "https://www.levels.fyi/companies/2nd-order-solutions/salaries", "google_jobs_url": "https://www.google.com/search?q=2nd%20Order%20Solutions+jobs+careers"}, {"id": 19, "name": "2U", "ats": "greenhouse", "slug": "2u", "open_jobs": "2", "board_url": "https://boards.greenhouse.io/2u", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=2U", "levels_url": "https://www.levels.fyi/companies/2u/salaries", "google_jobs_url": "https://www.google.com/search?q=2U+jobs+careers"}, {"id": 20, "name": "31st Union", "ats": "greenhouse", "slug": "31stunion", "open_jobs": "9", "board_url": "https://boards.greenhouse.io/31stunion", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=31st%20Union", "levels_url": "https://www.levels.fyi/companies/31st-union/salaries", "google_jobs_url": "https://www.google.com/search?q=31st%20Union+jobs+careers"}, {"id": 21, "name": "360Learning", "ats": "lever", "slug": "360learning", "open_jobs": "45", "board_url": "https://jobs.lever.co/360learning", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=360Learning", "levels_url": "https://www.levels.fyi/companies/360learning/salaries", "google_jobs_url": "https://www.google.com/search?q=360Learning+jobs+careers"}, {"id": 22, "name": "3Cloud", "ats": "greenhouse", "slug": "3cloud", "open_jobs": "39", "board_url": "https://boards.greenhouse.io/3cloud", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3Cloud", "levels_url": "https://www.levels.fyi/companies/3cloud/salaries", "google_jobs_url": "https://www.google.com/search?q=3Cloud+jobs+careers"}, {"id": 23, "name": "3jane", "ats": "lever", "slug": "3jane", "open_jobs": "0", "board_url": "https://jobs.lever.co/3jane", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3jane", "levels_url": "https://www.levels.fyi/companies/3jane/salaries", "google_jobs_url": "https://www.google.com/search?q=3jane+jobs+careers"}, {"id": 24, "name": "3M", "ats": "workday", "slug": "3m:wd1:Search", "open_jobs": "755", "board_url": "https://3m.wd1.myworkdayjobs.com/en-US/Search", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3M", "levels_url": "https://www.levels.fyi/companies/3m/salaries", "google_jobs_url": "https://www.google.com/search?q=3M+jobs+careers"}, {"id": 25, "name": "3Pillarglobal", "ats": "lever", "slug": "3pillarglobal", "open_jobs": "0", "board_url": "https://jobs.lever.co/3pillarglobal", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3Pillarglobal", "levels_url": "https://www.levels.fyi/companies/3pillarglobal/salaries", "google_jobs_url": "https://www.google.com/search?q=3Pillarglobal+jobs+careers"}, {"id": 26, "name": "3Red Partners", "ats": "greenhouse", "slug": "3redpartners", "open_jobs": "7", "board_url": "https://boards.greenhouse.io/3redpartners", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3Red%20Partners", "levels_url": "https://www.levels.fyi/companies/3red-partners/salaries", "google_jobs_url": "https://www.google.com/search?q=3Red%20Partners+jobs+careers"}, {"id": 27, "name": "3y Health", "ats": "ashby", "slug": "3y-health", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/3y-health", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=3y%20Health", "levels_url": "https://www.levels.fyi/companies/3y-health/salaries", "google_jobs_url": "https://www.google.com/search?q=3y%20Health+jobs+careers"}, {"id": 28, "name": "42dot", "ats": "ashby", "slug": "42dot", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/42dot", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=42dot", "levels_url": "https://www.levels.fyi/companies/42dot/salaries", "google_jobs_url": "https://www.google.com/search?q=42dot+jobs+careers"}, {"id": 29, "name": "4Front Ventures", "ats": "lever", "slug": "4front", "open_jobs": "10", "board_url": "https://jobs.lever.co/4front", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=4Front%20Ventures", "levels_url": "https://www.levels.fyi/companies/4front-ventures/salaries", "google_jobs_url": "https://www.google.com/search?q=4Front%20Ventures+jobs+careers"}, {"id": 30, "name": "5", "ats": "lever", "slug": "energy-by-5", "open_jobs": "0", "board_url": "https://jobs.lever.co/energy-by-5", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=5", "levels_url": "https://www.levels.fyi/companies/5/salaries", "google_jobs_url": "https://www.google.com/search?q=5+jobs+careers"}, {"id": 31, "name": "5AM Ventures", "ats": "lever", "slug": "5amventures", "open_jobs": "2", "board_url": "https://jobs.lever.co/5amventures", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=5AM%20Ventures", "levels_url": "https://www.levels.fyi/companies/5am-ventures/salaries", "google_jobs_url": "https://www.google.com/search?q=5AM%20Ventures+jobs+careers"}, {"id": 32, "name": "5CA", "ats": "greenhouse", "slug": "5ca", "open_jobs": "14", "board_url": "https://boards.greenhouse.io/5ca", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=5CA", "levels_url": "https://www.levels.fyi/companies/5ca/salaries", "google_jobs_url": "https://www.google.com/search?q=5CA+jobs+careers"}, {"id": 33, "name": "66degrees", "ats": "greenhouse", "slug": "66degrees", "open_jobs": "16", "board_url": "https://boards.greenhouse.io/66degrees", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=66degrees", "levels_url": "https://www.levels.fyi/companies/66degrees/salaries", "google_jobs_url": "https://www.google.com/search?q=66degrees+jobs+careers"}, {"id": 34, "name": "6sense", "ats": "greenhouse", "slug": "6sense", "open_jobs": "30", "board_url": "https://boards.greenhouse.io/6sense", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=6sense", "levels_url": "https://www.levels.fyi/companies/6sense/salaries", "google_jobs_url": "https://www.google.com/search?q=6sense+jobs+careers"}, {"id": 35, "name": "8am", "ats": "greenhouse", "slug": "affinipay1", "open_jobs": "27", "board_url": "https://boards.greenhouse.io/affinipay1", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8am", "levels_url": "https://www.levels.fyi/companies/8am/salaries", "google_jobs_url": "https://www.google.com/search?q=8am+jobs+careers"}, {"id": 36, "name": "8fleet Inc", "ats": "ashby", "slug": "8fleet-inc", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/8fleet-inc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8fleet%20Inc", "levels_url": "https://www.levels.fyi/companies/8fleet-inc/salaries", "google_jobs_url": "https://www.google.com/search?q=8fleet%20Inc+jobs+careers"}, {"id": 37, "name": "8returns", "ats": "ashby", "slug": "8returns", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/8returns", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8returns", "levels_url": "https://www.levels.fyi/companies/8returns/salaries", "google_jobs_url": "https://www.google.com/search?q=8returns+jobs+careers"}, {"id": 38, "name": "8vc", "ats": "ashby", "slug": "8vc", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/8vc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=8vc", "levels_url": "https://www.levels.fyi/companies/8vc/salaries", "google_jobs_url": "https://www.google.com/search?q=8vc+jobs+careers"}, {"id": 39, "name": "9 Mothers", "ats": "ashby", "slug": "9-mothers", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/9-mothers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=9%20Mothers", "levels_url": "https://www.levels.fyi/companies/9-mothers/salaries", "google_jobs_url": "https://www.google.com/search?q=9%20Mothers+jobs+careers"}, {"id": 40, "name": "90 Seconds", "ats": "lever", "slug": "90seconds", "open_jobs": "8", "board_url": "https://jobs.lever.co/90seconds", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=90%20Seconds", "levels_url": "https://www.levels.fyi/companies/90-seconds/salaries", "google_jobs_url": "https://www.google.com/search?q=90%20Seconds+jobs+careers"}, {"id": 41, "name": "908 Devices", "ats": "greenhouse", "slug": "908devicesinc", "open_jobs": "2", "board_url": "https://boards.greenhouse.io/908devicesinc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=908%20Devices", "levels_url": "https://www.levels.fyi/companies/908-devices/salaries", "google_jobs_url": "https://www.google.com/search?q=908%20Devices+jobs+careers"}, {"id": 42, "name": "9fin", "ats": "ashby", "slug": "9fin", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/9fin", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=9fin", "levels_url": "https://www.levels.fyi/companies/9fin/salaries", "google_jobs_url": "https://www.google.com/search?q=9fin+jobs+careers"}, {"id": 43, "name": "[solidcore]", "ats": "lever", "slug": "solidcore", "open_jobs": "258", "board_url": "https://jobs.lever.co/solidcore", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=%5Bsolidcore%5D", "levels_url": "https://www.levels.fyi/companies/solidcore/salaries", "google_jobs_url": "https://www.google.com/search?q=%5Bsolidcore%5D+jobs+careers"}, {"id": 44, "name": "A Place For Mom", "ats": "ashby", "slug": "a-place-for-mom", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/a-place-for-mom", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=A%20Place%20For%20Mom", "levels_url": "https://www.levels.fyi/companies/a-place-for-mom/salaries", "google_jobs_url": "https://www.google.com/search?q=A%20Place%20For%20Mom+jobs+careers"}, {"id": 45, "name": "A Team", "ats": "ashby", "slug": "a-team", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/a-team", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=A%20Team", "levels_url": "https://www.levels.fyi/companies/a-team/salaries", "google_jobs_url": "https://www.google.com/search?q=A%20Team+jobs+careers"}, {"id": 46, "name": "A11", "ats": "greenhouse", "slug": "projectaservicesgmbhcokg", "open_jobs": "61", "board_url": "https://boards.greenhouse.io/projectaservicesgmbhcokg", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=A11", "levels_url": "https://www.levels.fyi/companies/a11/salaries", "google_jobs_url": "https://www.google.com/search?q=A11+jobs+careers"}, {"id": 47, "name": "Aaaie", "ats": "workday", "slug": "aaaie:wd1:CSAACareers2", "open_jobs": "2", "board_url": "https://aaaie.wd1.myworkdayjobs.com/en-US/CSAACareers2", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aaaie", "levels_url": "https://www.levels.fyi/companies/aaaie/salaries", "google_jobs_url": "https://www.google.com/search?q=Aaaie+jobs+careers"}, {"id": 48, "name": "Aave Labs", "ats": "lever", "slug": "aavelabs", "open_jobs": "16", "board_url": "https://jobs.eu.lever.co/aavelabs", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aave%20Labs", "levels_url": "https://www.levels.fyi/companies/aave-labs/salaries", "google_jobs_url": "https://www.google.com/search?q=Aave%20Labs+jobs+careers"}, {"id": 49, "name": "Aba", "ats": "workday", "slug": "aba:wd1:aba", "open_jobs": "25", "board_url": "https://aba.wd1.myworkdayjobs.com/en-US/aba", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aba", "levels_url": "https://www.levels.fyi/companies/aba/salaries", "google_jobs_url": "https://www.google.com/search?q=Aba+jobs+careers"}, {"id": 50, "name": "Abacum", "ats": "ashby", "slug": "abacum", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abacum", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abacum", "levels_url": "https://www.levels.fyi/companies/abacum/salaries", "google_jobs_url": "https://www.google.com/search?q=Abacum+jobs+careers"}, {"id": 51, "name": "ABACUS", "ats": "greenhouse", "slug": "abacus", "open_jobs": "44", "board_url": "https://boards.greenhouse.io/abacus", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ABACUS", "levels_url": "https://www.levels.fyi/companies/abacus/salaries", "google_jobs_url": "https://www.google.com/search?q=ABACUS+jobs+careers"}, {"id": 52, "name": "Abacus Insights", "ats": "greenhouse", "slug": "abacusinsights", "open_jobs": "19", "board_url": "https://boards.greenhouse.io/abacusinsights", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abacus%20Insights", "levels_url": "https://www.levels.fyi/companies/abacus-insights/salaries", "google_jobs_url": "https://www.google.com/search?q=Abacus%20Insights+jobs+careers"}, {"id": 53, "name": "Abb", "ats": "workday", "slug": "abb:wd3:external_career_page", "open_jobs": "2000", "board_url": "https://abb.wd3.myworkdayjobs.com/en-US/external_career_page", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abb", "levels_url": "https://www.levels.fyi/companies/abb/salaries", "google_jobs_url": "https://www.google.com/search?q=Abb+jobs+careers"}, {"id": 54, "name": "Abby Care", "ats": "ashby", "slug": "abby-care", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abby-care", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abby%20Care", "levels_url": "https://www.levels.fyi/companies/abby-care/salaries", "google_jobs_url": "https://www.google.com/search?q=Abby%20Care+jobs+careers"}, {"id": 55, "name": "Abe", "ats": "ashby", "slug": "abe", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abe", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abe", "levels_url": "https://www.levels.fyi/companies/abe/salaries", "google_jobs_url": "https://www.google.com/search?q=Abe+jobs+careers"}, {"id": 56, "name": "Abglobal", "ats": "workday", "slug": "abglobal:wd1:abcampuscareers", "open_jobs": "23", "board_url": "https://abglobal.wd1.myworkdayjobs.com/en-US/abcampuscareers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abglobal", "levels_url": "https://www.levels.fyi/companies/abglobal/salaries", "google_jobs_url": "https://www.google.com/search?q=Abglobal+jobs+careers"}, {"id": 57, "name": "Ably (UK)", "ats": "greenhouse", "slug": "ably30", "open_jobs": "5", "board_url": "https://boards.greenhouse.io/ably30", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Ably%20%28UK%29", "levels_url": "https://www.levels.fyi/companies/ably-uk/salaries", "google_jobs_url": "https://www.google.com/search?q=Ably%20%28UK%29+jobs+careers"}, {"id": 58, "name": "ABM Industries", "ats": "lever", "slug": "ableserve", "open_jobs": "79", "board_url": "https://jobs.lever.co/ableserve", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ABM%20Industries", "levels_url": "https://www.levels.fyi/companies/abm-industries/salaries", "google_jobs_url": "https://www.google.com/search?q=ABM%20Industries+jobs+careers"}, {"id": 59, "name": "Abnormal", "ats": "greenhouse", "slug": "abnormalsecurity", "open_jobs": "82", "board_url": "https://boards.greenhouse.io/abnormalsecurity", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abnormal", "levels_url": "https://www.levels.fyi/companies/abnormal/salaries", "google_jobs_url": "https://www.google.com/search?q=Abnormal+jobs+careers"}, {"id": 60, "name": "Abound", "ats": "ashby", "slug": "abound", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abound", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abound", "levels_url": "https://www.levels.fyi/companies/abound/salaries", "google_jobs_url": "https://www.google.com/search?q=Abound+jobs+careers"}, {"id": 61, "name": "Above and Beyond Therapy", "ats": "lever", "slug": "abtaba", "open_jobs": "257", "board_url": "https://jobs.lever.co/abtaba", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Above%20and%20Beyond%20Therapy", "levels_url": "https://www.levels.fyi/companies/above-and-beyond-therapy/salaries", "google_jobs_url": "https://www.google.com/search?q=Above%20and%20Beyond%20Therapy+jobs+careers"}, {"id": 62, "name": "Above Lending", "ats": "lever", "slug": "abovelending", "open_jobs": "3", "board_url": "https://jobs.lever.co/abovelending", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Above%20Lending", "levels_url": "https://www.levels.fyi/companies/above-lending/salaries", "google_jobs_url": "https://www.google.com/search?q=Above%20Lending+jobs+careers"}, {"id": 63, "name": "Abridge", "ats": "ashby", "slug": "abridge", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/abridge", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abridge", "levels_url": "https://www.levels.fyi/companies/abridge/salaries", "google_jobs_url": "https://www.google.com/search?q=Abridge+jobs+careers"}, {"id": 64, "name": "Absorblms", "ats": "ashby", "slug": "absorblms", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/absorblms", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Absorblms", "levels_url": "https://www.levels.fyi/companies/absorblms/salaries", "google_jobs_url": "https://www.google.com/search?q=Absorblms+jobs+careers"}, {"id": 65, "name": "Abt", "ats": "lever", "slug": "abt", "open_jobs": "3", "board_url": "https://jobs.lever.co/abt", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abt", "levels_url": "https://www.levels.fyi/companies/abt/salaries", "google_jobs_url": "https://www.google.com/search?q=Abt+jobs+careers"}, {"id": 66, "name": "Abzena Inc.", "ats": "lever", "slug": "abzena", "open_jobs": "30", "board_url": "https://jobs.eu.lever.co/abzena", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Abzena%20Inc.", "levels_url": "https://www.levels.fyi/companies/abzena-inc/salaries", "google_jobs_url": "https://www.google.com/search?q=Abzena%20Inc.+jobs+careers"}, {"id": 67, "name": "Accela", "ats": "greenhouse", "slug": "accela", "open_jobs": "8", "board_url": "https://boards.greenhouse.io/accela", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accela", "levels_url": "https://www.levels.fyi/companies/accela/salaries", "google_jobs_url": "https://www.google.com/search?q=Accela+jobs+careers"}, {"id": 68, "name": "Acceldata", "ats": "lever", "slug": "acceldata", "open_jobs": "36", "board_url": "https://jobs.lever.co/acceldata", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acceldata", "levels_url": "https://www.levels.fyi/companies/acceldata/salaries", "google_jobs_url": "https://www.google.com/search?q=Acceldata+jobs+careers"}, {"id": 69, "name": "Accelevents", "ats": "ashby", "slug": "accelevents", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/accelevents", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accelevents", "levels_url": "https://www.levels.fyi/companies/accelevents/salaries", "google_jobs_url": "https://www.google.com/search?q=Accelevents+jobs+careers"}, {"id": 70, "name": "Accenture Federal Services", "ats": "greenhouse", "slug": "accenturefederalservices", "open_jobs": "716", "board_url": "https://boards.greenhouse.io/accenturefederalservices", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accenture%20Federal%20Services", "levels_url": "https://www.levels.fyi/companies/accenture-federal-services/salaries", "google_jobs_url": "https://www.google.com/search?q=Accenture%20Federal%20Services+jobs+careers"}, {"id": 71, "name": "Access Softek", "ats": "lever", "slug": "accesssoftek", "open_jobs": "2", "board_url": "https://jobs.lever.co/accesssoftek", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Access%20Softek", "levels_url": "https://www.levels.fyi/companies/access-softek/salaries", "google_jobs_url": "https://www.google.com/search?q=Access%20Softek+jobs+careers"}, {"id": 72, "name": "Accord", "ats": "ashby", "slug": "accord", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/accord", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accord", "levels_url": "https://www.levels.fyi/companies/accord/salaries", "google_jobs_url": "https://www.google.com/search?q=Accord+jobs+careers"}, {"id": 73, "name": "Accurate Background", "ats": "lever", "slug": "accurate", "open_jobs": "0", "board_url": "https://jobs.lever.co/accurate", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accurate%20Background", "levels_url": "https://www.levels.fyi/companies/accurate-background/salaries", "google_jobs_url": "https://www.google.com/search?q=Accurate%20Background+jobs+careers"}, {"id": 74, "name": "Accurx", "ats": "ashby", "slug": "accurx", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/accurx", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Accurx", "levels_url": "https://www.levels.fyi/companies/accurx/salaries", "google_jobs_url": "https://www.google.com/search?q=Accurx+jobs+careers"}, {"id": 75, "name": "AccuWeather Careers", "ats": "greenhouse", "slug": "accuweather", "open_jobs": "19", "board_url": "https://boards.greenhouse.io/accuweather", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=AccuWeather%20Careers", "levels_url": "https://www.levels.fyi/companies/accuweather-careers/salaries", "google_jobs_url": "https://www.google.com/search?q=AccuWeather%20Careers+jobs+careers"}, {"id": 76, "name": "Ace 1 Media", "ats": "ashby", "slug": "ace-1-media", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/ace-1-media", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Ace%201%20Media", "levels_url": "https://www.levels.fyi/companies/ace-1-media/salaries", "google_jobs_url": "https://www.google.com/search?q=Ace%201%20Media+jobs+careers"}, {"id": 77, "name": "Acehardware", "ats": "workday", "slug": "acehardware:wd1:External", "open_jobs": "155", "board_url": "https://acehardware.wd1.myworkdayjobs.com/en-US/External", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acehardware", "levels_url": "https://www.levels.fyi/companies/acehardware/salaries", "google_jobs_url": "https://www.google.com/search?q=Acehardware+jobs+careers"}, {"id": 78, "name": "Acehardware", "ats": "workday", "slug": "acehardware:wd1:external", "open_jobs": "155", "board_url": "https://acehardware.wd1.myworkdayjobs.com/en-US/external", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acehardware", "levels_url": "https://www.levels.fyi/companies/acehardware/salaries", "google_jobs_url": "https://www.google.com/search?q=Acehardware+jobs+careers"}, {"id": 79, "name": "Achievement First Network Support", "ats": "greenhouse", "slug": "achievementfirstnetworksupportcareers", "open_jobs": "4", "board_url": "https://boards.greenhouse.io/achievementfirstnetworksupportcareers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achievement%20First%20Network%20Support", "levels_url": "https://www.levels.fyi/companies/achievement-first-network-support/salaries", "google_jobs_url": "https://www.google.com/search?q=Achievement%20First%20Network%20Support+jobs+careers"}, {"id": 80, "name": "Achievers", "ats": "lever", "slug": "achievers", "open_jobs": "13", "board_url": "https://jobs.lever.co/achievers", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achievers", "levels_url": "https://www.levels.fyi/companies/achievers/salaries", "google_jobs_url": "https://www.google.com/search?q=Achievers+jobs+careers"}, {"id": 81, "name": "Achilleshr", "ats": "ashby", "slug": "achilleshr", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/achilleshr", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achilleshr", "levels_url": "https://www.levels.fyi/companies/achilleshr/salaries", "google_jobs_url": "https://www.google.com/search?q=Achilleshr+jobs+careers"}, {"id": 82, "name": "Achira", "ats": "ashby", "slug": "achira", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/achira", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Achira", "levels_url": "https://www.levels.fyi/companies/achira/salaries", "google_jobs_url": "https://www.google.com/search?q=Achira+jobs+careers"}, {"id": 83, "name": "ACI Learning", "ats": "greenhouse", "slug": "acilearning", "open_jobs": "4", "board_url": "https://boards.greenhouse.io/acilearning", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ACI%20Learning", "levels_url": "https://www.levels.fyi/companies/aci-learning/salaries", "google_jobs_url": "https://www.google.com/search?q=ACI%20Learning+jobs+careers"}, {"id": 84, "name": "Ackermann Group", "ats": "greenhouse", "slug": "ackermanngroup", "open_jobs": "17", "board_url": "https://boards.greenhouse.io/ackermanngroup", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Ackermann%20Group", "levels_url": "https://www.levels.fyi/companies/ackermann-group/salaries", "google_jobs_url": "https://www.google.com/search?q=Ackermann%20Group+jobs+careers"}, {"id": 85, "name": "Aclima", "ats": "ashby", "slug": "aclima", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/aclima", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Aclima", "levels_url": "https://www.levels.fyi/companies/aclima/salaries", "google_jobs_url": "https://www.google.com/search?q=Aclima+jobs+careers"}, {"id": 86, "name": "ACLU of Northern California", "ats": "greenhouse", "slug": "aclunc", "open_jobs": "6", "board_url": "https://boards.greenhouse.io/aclunc", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ACLU%20of%20Northern%20California", "levels_url": "https://www.levels.fyi/companies/aclu-of-northern-california/salaries", "google_jobs_url": "https://www.google.com/search?q=ACLU%20of%20Northern%20California+jobs+careers"}, {"id": 87, "name": "Acme", "ats": "ashby", "slug": "acme", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acme", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acme", "levels_url": "https://www.levels.fyi/companies/acme/salaries", "google_jobs_url": "https://www.google.com/search?q=Acme+jobs+careers"}, {"id": 88, "name": "ACORD Corporation", "ats": "lever", "slug": "acord", "open_jobs": "2", "board_url": "https://jobs.lever.co/acord", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ACORD%20Corporation", "levels_url": "https://www.levels.fyi/companies/acord-corporation/salaries", "google_jobs_url": "https://www.google.com/search?q=ACORD%20Corporation+jobs+careers"}, {"id": 89, "name": "Acorn Health - Internal", "ats": "greenhouse", "slug": "internalacornhealth", "open_jobs": "4", "board_url": "https://boards.greenhouse.io/internalacornhealth", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acorn%20Health%20-%20Internal", "levels_url": "https://www.levels.fyi/companies/acorn-health-internal/salaries", "google_jobs_url": "https://www.google.com/search?q=Acorn%20Health%20-%20Internal+jobs+careers"}, {"id": 90, "name": "Acorns", "ats": "ashby", "slug": "acorns", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acorns", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acorns", "levels_url": "https://www.levels.fyi/companies/acorns/salaries", "google_jobs_url": "https://www.google.com/search?q=Acorns+jobs+careers"}, {"id": 91, "name": "Acquia", "ats": "greenhouse", "slug": "acquia", "open_jobs": "6", "board_url": "https://boards.greenhouse.io/acquia", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acquia", "levels_url": "https://www.levels.fyi/companies/acquia/salaries", "google_jobs_url": "https://www.google.com/search?q=Acquia+jobs+careers"}, {"id": 92, "name": "Acquird", "ats": "ashby", "slug": "acquird", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acquird", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acquird", "levels_url": "https://www.levels.fyi/companies/acquird/salaries", "google_jobs_url": "https://www.google.com/search?q=Acquird+jobs+careers"}, {"id": 93, "name": "Acquisition", "ats": "ashby", "slug": "acquisition", "open_jobs": null, "board_url": "https://jobs.ashbyhq.com/acquisition", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acquisition", "levels_url": "https://www.levels.fyi/companies/acquisition/salaries", "google_jobs_url": "https://www.google.com/search?q=Acquisition+jobs+careers"}, {"id": 94, "name": "Acron Aviation", "ats": "lever", "slug": "acronaviation", "open_jobs": "49", "board_url": "https://jobs.lever.co/acronaviation", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acron%20Aviation", "levels_url": "https://www.levels.fyi/companies/acron-aviation/salaries", "google_jobs_url": "https://www.google.com/search?q=Acron%20Aviation+jobs+careers"}, {"id": 95, "name": "Acselhealth", "ats": "lever", "slug": "acselhealth", "open_jobs": "2", "board_url": "https://jobs.lever.co/acselhealth", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Acselhealth", "levels_url": "https://www.levels.fyi/companies/acselhealth/salaries", "google_jobs_url": "https://www.google.com/search?q=Acselhealth+jobs+careers"}, {"id": 96, "name": "Actian Corporation", "ats": "lever", "slug": "actian", "open_jobs": "2", "board_url": "https://jobs.lever.co/actian", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Actian%20Corporation", "levels_url": "https://www.levels.fyi/companies/actian-corporation/salaries", "google_jobs_url": "https://www.google.com/search?q=Actian%20Corporation+jobs+careers"}, {"id": 97, "name": "Action Property Management", "ats": "lever", "slug": "actionlife", "open_jobs": "63", "board_url": "https://jobs.lever.co/actionlife", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Action%20Property%20Management", "levels_url": "https://www.levels.fyi/companies/action-property-management/salaries", "google_jobs_url": "https://www.google.com/search?q=Action%20Property%20Management+jobs+careers"}, {"id": 98, "name": "Active Theory", "ats": "lever", "slug": "activetheory", "open_jobs": "4", "board_url": "https://jobs.lever.co/activetheory", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Active%20Theory", "levels_url": "https://www.levels.fyi/companies/active-theory/salaries", "google_jobs_url": "https://www.google.com/search?q=Active%20Theory+jobs+careers"}, {"id": 99, "name": "ActiveCampaign", "ats": "lever", "slug": "activecampaign", "open_jobs": "12", "board_url": "https://jobs.lever.co/activecampaign", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=ActiveCampaign", "levels_url": "https://www.levels.fyi/companies/activecampaign/salaries", "google_jobs_url": "https://www.google.com/search?q=ActiveCampaign+jobs+careers"}, {"id": 100, "name": "Actriv", "ats": "lever", "slug": "actriv", "open_jobs": "1", "board_url": "https://jobs.lever.co/actriv", "glassdoor_url": "https://www.glassdoor.com/Search/results.htm?keyword=Actriv", "levels_url": "https://www.levels.fyi/companies/actriv/salaries", "google_jobs_url": "https://www.google.com/search?q=Actriv+jobs+careers"}];
+let CURRENT_TAILORED_RESULT = null;
+let TRACKED_APPLICATIONS = [];
+let CURRENT_PDF_PREVIEW_URL = "";
+
+// Directory Sheets State
+let CURRENT_SHEET_KEY = "master";
+let CURRENT_PAGE = 1;
+let CURRENT_LIMIT = 25;
+let CURRENT_QUERY = "";
+let SEARCH_DEBOUNCE_TIMER = null;
+
+// Initialize
+window.addEventListener("DOMContentLoaded", () => {
+  loadCompaniesAutocomplete();
+  loadBaseTex();
+  loadTrackerData();
+  loadPortalSheetsSummary();
+});
+
+// View Navigation: 'home', 'tailor', 'portals', 'tracker', 'base-cv'
+function switchView(viewName) {
+  document.getElementById("view-home").style.display = (viewName === 'home') ? 'block' : 'none';
+  document.getElementById("view-tailor").style.display = (viewName === 'tailor') ? 'block' : 'none';
+  document.getElementById("view-portals").style.display = (viewName === 'portals') ? 'block' : 'none';
+  document.getElementById("view-tracker").style.display = (viewName === 'tracker') ? 'block' : 'none';
+  document.getElementById("view-base-cv").style.display = (viewName === 'base-cv') ? 'block' : 'none';
+
+  const btns = document.querySelectorAll(".nav-tabs .tab-btn");
+  btns.forEach(b => b.classList.remove("active"));
+  
+  if (viewName === 'home') {
+    const btn = document.getElementById("navBtn-home");
+    if (btn) btn.classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'tailor') {
+    const btn = document.getElementById("navBtn-tailor");
+    if (btn) btn.classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'portals') {
+    const btn = document.getElementById("navBtn-portals");
+    if (btn) btn.classList.add("active");
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'tracker') {
+    const btn = document.getElementById("navBtn-tracker");
+    if (btn) btn.classList.add("active");
+    loadTrackerData();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewName === 'base-cv') {
+    const btn = document.getElementById("navBtn-base-cv");
+    if (btn) btn.classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Subtabs in CV Studio
+function switchSubTab(subTabName) {
+  document.getElementById("subtab-preview").style.display = (subTabName === 'preview') ? 'block' : 'none';
+  document.getElementById("subtab-pdf").style.display = (subTabName === 'pdf') ? 'block' : 'none';
+  document.getElementById("subtab-diff").style.display = (subTabName === 'diff') ? 'block' : 'none';
+  document.getElementById("subtab-tex").style.display = (subTabName === 'tex') ? 'block' : 'none';
+
+  document.querySelectorAll(".subtab-btn").forEach(btn => btn.classList.remove("active"));
+  const btn = document.getElementById("subtabBtn-" + subTabName);
+  if (btn) btn.classList.add("active");
+
+  if (subTabName === 'pdf') {
+    const frame = document.getElementById("pdfPreviewFrame");
+    if (!frame.src || frame.src === "about:blank" || frame.src.endsWith("#empty")) {
+      loadCompiledPdfPreview();
+    }
+  }
+}
+
+async function loadCompiledPdfPreview() {
+  const tex = document.getElementById("tailoredTexArea").value;
+  if (!tex) return;
+  const frame = document.getElementById("pdfPreviewFrame");
+  showToast("Compiling LaTeX preview via TeX engine...");
+  try {
+    const res = await fetch("/api/preview_pdf", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tailored_tex: tex })
+    });
+    const data = await res.json();
+    if (res.ok && data.preview_url) {
+      CURRENT_PDF_PREVIEW_URL = data.preview_url;
+      frame.src = data.preview_url;
+      showToast("LaTeX PDF preview loaded");
+    } else {
+      showToast("PDF compile notice: " + (data.error || "Unable to preview PDF"));
+    }
+  } catch (e) {
+    showToast("Error loading PDF preview: " + e.message);
+  }
+}
+
+async function recompilePdf() {
+  const tex = document.getElementById("tailoredTexArea").value;
+  if (!tex) {
+    showToast("No LaTeX source to compile.");
+    return;
+  }
+  const company = document.getElementById("companyName").value.trim() || "CV";
+  showToast("Recompiling LaTeX with TeX engine...");
+
+  try {
+    const res = await fetch("/api/recompile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tailored_tex: tex, company: company })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert("LaTeX Recompile Error: " + (data.error || "Failed to compile."));
+      showToast("Recompilation error");
+      return;
+    }
+
+    if (data.preview_html) {
+      document.getElementById("cvPreviewFrame").srcdoc = data.preview_html;
+    }
+    if (data.preview_url) {
+      CURRENT_PDF_PREVIEW_URL = data.preview_url;
+      document.getElementById("pdfPreviewFrame").src = data.preview_url;
+    }
+
+    if (CURRENT_TAILORED_RESULT) {
+      CURRENT_TAILORED_RESULT.tailored_tex = tex;
+      CURRENT_TAILORED_RESULT.preview_html = data.preview_html;
+    }
+
+    showToast("LaTeX successfully recompiled!");
+  } catch (e) {
+    showToast("Recompile failed: " + e.message);
+  }
+}
+
+function toggleReferralFields() {
+  const checked = document.getElementById("hasReferral").checked;
+  document.getElementById("referralFields").style.display = checked ? "block" : "none";
+}
+
+async function loadCompaniesAutocomplete() {
+  try {
+    const res = await fetch("/api/companies");
+    if (!res.ok) throw new Error("No backend");
+    const data = await res.json();
+    const datalist = document.getElementById("companyList");
+    datalist.innerHTML = data.map(c => `<option value="${escapeHtml(c)}"></option>`).join("");
+  } catch (e) {
+    if (typeof EMBEDDED_ITEMS !== 'undefined') {
+      const datalist = document.getElementById("companyList");
+      datalist.innerHTML = EMBEDDED_ITEMS.map(c => `<option value="${escapeHtml(c.name)}"></option>`).join("");
+    }
+  }
+}
+
+async function loadBaseTex() {
+  try {
+    const res = await fetch("/api/base_tex");
+    if (!res.ok) throw new Error("No backend");
+    const data = await res.json();
+    document.getElementById("baseTexContent").value = data.tex || "";
+  } catch(e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      document.getElementById("baseTexContent").value = EMBEDDED_BASE_TEX;
+    }
+  }
+}
+
+// -------------------------------------------------------------
+// PORTAL DIRECTORY SHEETS (PAGINATED & ISOLATED SHEET LOADING)
+// -------------------------------------------------------------
+async function loadPortalSheetsSummary() {
+  try {
+    const res = await fetch("/api/portals/summary");
+    if (!res.ok) throw new Error("No backend");
+    const summaries = await res.json();
+    renderPortalSheetsSummary(summaries);
+  } catch (e) {
+    if (typeof EMBEDDED_SUMMARIES !== 'undefined') {
+      renderPortalSheetsSummary(EMBEDDED_SUMMARIES);
+    }
+  }
+}
+
+function renderPortalSheetsSummary(summaries) {
+  const container = document.getElementById("sheetPillsContainer");
+  if (!container || !Array.isArray(summaries)) return;
+  container.innerHTML = summaries.map(s => {
+    const activeClass = (s.key === CURRENT_SHEET_KEY) ? "active" : "";
+    return `
+      <button class="sheet-pill ${activeClass}" onclick="switchPortalSheet('${s.key}')">
+        <i class="fa ${s.icon}"></i>
+        <span>${s.title}</span>
+        <span class="count-badge">${s.total_count.toLocaleString()}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function switchPortalSheet(sheetKey) {
+  CURRENT_SHEET_KEY = sheetKey;
+  CURRENT_PAGE = 1;
+  loadPortalSheetsSummary();
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+}
+
+function onPortalSearchInput(val) {
+  clearTimeout(SEARCH_DEBOUNCE_TIMER);
+  SEARCH_DEBOUNCE_TIMER = setTimeout(() => {
+    CURRENT_QUERY = val.trim();
+    CURRENT_PAGE = 1;
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+  }, 250);
+}
+
+function onPortalLimitChange(val) {
+  CURRENT_LIMIT = parseInt(val, 10) || 25;
+  CURRENT_PAGE = 1;
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+}
+
+async function loadPortalSheetPage(sheetKey, page, limit, query) {
+  const tbody = document.getElementById("portalTableBody");
+  tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);"><i class="fa fa-spinner fa-spin"></i> Loading ${sheetKey} sheet page ${page}...</td></tr>`;
+
+  try {
+    const params = new URLSearchParams({
+      sheet: sheetKey,
+      page: page,
+      limit: limit,
+      q: query || ""
+    });
+    const res = await fetch(`/api/portals?${params.toString()}`);
+    if (!res.ok) throw new Error("API not reachable");
+    const data = await res.json();
+
+    renderPortalTable(data);
+    renderPortalPagination(data);
+  } catch (e) {
+    if (typeof EMBEDDED_ITEMS !== 'undefined') {
+      let filtered = EMBEDDED_ITEMS;
+      if (sheetKey !== 'master') {
+        filtered = filtered.filter(i => (i.ats || '').toLowerCase().includes(sheetKey.toLowerCase()));
+      }
+      if (query) {
+        const q = query.toLowerCase();
+        filtered = filtered.filter(i => (i.name || '').toLowerCase().includes(q) || (i.slug || '').toLowerCase().includes(q));
+      }
+      const total = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / limit));
+      const curPage = Math.min(page, totalPages);
+      const start = (curPage - 1) * limit;
+      const end = start + limit;
+      const slice = filtered.slice(start, end);
+
+      const staticData = {
+        sheet_key: sheetKey,
+        sheet_title: sheetKey.toUpperCase() + " Portals",
+        sheet_subtitle: "Verified Tech Companies",
+        total_in_sheet: 7008,
+        total_filtered: total,
+        page: curPage,
+        limit: limit,
+        total_pages: totalPages,
+        has_next: curPage < totalPages,
+        has_prev: curPage > 1,
+        start_index: total === 0 ? 0 : start + 1,
+        end_index: Math.min(end, total),
+        items: slice
+      };
+      renderPortalTable(staticData);
+      renderPortalPagination(staticData);
+    } else {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #DC2626; padding: 40px;">Failed to load sheet data: ${escapeHtml(e.message)}</td></tr>`;
+    }
+  }
+}
+
+function renderPortalTable(data) {
+  const tbody = document.getElementById("portalTableBody");
+  if (!data.items || data.items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 50px;">No companies found matching "<strong>${escapeHtml(CURRENT_QUERY)}</strong>" in ${escapeHtml(data.sheet_title)}.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = data.items.map((item, idx) => {
+    const ats = (item.ats || "").toLowerCase();
+    let badgeClass = "badge-other";
+    if (ats.includes("ashby")) badgeClass = "badge-ashby";
+    if (ats.includes("greenhouse")) badgeClass = "badge-greenhouse";
+    if (ats.includes("lever")) badgeClass = "badge-lever";
+    if (ats.includes("workday")) badgeClass = "badge-workday";
+
+    const jobsHtml = item.open_jobs 
+      ? `<span style="font-weight: 600; color: #047857; font-size: 0.78rem;">${item.open_jobs} open roles</span>`
+      : `<span style="color: var(--text-muted); font-size: 0.78rem;">Verified Board</span>`;
+
+    const rowIndex = data.start_index + idx;
+
+    return `
+      <tr>
+        <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
+        <td>
+          <div style="font-weight: 600; color: var(--text-primary); font-size: 0.92rem;">${escapeHtml(item.name)}</div>
+          <div style="font-size: 0.74rem; color: var(--text-muted); font-family: monospace;">slug: ${escapeHtml(item.slug)}</div>
+        </td>
+        <td>
+          <span class="portal-badge ${badgeClass}"><i class="fa fa-tag"></i> ${escapeHtml(item.ats.toUpperCase())}</span>
+        </td>
+        <td>${jobsHtml}</td>
+        <td>
+          <a class="ext-link" href="${escapeHtml(item.board_url)}" target="_blank" rel="noopener noreferrer">
+            <span>Career Portal</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+          </a>
+        </td>
+        <td style="white-space: nowrap;">
+          <a class="intel-link intel-levels" href="${escapeHtml(item.levels_url)}" target="_blank" rel="noopener noreferrer" title="View salaries on Levels.fyi">
+            <i class="fa fa-chart-line"></i> Levels.fyi
+          </a>
+          <a class="intel-link intel-glassdoor" href="${escapeHtml(item.glassdoor_url)}" target="_blank" rel="noopener noreferrer" title="View reviews on Glassdoor">
+            <i class="fa fa-star"></i> Glassdoor
+          </a>
+        </td>
+        <td style="text-align: right; white-space: nowrap;">
+          <button class="btn btn-sm btn-primary" onclick="useCompanyInStudio('${escapeHtml(item.name).replace(/'/g, "\\'")}', '${escapeHtml(item.board_url).replace(/'/g, "\\'")}')">
+            <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function renderPortalPagination(data) {
+  const info = document.getElementById("portalPageInfo");
+  info.innerHTML = `Showing ${data.start_index}&ndash;${data.end_index} of <strong>${data.total_filtered.toLocaleString()}</strong> companies in <strong>${escapeHtml(data.sheet_title)}</strong>`;
+
+  const nav = document.getElementById("portalPageNav");
+  const totalPages = data.total_pages;
+  const current = data.page;
+
+  let btnsHtml = `
+    <button class="page-btn" onclick="gotoPortalPage(1)" ${current <= 1 ? 'disabled' : ''} title="First Page">&laquo;</button>
+    <button class="page-btn" onclick="gotoPortalPage(${current - 1})" ${current <= 1 ? 'disabled' : ''}>Prev</button>
+  `;
+
+  const startP = Math.max(1, current - 2);
+  const endP = Math.min(totalPages, current + 2);
+
+  for (let p = startP; p <= endP; p++) {
+    const active = (p === current) ? "active" : "";
+    btnsHtml += `<button class="page-btn ${active}" onclick="gotoPortalPage(${p})">${p}</button>`;
+  }
+
+  btnsHtml += `
+    <button class="page-btn" onclick="gotoPortalPage(${current + 1})" ${current >= totalPages ? 'disabled' : ''}>Next</button>
+    <button class="page-btn" onclick="gotoPortalPage(${totalPages})" ${current >= totalPages ? 'disabled' : ''} title="Last Page">&raquo;</button>
+  `;
+
+  nav.innerHTML = btnsHtml;
+}
+
+function gotoPortalPage(page) {
+  CURRENT_PAGE = page;
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+}
+
+function useCompanyInStudio(name, url) {
+  switchView('tailor');
+  document.getElementById("companyName").value = name;
+  if (url) {
+    document.getElementById("jobUrl").value = url;
+  }
+  document.getElementById("jdText").focus();
+  showToast(`Pre-filled ${name} in Studio! Paste the Job Description to tailor.`);
+}
+
+async function loadBaseCvInStudio() {
+  showToast("Loading Base CV into Studio...");
+  try {
+    const res = await fetch("/api/base_tex");
+    const data = await res.json();
+    if (!data.tex) throw new Error("Base LaTeX source not found");
+    
+    document.getElementById("tailoredTexArea").value = data.tex;
+    document.getElementById("companyName").value = "Base Master CV";
+    document.getElementById("jobTitle").value = "Software Development Engineer";
+
+    const recompileRes = await fetch("/api/recompile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tailored_tex: data.tex, company: "Base Master CV" })
+    });
+    const recompileData = await recompileRes.json();
+    if (recompileData.preview_html) {
+      document.getElementById("cvPreviewFrame").srcdoc = recompileData.preview_html;
+    }
+    if (recompileData.preview_url) {
+      CURRENT_PDF_PREVIEW_URL = recompileData.preview_url;
+      document.getElementById("pdfPreviewFrame").src = recompileData.preview_url;
+    }
+
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("outputContent").style.display = "block";
+    document.getElementById("actionDownloadButtons").style.display = "flex";
+    document.getElementById("scoreBadge").textContent = "Base Profile";
+    document.getElementById("archetypeBadge").textContent = "Master Template";
+    document.getElementById("prioritySkillsChips").innerHTML = '<span class="chip chip-skill"><i class="fa fa-code"></i> data/main.tex</span>';
+    switchSubTab("preview");
+    showToast("Base CV loaded in Studio!");
+  } catch (e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      document.getElementById("tailoredTexArea").value = EMBEDDED_BASE_TEX;
+      document.getElementById("companyName").value = "Base Master CV";
+      document.getElementById("jobTitle").value = "Software Development Engineer";
+      document.getElementById("cvPreviewFrame").srcdoc = EMBEDDED_PREVIEW_HTML;
+      document.getElementById("emptyState").style.display = "none";
+      document.getElementById("outputContent").style.display = "block";
+      document.getElementById("actionDownloadButtons").style.display = "flex";
+      document.getElementById("scoreBadge").textContent = "Base Profile";
+      document.getElementById("archetypeBadge").textContent = "Master Template";
+      document.getElementById("prioritySkillsChips").innerHTML = '<span class="chip chip-skill"><i class="fa fa-code"></i> data/main.tex</span>';
+      switchSubTab("preview");
+      showToast("Base CV loaded in Studio!");
+      return;
+    }
+    showToast("Failed to load base CV: " + e.message);
+  }
+}
+
+// -------------------------------------------------------------
+// CV TAILORING & SAVING WORKFLOW
+// -------------------------------------------------------------
+async function handleTailor() {
+  const company = document.getElementById("companyName").value.trim();
+  const title = document.getElementById("jobTitle").value.trim();
+  const url = document.getElementById("jobUrl").value.trim();
+  const jd = document.getElementById("jdText").value.trim();
+  const hasRef = document.getElementById("hasReferral").checked;
+  const refName = document.getElementById("referralName").value.trim();
+  const refContact = document.getElementById("referralContact").value.trim();
+
+  if (!company || !jd) {
+    showToast("Please provide both Company Name and Job Description.");
+    alert("Please provide both Company Name and Job Description.");
+    return false;
+  }
+
+  const btnTailor = document.getElementById("btnTailor");
+  const origHtml = btnTailor ? btnTailor.innerHTML : "";
+  if (btnTailor) {
+    btnTailor.disabled = true;
+    btnTailor.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Tailoring CV...';
+  }
+  showToast("Analyzing JD & tailoring CV...");
+
+  try {
+    const resp = await fetch("/api/tailor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        company: company,
+        job_title: title,
+        job_url: url,
+        jd: jd,
+        has_referral: hasRef,
+        referral_name: refName,
+        referral_contact: refContact
+      })
+    });
+
+    const data = await resp.json();
+    if (!resp.ok) {
+      if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+        simulateStaticTailor(company, title, jd);
+        return true;
+      }
+      showToast("Error: " + (data.error || "Failed to tailor CV"));
+      alert("Error: " + (data.error || "Failed to tailor CV"));
+      return false;
+    }
+
+    CURRENT_TAILORED_RESULT = data;
+
+    // Display Output
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("outputContent").style.display = "block";
+    document.getElementById("actionDownloadButtons").style.display = "flex";
+
+    // Set Metadata
+    document.getElementById("scoreBadge").textContent = `Match: ${data.analysis.match_score}%`;
+    document.getElementById("archetypeBadge").textContent = `Archetype: ${data.analysis.archetype.replace('_', ' ')}`;
+
+    const chips = data.analysis.top_priorities.map(s => `<span class="chip chip-skill">${s}</span>`).join("");
+    document.getElementById("prioritySkillsChips").innerHTML = chips;
+
+    // Render Preview Iframe
+    const frame = document.getElementById("cvPreviewFrame");
+    frame.srcdoc = data.preview_html;
+
+    // Reset PDF preview frame so it loads fresh on next view
+    document.getElementById("pdfPreviewFrame").src = "about:blank";
+
+    // Set Diff HTML
+    document.getElementById("diffViewContainer").innerHTML = `
+      <div style="margin-bottom: 16px;">
+        <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">PROFILE Changes</h4>
+        <div class="diff-box">${renderDiffLines(data.profile_diff)}</div>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">TECHNICAL SKILLS Changes</h4>
+        <div class="diff-box">${renderDiffLines(data.skills_diff)}</div>
+      </div>
+      <div>
+        <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">PROJECTS Changes</h4>
+        <div class="diff-box">${renderDiffLines(data.projects_diff)}</div>
+      </div>
+    `;
+
+    // Set TeX Source
+    document.getElementById("tailoredTexArea").value = data.tailored_tex;
+
+    showToast(`Successfully tailored CV for ${company}! Click 'Save & Track Job' to record it.`);
+    return true;
+  } catch (e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      simulateStaticTailor(company, title, jd);
+      return true;
+    }
+    showToast("Request failed: " + e.message);
+    return false;
+  } finally {
+    if (btnTailor) {
+      btnTailor.disabled = false;
+      btnTailor.innerHTML = origHtml;
+    }
+  }
+}
+
+function simulateStaticTailor(company, title, jd) {
+  const jdLower = (jd || "").toLowerCase();
+  const candidateSkills = ["Python", "Go", "TypeScript", "LangChain", "LangGraph", "RAG", "LLM APIs", "Docker", "Kubernetes", "PostgreSQL", "Redis", "FastAPI", "AWS", "REST APIs", "Microservices"];
+  let matched = candidateSkills.filter(s => jdLower.includes(s.toLowerCase()));
+  if (matched.length === 0) matched = ["Python", "LangChain", "REST APIs", "Docker", "PostgreSQL", "FastAPI"];
+
+  const simScore = Math.min(98, Math.max(76, 70 + matched.length * 4));
+  let simTex = (typeof EMBEDDED_BASE_TEX !== 'undefined') ? EMBEDDED_BASE_TEX : "";
+
+  const simData = {
+    success: true,
+    company: company,
+    job_title: title || "Software Engineer",
+    tailored_tex: simTex,
+    preview_html: (typeof EMBEDDED_PREVIEW_HTML !== 'undefined') ? EMBEDDED_PREVIEW_HTML : "",
+    analysis: {
+      match_score: simScore,
+      archetype: jdLower.includes("ai") ? "ai_engineer" : "backend_engineer",
+      top_priorities: matched.slice(0, 6),
+      profile_summary: "AI-focused Software Development Engineer tailored for " + company
+    },
+    profile_diff: "--- Base Profile\n+++ Tailored Profile\n@@ -1,3 +1,3 @@\n- AI-focused Software Development Engineer with 2.5 years experience\n+ AI-focused Engineer tailored for " + company + ": specializing in " + matched.slice(0, 3).join(", "),
+    skills_diff: "--- Base Technical Skills\n+++ Tailored Skills\n@@ -1,4 +1,4 @@\n- AI/GenAI: LLMs, LangChain, RAG, Prompt Engineering\n+ AI/GenAI: " + matched.join(", "),
+    projects_diff: "--- Base Project Tech Stack\n+++ Tailored Project Tech Stack\n@@ -1,2 +1,2 @@\n- VitaTrack.ai [Go, Python, FastAPI, PostgreSQL, AWS Bedrock]\n+ VitaTrack.ai [Go, Python, " + matched.slice(0, 3).join(", ") + "]"
+  };
+
+  CURRENT_TAILORED_RESULT = simData;
+  document.getElementById("emptyState").style.display = "none";
+  document.getElementById("outputContent").style.display = "block";
+  document.getElementById("actionDownloadButtons").style.display = "flex";
+  document.getElementById("scoreBadge").textContent = `Match: ${simData.analysis.match_score}%`;
+  document.getElementById("archetypeBadge").textContent = `Archetype: ${simData.analysis.archetype.replace('_', ' ')}`;
+  document.getElementById("prioritySkillsChips").innerHTML = simData.analysis.top_priorities.map(s => `<span class="chip chip-skill">${s}</span>`).join("");
+  document.getElementById("cvPreviewFrame").srcdoc = simData.preview_html;
+  document.getElementById("tailoredTexArea").value = simData.tailored_tex;
+
+  document.getElementById("diffViewContainer").innerHTML = `
+    <div style="margin-bottom: 16px;">
+      <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">PROFILE Changes</h4>
+      <div class="diff-box">${renderDiffLines(simData.profile_diff)}</div>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">TECHNICAL SKILLS Changes</h4>
+      <div class="diff-box">${renderDiffLines(simData.skills_diff)}</div>
+    </div>
+    <div>
+      <h4 style="color: var(--accent-emerald); margin: 0 0 6px 0;">PROJECTS Changes</h4>
+      <div class="diff-box">${renderDiffLines(simData.projects_diff)}</div>
+    </div>
+  `;
+
+  showToast(`Tailored CV generated for ${company}! (GitHub Pages Interactive Demo)`);
+}
+
+function renderDiffLines(diffStr) {
+  if (!diffStr || !diffStr.trim()) return '<div style="color: #64748b; padding: 4px;">No changes made to this section.</div>';
+  return diffStr.split('\n').map(line => {
+    let cls = 'diff-context';
+    if (line.startsWith('+')) cls = 'diff-added';
+    else if (line.startsWith('-')) cls = 'diff-removed';
+    else if (line.startsWith('@@')) cls = 'diff-chunk';
+    else if (line.startsWith('---') || line.startsWith('+++')) cls = 'diff-header';
+    return `<div class="diff-line ${cls}">${escapeHtml(line)}</div>`;
+  }).join('');
+}
+
+function escapeHtml(text) {
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+  return String(text || '').replace(/[&<>"']/g, m => map[m]);
+}
+
+async function handleSaveApplication() {
+  const btnSave = document.getElementById("btnSaveApp");
+  const origHtml = btnSave ? btnSave.innerHTML : "";
+
+  if (!CURRENT_TAILORED_RESULT) {
+    const comp = document.getElementById("companyName").value.trim();
+    const jd = document.getElementById("jdText").value.trim();
+    if (!comp || !jd) {
+      showToast("Please provide both Company Name and Job Description first.");
+      alert("Please provide both Company Name and Job Description first.");
+      return;
+    }
+    showToast("Tailoring CV before saving to tracker...");
+    const ok = await handleTailor();
+    if (!ok || !CURRENT_TAILORED_RESULT) return;
+  }
+
+  if (btnSave) {
+    btnSave.disabled = true;
+    btnSave.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Saving...';
+  }
+
+  const notes = document.getElementById("appNotes").value.trim();
+  const payload = {
+    company: CURRENT_TAILORED_RESULT.metadata.company_name,
+    job_title: CURRENT_TAILORED_RESULT.metadata.job_title,
+    job_url: CURRENT_TAILORED_RESULT.metadata.job_url,
+    tailored_tex: CURRENT_TAILORED_RESULT.tailored_tex,
+    metadata: CURRENT_TAILORED_RESULT.metadata,
+    has_referral: CURRENT_TAILORED_RESULT.metadata.referral.has_referral,
+    referral_name: CURRENT_TAILORED_RESULT.metadata.referral.referral_name,
+    referral_contact: CURRENT_TAILORED_RESULT.metadata.referral.referral_contact,
+    notes: notes,
+    preview_html: CURRENT_TAILORED_RESULT.preview_html
+  };
+
+  try {
+    const res = await fetch("/api/apply", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showToast(`Recorded application ${data.application_id} in sheet!`);
+      loadTrackerData();
+    } else {
+      showToast("Error saving: " + data.error);
+    }
+  } catch (e) {
+    showToast("Error saving application: " + e.message);
+  } finally {
+    if (btnSave) {
+      btnSave.disabled = false;
+      btnSave.innerHTML = origHtml;
+    }
+  }
+}
+
+// -------------------------------------------------------------
+// TRACKER & ARCHIVES
+// -------------------------------------------------------------
+async function loadTrackerData() {
+  try {
+    const res = await fetch("/api/applications");
+    const data = await res.json();
+    TRACKED_APPLICATIONS = data;
+    document.getElementById("appCount").textContent = data.length;
+    renderTrackerTable(data);
+  } catch (e) {
+    console.error("Failed to load applications", e);
+  }
+}
+
+function renderTrackerTable(apps) {
+  const tbody = document.getElementById("trackerTableBody");
+  if (!apps || apps.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-secondary); padding: 40px;">No job applications tracked yet.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = apps.map(a => {
+    let statusClass = "status-applied";
+    const st = (a.status || "").toLowerCase();
+    if (st.includes("interview")) statusClass = "status-interviewing";
+    if (st.includes("offer")) statusClass = "status-offer";
+    if (st.includes("reject")) statusClass = "status-rejected";
+
+    const refHtml = a.has_referral 
+      ? `<span class="chip chip-archetype" style="font-size: 0.72rem;"><i class="fa fa-user-check"></i> ${escapeHtml(a.referral_name || "Referred")}</span>`
+      : `<span style="color: var(--text-muted); font-size: 0.8rem;">None</span>`;
+
+    const skillsHtml = (a.key_skills_matched || []).slice(0, 4).map(s => `<span class="chip chip-skill" style="font-size:0.7rem; padding: 2px 6px;">${escapeHtml(s)}</span>`).join(" ");
+
+    return `
+      <tr>
+        <td style="white-space: nowrap; font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml(a.applied_date || "-")}</td>
+        <td><strong>${escapeHtml(a.company || "-")}</strong></td>
+        <td>${escapeHtml(a.job_title || "-")}</td>
+        <td>
+          <select onchange="updateStatus('${a.application_id}', this.value)" style="padding: 4px 8px; font-size: 0.8rem; width: auto; border-color: var(--border-hover);">
+            <option value="Applied" ${a.status === 'Applied' ? 'selected' : ''}>Applied</option>
+            <option value="Interviewing" ${a.status === 'Interviewing' ? 'selected' : ''}>Interviewing</option>
+            <option value="Offer" ${a.status === 'Offer' ? 'selected' : ''}>Offer</option>
+            <option value="Rejected" ${a.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+          </select>
+        </td>
+        <td>${refHtml}</td>
+        <td><span class="chip chip-score">${a.match_score}%</span></td>
+        <td>${skillsHtml}</td>
+        <td style="white-space: nowrap;">
+          <button class="btn btn-secondary btn-sm" onclick="viewArchivedCV('${a.application_id}')"><i class="fa fa-eye"></i> View CV</button>
+          <a class="btn btn-primary btn-sm" href="/api/application/${a.application_id}/download_pdf" download><i class="fa fa-file-pdf"></i> PDF</a>
+          <a class="btn btn-secondary btn-sm" href="/api/application/${a.application_id}/download_tex" download><i class="fa fa-download"></i> .tex</a>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function filterTrackerTable() {
+  const q = document.getElementById("trackerSearch").value.toLowerCase();
+  const filtered = TRACKED_APPLICATIONS.filter(a => 
+    (a.company && a.company.toLowerCase().includes(q)) ||
+    (a.job_title && a.job_title.toLowerCase().includes(q)) ||
+    (a.referral_name && a.referral_name.toLowerCase().includes(q))
+  );
+  renderTrackerTable(filtered);
+}
+
+async function updateStatus(appId, newStatus) {
+  try {
+    await fetch(`/api/application/${appId}/status`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus })
+    });
+    showToast(`Updated status for ${appId} to ${newStatus}`);
+    loadTrackerData();
+  } catch (e) {
+    showToast("Failed to update status");
+  }
+}
+
+async function viewArchivedCV(appId) {
+  try {
+    const res = await fetch(`/api/application/${appId}`);
+    const data = await res.json();
+    if (!res.ok) {
+      showToast("Could not load archive");
+      return;
+    }
+
+    CURRENT_TAILORED_RESULT = {
+      tailored_tex: data.tailored_tex,
+      preview_html: data.preview_html,
+      analysis: {
+        match_score: data.match_score,
+        archetype: data.metadata?.archetype || "GENERAL_SDE",
+        top_priorities: data.key_skills_matched || []
+      },
+      metadata: data.metadata || {}
+    };
+
+    switchView('tailor');
+    document.getElementById("companyName").value = data.company || "";
+    document.getElementById("jobTitle").value = data.job_title || "";
+    document.getElementById("jobUrl").value = data.job_url || "";
+    document.getElementById("hasReferral").checked = data.has_referral;
+    toggleReferralFields();
+    document.getElementById("referralName").value = data.referral_name || "";
+    document.getElementById("referralContact").value = data.referral_contact || "";
+    document.getElementById("appNotes").value = data.notes || "";
+
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("outputContent").style.display = "block";
+    document.getElementById("actionDownloadButtons").style.display = "flex";
+
+    document.getElementById("scoreBadge").textContent = `Match: ${data.match_score}%`;
+    document.getElementById("archetypeBadge").textContent = `Archetype: ${(data.metadata?.archetype || 'SDE').replace('_', ' ')}`;
+    document.getElementById("prioritySkillsChips").innerHTML = (data.key_skills_matched || []).map(s => `<span class="chip chip-skill">${s}</span>`).join("");
+
+    const frame = document.getElementById("cvPreviewFrame");
+    frame.srcdoc = data.preview_html || "Preview not available";
+    document.getElementById("tailoredTexArea").value = data.tailored_tex || "";
+
+    document.getElementById("pdfPreviewFrame").src = `/api/application/${appId}/preview_pdf`;
+    showToast(`Loaded archived CV for ${data.company} (${appId})`);
+  } catch (e) {
+    showToast("Error loading archived CV: " + e.message);
+  }
+}
+
+// -------------------------------------------------------------
+// DOWNLOAD HANDLERS
+// -------------------------------------------------------------
+async function downloadPdf() {
+  const tex = document.getElementById("tailoredTexArea").value;
+  if (!tex) {
+    showToast("No CV tailored yet!");
+    return;
+  }
+  const company = document.getElementById("companyName").value.trim() || "Company";
+  const btn = document.getElementById("btnDownloadPdf");
+  const origHtml = btn ? btn.innerHTML : "";
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Compiling...';
+  }
+  showToast("Compiling LaTeX with TeX engine to produce authentic Overleaf-grade PDF...");
+
+  try {
+    const res = await fetch("/api/compile_pdf", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tailored_tex: tex, company: company })
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: "LaTeX compilation failed" }));
+      alert("LaTeX Compilation Error: " + (err.error || "Failed to compile."));
+      throw new Error(err.error || "Compilation failed");
+    }
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Harsh_Jha_CV_${company.replace(/\s+/g, '_')}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    showToast("Genuine Overleaf-grade PDF downloaded successfully!");
+  } catch (e) {
+    if (typeof EMBEDDED_BASE_TEX !== 'undefined') {
+      downloadTex();
+      alert(`Downloaded tailored LaTeX source (.tex)!
+
+Note: To compile binary Overleaf PDFs directly via the embedded Tectonic XeTeX engine, run Applyfox locally or via Docker:
+
+$ python3 cv_service.py serve`);
+      return;
+    }
+    showToast("Download failed: " + e.message);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = origHtml;
+    }
+  }
+}
+
+function copyTex() {
+  const tex = document.getElementById("tailoredTexArea").value;
+  navigator.clipboard.writeText(tex).then(() => {
+    showToast("Copied LaTeX source to clipboard!");
+  });
+}
+
+function downloadTex() {
+  const tex = document.getElementById("tailoredTexArea").value;
+  const company = document.getElementById("companyName").value.trim() || "company";
+  const blob = new Blob([tex], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `Harsh_Jha_CV_${company.replace(/\s+/g, '_')}.tex`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.style.display = "block";
+  setTimeout(() => { toast.style.display = "none"; }, 3500);
+}
+</script>
+</body>
+</html>

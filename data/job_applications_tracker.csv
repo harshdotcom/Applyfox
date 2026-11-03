@@ -1,0 +1,5 @@
+Application ID,Applied Date,Company,Job Title,Status,Has Referral,Referral Name,Referral Contact,Job URL,Match Score,Key Skills Matched,Archive Path,Notes
+APP-OPENAI-20261103-3458,2026-11-03 21:34,OpenAI,AI Agent Engineer,Interviewing,Yes,Elena Rostova,elena@openai.com,https://jobs.ashbyhq.com/openai,91%,"AI Agents, LangChain, LangGraph, RAG, Tool Calling, Vector Search",data/applications/APP-OPENAI-20261103-3458_openai,Referred by Elena on LinkedIn
+APP-STRIPE-20261103-3720,2026-11-03 21:37,Stripe,Backend Engineer,Applied,Yes,Sam Altman,sam@openai.com,,45%,"REST APIs, Microservices, Go, PostgreSQL, Redis",data/applications/APP-STRIPE-20261103-3720_stripe,
+APP-INFRRD-20261103-3203,2026-11-03 22:32,Infrrd,Python Developer (Gen AI),Applied,No,,,,75%,"LLMs, LangChain, LangGraph, RAG, FastAPI, REST APIs",data/applications/APP-INFRRD-20261103-3203_infrrd,
+APP-0G-20261103-2553,2026-11-03 23:25,0g,Python Developer (Gen AI),Applied,No,,,https://www.instahyre.com/job-432385-python-developer-gen-ai-at-infrrd-bangalore/,98%,"LLMs, LangChain, RAG, Prompt Engineering, Tool Calling, Structured Outputs",data/applications/APP-0G-20261103-2553_0g,

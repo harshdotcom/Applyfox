@@ -1,0 +1,102 @@
+[
+  {
+    "application_id": "APP-OPENAI-20261103-3458",
+    "applied_date": "2026-11-03 21:34",
+    "company": "OpenAI",
+    "job_title": "AI Agent Engineer",
+    "status": "Interviewing",
+    "has_referral": true,
+    "referral_name": "Elena Rostova",
+    "referral_contact": "elena@openai.com",
+    "job_url": "https://jobs.ashbyhq.com/openai",
+    "match_score": 91,
+    "key_skills_matched": [
+      "AI Agents",
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "Tool Calling",
+      "Vector Search",
+      "Microservices",
+      "Python"
+    ],
+    "archive_dir": "data/applications/APP-OPENAI-20261103-3458_openai",
+    "tex_path": "data/applications/APP-OPENAI-20261103-3458_openai/tailored_cv.tex",
+    "notes": "Referred by Elena on LinkedIn",
+    "created_at": 1793721898.2278197
+  },
+  {
+    "application_id": "APP-STRIPE-20261103-3720",
+    "applied_date": "2026-11-03 21:37",
+    "company": "Stripe",
+    "job_title": "Backend Engineer",
+    "status": "Applied",
+    "has_referral": true,
+    "referral_name": "Sam Altman",
+    "referral_contact": "sam@openai.com",
+    "job_url": "",
+    "match_score": 45,
+    "key_skills_matched": [
+      "REST APIs",
+      "Microservices",
+      "Go",
+      "PostgreSQL",
+      "Redis"
+    ],
+    "archive_dir": "data/applications/APP-STRIPE-20261103-3720_stripe",
+    "tex_path": "data/applications/APP-STRIPE-20261103-3720_stripe/tailored_cv.tex",
+    "notes": "",
+    "created_at": 1793722040.8104064
+  },
+  {
+    "application_id": "APP-INFRRD-20261103-3203",
+    "applied_date": "2026-11-03 22:32",
+    "company": "Infrrd",
+    "job_title": "Python Developer (Gen AI)",
+    "status": "Applied",
+    "has_referral": false,
+    "referral_name": "",
+    "referral_contact": "",
+    "job_url": "",
+    "match_score": 75,
+    "key_skills_matched": [
+      "LLMs",
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "FastAPI",
+      "REST APIs",
+      "Python"
+    ],
+    "archive_dir": "data/applications/APP-INFRRD-20261103-3203_infrrd",
+    "tex_path": "data/applications/APP-INFRRD-20261103-3203_infrrd/tailored_cv.tex",
+    "notes": "",
+    "created_at": 1793725325.7434444
+  },
+  {
+    "application_id": "APP-0G-20261103-2553",
+    "applied_date": "2026-11-03 23:25",
+    "company": "0g",
+    "job_title": "Python Developer (Gen AI)",
+    "status": "Applied",
+    "has_referral": false,
+    "referral_name": "",
+    "referral_contact": "",
+    "job_url": "https://www.instahyre.com/job-432385-python-developer-gen-ai-at-infrrd-bangalore/",
+    "match_score": 98,
+    "key_skills_matched": [
+      "LLMs",
+      "LangChain",
+      "RAG",
+      "Prompt Engineering",
+      "Tool Calling",
+      "Structured Outputs",
+      "AI Evaluation",
+      "FastAPI"
+    ],
+    "archive_dir": "data/applications/APP-0G-20261103-2553_0g",
+    "tex_path": "data/applications/APP-0G-20261103-2553_0g/tailored_cv.tex",
+    "notes": "",
+    "created_at": 1793728555.4921403
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "company_name": "0g",
+  "job_title": "Python Developer (Gen AI)",
+  "job_url": "https://www.instahyre.com/job-432385-python-developer-gen-ai-at-infrrd-bangalore/",
+  "archetype": "AI_ENGINEER",
+  "match_score": 98,
+  "matched_skills": {
+    "languages": [
+      "Python"
+    ],
+    "ai_genai": [
+      "LLMs",
+      "LangChain",
+      "RAG",
+      "Prompt Engineering",
+      "Tool Calling",
+      "Structured Outputs",
+      "AI Evaluation"
+    ],
+    "backend": [
+      "FastAPI",
+      "REST APIs"
+    ],
+    "data": [
+      "PostgreSQL",
+      "MongoDB"
+    ],
+    "cloud": [],
+    "devops": [
+      "Docker",
+      "GitHub Actions",
+      "CI/CD"
+    ],
+    "architecture": [
+      "High Concurrency"
+    ],
+    "security": [
+      "API Validation"
+    ]
+  },
+  "top_priorities": [
+    "LLMs",
+    "LangChain",
+    "RAG",
+    "Prompt Engineering",
+    "Tool Calling",
+    "Structured Outputs",
+    "AI Evaluation",
+    "FastAPI"
+  ],
+  "referral": {
+    "has_referral": false,
+    "referral_name": "",
+    "referral_contact": ""
+  },
+  "jd_length": 1699,
+  "application_id": "APP-0G-20261103-2553",
+  "applied_date": "2026-11-03 23:25",
+  "status": "Applied",
+  "notes": "",
+  "pdf_path": "data/applications/APP-0G-20261103-2553_0g/tailored_cv.pdf",
+  "has_pdf": true
+}

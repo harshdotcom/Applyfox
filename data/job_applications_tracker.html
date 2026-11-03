@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🦊 Applyfox | Job Applications Master Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --bg: #0b1120;
+    --card-bg: #1e293b;
+    --border: #334155;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #f97316;
+    --success: #10b981;
+    --info: #38bdf8;
+  }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px;
+    line-height: 1.5;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  .brand-badge {
+    background: var(--primary);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .header-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #334155;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: #475569; }
+  .btn-primary { background: var(--primary); }
+  .btn-primary:hover { background: #ea580c; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .stat-title {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .filter-bar {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-input {
+    flex: 1;
+    min-width: 250px;
+    background: #0f172a;
+    border: 1px solid var(--border);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .filter-select {
+    background: #0f172a;
+    border: 1px solid var(--border);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .table-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+  th {
+    background: #0f172a;
+    padding: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+  .status-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .status-applied { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+  .status-interview { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
+  .status-offer { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+  .status-rejected { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+  .score-pill {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+  }
+  .skill-pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #334155;
+    color: #e2e8f0;
+    font-size: 0.75rem;
+    margin: 2px;
+  }
+  .ref-badge {
+    color: #fb923c;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #334155;
+    color: #e2e8f0;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    margin-right: 4px;
+  }
+  .action-btn:hover { background: #475569; color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="brand">
+      <h1>🦊 Applyfox Job Applications Master Tracker</h1>
+      <span class="brand-badge">Official Tracker Sheet</span>
+    </div>
+    <div class="header-actions">
+      <a href="http://127.0.0.1:8080" target="_blank" class="btn btn-primary"><i class="fa fa-wand-magic-sparkles"></i> Open Web Studio</a>
+      <a href="job_applications_tracker.csv" download class="btn"><i class="fa fa-file-csv"></i> Download CSV</a>
+    </div>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-title">Total Applications</div>
+      <div class="stat-value" style="color: #38bdf8;">4</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">Interviewing</div>
+      <div class="stat-value" style="color: #fb923c;">1</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">Referrals Tracked</div>
+      <div class="stat-value" style="color: var(--primary);">2</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">Offers Received</div>
+      <div class="stat-value" style="color: #34d399;">0</div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <i class="fa fa-magnifying-glass" style="color: var(--text-muted);"></i>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search by company, role, referrer, or skill..." oninput="filterTable()">
+    <select id="statusFilter" class="filter-select" onchange="filterTable()">
+      <option value="all">All Statuses</option>
+      <option value="applied">Applied</option>
+      <option value="interview">Interviewing</option>
+      <option value="offer">Offer</option>
+      <option value="reject">Rejected</option>
+    </select>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Date Applied</th>
+          <th>Company</th>
+          <th>Job Title</th>
+          <th>Status</th>
+          <th>Referral</th>
+          <th>Match</th>
+          <th>Key Skills Targeted</th>
+          <th>Archived CV</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        
+        <tr data-status="applied" data-search="0g python developer (gen ai) ">
+            <td style="white-space:nowrap; font-size:0.85rem; color:#94a3b8;">2026-11-03 23:25</td>
+            <td><a href="https://www.instahyre.com/job-432385-python-developer-gen-ai-at-infrrd-bangalore/" target="_blank" style="color:#38bdf8; text-decoration:none;">0g <i class="fa fa-external-link-alt" style="font-size:0.75rem;"></i></a></td>
+            <td><strong>Python Developer (Gen AI)</strong></td>
+            <td><span class="status-pill status-applied">Applied</span></td>
+            <td><span style="color:#64748b;">None</span></td>
+            <td><span class="score-pill">98%</span></td>
+            <td><span class="skill-pill">LLMs</span> <span class="skill-pill">LangChain</span> <span class="skill-pill">RAG</span> <span class="skill-pill">Prompt Engineering</span> <span class="skill-pill">Tool Calling</span></td>
+            <td style="white-space:nowrap;">
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-0G-20261103-2553_0g/preview.html" target="_blank" class="action-btn" title="View CV in Browser"><i class="fa fa-eye"></i> View CV</a>
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-0G-20261103-2553_0g/tailored_cv.tex" download class="action-btn" title="Open LaTeX Source"><i class="fa fa-file-code"></i> .tex</a>
+            </td>
+        </tr>
+        
+
+        <tr data-status="applied" data-search="infrrd python developer (gen ai) ">
+            <td style="white-space:nowrap; font-size:0.85rem; color:#94a3b8;">2026-11-03 22:32</td>
+            <td><strong>Infrrd</strong></td>
+            <td><strong>Python Developer (Gen AI)</strong></td>
+            <td><span class="status-pill status-applied">Applied</span></td>
+            <td><span style="color:#64748b;">None</span></td>
+            <td><span class="score-pill">75%</span></td>
+            <td><span class="skill-pill">LLMs</span> <span class="skill-pill">LangChain</span> <span class="skill-pill">LangGraph</span> <span class="skill-pill">RAG</span> <span class="skill-pill">FastAPI</span></td>
+            <td style="white-space:nowrap;">
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-INFRRD-20261103-3203_infrrd/preview.html" target="_blank" class="action-btn" title="View CV in Browser"><i class="fa fa-eye"></i> View CV</a>
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-INFRRD-20261103-3203_infrrd/tailored_cv.tex" download class="action-btn" title="Open LaTeX Source"><i class="fa fa-file-code"></i> .tex</a>
+            </td>
+        </tr>
+        
+
+        <tr data-status="applied" data-search="stripe backend engineer sam altman">
+            <td style="white-space:nowrap; font-size:0.85rem; color:#94a3b8;">2026-11-03 21:37</td>
+            <td><strong>Stripe</strong></td>
+            <td><strong>Backend Engineer</strong></td>
+            <td><span class="status-pill status-applied">Applied</span></td>
+            <td><span class="ref-badge"><i class="fa fa-user-check"></i> Sam Altman<small style="display:block; opacity:0.8;">sam@openai.com</small></span></td>
+            <td><span class="score-pill">45%</span></td>
+            <td><span class="skill-pill">REST APIs</span> <span class="skill-pill">Microservices</span> <span class="skill-pill">Go</span> <span class="skill-pill">PostgreSQL</span> <span class="skill-pill">Redis</span></td>
+            <td style="white-space:nowrap;">
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-STRIPE-20261103-3720_stripe/preview.html" target="_blank" class="action-btn" title="View CV in Browser"><i class="fa fa-eye"></i> View CV</a>
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-STRIPE-20261103-3720_stripe/tailored_cv.tex" download class="action-btn" title="Open LaTeX Source"><i class="fa fa-file-code"></i> .tex</a>
+            </td>
+        </tr>
+        
+
+        <tr data-status="interviewing" data-search="openai ai agent engineer elena rostova">
+            <td style="white-space:nowrap; font-size:0.85rem; color:#94a3b8;">2026-11-03 21:34</td>
+            <td><a href="https://jobs.ashbyhq.com/openai" target="_blank" style="color:#38bdf8; text-decoration:none;">OpenAI <i class="fa fa-external-link-alt" style="font-size:0.75rem;"></i></a></td>
+            <td><strong>AI Agent Engineer</strong></td>
+            <td><span class="status-pill status-interview">Interviewing</span></td>
+            <td><span class="ref-badge"><i class="fa fa-user-check"></i> Elena Rostova<small style="display:block; opacity:0.8;">elena@openai.com</small></span></td>
+            <td><span class="score-pill">91%</span></td>
+            <td><span class="skill-pill">AI Agents</span> <span class="skill-pill">LangChain</span> <span class="skill-pill">LangGraph</span> <span class="skill-pill">RAG</span> <span class="skill-pill">Tool Calling</span></td>
+            <td style="white-space:nowrap;">
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-OPENAI-20261103-3458_openai/preview.html" target="_blank" class="action-btn" title="View CV in Browser"><i class="fa fa-eye"></i> View CV</a>
+                <a href="file:///home/priyanshu/Documents/Applyfox/data/applications/APP-OPENAI-20261103-3458_openai/tailored_cv.tex" download class="action-btn" title="Open LaTeX Source"><i class="fa fa-file-code"></i> .tex</a>
+            </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function filterTable() {
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  const status = document.getElementById("statusFilter").value.toLowerCase();
+  const rows = document.querySelectorAll("#tableBody tr");
+
+  rows.forEach(r => {
+    const text = (r.getAttribute("data-search") || "");
+    const rowStatus = (r.getAttribute("data-status") || "");
+
+    const matchQuery = text.includes(query);
+    const matchStatus = status === "all" || rowStatus.includes(status);
+
+    r.style.display = (matchQuery && matchStatus) ? "" : "none";
+  });
+}
+</script>
+
+</body>
+</html>

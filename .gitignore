@@ -28,3 +28,7 @@ build/
 dist/
 *.egg-info/
 
+# Local binaries & caches
+bin/
+
+

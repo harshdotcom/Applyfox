@@ -1,0 +1,42 @@
+{
+  "company_name": "Stripe",
+  "job_title": "Backend Engineer",
+  "job_url": "",
+  "archetype": "BACKEND_ENGINEER",
+  "match_score": 45,
+  "matched_skills": {
+    "languages": [
+      "Go"
+    ],
+    "ai_genai": [],
+    "backend": [
+      "REST APIs",
+      "Microservices"
+    ],
+    "data": [
+      "PostgreSQL",
+      "Redis"
+    ],
+    "cloud": [],
+    "devops": [],
+    "architecture": [],
+    "security": []
+  },
+  "top_priorities": [
+    "REST APIs",
+    "Microservices",
+    "Go",
+    "PostgreSQL",
+    "Redis"
+  ],
+  "referral": {
+    "has_referral": true,
+    "referral_name": "Sam Altman",
+    "referral_contact": "sam@openai.com"
+  },
+  "jd_length": 55,
+  "application_id": "APP-STRIPE-20261103-3720",
+  "applied_date": "2026-11-03 21:37",
+  "status": "Applied",
+  "notes": ""
+}

@@ -278,6 +278,45 @@ Contains all validated companies across every platform:
 
 ---
 
+## 🎯 Applyfox CV Studio & Job Application Tracker (`cv_service.py`)
+
+Applyfox includes an intelligent LaTeX CV tailoring engine and persistent job application tracker designed for [`data/main.tex`](file:///home/priyanshu/Documents/Applyfox/data/main.tex).
+
+### Key Features:
+- **Overleaf-Grade LaTeX PDF Compilation Engine**: Built-in standalone TeX compiler (`bin/tectonic`) that renders pristine, authentic single-page PDFs directly from LaTeX source code. No HTML-to-PDF conversions or browser print dialogs—pure vector typesetting with full hyperref link support.
+- **Precise Section Tailoring**: Intelligently analyzes any target Job Description (JD) and adapts:
+  - `%-----------PROFILE-----------`: Re-aligns lead title, emphasis, and core competencies to match the role archetype (AI/GenAI, Backend, DevOps, Distributed Systems).
+  - `%-----------TECHNICAL SKILLS-----------`: Re-orders skill categories and front-loads matching technologies while preserving authentic verified skills.
+  - `%-----------PROJECTS-----------`: Dynamically adjusts project header tech-stack tags (e.g. `VitaTrack.ai` and `AI Agent Workflow System`) to match the JD stack.
+- **Master Job Application Tracker ("The Sheet")**:
+  - Automatically records every application in [`data/job_applications_tracker.csv`](file:///home/priyanshu/Documents/Applyfox/data/job_applications_tracker.csv) and JSON database.
+  - Tracks **Company Name**, **Job Title**, **Application Date**, **Referral Status & Referrer Name/Contact**, **Match Score**, and **Archive Path**.
+- **Full Version Archival & Real PDF Artifacts**:
+  - Stores each application in `data/applications/<APP-ID>_<company>/` with the exact `.tex` source, compiled `.pdf`, full metadata JSON, and paper preview for future reference and interview prep.
+- **Interactive Web Studio**:
+  - Built-in local web server with autocomplete across **7,008 verified companies**, live compiled PDF preview, visual paper preview, section diffs, editable LaTeX source with instant recompile, and 1-click PDF download.
+
+### Usage:
+
+```bash
+# 1. Launch interactive Web Studio & Application Tracker UI
+python cv_service.py serve --port 8080
+
+# 2. Tailor CV directly via CLI with instant tracking
+python cv_service.py tailor --company "OpenAI" --title "AI Agent Engineer" --jd "path/to/jd.txt" --save
+
+# 3. Interactive Terminal Wizard
+python cv_service.py interactive
+
+# 4. View Application Tracking Sheet in Terminal
+python cv_service.py list
+
+# 5. Retrieve an exact previously sent CV version
+python cv_service.py get APP-OPENAI-20261103-3458 --tex
+```
+
+---
+
 ## 🏷️ Recommended Repository Names
 
 For publishing this repository on GitHub:

@@ -1,0 +1,52 @@
+{
+  "company_name": "Infrrd",
+  "job_title": "Python Developer (Gen AI)",
+  "job_url": "",
+  "archetype": "AI_ENGINEER",
+  "match_score": 75,
+  "matched_skills": {
+    "languages": [
+      "Python"
+    ],
+    "ai_genai": [
+      "LLMs",
+      "LangChain",
+      "LangGraph",
+      "RAG"
+    ],
+    "backend": [
+      "FastAPI",
+      "REST APIs"
+    ],
+    "data": [],
+    "cloud": [],
+    "devops": [
+      "Docker"
+    ],
+    "architecture": [
+      "SOLID Principles"
+    ],
+    "security": []
+  },
+  "top_priorities": [
+    "LLMs",
+    "LangChain",
+    "LangGraph",
+    "RAG",
+    "FastAPI",
+    "REST APIs",
+    "Python"
+  ],
+  "referral": {
+    "has_referral": false,
+    "referral_name": "",
+    "referral_contact": ""
+  },
+  "jd_length": 522,
+  "application_id": "APP-INFRRD-20261103-3203",
+  "applied_date": "2026-11-03 22:32",
+  "status": "Applied",
+  "notes": "",
+  "pdf_path": "data/applications/APP-INFRRD-20261103-3203_infrrd/tailored_cv.pdf",
+  "has_pdf": true
+}

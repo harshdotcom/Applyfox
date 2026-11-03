@@ -1,0 +1,259 @@
+%-------------------------
+% Resume in Latex
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+
+%----------PAGE MARGINS----------
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+%----------SECTION FORMATTING----------
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\titlerule \vspace{-5pt}]
+
+%----------BULLET FORMATTING----------
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\circ$}}$}
+
+\newcommand{\resumeItem}[1]{
+  \item[\textbullet]\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+%----------SUBHEADING----------
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-4pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{#2} \\
+      \textit{#3} & \textit{#4} \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+%----------PROJECT HEADING----------
+% tabularx allows long project titles/technology stacks
+% to wrap without overlapping the GitHub link.
+\newcommand{\resumeProjectHeading}[2]{
+  \vspace{-2pt}\item
+    \begin{tabularx}{\textwidth}{@{}X r@{}}
+      \small #1 & \small #2 \\
+    \end{tabularx}
+    \vspace{-4pt}
+}
+
+%----------LISTS----------
+\newcommand{\resumeSubHeadingListStart}{
+  \begin{itemize}[leftmargin=0in, label={}]
+}
+
+\newcommand{\resumeSubHeadingListEnd}{
+  \end{itemize}
+}
+
+\newcommand{\resumeItemListStart}{
+  \begin{itemize}[leftmargin=0.15in]
+}
+
+\newcommand{\resumeItemListEnd}{
+  \end{itemize}\vspace{-6pt}
+}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%
+%-------------------------------------------
+
+\begin{document}
+
+%----------HEADER----------
+\begin{center}
+    {\huge \textbf{Harsh Jha}} \\ \vspace{6pt}
+    {\faPhone \ +91 7060286069} ~
+    {\faEnvelope \ \href{mailto:harshptct@gmail.com}{harshj92002@gmail.com}} ~
+    {\faLinkedin \ \href{https://www.linkedin.com/in/harshjha-iiti/}{LinkedIn}} ~
+    {\faGithub \ \href{https://github.com/jhaharsh03}{GitHub}} ~
+    {\faCode \ \href{https://leetcode.com/u/harshdotcom/}{LeetCode}}
+\end{center}
+
+
+%-----------PROFILE-----------
+\section{\color{airforceblue}PROFILE}
+\resumeItemListStart
+
+\resumeItem{AI-focused Software Development Engineer with \textbf{2.5 years of experience} building production-grade LLM applications, agentic AI workflows, scalable backend systems, and cloud-native microservices.}
+
+\resumeItem{Hands-on experience designing and integrating \textbf{LLM and agentic AI workflows} using LangGraph, LangChain, RAG pipelines, AWS Bedrock, prompt engineering, and structured outputs.}
+
+\resumeItem{Strong backend and systems foundation across \textbf{Python, Go, TypeScript, REST APIs, PostgreSQL, Redis, Docker, Kubernetes, AWS, and Azure}, with experience taking features from design through production.}
+
+\resumeItem{Open-source maintainer of \textbf{VitaTrack.ai}, an AI-powered healthcare platform for medical document extraction, report summarization, health-record organization, and intelligent health-data workflows.}
+
+\resumeItemListEnd
+%-----------EDUCATION-----------
+\section{\color{airforceblue}EDUCATION}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Indian Institute of Technology Indore (IIT Indore)}{Indore, India}
+{Bachelor of Technology (B.Tech.) in Civil Engineering}{2020 -- 2024}
+
+\resumeSubHeadingListEnd
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{\color{airforceblue}TECHNICAL SKILLS}
+\resumeItemListStart
+
+\resumeItem{\textbf{AI / GenAI:} LLMs, LangChain, LangGraph, RAG, AI Agents, Agentic AI, Prompt Engineering, Tool Calling, Function Calling, LLM Integration, AI Workflow Automation}
+
+\resumeItem{\textbf{AI Engineering:} Agent Orchestration, Retrieval Pipelines, Vector Search, Embeddings, Context Engineering, Structured Outputs, Model Integration, AI Evaluation}
+
+\resumeItem{\textbf{Programming:} Python, Go, TypeScript, JavaScript, C++}
+
+\resumeItem{\textbf{Backend:} FastAPI, REST APIs, Gin, Fiber, Node.js, Express.js, gRPC, Microservices, API Gateway}
+
+\resumeItem{\textbf{Data:} PostgreSQL, MongoDB, MySQL, SQL Server, Redis}
+
+\resumeItem{\textbf{Cloud \& AI Services:} AWS, Azure, AWS Bedrock, AWS Textract, Oracle Cloud Infrastructure}
+
+\resumeItem{\textbf{DevOps \& Infrastructure:} Docker, Kubernetes, GitHub Actions, CI/CD, Containerized Deployment}
+
+\resumeItem{\textbf{Architecture:} SOLID Principles, System Design, Distributed Systems, Event-Driven Architecture, Microservices, Clean Architecture}
+
+\resumeItem{\textbf{Security:} JWT, RBAC, API Validation, Secure API Design}
+
+\resumeItemListEnd
+%-----------WORK EXPERIENCE-----------
+\section{\color{airforceblue}WORK EXPERIENCE}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Software Development Engineer - 2}{May 2024 -- Present}
+{SimplyPhi}{Bangalore, India}
+
+\resumeItemListStart
+
+\resumeItem{Designed and built scalable backend services using \textbf{Go, Python, TypeScript, REST APIs, PostgreSQL, and microservices} for production business workflows.}
+
+\resumeItem{Developed production-ready APIs for \textbf{authentication, reporting, financial workflows, property operations, dashboard analytics, and business automation}, supporting multiple application workflows.}
+
+\resumeItem{Engineered AI-powered workflows using \textbf{LangChain, LangGraph, AI agents, LLM APIs, RAG pipelines, prompt engineering, tool calling, and structured outputs}.}
+
+\resumeItem{Integrated \textbf{LLM and AI services} into business applications for document understanding, report generation, data extraction, summarization, and intelligent workflow automation.}
+
+\resumeItem{Built and deployed cloud-native services using \textbf{Docker, Kubernetes, AWS, Azure, GitHub Actions, and CI/CD}, supporting reliable application delivery across environments.}
+
+\resumeItem{Implemented secure application workflows using \textbf{JWT authentication, RBAC, API validation, structured logging, and centralized error handling}.}
+
+\resumeItem{Improved backend scalability and maintainability through \textbf{Clean Architecture, modular service design, optimized database queries, caching, and reusable service components}.}
+
+\resumeItem{Owned features end-to-end across \textbf{requirements analysis, system design, development, testing, deployment, monitoring, debugging, and production support}.}
+
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{\color{airforceblue}PROJECTS}
+\resumeSubHeadingListStart
+
+%----------VITATRACK----------
+\resumeProjectHeading
+{\textbf{VitaTrack.ai -- AI Medical Report Platform} $|$ Go, Python, FastAPI, AWS Bedrock, Docker}
+{\href{https://github.com/harshdotcom/vitalTrack.ai-}{GitHub}}
+
+\resumeItemListStart
+
+\resumeItem{Developing an open-source AI healthcare platform for managing \textbf{medical reports, prescriptions, symptoms, medications, health records, and daily health notes}.}
+
+\resumeItem{Built secure \textbf{Go backend APIs} and structured healthcare data workflows using \textbf{PostgreSQL} for medical record management.}
+
+\resumeItem{Integrated \textbf{AWS Textract} to extract text and structured data from medical reports, prescriptions, and healthcare documents.}
+
+\resumeItem{Integrated \textbf{AWS Bedrock and LLMs} with prompt engineering to summarize medical reports and transform unstructured health data into structured, actionable information.}
+
+\resumeItem{Designed AI workflows for \textbf{medical document analysis, health-history tracking, report processing, and patient record organization}.}
+
+\resumeItem{Built supporting \textbf{Angular} interfaces for document uploads, health logs, dashboards, and medical data management.}
+
+\resumeItemListEnd
+
+
+%----------AI AGENT WORKFLOW----------
+\resumeProjectHeading
+{\textbf{AI Agent Workflow System} $|$ Python, LangGraph, LangChain, RAG, LLMs}
+{\href{https://github.com/harshdotcom/naukriAuto.Ai}{GitHub}}
+
+\resumeItemListStart
+
+\resumeItem{Engineered multi-step \textbf{AI agent workflows} using Python, LangChain, LangGraph, and LLM APIs for intelligent automation and structured decision-making.}
+
+\resumeItem{Designed stateful agent workflows for \textbf{document processing, summarization, API integration, tool execution, and structured response generation}.}
+
+\resumeItem{Implemented \textbf{tool calling, prompt templates, reusable chains, memory, state management, and conditional workflow execution} for agent-driven automation.}
+
+\resumeItem{Integrated AI agents with \textbf{REST APIs and external tools} to execute tasks, process information, and support real-world business workflows.}
+
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+%-----------CERTIFICATIONS-----------
+\section{\color{airforceblue}CERTIFICATIONS}
+\resumeItemListStart
+
+\resumeItem{
+\href{https://academy.langchain.com/certificates/svjvl9l9fa}
+{\textbf{Introduction to LangChain - Python} — LangChain Academy}
+}
+
+\resumeItem{
+\href{https://verify.skilljar.com/c/gbzedjz5dcde}
+{\textbf{Introduction to Agent Skills} — Anthropic}
+}
+
+\resumeItem{
+\href{https://www.linkedin.com/in/harshjha-iiti/overlay/certifications/1170933565/multiple-media-viewer/?profileId=ACoAADN4Q84BhQseKYmEwHkPK7yzh0e_9nVq1kY}
+{\textbf{Oracle Cloud Infrastructure 2025 Certified} — Oracle}
+}
+
+\resumeItemListEnd
+
+
+%-----------ACHIEVEMENTS-----------
+\section{\color{airforceblue}ACHIEVEMENTS}
+\resumeItemListStart
+
+\resumeItem{Achieved a \textbf{LeetCode Contest Rating of 1663}, placing in the \textbf{top 6\% globally}.}
+
+\resumeItem{Open-source maintainer of \textbf{VitaTrack.ai}, an AI-powered healthcare platform focused on medical document processing and intelligent health-data workflows.}
+
+\resumeItemListEnd
+
+
+%-------------------------------------------
+\end{document}

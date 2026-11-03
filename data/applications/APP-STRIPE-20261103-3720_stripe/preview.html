@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harsh Jha - CV (Stripe)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+  :root {
+    --airforceblue: #5c8aab;
+    --text-color: #000000;
+    --paper-bg: #ffffff;
+    --link-color: #000000;
+    --line-color: #000000;
+  }
+  @page {
+    size: letter portrait;
+    margin: 0.35in 0.45in;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: #e5e7eb;
+    margin: 0;
+    padding: 16px 8px;
+    font-family: 'Times New Roman', Times, Cambria, Georgia, serif;
+    color: var(--text-color);
+    line-height: 1.25;
+    font-size: 10pt;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .paper-page {
+    background: var(--paper-bg);
+    max-width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    padding: 0.4in 0.5in;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    box-sizing: border-box;
+  }
+  .header-block {
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .header-name {
+    font-size: 20pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px 0;
+  }
+  .header-contacts {
+    font-size: 9.5pt;
+    color: #111;
+  }
+  .header-contacts a, .cv-link {
+    color: var(--text-color);
+    text-decoration: none;
+  }
+  .header-contacts a:hover, .cv-link:hover {
+    text-decoration: underline;
+  }
+  .contact-sep {
+    margin: 0 4px;
+    color: #666;
+  }
+  .section-title {
+    color: var(--airforceblue);
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 10px 0 2px 0;
+    border-bottom: 1px solid #111;
+    padding-bottom: 2px;
+  }
+  ul.resume-list {
+    margin: 2px 0 5px 0;
+    padding-left: 18px;
+  }
+  ul.resume-list li {
+    margin-bottom: 2.5px;
+    font-size: 9.8pt;
+    line-height: 1.28;
+  }
+  .subheading-row, .project-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 9.8pt;
+    margin-top: 3px;
+  }
+  .sub-row {
+    margin-top: 1px;
+    margin-bottom: 2px;
+  }
+  .row-left {
+    text-align: left;
+  }
+  .row-right {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .pipe-sep {
+    color: #333;
+    margin: 0 3px;
+  }
+  .tech-tag {
+    font-style: italic;
+    color: #111;
+  }
+  .entry-block {
+    margin-bottom: 5px;
+  }
+  @media print {
+    body {
+      background: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .paper-page {
+      box-shadow: none !important;
+      padding: 0.25in 0.35in !important;
+      max-width: 100% !important;
+      min-height: auto !important;
+      margin: 0 !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="paper-page" id="cvPaperDocument">
+  <!-- HEADER -->
+  <div class="header-block">
+    <div class="header-name">Harsh Jha</div>
+    <div class="header-contacts">
+      <i class="fa fa-phone"></i> +91 7060286069
+      <span class="contact-sep">~</span>
+      <i class="fa fa-envelope"></i> <a href="mailto:harshj92002@gmail.com">harshj92002@gmail.com</a>
+      <span class="contact-sep">~</span>
+      <i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/harshjha-iiti/" target="_blank">LinkedIn</a>
+      <span class="contact-sep">~</span>
+      <i class="fab fa-github"></i> <a href="https://github.com/jhaharsh03" target="_blank">GitHub</a>
+      <span class="contact-sep">~</span>
+      <i class="fa fa-code"></i> <a href="https://leetcode.com/u/harshdotcom/" target="_blank">LeetCode</a>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="section-title">PROFILE</div>
+  <ul class="resume-list">
+    <li>Backend-focused Software Development Engineer with <strong>2.5 years of experience</strong> building high-throughput Go backend systems, microservices, cloud-native services, and production-grade software.</li>
+<li>Hands-on expertise developing production <strong>REST APIs, gRPC services, and microservices</strong> with PostgreSQL, Redis caching, structured data pipelines, and clean modular architecture.</li>
+<li>Proven track record integrating <strong>LLM workflows, AI agents, and RAG pipelines</strong> into backend business platforms using LangChain, LangGraph, and AWS Bedrock.</li>
+<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform for medical document extraction, report summarization, health-record organization, and intelligent health-data workflows.</li>
+  </ul>
+
+  <!-- EDUCATION -->
+  <div class="section-title">EDUCATION</div>
+  
+        <div class="subheading-row">
+            <div class="row-left"><strong>Indian Institute of Technology Indore (IIT Indore)</strong></div>
+            <div class="row-right"><strong>Indore, India</strong></div>
+        </div>
+        <div class="subheading-row sub-row">
+            <div class="row-left"><em>Bachelor of Technology (B.Tech.) in Civil Engineering</em></div>
+            <div class="row-right"><em>2020 – 2024</em></div>
+        </div>
+        
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section-title">TECHNICAL SKILLS</div>
+  <ul class="resume-list">
+    <li><strong>Programming:</strong> Python, Go, TypeScript, JavaScript, C++</li>
+<li><strong>Backend:</strong> REST APIs, Microservices, FastAPI, Gin, Fiber, Node.js, Express.js, gRPC, API Gateway</li>
+<li><strong>Architecture:</strong> System Design, Distributed Systems, Event-Driven Architecture, Microservices, Clean Architecture, SOLID Principles</li>
+<li><strong>Data:</strong> PostgreSQL, Redis, MongoDB, MySQL, SQL Server</li>
+<li><strong>DevOps & Infrastructure:</strong> Docker, Kubernetes, GitHub Actions, CI/CD, Containerized Deployment</li>
+<li><strong>Cloud & AI Services:</strong> AWS, Azure, AWS Bedrock, AWS Textract, Oracle Cloud Infrastructure</li>
+<li><strong>AI / GenAI:</strong> LLMs, AI Agents, Agentic AI, LangChain, LangGraph, RAG, Prompt Engineering, Tool Calling, Function Calling, LLM Integration, AI Workflow Automation</li>
+<li><strong>Security:</strong> JWT, RBAC, API Validation, Secure API Design</li>
+  </ul>
+
+  <!-- WORK EXPERIENCE -->
+  <div class="section-title">WORK EXPERIENCE</div>
+  
+        <div class="entry-block">
+            <div class="subheading-row">
+                <div class="row-left"><strong>Software Development Engineer - 2</strong></div>
+                <div class="row-right"><strong>May 2024 – Present</strong></div>
+            </div>
+            <div class="subheading-row sub-row">
+                <div class="row-left"><em>SimplyPhi</em></div>
+                <div class="row-right"><em>Bangalore, India</em></div>
+            </div>
+            <ul class="resume-list">
+                <li>Designed and built scalable backend services using <strong>Go, Python, TypeScript, REST APIs, PostgreSQL, and microservices</strong> for production business workflows.</li>
+<li>Developed production-ready APIs for <strong>authentication, reporting, financial workflows, property operations, dashboard analytics, and business automation</strong>, supporting multiple application workflows.</li>
+<li>Engineered AI-powered workflows using <strong>LangChain, LangGraph, AI agents, LLM APIs, RAG pipelines, prompt engineering, tool calling, and structured outputs</strong>.</li>
+<li>Integrated <strong>LLM and AI services</strong> into business applications for document understanding, report generation, data extraction, summarization, and intelligent workflow automation.</li>
+<li>Built and deployed cloud-native services using <strong>Docker, Kubernetes, AWS, Azure, GitHub Actions, and CI/CD</strong>, supporting reliable application delivery across environments.</li>
+<li>Implemented secure application workflows using <strong>JWT authentication, RBAC, API validation, structured logging, and centralized error handling</strong>.</li>
+<li>Improved backend scalability and maintainability through <strong>Clean Architecture, modular service design, optimized database queries, caching, and reusable service components</strong>.</li>
+<li>Owned features end-to-end across <strong>requirements analysis, system design, development, testing, deployment, monitoring, debugging, and production support</strong>.</li>
+            </ul>
+        </div>
+        
+
+  <!-- PROJECTS -->
+  <div class="section-title">PROJECTS</div>
+  
+        <div class="entry-block">
+            <div class="project-header-row">
+                <div class="proj-left"><strong><strong>VitaTrack.ai – AI Medical Report Platform</strong></strong> <span class="pipe-sep">|</span> <span class="tech-tag">Go, Python, PostgreSQL, Microservices</span></div>
+                <div class="proj-right"><a href="https://github.com/harshdotcom/vitalTrack.ai-" target="_blank" class="cv-link">GitHub</a></div>
+            </div>
+            <ul class="resume-list">
+                <li>Developing an open-source AI healthcare platform for managing <strong>medical reports, prescriptions, symptoms, medications, health records, and daily health notes</strong>.</li>
+<li>Built secure <strong>Go backend APIs</strong> and structured healthcare data workflows using <strong>PostgreSQL</strong> for medical record management.</li>
+<li>Integrated <strong>AWS Textract</strong> to extract text and structured data from medical reports, prescriptions, and healthcare documents.</li>
+<li>Integrated <strong>AWS Bedrock and LLMs</strong> with prompt engineering to summarize medical reports and transform unstructured health data into structured, actionable information.</li>
+<li>Designed AI workflows for <strong>medical document analysis, health-history tracking, report processing, and patient record organization</strong>.</li>
+<li>Built supporting <strong>Angular</strong> interfaces for document uploads, health logs, dashboards, and medical data management.</li>
+            </ul>
+        </div>
+        
+        <div class="entry-block">
+            <div class="project-header-row">
+                <div class="proj-left"><strong><strong>AI Agent Workflow System</strong></strong> <span class="pipe-sep">|</span> <span class="tech-tag">Python, LangChain, LLMs</span></div>
+                <div class="proj-right"><a href="https://github.com/harshdotcom/naukriAuto.Ai" target="_blank" class="cv-link">GitHub</a></div>
+            </div>
+            <ul class="resume-list">
+                <li>Engineered multi-step <strong>AI agent workflows</strong> using Python, LangChain, LangGraph, and LLM APIs for intelligent automation and structured decision-making.</li>
+<li>Designed stateful agent workflows for <strong>document processing, summarization, API integration, tool execution, and structured response generation</strong>.</li>
+<li>Implemented <strong>tool calling, prompt templates, reusable chains, memory, state management, and conditional workflow execution</strong> for agent-driven automation.</li>
+<li>Integrated AI agents with <strong>REST APIs and external tools</strong> to execute tasks, process information, and support real-world business workflows.</li>
+            </ul>
+        </div>
+        
+
+  <!-- CERTIFICATIONS -->
+  <div class="section-title">CERTIFICATIONS</div>
+  <ul class="resume-list">
+    <li><a href="https://academy.langchain.com/certificates/svjvl9l9fa" target="_blank" class="cv-link"><strong>Introduction to LangChain - Python</strong> — LangChain Academy</a></li>
+<li><a href="https://verify.skilljar.com/c/gbzedjz5dcde" target="_blank" class="cv-link"><strong>Introduction to Agent Skills</strong> — Anthropic</a></li>
+<li><a href="https://www.linkedin.com/in/harshjha-iiti/overlay/certifications/1170933565/multiple-media-viewer/?profileId=ACoAADN4Q84BhQseKYmEwHkPK7yzh0e_9nVq1kY" target="_blank" class="cv-link"><strong>Oracle Cloud Infrastructure 2025 Certified</strong> — Oracle</a></li>
+  </ul>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="section-title">ACHIEVEMENTS</div>
+  <ul class="resume-list">
+    <li>Achieved a <strong>LeetCode Contest Rating of 1663</strong>, placing in the <strong>top 6% globally</strong>.</li>
+<li>Open-source maintainer of <strong>VitaTrack.ai</strong>, an AI-powered healthcare platform focused on medical document processing and intelligent health-data workflows.</li>
+  </ul>
+</div>
+
+<script>
+window.generateAndDownloadPdf = function(filename) {
+  const elem = document.getElementById("cvPaperDocument");
+  const opt = {
+    margin: [0.3, 0.3, 0.3, 0.3],
+    filename: filename || "Harsh_Jha_CV.pdf",
+    image: { type: "jpeg", quality: 0.99 },
+    html2canvas: { scale: 2.5, useCORS: true, letterRendering: true },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+  };
+  if (typeof html2pdf !== "undefined") {
+    return html2pdf().set(opt).from(elem).save();
+  } else {
+    window.print();
+  }
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "company_name": "OpenAI",
+  "job_title": "AI Agent Engineer",
+  "job_url": "https://jobs.ashbyhq.com/openai",
+  "archetype": "AI_ENGINEER",
+  "match_score": 91,
+  "matched_skills": {
+    "languages": [
+      "Python"
+    ],
+    "ai_genai": [
+      "AI Agents",
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "Tool Calling",
+      "Vector Search"
+    ],
+    "backend": [
+      "Microservices"
+    ],
+    "data": [
+      "PostgreSQL"
+    ],
+    "cloud": [
+      "AWS",
+      "AWS Bedrock"
+    ],
+    "devops": [],
+    "architecture": [],
+    "security": []
+  },
+  "top_priorities": [
+    "AI Agents",
+    "LangChain",
+    "LangGraph",
+    "RAG",
+    "Tool Calling",
+    "Vector Search",
+    "Microservices",
+    "Python"
+  ],
+  "referral": {
+    "has_referral": true,
+    "referral_name": "Elena Rostova",
+    "referral_contact": "elena@openai.com"
+  },
+  "jd_length": 214,
+  "application_id": "APP-OPENAI-20261103-3458",
+  "applied_date": "2026-11-03 21:34",
+  "status": "Applied",
+  "notes": "Referred by Elena on LinkedIn"
+}

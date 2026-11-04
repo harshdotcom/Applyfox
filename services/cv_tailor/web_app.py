@@ -1705,6 +1705,85 @@ HTML_PAGE = """<!DOCTYPE html>
       text-align: center;
     }
   }
+
+  /* Company Detail Modal & Dossier ("Company Page") */
+  .company-name-clickable {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.94rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s ease;
+  }
+  .company-name-clickable:hover {
+    color: var(--accent-emerald-dark);
+  }
+  .company-name-clickable span {
+    border-bottom: 1px dashed #A8A29E;
+  }
+  .company-name-clickable:hover span {
+    border-bottom-color: var(--accent-emerald);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 25, 23, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.25);
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 28px;
+    position: relative;
+  }
+  .modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+  }
+  .modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #F5F5F4;
+    border: 1px solid var(--border-subtle);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    transition: all 0.15s ease;
+  }
+  .modal-close-btn:hover {
+    background: #E7E5E4;
+    color: var(--text-primary);
+  }
 </style>
 </head>
 <body>
@@ -2320,6 +2399,14 @@ HTML_PAGE = """<!DOCTYPE html>
 
   <div id="toast" class="toast"></div>
 
+  <!-- Company Profile Dossier Modal ("Company Page") -->
+  <div id="companyModalOverlay" class="modal-overlay" onclick="if(event.target === this) closeCompanyModal()">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeCompanyModal()" title="Close">&times;</button>
+      <div id="companyModalBody"></div>
+    </div>
+  </div>
+
 <script>
 /* GITHUB_PAGES_EMBEDDED_DATA */
 let CURRENT_TAILORED_RESULT = null;
@@ -2799,25 +2886,29 @@ function renderPortalTable(data) {
       const rowIndex = data.start_index + idx;
       const safeComp = escapeHtml(item.name);
       const safeJsName = safeComp.replace(/'/g, "\\'");
-      const websiteUrl = item.website || item.google_jobs_url;
-      const safeJsUrl = escapeHtml(websiteUrl).replace(/'/g, "\\'");
+      const companyPageUrl = item.website || item.board_url || item.google_jobs_url || `https://www.google.com/search?q=${encodeURIComponent(item.name)}+official+website`;
+      const safeJsUrl = escapeHtml(companyPageUrl).replace(/'/g, "\\'");
+      const safeItemData = encodeURIComponent(JSON.stringify(item));
       
       const roundBadge = item.round ? `<span class="badge-round">${escapeHtml(item.round)}</span>` : "";
       const amountBadge = item.amount ? `<span class="badge-amount">${escapeHtml(item.amount)}</span>` : "";
       const sectorBadge = item.sector ? `<span class="badge-sector">${escapeHtml(item.sector)}</span>` : "";
       const locationText = item.country ? `<span class="badge-country"><i class="fa-solid fa-location-dot" style="font-size: 0.68rem;"></i> ${escapeHtml(item.country)}</span>` : "";
 
-      const websiteBtn = item.website ? `
-        <a class="ext-link" href="${escapeHtml(item.website)}" target="_blank" rel="noopener noreferrer" style="margin-right: 4px;">
-          <span>Website</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.68rem;"></i>
+      const companyPageBtn = `
+        <a class="ext-link" href="${escapeHtml(companyPageUrl)}" target="_blank" rel="noopener noreferrer" style="margin-right: 4px;" title="Open ${safeComp} official company page / careers">
+          <i class="fa fa-globe" style="font-size: 0.72rem;"></i> <span>Company Page</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.65rem;"></i>
         </a>
-      ` : "";
+      `;
 
       return `
         <tr>
           <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
           <td>
-            <div style="font-weight: 600; color: var(--text-primary); font-size: 0.94rem;">${safeComp}</div>
+            <div class="company-name-clickable" onclick="openCompanyModal('${safeItemData}')" title="Click to view full ${safeComp} company profile & dossier">
+              <span>${safeComp}</span>
+              <i class="fa fa-circle-info" style="font-size: 0.72rem; color: var(--accent-emerald);"></i>
+            </div>
             <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 3px;">
               ${sectorBadge}
               ${locationText}
@@ -2840,7 +2931,7 @@ function renderPortalTable(data) {
             ${item.lead_investors ? `<div style="font-size: 0.74rem; color: var(--text-secondary); margin-top: 2px;">Lead: <strong>${escapeHtml(item.lead_investors)}</strong></div>` : ''}
           </td>
           <td style="white-space: nowrap;">
-            ${websiteBtn}
+            ${companyPageBtn}
             <a class="intel-link intel-levels" href="${escapeHtml(item.levels_url)}" target="_blank" rel="noopener noreferrer" title="View salaries on Levels.fyi">
               <i class="fa fa-chart-line"></i> Salaries
             </a>
@@ -2864,6 +2955,7 @@ function renderPortalTable(data) {
       const rowIndex = data.start_index + idx;
       const safeComp = escapeHtml(item.name);
       const safeJsName = safeComp.replace(/'/g, "\\'");
+      const safeItemData = encodeURIComponent(JSON.stringify(item));
       const sectorBadge = item.sector ? `<span class="badge-sector" style="background: #FFF1F2; color: #BE123C; border-color: #FECDD3;">${escapeHtml(item.sector)}</span>` : "";
       const countryText = item.country ? `<span class="badge-country"><i class="fa-solid fa-location-dot" style="font-size: 0.68rem;"></i> ${escapeHtml(item.country)}</span>` : "";
 
@@ -2871,7 +2963,10 @@ function renderPortalTable(data) {
         <tr>
           <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
           <td>
-            <div style="font-weight: 600; color: #991B1B; font-size: 0.94rem;"><i class="fa fa-skull-crossbones" style="font-size: 0.8rem; opacity: 0.7;"></i> ${safeComp}</div>
+            <div class="company-name-clickable" onclick="openCompanyModal('${safeItemData}')" title="Click to view full ${safeComp} failure dossier & profile">
+              <span style="color: #991B1B;"><i class="fa fa-skull-crossbones" style="font-size: 0.8rem; opacity: 0.7; margin-right: 4px;"></i>${safeComp}</span>
+              <i class="fa fa-circle-info" style="font-size: 0.72rem; color: #DC2626;"></i>
+            </div>
             <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 3px;">
               ${sectorBadge}
               ${countryText}
@@ -2920,21 +3015,28 @@ function renderPortalTable(data) {
       : `<span style="color: var(--text-muted); font-size: 0.78rem;">Verified Board</span>`;
 
     const rowIndex = data.start_index + idx;
+    const safeComp = escapeHtml(item.name);
+    const safeJsName = safeComp.replace(/'/g, "\\'");
+    const safeJsUrl = escapeHtml(item.board_url || "").replace(/'/g, "\\'");
+    const safeItemData = encodeURIComponent(JSON.stringify(item));
 
     return `
       <tr>
         <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
         <td>
-          <div style="font-weight: 600; color: var(--text-primary); font-size: 0.92rem;">${escapeHtml(item.name)}</div>
-          <div style="font-size: 0.74rem; color: var(--text-muted); font-family: monospace;">slug: ${escapeHtml(item.slug)}</div>
+          <div class="company-name-clickable" onclick="openCompanyModal('${safeItemData}')" title="Click to view full ${safeComp} company profile & details">
+            <span>${safeComp}</span>
+            <i class="fa fa-circle-info" style="font-size: 0.72rem; color: var(--accent-emerald);"></i>
+          </div>
+          <div style="font-size: 0.74rem; color: var(--text-muted); font-family: monospace;">slug: ${escapeHtml(item.slug || '')}</div>
         </td>
         <td>
           <span class="portal-badge ${badgeClass}"><i class="fa fa-tag"></i> ${escapeHtml(item.ats.toUpperCase())}</span>
         </td>
         <td>${jobsHtml}</td>
         <td>
-          <a class="ext-link" href="${escapeHtml(item.board_url)}" target="_blank" rel="noopener noreferrer">
-            <span>Career Portal</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+          <a class="ext-link" href="${escapeHtml(item.board_url)}" target="_blank" rel="noopener noreferrer" title="Open ${safeComp} official company page & careers">
+            <i class="fa fa-globe" style="font-size: 0.72rem;"></i> <span>Company Page</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.68rem;"></i>
           </a>
         </td>
         <td style="white-space: nowrap;">
@@ -2946,7 +3048,7 @@ function renderPortalTable(data) {
           </a>
         </td>
         <td style="text-align: right; white-space: nowrap;">
-          <button class="btn btn-sm btn-primary" onclick="useCompanyInStudio('${escapeHtml(item.name).replace(/'/g, "\\\\'")}', '${escapeHtml(item.board_url).replace(/'/g, "\\\\'")}')">
+          <button class="btn btn-sm btn-primary" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
             <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
           </button>
         </td>
@@ -3510,6 +3612,213 @@ function showToast(msg) {
   toast.style.display = "block";
   setTimeout(() => { toast.style.display = "none"; }, 3500);
 }
+
+// -------------------------------------------------------------
+// COMPANY PROFILE DOSSIER MODAL ("COMPANY PAGE")
+// -------------------------------------------------------------
+function openCompanyModal(encodedData) {
+  let item = null;
+  try {
+    item = JSON.parse(decodeURIComponent(encodedData));
+  } catch(e) {
+    console.error("Could not parse company data", e);
+    return;
+  }
+  const overlay = document.getElementById("companyModalOverlay");
+  const body = document.getElementById("companyModalBody");
+  if (!overlay || !body || !item) return;
+
+  const safeComp = escapeHtml(item.name || "Company");
+  const safeJsName = safeComp.replace(/'/g, "\\'");
+  const companyUrl = item.website || item.board_url || item.google_jobs_url || `https://www.google.com/search?q=${encodeURIComponent(item.name)}+official+website`;
+  const safeJsUrl = escapeHtml(companyUrl).replace(/'/g, "\\'");
+
+  let html = "";
+  if (item.what_happened || item.funding_before_failure) {
+    // Startup Failure Dossier
+    html = `
+      <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: #991B1B; margin: 0;">
+            <i class="fa fa-skull-crossbones" style="font-size: 1.2rem; opacity: 0.85; margin-right: 4px;"></i>${safeComp}
+          </h2>
+          <span class="badge-sector" style="background: #FFF1F2; color: #BE123C; border-color: #FECDD3;">${escapeHtml(item.sector || 'Tech')}</span>
+          <span class="badge-fail-funding">${escapeHtml(item.funding_before_failure || 'Disclosed Capital')}</span>
+        </div>
+        <div style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">
+          <i class="fa-solid fa-location-dot"></i> ${escapeHtml(item.country || 'Global')} &bull; <i class="fa fa-clock"></i> ${escapeHtml(item.when_date || '2026')}
+        </div>
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 8px 0;">What Happened</h4>
+        <div style="background: #FAF8F5; border: 1px solid var(--border-subtle); padding: 14px 16px; border-radius: 8px; font-size: 0.92rem; line-height: 1.5; color: var(--text-primary);">
+          ${escapeHtml(item.what_happened || 'Startup encountered severe market headwinds.')}
+        </div>
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #991B1B; margin: 0 0 8px 0;">Precise Distress Signal / Root Cause</h4>
+        <div style="background: #FEF2F2; border: 1px solid #FEE2E2; padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.5; color: #7F1D1D;">
+          <strong>Risk Analysis:</strong> ${escapeHtml(item.precise_reason || 'Premature scaling or capital depletion.')}
+        </div>
+      </div>
+
+      <div style="margin-bottom: 22px;">
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1E3A8A; margin: 0 0 8px 0;">Post-Mortem Engineering Lesson</h4>
+        <div style="background: #EFF6FF; border: 1px solid #DBEAFE; padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.5; color: #1E3A8A;">
+          <i class="fa fa-lightbulb" style="color: #F59E0B; margin-right: 4px;"></i><strong>Lesson:</strong> ${escapeHtml(item.lesson || 'Maintain strong capital discipline and genuine PMF.')}
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px;">
+        <a class="btn btn-secondary btn-sm" href="${escapeHtml(companyUrl)}" target="_blank" rel="noopener noreferrer">
+          <i class="fa fa-newspaper" style="color: var(--accent-emerald);"></i> <span>Company Page / News ↗</span>
+        </a>
+        <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.levels_url || '')}" target="_blank" rel="noopener noreferrer">
+          <i class="fa fa-chart-line" style="color: #6366F1;"></i> <span>Levels.fyi ↗</span>
+        </a>
+        <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.glassdoor_url || '')}" target="_blank" rel="noopener noreferrer">
+          <i class="fa fa-star" style="color: #059669;"></i> <span>Glassdoor ↗</span>
+        </a>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+        <button class="btn btn-secondary" onclick="closeCompanyModal()">Close</button>
+        <button class="btn btn-primary" onclick="closeCompanyModal(); useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
+          <i class="fa fa-file-pen"></i> Track Application &rarr;
+        </button>
+      </div>
+    `;
+  } else if (item.round || item.kind === 'funded_startups') {
+    // 2026 Funded Startup Dossier
+    html = `
+      <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">${safeComp}</h2>
+          ${item.round ? `<span class="badge-round" style="font-size: 0.8rem; padding: 4px 10px;">${escapeHtml(item.round)}</span>` : ''}
+          ${item.amount ? `<span class="badge-amount" style="font-size: 0.8rem; padding: 4px 10px;">${escapeHtml(item.amount)}</span>` : ''}
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px;">
+          ${item.sector ? `<span class="badge-sector">${escapeHtml(item.sector)}</span>` : ''}
+          ${item.country ? `<span class="badge-country"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(item.country)}</span>` : ''}
+          <span style="font-size: 0.78rem; color: var(--text-secondary);"><i class="fa fa-calendar-check" style="color: var(--accent-emerald);"></i> ${escapeHtml(item.month || item.announced_date)}</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 8px 0;">What They Are Building</h4>
+        <div style="font-size: 0.94rem; line-height: 1.55; color: var(--text-primary); background: #FAF8F5; padding: 14px 16px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          ${escapeHtml(item.what_they_build || 'High-growth technology startup.')}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Lead Investors</div>
+          <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml(item.lead_investors || 'Not disclosed / Syndicate')}</div>
+        </div>
+        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Valuation / Capital</div>
+          <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml(item.valuation && item.valuation !== 'N/D' ? item.valuation : (item.amount || 'Undisclosed'))}</div>
+        </div>
+        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Market Outlook</div>
+          <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml(item.outlook || 'Active Growth')}</div>
+        </div>
+      </div>
+
+      ${item.outlook_reasoning ? `
+        <div style="margin-bottom: 20px; padding: 10px 14px; background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; font-size: 0.82rem; color: #92400E;">
+          <strong>Intelligence Signal:</strong> ${escapeHtml(item.outlook_reasoning)}
+        </div>
+      ` : ''}
+
+      <div style="margin-bottom: 24px;">
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 10px 0;">Official Company Pages &amp; Intelligence</h4>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <a class="btn btn-secondary btn-sm" href="${escapeHtml(companyUrl)}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-globe" style="color: var(--accent-emerald);"></i> <span>Official Company Page ↗</span>
+          </a>
+          <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.levels_url || '')}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-chart-line" style="color: #6366F1;"></i> <span>Levels.fyi Salaries ↗</span>
+          </a>
+          <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.glassdoor_url || '')}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-star" style="color: #059669;"></i> <span>Glassdoor Reviews ↗</span>
+          </a>
+          <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.google_jobs_url || '')}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-magnifying-glass" style="color: var(--accent-amber);"></i> <span>Google Jobs Search ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+        <button class="btn btn-secondary" onclick="closeCompanyModal()">Close</button>
+        <button class="btn btn-primary" onclick="closeCompanyModal(); useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
+          <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio for ${safeComp} &rarr;
+        </button>
+      </div>
+    `;
+  } else {
+    // Standard Directory Sheet Profile
+    html = `
+      <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">${safeComp}</h2>
+          <span class="portal-badge badge-greenhouse"><i class="fa fa-tag"></i> ${(item.ats || 'ATS').toUpperCase()}</span>
+        </div>
+        <div style="font-size: 0.78rem; color: var(--text-muted); font-family: monospace; margin-top: 6px;">slug: ${escapeHtml(item.slug || '')}</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 22px;">
+        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">ATS Platform</div>
+          <div style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml((item.ats || 'Direct Portal').toUpperCase())}</div>
+        </div>
+        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Open Roles Status</div>
+          <div style="font-size: 0.9rem; font-weight: 600; color: #047857; margin-top: 4px;">${escapeHtml(item.open_jobs || 'Verified Career Board')}</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 10px 0;">Official Company Portals &amp; Intelligence</h4>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.board_url || companyUrl)}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-globe" style="color: var(--accent-emerald);"></i> <span>Official Company / Career Portal ↗</span>
+          </a>
+          <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.levels_url || '')}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-chart-line" style="color: #6366F1;"></i> <span>Levels.fyi Salaries ↗</span>
+          </a>
+          <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.glassdoor_url || '')}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-star" style="color: #059669;"></i> <span>Glassdoor Reviews ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+        <button class="btn btn-secondary" onclick="closeCompanyModal()">Close</button>
+        <button class="btn btn-primary" onclick="closeCompanyModal(); useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
+          <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio for ${safeComp} &rarr;
+        </button>
+      </div>
+    `;
+  }
+
+  body.innerHTML = html;
+  overlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCompanyModal() {
+  const overlay = document.getElementById("companyModalOverlay");
+  if (overlay) overlay.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeCompanyModal();
+});
 </script>
 </body>
 </html>

@@ -24,8 +24,8 @@ def main():
     base_tex = base_tex_path.read_text(encoding="utf-8") if base_tex_path.is_file() else ""
     preview_html = render_resume_to_html(base_tex, title_badge="Base Master CV").replace("</script>", "<\\/script>")
 
-    # Ingest 250 verified directory companies across Ashby, Greenhouse, Lever, Workday
-    page_data = get_sheet_page("master", 1, 250)
+    # Ingest 500 verified directory companies across Ashby, Greenhouse, Lever, Workday with full roles
+    page_data = get_sheet_page("master", 1, 500)
     items = page_data.get("items", [])
     summaries = get_sheets_summary()
 

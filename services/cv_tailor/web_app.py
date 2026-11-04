@@ -1460,6 +1460,96 @@ HTML_PAGE = """<!DOCTYPE html>
     }
   }
 
+  /* Discipline & Role Filter Pills */
+  .discipline-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .role-discipline-pill {
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+  .role-discipline-pill:hover {
+    border-color: var(--border-dark);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+  }
+  .role-discipline-pill.active {
+    background: var(--text-primary);
+    color: #FFFFFF;
+    border-color: var(--text-primary);
+    font-weight: 600;
+  }
+  .role-discipline-pill i {
+    font-size: 0.72rem;
+    opacity: 0.85;
+  }
+  .role-discipline-pill.active i {
+    opacity: 1;
+    color: #34D399;
+  }
+
+  /* Role Tag Badges in Table */
+  .role-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    max-width: 320px;
+  }
+  .role-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #F5F3EF;
+    border: 1px solid #E7E5E4;
+    color: #44403C;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+  .role-tag-pill:hover {
+    background: #EAE6DF;
+    border-color: #A8A29E;
+    color: #1C1917;
+    transform: translateY(-1px);
+  }
+  .role-tag-pill.highlighted {
+    background: #ECFDF5;
+    border-color: #6EE7B7;
+    color: #065F46;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(5, 150, 105, 0.12);
+  }
+  .role-tag-more {
+    font-size: 0.70rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 4px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .role-tag-more:hover {
+    color: var(--text-primary);
+  }
+
   /* Pagination Bar */
   .pagination-bar {
     display: flex;
@@ -2564,6 +2654,38 @@ HTML_PAGE = """<!DOCTYPE html>
           </div>
         </div>
 
+        <!-- Discipline & Role Filter Bar -->
+        <div id="roleFilterContainer" style="margin-bottom: 16px; padding: 12px 14px; background: #FAF8F5; border-radius: 10px; border: 1px solid #E7E5E4;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+              <i class="fa fa-briefcase" style="color: var(--accent-emerald);"></i> <span>Filter Open Roles by Discipline / Profession:</span>
+            </div>
+            <div style="font-size: 0.74rem; color: var(--text-muted);">
+              Click any role badge to instantly pre-fill CV Studio
+            </div>
+          </div>
+          <div class="discipline-pills" id="disciplinePillsContainer">
+            <button class="role-discipline-pill active" onclick="filterByRole('')" data-discipline="">
+              <i class="fa fa-border-all"></i> <span>All Disciplines</span>
+            </button>
+            <button class="role-discipline-pill" onclick="filterByRole('Software & AI')" data-discipline="Software & AI">
+              <i class="fa fa-code"></i> <span>Software &amp; AI</span>
+            </button>
+            <button class="role-discipline-pill" onclick="filterByRole('Graphic & UI/UX')" data-discipline="Graphic & UI/UX">
+              <i class="fa fa-pen-nib"></i> <span>Graphic &amp; UI/UX</span>
+            </button>
+            <button class="role-discipline-pill" onclick="filterByRole('IT & Cloud')" data-discipline="IT & Cloud">
+              <i class="fa fa-server"></i> <span>IT &amp; Cloud</span>
+            </button>
+            <button class="role-discipline-pill" onclick="filterByRole('Legal & Compliance')" data-discipline="Legal & Compliance">
+              <i class="fa fa-scale-balanced"></i> <span>Legal &amp; Compliance</span>
+            </button>
+            <button class="role-discipline-pill" onclick="filterByRole('Product & Operations')" data-discipline="Product & Operations">
+              <i class="fa fa-cubes"></i> <span>Product &amp; Ops</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Search & Control Bar -->
         <div class="controls-bar">
           <div class="search-wrapper">
@@ -2571,13 +2693,60 @@ HTML_PAGE = """<!DOCTYPE html>
             <input type="text" id="portalSearch" class="search-input" placeholder="Search companies, startups, sectors, or rounds..." oninput="onPortalSearchInput(this.value)">
           </div>
 
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <span style="font-size: 0.82rem; color: var(--text-secondary);">Per page:</span>
-            <select id="portalLimitSelect" onchange="onPortalLimitChange(this.value)" style="width: auto; padding: 6px 10px; font-size: 0.82rem;">
-              <option value="25" selected>25</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap;"><i class="fa fa-user-tag" style="color: var(--accent-emerald);"></i> Job Title:</span>
+              <select id="portalRoleSelect" onchange="onPortalRoleChange(this.value)" style="width: auto; max-width: 250px; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
+                <option value="">All Job Titles</option>
+                <optgroup label="Software &amp; AI Engineering">
+                  <option value="Software &amp; AI">All Software &amp; AI Roles</option>
+                  <option value="Senior Full Stack Engineer">Senior Full Stack Engineer</option>
+                  <option value="Senior Backend Engineer">Senior Backend Engineer</option>
+                  <option value="AI &amp; Machine Learning Engineer">AI &amp; Machine Learning Engineer</option>
+                  <option value="Senior AI Research Engineer">Senior AI Research Engineer</option>
+                  <option value="Frontend Systems Engineer">Frontend Systems Engineer</option>
+                  <option value="Staff Cloud &amp; DevOps Engineer">Staff Cloud &amp; DevOps Engineer</option>
+                  <option value="Mobile Engineer">Mobile Engineer</option>
+                </optgroup>
+                <optgroup label="Graphic &amp; UI/UX Design">
+                  <option value="Graphic &amp; UI/UX">All Design &amp; Creative Roles</option>
+                  <option value="Senior Product Designer">Senior Product Designer (UI/UX)</option>
+                  <option value="Graphic &amp; Brand Identity Designer">Graphic &amp; Brand Designer</option>
+                  <option value="Lead UI/UX Designer">Lead UI/UX Designer</option>
+                  <option value="Visual &amp; Marketing Content Designer">Visual &amp; Marketing Designer</option>
+                  <option value="Design Systems Specialist">Design Systems Specialist</option>
+                </optgroup>
+                <optgroup label="IT &amp; Cloud Systems">
+                  <option value="IT &amp; Cloud">All IT &amp; Cloud Roles</option>
+                  <option value="IT Systems Administrator">IT Systems Administrator</option>
+                  <option value="Cloud Infrastructure &amp; SRE">Cloud Infrastructure &amp; SRE</option>
+                  <option value="Enterprise IT &amp; Network Security">Enterprise IT &amp; Security</option>
+                  <option value="Corporate IT Support Specialist">Corporate IT Support</option>
+                </optgroup>
+                <optgroup label="Legal &amp; Compliance">
+                  <option value="Legal &amp; Compliance">All Legal &amp; Compliance Roles</option>
+                  <option value="Corporate Legal Counsel">Corporate Legal Counsel</option>
+                  <option value="Commercial Contracts &amp; Licensing">Commercial Contracts Manager</option>
+                  <option value="Regulatory &amp; Privacy Compliance">Regulatory &amp; Privacy Compliance</option>
+                  <option value="Intellectual Property &amp; Technology Counsel">IP &amp; Technology Counsel</option>
+                </optgroup>
+                <optgroup label="Product &amp; Operations">
+                  <option value="Product &amp; Operations">All Product &amp; Ops Roles</option>
+                  <option value="Senior Technical Product Manager">Senior Technical Product Manager</option>
+                  <option value="Product Operations &amp; Strategy Lead">Product Operations Lead</option>
+                  <option value="BizOps &amp; Growth Operations Associate">BizOps &amp; Strategy Lead</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <span style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap;">Per page:</span>
+              <select id="portalLimitSelect" onchange="onPortalLimitChange(this.value)" style="width: auto; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
+                <option value="25" selected>25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -2697,6 +2866,7 @@ let CURRENT_PAGE = 1;
 let CURRENT_LIMIT = 25;
 let CURRENT_QUERY = "";
 let CURRENT_MONTH = "";
+let CURRENT_ROLE = "";
 let SEARCH_DEBOUNCE_TIMER = null;
 let PORTAL_SUMMARIES = [];
 
@@ -2731,7 +2901,7 @@ function switchView(viewName) {
     const activeTabId = (CURRENT_SHEET_KEY === 'funded_startups' || CURRENT_SHEET_KEY === 'startup_failures') ? 'navBtn-startups' : 'navBtn-portals';
     const btn = document.getElementById(activeTabId) || document.getElementById("navBtn-portals");
     if (btn) btn.classList.add("active");
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (viewName === 'tracker') {
     const btn = document.getElementById("navBtn-tracker");
@@ -2769,14 +2939,40 @@ function openPortalsView() {
   renderPortalSheetsSummary(PORTAL_SUMMARIES);
 }
 
+function filterByRole(roleName) {
+  CURRENT_ROLE = (roleName === "All Disciplines" || roleName === "All Job Titles") ? "" : roleName;
+  CURRENT_PAGE = 1;
+
+  // Sync role select dropdown
+  const select = document.getElementById("portalRoleSelect");
+  if (select) {
+    select.value = CURRENT_ROLE;
+  }
+
+  // Sync discipline pills active state
+  const pills = document.querySelectorAll("#disciplinePillsContainer .role-discipline-pill");
+  pills.forEach(p => {
+    const disc = p.getAttribute("data-discipline") || "";
+    if (CURRENT_ROLE === "" && disc === "") {
+      p.classList.add("active");
+    } else if (CURRENT_ROLE !== "" && (disc === CURRENT_ROLE || CURRENT_ROLE.includes(disc))) {
+      p.classList.add("active");
+    } else {
+      p.classList.remove("active");
+    }
+  });
+
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+}
+
+function onPortalRoleChange(val) {
+  filterByRole(val);
+}
+
 function searchByRole(roleQuery) {
   openPortalsView();
-  const searchInput = document.getElementById("portalSearch");
-  if (searchInput) {
-    searchInput.value = roleQuery;
-    onPortalSearchInput(roleQuery);
-  }
-  showToast(`Filtering verified companies & boards for: ${roleQuery}`);
+  filterByRole(roleQuery);
+  showToast(`Filtered open roles for ${roleQuery}`);
 }
 
 function setRolePreset(title) {
@@ -2979,7 +3175,7 @@ function filterByMonth(monthName) {
   if (summary && summary.months) {
     renderMonthFilterPills(summary.months);
   }
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
 }
 
 function switchPortalSheet(sheetKey) {
@@ -2993,7 +3189,7 @@ function switchPortalSheet(sheetKey) {
   if (activeTab) activeTab.classList.add("active");
 
   renderPortalSheetsSummary(PORTAL_SUMMARIES);
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
 }
 
 function onPortalSearchInput(val) {
@@ -3001,14 +3197,14 @@ function onPortalSearchInput(val) {
   SEARCH_DEBOUNCE_TIMER = setTimeout(() => {
     CURRENT_QUERY = val.trim();
     CURRENT_PAGE = 1;
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
   }, 250);
 }
 
 function onPortalLimitChange(val) {
   CURRENT_LIMIT = parseInt(val, 10) || 25;
   CURRENT_PAGE = 1;
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
 }
 
 function renderPortalTableHeader(kind) {
@@ -3020,7 +3216,7 @@ function renderPortalTableHeader(kind) {
         <th style="width: 50px;">#</th>
         <th>Startup &amp; Sector</th>
         <th>Round &amp; Capital</th>
-        <th style="min-width: 200px;">What They Are Building</th>
+        <th style="min-width: 220px;">What They Are Building &amp; Open Roles</th>
         <th>Month &amp; Lead Investors</th>
         <th>Intelligence</th>
         <th style="text-align: right;">Action</th>
@@ -3044,7 +3240,7 @@ function renderPortalTableHeader(kind) {
         <th style="width: 50px;">#</th>
         <th>Company Name</th>
         <th>Portal / ATS</th>
-        <th>Open Roles</th>
+        <th style="min-width: 200px;">Active Open Roles</th>
         <th>Career Board</th>
         <th>Intelligence Links</th>
         <th style="text-align: right;">Action</th>
@@ -3053,7 +3249,7 @@ function renderPortalTableHeader(kind) {
   }
 }
 
-async function loadPortalSheetPage(sheetKey, page, limit, query, month = "") {
+async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", role = "") {
   const tbody = document.getElementById("portalTableBody");
   tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);"><i class="fa fa-spinner fa-spin"></i> Loading ${escapeHtml(sheetKey)} sheet page ${page}...</td></tr>`;
 
@@ -3074,7 +3270,8 @@ async function loadPortalSheetPage(sheetKey, page, limit, query, month = "") {
       page: page,
       limit: limit,
       q: query || "",
-      month: month || ""
+      month: month || "",
+      role: role || ""
     });
     const res = await fetch(`/api/portals?${params.toString()}`);
     if (!res.ok) throw new Error("API not reachable");
@@ -3085,11 +3282,11 @@ async function loadPortalSheetPage(sheetKey, page, limit, query, month = "") {
     renderPortalTable(data);
     renderPortalPagination(data);
   } catch (e) {
-    handleStaticPortalFallback(sheetKey, page, limit, query, month);
+    handleStaticPortalFallback(sheetKey, page, limit, query, month, role);
   }
 }
 
-function handleStaticPortalFallback(sheetKey, page, limit, query, month) {
+function handleStaticPortalFallback(sheetKey, page, limit, query, month, role = "") {
   let filtered = [];
   let title = "Directory Sheets";
   let kind = "standard";
@@ -3137,6 +3334,24 @@ function handleStaticPortalFallback(sheetKey, page, limit, query, month) {
       filtered = filtered.filter(i => (i.name || '').toLowerCase().includes(q) || (i.slug || '').toLowerCase().includes(q));
     }
     title = sheetKey.toUpperCase() + " Portals";
+  }
+
+  // Apply Role / Job Title Filter
+  if (role && role.trim().toLowerCase() !== 'all' && role.trim().toLowerCase() !== 'all roles' && role.trim().toLowerCase() !== 'all job titles' && role.trim().toLowerCase() !== 'all disciplines') {
+    const rLower = role.trim().toLowerCase();
+    filtered = filtered.filter(i => {
+      if (Array.isArray(i.roles)) {
+        return i.roles.some(ro => {
+          const t = (ro.title || '').toLowerCase();
+          const d = (ro.department || '').toLowerCase();
+          return t.includes(rLower) || d.includes(rLower);
+        });
+      }
+      if (typeof i.roles === 'string') {
+        return i.roles.toLowerCase().includes(rLower);
+      }
+      return false;
+    });
   }
 
   const total = filtered.length;
@@ -3222,6 +3437,25 @@ function renderPortalTable(data) {
             <div style="font-size: 0.83rem; line-height: 1.45; color: var(--text-primary); max-width: 320px;">
               ${escapeHtml(item.what_they_build || 'High-growth technology startup.')}
             </div>
+            ${(() => {
+              const sRolesList = Array.isArray(item.roles) ? item.roles : [];
+              if (sRolesList.length === 0) return "";
+              const shown = sRolesList.slice(0, 3);
+              const remaining = sRolesList.length - shown.length;
+              return `
+                <div class="role-tag-list" style="margin-top: 6px;">
+                  ${shown.map(r => {
+                    const titleStr = r.title || '';
+                    const safeTitle = escapeHtml(titleStr);
+                    const safeRoleJs = safeTitle.replace(/'/g, "\\'");
+                    const isMatch = CURRENT_ROLE && (titleStr.toLowerCase().includes(CURRENT_ROLE.toLowerCase()) || (r.department || '').toLowerCase().includes(CURRENT_ROLE.toLowerCase()));
+                    const highlightClass = isMatch ? "highlighted" : "";
+                    return `<span class="role-tag-pill ${highlightClass}" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" title="1-Click Tailor CV for ${safeTitle}"><i class="fa fa-briefcase" style="font-size: 0.65rem; opacity: 0.7;"></i> ${safeTitle}</span>`;
+                  }).join("")}
+                  ${remaining > 0 ? `<span class="role-tag-more" onclick="openCompanyModal('${safeItemData}')" title="View all ${sRolesList.length} open roles in dossier">+${remaining} roles</span>` : ''}
+                </div>
+              `;
+            })()}
           </td>
           <td>
             <div style="font-weight: 600; font-size: 0.82rem; color: var(--text-primary);"><i class="fa fa-calendar-check" style="color: var(--accent-emerald); font-size: 0.75rem;"></i> ${escapeHtml(item.month || item.announced_date)}</div>
@@ -3307,9 +3541,29 @@ function renderPortalTable(data) {
     if (ats.includes("workday")) badgeClass = "badge-workday";
     if (ats.includes("funded")) badgeClass = "badge-greenhouse";
 
-    const jobsHtml = item.open_jobs 
-      ? `<span style="font-weight: 600; color: #047857; font-size: 0.78rem;">${escapeHtml(item.open_jobs)}</span>`
-      : `<span style="color: var(--text-muted); font-size: 0.78rem;">Verified Board</span>`;
+    let rolesHtml = "";
+    const rolesList = Array.isArray(item.roles) ? item.roles : (typeof item.roles === 'string' ? item.roles.split(';').map(t => ({ title: t.trim(), department: 'Role' })) : []);
+    if (rolesList.length > 0) {
+      const shownRoles = rolesList.slice(0, 2);
+      const remaining = rolesList.length - shownRoles.length;
+      rolesHtml = `
+        <div class="role-tag-list">
+          ${shownRoles.map(r => {
+            const titleStr = typeof r === 'string' ? r : (r.title || '');
+            const safeTitle = escapeHtml(titleStr);
+            const safeRoleJs = safeTitle.replace(/'/g, "\\'");
+            const isMatch = CURRENT_ROLE && (titleStr.toLowerCase().includes(CURRENT_ROLE.toLowerCase()) || (r.department || '').toLowerCase().includes(CURRENT_ROLE.toLowerCase()));
+            const highlightClass = isMatch ? "highlighted" : "";
+            return `<span class="role-tag-pill ${highlightClass}" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" title="1-Click Tailor CV for ${safeTitle}"><i class="fa fa-briefcase" style="font-size: 0.65rem; opacity: 0.7;"></i> ${safeTitle}</span>`;
+          }).join("")}
+          ${remaining > 0 ? `<span class="role-tag-more" onclick="openCompanyModal('${safeItemData}')" title="Click to view all ${rolesList.length} open roles in dossier">+${remaining} more</span>` : ''}
+        </div>
+      `;
+    } else {
+      rolesHtml = item.open_jobs 
+        ? `<span style="font-weight: 600; color: #047857; font-size: 0.78rem;">${escapeHtml(item.open_jobs)}</span>`
+        : `<span style="color: var(--text-muted); font-size: 0.78rem;">Verified Board</span>`;
+    }
 
     const rowIndex = data.start_index + idx;
     const safeComp = escapeHtml(item.name);
@@ -3330,7 +3584,7 @@ function renderPortalTable(data) {
         <td>
           <span class="portal-badge ${badgeClass}"><i class="fa fa-tag"></i> ${escapeHtml(item.ats.toUpperCase())}</span>
         </td>
-        <td>${jobsHtml}</td>
+        <td>${rolesHtml}</td>
         <td>
           <a class="ext-link" href="${escapeHtml(item.board_url)}" target="_blank" rel="noopener noreferrer" title="Open ${safeComp} official company page & careers">
             <i class="fa fa-globe" style="font-size: 0.72rem;"></i> <span>Company Page</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.68rem;"></i>
@@ -3385,17 +3639,21 @@ function renderPortalPagination(data) {
 
 function gotoPortalPage(page) {
   CURRENT_PAGE = page;
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
 }
 
-function useCompanyInStudio(name, url) {
+function useCompanyInStudio(name, url, roleTitle = "") {
   switchView('tailor');
   document.getElementById("companyName").value = name;
   if (url) {
     document.getElementById("jobUrl").value = url;
   }
+  if (roleTitle) {
+    document.getElementById("jobTitle").value = roleTitle;
+  }
   document.getElementById("jdText").focus();
-  showToast(`Pre-filled ${name} in Studio! Paste the Job Description to tailor.`);
+  const roleMsg = roleTitle ? ` for ${roleTitle}` : "";
+  showToast(`Pre-filled ${name}${roleMsg} in Studio! Paste the Job Description to tailor.`);
 }
 
 async function loadBaseCvInStudio() {
@@ -3930,6 +4188,45 @@ function openCompanyModal(encodedData) {
   const companyUrl = item.website || item.board_url || item.google_jobs_url || `https://www.google.com/search?q=${encodeURIComponent(item.name)}+official+website`;
   const safeJsUrl = escapeHtml(companyUrl).replace(/'/g, "\\'");
 
+  const rolesList = Array.isArray(item.roles) ? item.roles : (typeof item.roles === 'string' ? item.roles.split(';').map(t => ({ title: t.trim(), department: 'Role', level: 'Mid-Senior', location: 'Remote / Hybrid' })) : []);
+  let rolesModalHtml = "";
+  if (rolesList.length > 0) {
+    rolesModalHtml = `
+      <div style="margin-bottom: 22px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0;">
+            <i class="fa fa-briefcase" style="color: var(--accent-emerald);"></i> Active Opened Roles (${rolesList.length} Verified Positions)
+          </h4>
+          <span style="font-size: 0.72rem; color: var(--text-muted);"><i class="fa fa-wand-magic-sparkles" style="color: var(--accent-emerald);"></i> 1-Click Tailor CV</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          ${rolesList.map(r => {
+            const titleStr = typeof r === 'string' ? r : (r.title || '');
+            const safeTitle = escapeHtml(titleStr);
+            const safeRoleJs = safeTitle.replace(/'/g, "\\'");
+            const dept = escapeHtml(r.department || "Engineering & AI");
+            const level = escapeHtml(r.level || "Mid-Senior");
+            const loc = escapeHtml(r.location || "Remote / Hybrid");
+            return `
+              <div style="display: flex; justify-content: space-between; align-items: center; background: #FAF8F5; border: 1px solid var(--border-subtle); padding: 9px 12px; border-radius: 8px; gap: 10px; flex-wrap: wrap;">
+                <div>
+                  <div style="font-weight: 600; font-size: 0.86rem; color: var(--text-primary);">${safeTitle}</div>
+                  <div style="font-size: 0.73rem; color: var(--text-secondary); margin-top: 2px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <span class="badge-sector" style="font-size: 0.68rem; padding: 1px 6px;">${dept}</span>
+                    <span style="color: var(--text-muted);">&bull; ${level} &bull; ${loc}</span>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="closeCompanyModal(); useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" style="padding: 4px 10px; font-size: 0.76rem; white-space: nowrap;">
+                  <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+                </button>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+  }
+
   let html = "";
   if (item.what_happened || item.funding_before_failure) {
     // Startup Failure Dossier
@@ -4031,6 +4328,8 @@ function openCompanyModal(encodedData) {
         </div>
       ` : ''}
 
+      ${rolesModalHtml}
+
       <div style="margin-bottom: 24px;">
         <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 10px 0;">Official Company Pages &amp; Intelligence</h4>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -4077,6 +4376,8 @@ function openCompanyModal(encodedData) {
           <div style="font-size: 0.9rem; font-weight: 600; color: #047857; margin-top: 4px;">${escapeHtml(item.open_jobs || 'Verified Career Board')}</div>
         </div>
       </div>
+
+      ${rolesModalHtml}
 
       <div style="margin-bottom: 24px;">
         <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 10px 0;">Official Company Portals &amp; Intelligence</h4>
@@ -4163,8 +4464,9 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
                 limit = 25
             q = qs.get("q", [""])[0]
             month = qs.get("month", [""])[0]
+            role = qs.get("role", [""])[0]
 
-            data = get_sheet_page(sheet_key=sheet, page=page, limit=limit, query=q, month=month)
+            data = get_sheet_page(sheet_key=sheet, page=page, limit=limit, query=q, month=month, role=role)
             self.send_json(200, data)
 
         elif path == "/api/base_tex":

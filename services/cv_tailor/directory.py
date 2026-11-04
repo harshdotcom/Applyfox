@@ -98,12 +98,32 @@ SHEETS = {
 # Cache sheets in memory to avoid repeated disk reads
 _SHEET_CACHE: Dict[str, List[Dict[str, Any]]] = {}
 
+# Centralized open roles repository
+_GLOBAL_ROLES: Dict[str, List[Dict[str, Any]]] = {}
+_ROLES_PATH = Path("data/company_open_roles.json")
+if _ROLES_PATH.is_file():
+    try:
+        _GLOBAL_ROLES = json.loads(_ROLES_PATH.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"Error loading company_open_roles.json: {e}")
+
 
 def _clean_slug(text: str) -> str:
     """Normalize company name to a safe URL slug for Levels.fyi."""
     s = text.lower().strip()
     s = re.sub(r"[^a-z0-9]+", "-", s)
     return s.strip("-")
+
+
+def _get_roles_for_company(name: str, slug: str = "") -> List[Dict[str, Any]]:
+    """Lookup structured open roles from global repository."""
+    name_low = name.lower().strip()
+    slug_low = slug.lower().strip()
+    if name_low in _GLOBAL_ROLES:
+        return _GLOBAL_ROLES[name_low]
+    if slug_low and slug_low in _GLOBAL_ROLES:
+        return _GLOBAL_ROLES[slug_low]
+    return []
 
 
 def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
@@ -133,6 +153,7 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
                 round_val = item.get("round", "")
                 amount_val = item.get("amount", "")
                 open_jobs_label = f"{round_val} ({amount_val})" if round_val and amount_val else (round_val or amount_val or "Funded 2026")
+                roles = item.get("roles") or _get_roles_for_company(comp, safe_slug)
 
                 items.append({
                     "id": item.get("id"),
@@ -159,6 +180,7 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
                     "outlook_reasoning": item.get("outlook_reasoning", ""),
                     "source": item.get("source", ""),
                     "open_jobs": open_jobs_label,
+                    "roles": roles,
                     "board_url": board_url,
                     "glassdoor_url": item.get("glassdoor_url") or f"https://www.glassdoor.com/Search/results.htm?keyword={safe_query}",
                     "levels_url": item.get("levels_url") or f"https://www.levels.fyi/companies/{safe_slug}/salaries",
@@ -229,6 +251,13 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
             levels_url = f"https://www.levels.fyi/companies/{safe_slug}/salaries"
             google_jobs_url = f"https://www.google.com/search?q={safe_query}+jobs+careers"
 
+            roles = _get_roles_for_company(name, slug)
+            if not roles and row.get("roles"):
+                roles = [
+                    {"title": r.strip(), "department": "General", "level": "Senior", "location": "Remote", "type": "Full-time"}
+                    for r in row["roles"].split(";") if r.strip()
+                ]
+
             items.append({
                 "id": idx,
                 "name": name,
@@ -236,6 +265,7 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
                 "slug": slug,
                 "kind": "standard",
                 "open_jobs": open_jobs if open_jobs else None,
+                "roles": roles,
                 "board_url": board_url,
                 "glassdoor_url": glassdoor_url,
                 "levels_url": levels_url,
@@ -283,11 +313,12 @@ def get_sheet_page(
     page: int = 1,
     limit: int = 25,
     query: str = "",
-    month: str = ""
+    month: str = "",
+    role: str = ""
 ) -> Dict[str, Any]:
     """
     Retrieve a single paginated slice of companies for the requested sheet.
-    Supports month filtering for funded startups and multi-field search.
+    Supports month filtering for funded startups, role/discipline filtering, and multi-field search.
     """
     if sheet_key not in SHEETS:
         sheet_key = "master"
@@ -302,6 +333,18 @@ def get_sheet_page(
     if kind == "funded_startups" and month and month.lower() not in ("all", "all months"):
         m_lower = month.strip().lower()
         filtered = [it for it in filtered if it.get("month", "").lower() == m_lower]
+
+    # Apply role / job title / discipline filter
+    if role and role.strip().lower() not in ("all", "all roles", "all job titles", "all titles"):
+        r_lower = role.strip().lower()
+        filtered = [
+            it for it in filtered
+            if any(
+                r_lower in ro.get("title", "").lower() or r_lower in ro.get("department", "").lower()
+                for ro in it.get("roles", [])
+            )
+            or (isinstance(it.get("roles"), str) and r_lower in it.get("roles", "").lower())
+        ]
 
     # Apply search filter if query is present
     q = query.strip().lower()
@@ -360,5 +403,6 @@ def get_sheet_page(
         "start_index": start + 1 if total > 0 else 0,
         "end_index": min(end, total),
         "month_filter": month,
+        "role_filter": role,
         "items": page_items,
     }

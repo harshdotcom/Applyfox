@@ -145,7 +145,15 @@ def analyze_jd(jd_text: str, custom_title: Optional[str] = None) -> JDAnalysis:
             title = "Software Development Engineer"
 
     title_lower = title.lower()
-    if any(k in title_lower for k in ["ai", "genai", "llm", "agent", "machine learning"]):
+    if any(k in title_lower for k in ["design", "graphic", "ui", "ux", "creative", "brand", "visual"]):
+        archetype = "DESIGN_CREATIVE"
+    elif any(k in title_lower for k in ["legal", "counsel", "compliance", "regulatory", "attorney", "policy", "contracts"]):
+        archetype = "LEGAL_COMPLIANCE"
+    elif any(k in title_lower for k in ["sysadmin", "it support", "network engineer", "systems administrator", "it specialist"]):
+        archetype = "IT_SYSTEMS"
+    elif any(k in title_lower for k in ["product manager", "tpm", "program manager", "bizops", "operations", "revops"]):
+        archetype = "PRODUCT_OPERATIONS"
+    elif any(k in title_lower for k in ["ai", "genai", "llm", "agent", "machine learning"]):
         archetype = "AI_ENGINEER"
     elif any(k in title_lower for k in ["backend", "distributed", "systems", "go", "golang", "api"]):
         archetype = "BACKEND_ENGINEER"
@@ -303,6 +311,70 @@ def build_tailored_profile(analysis: JDAnalysis) -> str:
         b4 = (
             "Open-source maintainer of \\textbf{VitaTrack.ai}, an AI-powered healthcare platform for "
             "medical document extraction, report summarization, health-record organization, and intelligent health-data workflows."
+        )
+
+    elif archetype == "DESIGN_CREATIVE":
+        b1 = (
+            f"Creative Technologist & Designer with \\textbf{{2.5 years of experience}} "
+            "building intuitive design systems, responsive web interfaces, brand identities, and modern user-centric digital products."
+        )
+        b2 = (
+            "Deep proficiency in \\textbf{Figma, Adobe Creative Suite, Design Tokens, wireframing, and interactive prototyping}, "
+            "bridging the gap between conceptual visual design and production-ready frontend code."
+        )
+        b3 = (
+            "Cross-functional design expertise collaborating with engineering and product leads, ensuring cohesive UI/UX and accessibility standards."
+        )
+        b4 = (
+            "Lead designer and builder of \\textbf{VitaTrack.ai}, architecting the complete UI/UX workflow, "
+            "design components, interactive dashboards, and design system documentation."
+        )
+
+    elif archetype == "LEGAL_COMPLIANCE":
+        b1 = (
+            f"Technology & Corporate Compliance Specialist with \\textbf{{2.5 years of experience}} "
+            "navigating data privacy, enterprise software governance, intellectual property licensing, and regulatory risk."
+        )
+        b2 = (
+            "Deep understanding of \\textbf{GDPR, CCPA, SOC 2 compliance frameworks, commercial contract review, and IP governance} "
+            "for high-growth tech platforms and AI systems."
+        )
+        b3 = (
+            "Skilled at drafting regulatory documentation, managing vendor security audits, and establishing data retention policies."
+        )
+        b4 = (
+            "Compliance advisor for \\textbf{VitaTrack.ai}, ensuring healthcare data security, HIPAA adherence, "
+            "user confidentiality, and transparent algorithmic policies."
+        )
+
+    elif archetype == "IT_SYSTEMS":
+        b1 = (
+            f"Systems & IT Infrastructure Specialist with \\textbf{{2.5 years of experience}} "
+            "managing cloud environments, enterprise Linux systems, network architecture, and security operations."
+        )
+        b2 = (
+            "Hands-on expertise across \\textbf{AWS, Azure, Docker, Kubernetes, CI/CD automation, identity management, and system monitoring}."
+        )
+        b3 = (
+            "Strong track record maintaining 99.9% uptime, mitigating vulnerabilities, and automating operational workflows."
+        )
+        b4 = (
+            "Infrastructure lead for \\textbf{VitaTrack.ai}, managing containerized deployments, automated backups, and encrypted storage."
+        )
+
+    elif archetype == "PRODUCT_OPERATIONS":
+        b1 = (
+            f"Technical Product & Operations Specialist with \\textbf{{2.5 years of experience}} "
+            "driving product roadmaps, cross-functional engineering alignment, and data-driven user growth."
+        )
+        b2 = (
+            "Proven ability translating customer pain points and business goals into structured specifications, user stories, and execution sprints."
+        )
+        b3 = (
+            "Strong analytical acumen tracking KPIs, user engagement funnels, retention metrics, and operational efficiency."
+        )
+        b4 = (
+            "Product lead for \\textbf{VitaTrack.ai}, driving feature prioritization, user interview loops, and roadmap milestones."
         )
 
     else:  # GENERAL_SDE / FULL_STACK

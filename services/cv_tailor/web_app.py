@@ -546,6 +546,161 @@ HTML_PAGE = """<!DOCTYPE html>
     margin-top: 5px;
   }
 
+  /* Multi-Discipline Discovery & Roles */
+  .discipline-strip {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 860px;
+  }
+  .discipline-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .discipline-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .role-pill {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.16s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  }
+  .role-pill:hover {
+    background: #F5F5F4;
+    border-color: #D6D3D1;
+    transform: translateY(-1px);
+    color: var(--accent-emerald-dark);
+  }
+
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin: 28px 0 44px;
+  }
+  .role-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 24px 22px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .role-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+  }
+  .role-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .role-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+  .icon-rose { background: #FFF1F2; color: #E11D48; }
+  .role-card-title {
+    font-family: 'Newsreader', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .role-card-meta {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-top: 3px;
+  }
+  .role-card-desc {
+    font-size: 0.86rem;
+    line-height: 1.48;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+  }
+  .role-card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .role-card-tags span {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+  .role-card-cta {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-emerald);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s ease;
+  }
+  .role-card:hover .role-card-cta {
+    color: var(--accent-emerald-dark);
+  }
+
+  .role-quick-btn {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .role-quick-btn:hover {
+    background: #FFFFFF;
+    border-color: var(--accent-emerald);
+    color: var(--accent-emerald-dark);
+  }
+
   /* Refined Warm CTA Banner */
   .cta-banner {
     background: #FFFFFF;
@@ -1841,10 +1996,10 @@ HTML_PAGE = """<!DOCTYPE html>
           <span>7,406 VERIFIED COMPANIES &bull; 480 2026 FUNDED STARTUPS &bull; OVERLEAF LATEX CORE &bull; V2.4</span>
         </div>
         <h1 class="hero-title">
-          The career application studio <span class="hero-accent">built for software engineers.</span>
+          The career application studio <span class="hero-accent">built for engineers, designers &amp; modern talent.</span>
         </h1>
         <p class="hero-subtitle">
-          Author and tailor authentic Overleaf-grade LaTeX CVs for any JD. Explore 7,400+ verified career boards and 480 newly funded 2026 tech startups across Ashby, Greenhouse, Lever, and Workday with live salary, funding, and failure intelligence.
+          Discover 7,400+ verified career boards and 480 newly funded 2026 tech startups. Engineered for Software Engineers, Graphic &amp; UI/UX Designers, IT Specialists, Legal Counsel, and Tech Operators to tailor authentic CVs and track every application.
         </p>
 
         <div class="hero-actions">
@@ -1860,6 +2015,18 @@ HTML_PAGE = """<!DOCTYPE html>
           <button class="btn btn-secondary btn-lg" onclick="switchView('tracker')">
             <i class="fa fa-clipboard-check"></i> View My Applications
           </button>
+        </div>
+
+        <!-- Discipline Quick-Discovery Strip -->
+        <div class="discipline-strip">
+          <div class="discipline-label"><i class="fa fa-compass" style="color: var(--accent-emerald);"></i> Explore verified companies &amp; roles by discipline:</div>
+          <div class="discipline-pills">
+            <button class="role-pill" onclick="searchByRole('engineer')"><i class="fa fa-code" style="color: #6366F1;"></i> Software &amp; AI Engineers</button>
+            <button class="role-pill" onclick="searchByRole('design')"><i class="fa fa-palette" style="color: #E11D48;"></i> Graphic &amp; UI/UX Designers</button>
+            <button class="role-pill" onclick="searchByRole('IT')"><i class="fa fa-server" style="color: #0284C7;"></i> IT, Cloud &amp; Security</button>
+            <button class="role-pill" onclick="searchByRole('legal')"><i class="fa fa-scale-balanced" style="color: #D97706;"></i> Legal &amp; Compliance</button>
+            <button class="role-pill" onclick="searchByRole('product')"><i class="fa fa-chart-pie" style="color: #059669;"></i> Product &amp; Operations</button>
+          </div>
         </div>
       </div>
 
@@ -1909,6 +2076,110 @@ HTML_PAGE = """<!DOCTYPE html>
         <div class="stat-item">
           <div class="stat-num">&lt; 2.0s</div>
           <div class="stat-label">LaTeX Compilation</div>
+        </div>
+      </div>
+
+      <!-- Multi-Discipline Roles Grid: Built for Tech, Design, IT & Legal -->
+      <div class="section-heading" style="margin-top: 54px;">
+        <span class="section-tag">MULTI-DISCIPLINE CAREER DISCOVERY</span>
+        <h2 class="section-title">Built for every profession across modern tech</h2>
+        <p class="section-desc">Applyfox indexes career boards and funded startups hiring across engineering, creative design, IT systems, corporate law, and business operations.</p>
+      </div>
+
+      <div class="roles-grid">
+        <div class="role-card" onclick="searchByRole('engineer')">
+          <div>
+            <div class="role-card-header">
+              <div class="role-icon-box icon-purple"><i class="fa fa-code"></i></div>
+              <div>
+                <h3 class="role-card-title">Software &amp; AI Engineers</h3>
+                <div class="role-card-meta">Full Stack &bull; Backend &bull; GenAI &bull; Cloud</div>
+              </div>
+            </div>
+            <p class="role-card-desc">
+              Find verified career boards hiring for Python, Go, TypeScript, LLM agents, and distributed microservices with instant ATS keyword alignment.
+            </p>
+            <div class="role-card-tags">
+              <span>LangChain</span><span>Kubernetes</span><span>FastAPI</span><span>Vector DB</span>
+            </div>
+          </div>
+          <span class="role-card-cta">Browse Engineering Roles &rarr;</span>
+        </div>
+
+        <div class="role-card" onclick="searchByRole('design')">
+          <div>
+            <div class="role-card-header">
+              <div class="role-icon-box icon-rose"><i class="fa fa-palette"></i></div>
+              <div>
+                <h3 class="role-card-title">Graphic &amp; UI/UX Designers</h3>
+                <div class="role-card-meta">Product Design &bull; Brand &bull; Visual &bull; Systems</div>
+              </div>
+            </div>
+            <p class="role-card-desc">
+              Explore fast-growing startups and product teams hiring brand designers, UI/UX specialists, and design system creators across Figma and Adobe.
+            </p>
+            <div class="role-card-tags">
+              <span>Figma</span><span>Design Systems</span><span>Brand Identity</span><span>UI/UX</span>
+            </div>
+          </div>
+          <span class="role-card-cta">Browse Design Roles &rarr;</span>
+        </div>
+
+        <div class="role-card" onclick="searchByRole('IT')">
+          <div>
+            <div class="role-card-header">
+              <div class="role-icon-box icon-sky"><i class="fa fa-server"></i></div>
+              <div>
+                <h3 class="role-card-title">IT, Cloud &amp; Security</h3>
+                <div class="role-card-meta">DevOps &bull; SysAdmin &bull; Cloud Architect &bull; InfoSec</div>
+              </div>
+            </div>
+            <p class="role-card-desc">
+              Track infrastructure, IT support, cloud architecture, and cybersecurity openings across Series A&ndash;D funded startups and global enterprises.
+            </p>
+            <div class="role-card-tags">
+              <span>AWS / GCP</span><span>SOC 2</span><span>Linux</span><span>Cybersecurity</span>
+            </div>
+          </div>
+          <span class="role-card-cta">Browse IT &amp; Security Roles &rarr;</span>
+        </div>
+
+        <div class="role-card" onclick="searchByRole('legal')">
+          <div>
+            <div class="role-card-header">
+              <div class="role-icon-box icon-amber"><i class="fa fa-scale-balanced"></i></div>
+              <div>
+                <h3 class="role-card-title">Legal, Policy &amp; Compliance</h3>
+                <div class="role-card-meta">In-House Counsel &bull; Regulatory &bull; IP &bull; Privacy</div>
+              </div>
+            </div>
+            <p class="role-card-desc">
+              Discover in-house legal counsel, regulatory policy, commercial contracts, and data privacy (GDPR/CCPA) roles in funded tech startups.
+            </p>
+            <div class="role-card-tags">
+              <span>Commercial Law</span><span>Privacy / GDPR</span><span>IP Licensing</span><span>Risk</span>
+            </div>
+          </div>
+          <span class="role-card-cta">Browse Legal Roles &rarr;</span>
+        </div>
+
+        <div class="role-card" onclick="searchByRole('product')">
+          <div>
+            <div class="role-card-header">
+              <div class="role-icon-box icon-emerald"><i class="fa fa-chart-pie"></i></div>
+              <div>
+                <h3 class="role-card-title">Product &amp; Operations</h3>
+                <div class="role-card-meta">Product Manager &bull; TPM &bull; BizOps &bull; RevOps</div>
+              </div>
+            </div>
+            <p class="role-card-desc">
+              Connect with companies seeking product leaders, operations strategists, and growth managers to drive customer acquisition and scale.
+            </p>
+            <div class="role-card-tags">
+              <span>Roadmapping</span><span>User Metrics</span><span>Cross-Functional</span><span>BizOps</span>
+            </div>
+          </div>
+          <span class="role-card-cta">Browse Product &amp; Ops Roles &rarr;</span>
         </div>
       </div>
 
@@ -2020,7 +2291,7 @@ HTML_PAGE = """<!DOCTYPE html>
               <span class="brand-badge">STUDIO &bull; SHEETS</span>
             </div>
             <p class="footer-desc">
-              An open-source, local-first career intelligence platform and Overleaf-grade LaTeX CV studio engineered for developers.
+              An open-source, local-first career intelligence platform and Overleaf-grade LaTeX CV studio engineered for engineers, designers, IT specialists, and modern tech professionals.
             </p>
 
             <div class="contrib-card">
@@ -2140,7 +2411,14 @@ HTML_PAGE = """<!DOCTYPE html>
             <div class="form-row">
               <div class="form-group">
                 <label for="jobTitle">Job Title / Role</label>
-                <input type="text" id="jobTitle" placeholder="e.g. Python Developer (Gen AI)">
+                <input type="text" id="jobTitle" placeholder="e.g. Senior Software Engineer, UI/UX Designer, Legal Counsel...">
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;">
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Software & AI Engineer')">💻 Software / AI</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Graphic & UI/UX Designer')">🎨 Graphic / Design</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('IT Systems & Cloud Infrastructure Specialist')">🛡️ IT &amp; Cloud</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Corporate Legal Counsel & Compliance')">⚖️ Legal &amp; Compliance</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Technical Product Manager')">📈 Product</button>
+                </div>
               </div>
               <div class="form-group">
                 <label for="jobUrl">Job Posting / ATS URL</label>
@@ -2489,6 +2767,25 @@ function openPortalsView() {
   CURRENT_MONTH = "";
   switchView('portals');
   renderPortalSheetsSummary(PORTAL_SUMMARIES);
+}
+
+function searchByRole(roleQuery) {
+  openPortalsView();
+  const searchInput = document.getElementById("portalSearch");
+  if (searchInput) {
+    searchInput.value = roleQuery;
+    onPortalSearchInput(roleQuery);
+  }
+  showToast(`Filtering verified companies & boards for: ${roleQuery}`);
+}
+
+function setRolePreset(title) {
+  const input = document.getElementById("jobTitle");
+  if (input) {
+    input.value = title;
+    input.focus();
+    showToast(`Role selected: ${title}`);
+  }
 }
 
 // Subtabs in CV Studio

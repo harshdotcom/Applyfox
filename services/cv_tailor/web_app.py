@@ -1194,6 +1194,101 @@ HTML_PAGE = """<!DOCTYPE html>
   .intel-levels { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
   .intel-glassdoor { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
 
+  /* Startup Funding & Intelligence Styles */
+  .badge-round {
+    background: #EFF6FF;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+    font-weight: 600;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: var(--radius-pill);
+    display: inline-block;
+  }
+  .badge-amount {
+    font-weight: 700;
+    color: #047857;
+    font-size: 0.84rem;
+    margin-left: 4px;
+  }
+  .badge-sector {
+    background: #FAF5FF;
+    color: #7E22CE;
+    border: 1px solid #F3E8FF;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .badge-country {
+    color: var(--text-muted);
+    font-size: 0.74rem;
+  }
+  .badge-fail-funding {
+    color: #DC2626;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+
+  /* Month Filter Pills */
+  .month-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .month-pill {
+    padding: 4px 11px;
+    border-radius: var(--radius-pill);
+    font-size: 0.74rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s;
+  }
+  .month-pill:hover {
+    border-color: var(--border-dark);
+    color: var(--text-primary);
+  }
+  .month-pill.active {
+    background: var(--accent-emerald-dark);
+    color: #FFFFFF;
+    border-color: var(--accent-emerald-dark);
+    font-weight: 600;
+  }
+  .month-pill .count-badge {
+    background: rgba(0, 0, 0, 0.07);
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-size: 0.68rem;
+  }
+  .month-pill.active .count-badge {
+    background: rgba(255, 255, 255, 0.25);
+    color: #FFFFFF;
+  }
+  @media (max-width: 768px) {
+    .month-pills {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
+      padding-bottom: 4px;
+    }
+    .month-pills::-webkit-scrollbar {
+      display: none;
+    }
+    .month-pill {
+      flex-shrink: 0;
+    }
+  }
+
   /* Pagination Bar */
   .pagination-bar {
     display: flex;
@@ -1621,7 +1716,7 @@ HTML_PAGE = """<!DOCTYPE html>
             <i class="fa fa-wand-magic-sparkles"></i> <span>Studio &amp; Tailor</span>
           </button>
           <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
-            <i class="fa fa-table-list"></i> <span>Portal Sheets (7,008)</span>
+            <i class="fa fa-table-list"></i> <span>Directory &amp; Startups (7,406)</span>
           </button>
           <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
             <i class="fa fa-clipboard-check"></i> <span>Tracker (<span id="appCount">0</span>)</span>
@@ -1645,21 +1740,24 @@ HTML_PAGE = """<!DOCTYPE html>
       <div class="hero-section">
         <div class="hero-pill">
           <span class="hero-dot"></span>
-          <span>7,008 CAREER BOARDS &bull; OVERLEAF LATEX CORE &bull; V2.4</span>
+          <span>7,406 VERIFIED COMPANIES &bull; 480 2026 FUNDED STARTUPS &bull; OVERLEAF LATEX CORE &bull; V2.4</span>
         </div>
         <h1 class="hero-title">
           The career application studio <span class="hero-accent">built for software engineers.</span>
         </h1>
         <p class="hero-subtitle">
-          Author and tailor authentic Overleaf-grade LaTeX CVs for any JD. Explore 7,000+ verified career boards across Ashby, Greenhouse, Lever, and Workday with live salary and review intelligence.
+          Author and tailor authentic Overleaf-grade LaTeX CVs for any JD. Explore 7,400+ verified career boards and 480 newly funded 2026 tech startups across Ashby, Greenhouse, Lever, and Workday with live salary, funding, and failure intelligence.
         </p>
 
         <div class="hero-actions">
           <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
             <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
           </button>
+          <button class="btn btn-secondary btn-lg" onclick="switchView('portals'); switchPortalSheet('funded_startups');">
+            <i class="fa fa-rocket"></i> Explore 480 Funded Startups
+          </button>
           <button class="btn btn-secondary btn-lg" onclick="switchView('portals')">
-            <i class="fa fa-table-list"></i> Explore 7,008 Portal Sheets
+            <i class="fa fa-table-list"></i> Explore 7,406 Portal Sheets
           </button>
           <button class="btn btn-secondary btn-lg" onclick="switchView('tracker')">
             <i class="fa fa-clipboard-check"></i> View My Applications
@@ -1695,20 +1793,20 @@ HTML_PAGE = """<!DOCTYPE html>
       <!-- Platform Statistics Strip -->
       <div class="stats-strip">
         <div class="stat-item">
-          <div class="stat-num">7,008</div>
-          <div class="stat-label">Verified Career Boards</div>
+          <div class="stat-num">7,406</div>
+          <div class="stat-label">Verified Companies &amp; Boards</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">480</div>
+          <div class="stat-label">2026 Funded Startups</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">23</div>
+          <div class="stat-label">Failure Case Studies</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">3,212</div>
           <div class="stat-label">Ashby Portals</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">1,894</div>
-          <div class="stat-label">Greenhouse Pipelines</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">1,522</div>
-          <div class="stat-label">Lever Companies</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">&lt; 2.0s</div>
@@ -1742,11 +1840,20 @@ HTML_PAGE = """<!DOCTYPE html>
           <span class="feature-link">Tailor a CV &rarr;</span>
         </div>
 
+        <div class="feature-card" onclick="switchView('portals'); switchPortalSheet('funded_startups');">
+          <div>
+            <div class="feature-icon-wrapper icon-emerald" style="background: #ECFDF5; color: #047857;"><i class="fa fa-rocket"></i></div>
+            <h3 class="feature-title">2026 Startup Funding &amp; Risk Intelligence</h3>
+            <p class="feature-text">Track 480 tech startups that raised Series A-D funding in 2026 month-by-month (Jan&ndash;Nov), alongside 23 failure post-mortems with risk signals and engineering lessons.</p>
+          </div>
+          <span class="feature-link">Explore 480 Startups &rarr;</span>
+        </div>
+
         <div class="feature-card" onclick="switchView('portals')">
           <div>
             <div class="feature-icon-wrapper icon-sky"><i class="fa fa-table-list"></i></div>
             <h3 class="feature-title">Multi-Portal Career Sheets</h3>
-            <p class="feature-text">Explore 7,008 career boards with instant server-side pagination across Ashby, Greenhouse, Lever, and Workday, integrated with direct Levels.fyi salary data and Glassdoor reviews.</p>
+            <p class="feature-text">Explore 7,406 career boards with instant server-side pagination across Ashby, Greenhouse, Lever, and Workday, integrated with direct Levels.fyi salary data and Glassdoor reviews.</p>
           </div>
           <span class="feature-link">Browse Sheets &rarr;</span>
         </div>
@@ -1837,14 +1944,16 @@ HTML_PAGE = """<!DOCTYPE html>
             <div class="footer-heading">WORKSPACE NAVIGATION</div>
             <ul class="footer-links">
               <li><a href="#" onclick="switchView('tailor'); return false;"><i class="fa fa-wand-magic-sparkles"></i> CV Studio &amp; Tailor</a></li>
-              <li><a href="#" onclick="switchView('portals'); return false;"><i class="fa fa-table-list"></i> Portal Sheets (7,008)</a></li>
+              <li><a href="#" onclick="switchView('portals'); return false;"><i class="fa fa-table-list"></i> Directory &amp; Startups (7,406)</a></li>
               <li><a href="#" onclick="switchView('tracker'); return false;"><i class="fa fa-clipboard-check"></i> Applications Tracker</a></li>
               <li><a href="#" onclick="switchView('base-cv'); return false;"><i class="fa fa-file-code"></i> Base LaTeX main.tex</a></li>
             </ul>
 
-            <div class="footer-heading" style="margin-top: 22px;">CAREER PORTALS</div>
+            <div class="footer-heading" style="margin-top: 22px;">CAREER PORTALS &amp; STARTUPS</div>
             <ul class="footer-links">
-              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('master'); return false;"><i class="fa fa-globe"></i> Master Sheet (7,008)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('master'); return false;"><i class="fa fa-globe"></i> Master Sheet (7,406)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('funded_startups'); return false;"><i class="fa fa-rocket"></i> 2026 Funded Startups (480)</a></li>
+              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('startup_failures'); return false;"><i class="fa fa-triangle-exclamation"></i> Failures &amp; Distress (23)</a></li>
               <li><a href="#" onclick="switchView('portals'); switchPortalSheet('ashby'); return false;"><i class="fa fa-bolt"></i> Ashby Boards (3,212)</a></li>
               <li><a href="#" onclick="switchView('portals'); switchPortalSheet('greenhouse'); return false;"><i class="fa fa-seedling"></i> Greenhouse Portals (1,894)</a></li>
               <li><a href="#" onclick="switchView('portals'); switchPortalSheet('lever'); return false;"><i class="fa fa-sliders"></i> Lever Boards (1,522)</a></li>
@@ -2052,11 +2161,11 @@ HTML_PAGE = """<!DOCTYPE html>
     <div id="view-portals" style="display: none;">
       <div class="workspace-bar">
         <div class="workspace-breadcrumb">
-          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>ATS Career Portal Sheets (7,008 Boards)</strong>
+          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>ATS Portals &amp; 2026 Startup Sheets (7,406 Companies)</strong>
         </div>
         <div class="workspace-meta">
           <span class="chip chip-skill"><i class="fa fa-chart-line"></i> Levels.fyi Integrated</span>
-          <span class="chip chip-score"><i class="fa fa-star"></i> Glassdoor Reviews</span>
+          <span class="chip chip-score"><i class="fa fa-rocket"></i> 2026 Funded Tracker</span>
         </div>
       </div>
 
@@ -2068,11 +2177,21 @@ HTML_PAGE = """<!DOCTYPE html>
           </div>
         </div>
 
+        <!-- Month Filter Pills (Visible when 2026 Funded Startups is active) -->
+        <div id="monthFilterContainer" style="display: none; margin-bottom: 16px; padding: 12px 14px; background: #FAF8F5; border-radius: 10px; border: 1px dashed #D6D3D1;">
+          <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <i class="fa fa-calendar" style="color: var(--accent-emerald);"></i> <span>Filter 2026 Funding Rounds by Month:</span>
+          </div>
+          <div class="month-pills" id="monthPillsContainer">
+            <!-- Rendered dynamically via JS -->
+          </div>
+        </div>
+
         <!-- Search & Control Bar -->
         <div class="controls-bar">
           <div class="search-wrapper">
             <i class="fa fa-magnifying-glass"></i>
-            <input type="text" id="portalSearch" class="search-input" placeholder="Search companies by name, slug, or portal..." oninput="onPortalSearchInput(this.value)">
+            <input type="text" id="portalSearch" class="search-input" placeholder="Search companies, startups, sectors, or rounds..." oninput="onPortalSearchInput(this.value)">
           </div>
 
           <div style="display: flex; gap: 10px; align-items: center;">
@@ -2192,7 +2311,9 @@ let CURRENT_SHEET_KEY = "master";
 let CURRENT_PAGE = 1;
 let CURRENT_LIMIT = 25;
 let CURRENT_QUERY = "";
+let CURRENT_MONTH = "";
 let SEARCH_DEBOUNCE_TIMER = null;
+let PORTAL_SUMMARIES = [];
 
 // Initialize
 window.addEventListener("DOMContentLoaded", () => {
@@ -2362,11 +2483,12 @@ async function loadPortalSheetsSummary() {
   try {
     const res = await fetch("/api/portals/summary");
     if (!res.ok) throw new Error("No backend");
-    const summaries = await res.json();
-    renderPortalSheetsSummary(summaries);
+    PORTAL_SUMMARIES = await res.json();
+    renderPortalSheetsSummary(PORTAL_SUMMARIES);
   } catch (e) {
     if (typeof EMBEDDED_SUMMARIES !== 'undefined') {
-      renderPortalSheetsSummary(EMBEDDED_SUMMARIES);
+      PORTAL_SUMMARIES = EMBEDDED_SUMMARIES;
+      renderPortalSheetsSummary(PORTAL_SUMMARIES);
     }
   }
 }
@@ -2384,13 +2506,59 @@ function renderPortalSheetsSummary(summaries) {
       </button>
     `;
   }).join("");
+
+  const activeSummary = summaries.find(s => s.key === CURRENT_SHEET_KEY);
+  if (activeSummary && activeSummary.months) {
+    renderMonthFilterPills(activeSummary.months);
+  } else {
+    const wrapper = document.getElementById("monthFilterContainer");
+    if (wrapper) wrapper.style.display = 'none';
+  }
+}
+
+function renderMonthFilterPills(months) {
+  const container = document.getElementById("monthPillsContainer");
+  const wrapper = document.getElementById("monthFilterContainer");
+  if (!wrapper || !container) return;
+
+  if (CURRENT_SHEET_KEY !== 'funded_startups') {
+    wrapper.style.display = 'none';
+    return;
+  }
+
+  wrapper.style.display = 'block';
+  if (!months || !Array.isArray(months)) {
+    container.innerHTML = '';
+    return;
+  }
+
+  container.innerHTML = months.map(m => {
+    const isActive = (CURRENT_MONTH === m.name || (CURRENT_MONTH === "" && m.name === "All Months")) ? "active" : "";
+    return `
+      <button class="month-pill ${isActive}" onclick="filterByMonth('${m.name}')">
+        <span>${escapeHtml(m.name)}</span>
+        <span class="count-badge">${m.count}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function filterByMonth(monthName) {
+  CURRENT_MONTH = (monthName === "All Months") ? "" : monthName;
+  CURRENT_PAGE = 1;
+  const summary = PORTAL_SUMMARIES.find(s => s.key === 'funded_startups');
+  if (summary && summary.months) {
+    renderMonthFilterPills(summary.months);
+  }
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
 }
 
 function switchPortalSheet(sheetKey) {
   CURRENT_SHEET_KEY = sheetKey;
   CURRENT_PAGE = 1;
-  loadPortalSheetsSummary();
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+  CURRENT_MONTH = "";
+  renderPortalSheetsSummary(PORTAL_SUMMARIES);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
 }
 
 function onPortalSearchInput(val) {
@@ -2398,80 +2566,295 @@ function onPortalSearchInput(val) {
   SEARCH_DEBOUNCE_TIMER = setTimeout(() => {
     CURRENT_QUERY = val.trim();
     CURRENT_PAGE = 1;
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
   }, 250);
 }
 
 function onPortalLimitChange(val) {
   CURRENT_LIMIT = parseInt(val, 10) || 25;
   CURRENT_PAGE = 1;
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
 }
 
-async function loadPortalSheetPage(sheetKey, page, limit, query) {
+function renderPortalTableHeader(kind) {
+  const thead = document.querySelector("#portalTable thead");
+  if (!thead) return;
+  if (kind === "funded_startups") {
+    thead.innerHTML = `
+      <tr>
+        <th style="width: 50px;">#</th>
+        <th>Startup &amp; Sector</th>
+        <th>Round &amp; Capital</th>
+        <th style="min-width: 200px;">What They Are Building</th>
+        <th>Month &amp; Lead Investors</th>
+        <th>Intelligence</th>
+        <th style="text-align: right;">Action</th>
+      </tr>
+    `;
+  } else if (kind === "startup_failures") {
+    thead.innerHTML = `
+      <tr>
+        <th style="width: 50px;">#</th>
+        <th>Company &amp; Sector</th>
+        <th>Pre-Failure Capital</th>
+        <th>When &amp; What Happened</th>
+        <th style="min-width: 200px;">Precise Reason</th>
+        <th style="min-width: 180px;">Key Lesson</th>
+        <th style="text-align: right;">Action</th>
+      </tr>
+    `;
+  } else {
+    thead.innerHTML = `
+      <tr>
+        <th style="width: 50px;">#</th>
+        <th>Company Name</th>
+        <th>Portal / ATS</th>
+        <th>Open Roles</th>
+        <th>Career Board</th>
+        <th>Intelligence Links</th>
+        <th style="text-align: right;">Action</th>
+      </tr>
+    `;
+  }
+}
+
+async function loadPortalSheetPage(sheetKey, page, limit, query, month = "") {
   const tbody = document.getElementById("portalTableBody");
-  tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);"><i class="fa fa-spinner fa-spin"></i> Loading ${sheetKey} sheet page ${page}...</td></tr>`;
+  tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);"><i class="fa fa-spinner fa-spin"></i> Loading ${escapeHtml(sheetKey)} sheet page ${page}...</td></tr>`;
+
+  const searchInput = document.getElementById("portalSearch");
+  if (searchInput) {
+    if (sheetKey === 'funded_startups') {
+      searchInput.placeholder = "Search 480 funded startups by name, sector (e.g. AI), round, or investor...";
+    } else if (sheetKey === 'startup_failures') {
+      searchInput.placeholder = "Search failed / distressed startups by name, reason, lesson, or sector...";
+    } else {
+      searchInput.placeholder = "Search companies by name, slug, or portal...";
+    }
+  }
 
   try {
     const params = new URLSearchParams({
       sheet: sheetKey,
       page: page,
       limit: limit,
-      q: query || ""
+      q: query || "",
+      month: month || ""
     });
     const res = await fetch(`/api/portals?${params.toString()}`);
     if (!res.ok) throw new Error("API not reachable");
     const data = await res.json();
 
+    const kind = data.kind || (sheetKey === 'funded_startups' ? 'funded_startups' : (sheetKey === 'startup_failures' ? 'startup_failures' : 'standard'));
+    renderPortalTableHeader(kind);
     renderPortalTable(data);
     renderPortalPagination(data);
   } catch (e) {
-    if (typeof EMBEDDED_ITEMS !== 'undefined') {
-      let filtered = EMBEDDED_ITEMS;
-      if (sheetKey !== 'master') {
-        filtered = filtered.filter(i => (i.ats || '').toLowerCase().includes(sheetKey.toLowerCase()));
-      }
-      if (query) {
-        const q = query.toLowerCase();
-        filtered = filtered.filter(i => (i.name || '').toLowerCase().includes(q) || (i.slug || '').toLowerCase().includes(q));
-      }
-      const total = filtered.length;
-      const totalPages = Math.max(1, Math.ceil(total / limit));
-      const curPage = Math.min(page, totalPages);
-      const start = (curPage - 1) * limit;
-      const end = start + limit;
-      const slice = filtered.slice(start, end);
-
-      const staticData = {
-        sheet_key: sheetKey,
-        sheet_title: sheetKey.toUpperCase() + " Portals",
-        sheet_subtitle: "Verified Tech Companies",
-        total_in_sheet: 7008,
-        total_filtered: total,
-        page: curPage,
-        limit: limit,
-        total_pages: totalPages,
-        has_next: curPage < totalPages,
-        has_prev: curPage > 1,
-        start_index: total === 0 ? 0 : start + 1,
-        end_index: Math.min(end, total),
-        items: slice
-      };
-      renderPortalTable(staticData);
-      renderPortalPagination(staticData);
-    } else {
-      tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #DC2626; padding: 40px;">Failed to load sheet data: ${escapeHtml(e.message)}</td></tr>`;
-    }
+    handleStaticPortalFallback(sheetKey, page, limit, query, month);
   }
+}
+
+function handleStaticPortalFallback(sheetKey, page, limit, query, month) {
+  let filtered = [];
+  let title = "Directory Sheets";
+  let kind = "standard";
+
+  if (sheetKey === 'funded_startups') {
+    kind = "funded_startups";
+    title = "2026 Funded Startups";
+    filtered = (typeof EMBEDDED_FUNDED_STARTUPS !== 'undefined') ? EMBEDDED_FUNDED_STARTUPS : [];
+    if (month && month.toLowerCase() !== 'all' && month.toLowerCase() !== 'all months') {
+      filtered = filtered.filter(i => (i.month || '').toLowerCase() === month.toLowerCase());
+    }
+    if (query) {
+      const q = query.toLowerCase();
+      filtered = filtered.filter(i => 
+        (i.name || '').toLowerCase().includes(q) ||
+        (i.sector || '').toLowerCase().includes(q) ||
+        (i.country || '').toLowerCase().includes(q) ||
+        (i.round || '').toLowerCase().includes(q) ||
+        (i.what_they_build || '').toLowerCase().includes(q) ||
+        (i.lead_investors || '').toLowerCase().includes(q)
+      );
+    }
+  } else if (sheetKey === 'startup_failures') {
+    kind = "startup_failures";
+    title = "Failures & Distress 2026";
+    filtered = (typeof EMBEDDED_FAILURES !== 'undefined') ? EMBEDDED_FAILURES : [];
+    if (query) {
+      const q = query.toLowerCase();
+      filtered = filtered.filter(i => 
+        (i.name || '').toLowerCase().includes(q) ||
+        (i.sector || '').toLowerCase().includes(q) ||
+        (i.country || '').toLowerCase().includes(q) ||
+        (i.what_happened || '').toLowerCase().includes(q) ||
+        (i.precise_reason || '').toLowerCase().includes(q) ||
+        (i.lesson || '').toLowerCase().includes(q)
+      );
+    }
+  } else {
+    filtered = (typeof EMBEDDED_ITEMS !== 'undefined') ? EMBEDDED_ITEMS : [];
+    if (sheetKey !== 'master') {
+      filtered = filtered.filter(i => (i.ats || '').toLowerCase().includes(sheetKey.toLowerCase()));
+    }
+    if (query) {
+      const q = query.toLowerCase();
+      filtered = filtered.filter(i => (i.name || '').toLowerCase().includes(q) || (i.slug || '').toLowerCase().includes(q));
+    }
+    title = sheetKey.toUpperCase() + " Portals";
+  }
+
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+  const curPage = Math.min(page, totalPages);
+  const start = (curPage - 1) * limit;
+  const end = start + limit;
+  const slice = filtered.slice(start, end);
+
+  const staticData = {
+    sheet_key: sheetKey,
+    sheet_title: title,
+    sheet_subtitle: "Verified Tech Companies & Startups",
+    kind: kind,
+    total_in_sheet: total,
+    total_filtered: total,
+    page: curPage,
+    limit: limit,
+    total_pages: totalPages,
+    has_next: curPage < totalPages,
+    has_prev: curPage > 1,
+    start_index: total === 0 ? 0 : start + 1,
+    end_index: Math.min(end, total),
+    items: slice
+  };
+
+  renderPortalTableHeader(kind);
+  renderPortalTable(staticData);
+  renderPortalPagination(staticData);
 }
 
 function renderPortalTable(data) {
   const tbody = document.getElementById("portalTableBody");
   if (!data.items || data.items.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 50px;">No companies found matching "<strong>${escapeHtml(CURRENT_QUERY)}</strong>" in ${escapeHtml(data.sheet_title)}.</td></tr>`;
+    const filterInfo = CURRENT_MONTH ? ` for ${CURRENT_MONTH}` : "";
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 50px;">No records found matching "<strong>${escapeHtml(CURRENT_QUERY || CURRENT_MONTH)}</strong>"${filterInfo} in ${escapeHtml(data.sheet_title)}.</td></tr>`;
     return;
   }
 
+  const kind = data.kind || (data.sheet_key === 'funded_startups' ? 'funded_startups' : (data.sheet_key === 'startup_failures' ? 'startup_failures' : 'standard'));
+
+  if (kind === "funded_startups") {
+    tbody.innerHTML = data.items.map((item, idx) => {
+      const rowIndex = data.start_index + idx;
+      const safeComp = escapeHtml(item.name);
+      const safeJsName = safeComp.replace(/'/g, "\\'");
+      const websiteUrl = item.website || item.google_jobs_url;
+      const safeJsUrl = escapeHtml(websiteUrl).replace(/'/g, "\\'");
+      
+      const roundBadge = item.round ? `<span class="badge-round">${escapeHtml(item.round)}</span>` : "";
+      const amountBadge = item.amount ? `<span class="badge-amount">${escapeHtml(item.amount)}</span>` : "";
+      const sectorBadge = item.sector ? `<span class="badge-sector">${escapeHtml(item.sector)}</span>` : "";
+      const locationText = item.country ? `<span class="badge-country"><i class="fa-solid fa-location-dot" style="font-size: 0.68rem;"></i> ${escapeHtml(item.country)}</span>` : "";
+
+      const websiteBtn = item.website ? `
+        <a class="ext-link" href="${escapeHtml(item.website)}" target="_blank" rel="noopener noreferrer" style="margin-right: 4px;">
+          <span>Website</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.68rem;"></i>
+        </a>
+      ` : "";
+
+      return `
+        <tr>
+          <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
+          <td>
+            <div style="font-weight: 600; color: var(--text-primary); font-size: 0.94rem;">${safeComp}</div>
+            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 3px;">
+              ${sectorBadge}
+              ${locationText}
+            </div>
+          </td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              ${roundBadge}
+              ${amountBadge}
+            </div>
+            ${item.valuation && item.valuation !== 'N/D' ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 3px;">Val: ${escapeHtml(item.valuation)}</div>` : ''}
+          </td>
+          <td>
+            <div style="font-size: 0.83rem; line-height: 1.45; color: var(--text-primary); max-width: 320px;">
+              ${escapeHtml(item.what_they_build || 'High-growth technology startup.')}
+            </div>
+          </td>
+          <td>
+            <div style="font-weight: 600; font-size: 0.82rem; color: var(--text-primary);"><i class="fa fa-calendar-check" style="color: var(--accent-emerald); font-size: 0.75rem;"></i> ${escapeHtml(item.month || item.announced_date)}</div>
+            ${item.lead_investors ? `<div style="font-size: 0.74rem; color: var(--text-secondary); margin-top: 2px;">Lead: <strong>${escapeHtml(item.lead_investors)}</strong></div>` : ''}
+          </td>
+          <td style="white-space: nowrap;">
+            ${websiteBtn}
+            <a class="intel-link intel-levels" href="${escapeHtml(item.levels_url)}" target="_blank" rel="noopener noreferrer" title="View salaries on Levels.fyi">
+              <i class="fa fa-chart-line"></i> Salaries
+            </a>
+            <a class="intel-link intel-glassdoor" href="${escapeHtml(item.glassdoor_url)}" target="_blank" rel="noopener noreferrer" title="View reviews on Glassdoor">
+              <i class="fa fa-star"></i> Reviews
+            </a>
+          </td>
+          <td style="text-align: right; white-space: nowrap;">
+            <button class="btn btn-sm btn-primary" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
+              <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join("");
+    return;
+  }
+
+  if (kind === "startup_failures") {
+    tbody.innerHTML = data.items.map((item, idx) => {
+      const rowIndex = data.start_index + idx;
+      const safeComp = escapeHtml(item.name);
+      const safeJsName = safeComp.replace(/'/g, "\\'");
+      const sectorBadge = item.sector ? `<span class="badge-sector" style="background: #FFF1F2; color: #BE123C; border-color: #FECDD3;">${escapeHtml(item.sector)}</span>` : "";
+      const countryText = item.country ? `<span class="badge-country"><i class="fa-solid fa-location-dot" style="font-size: 0.68rem;"></i> ${escapeHtml(item.country)}</span>` : "";
+
+      return `
+        <tr>
+          <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
+          <td>
+            <div style="font-weight: 600; color: #991B1B; font-size: 0.94rem;"><i class="fa fa-skull-crossbones" style="font-size: 0.8rem; opacity: 0.7;"></i> ${safeComp}</div>
+            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 3px;">
+              ${sectorBadge}
+              ${countryText}
+            </div>
+          </td>
+          <td>
+            <div class="badge-fail-funding">${escapeHtml(item.funding_before_failure || 'N/A')}</div>
+          </td>
+          <td>
+            <div style="font-size: 0.76rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 3px;"><i class="fa fa-clock"></i> ${escapeHtml(item.when_date)}</div>
+            <div style="font-size: 0.82rem; line-height: 1.4; color: var(--text-primary); max-width: 280px;">${escapeHtml(item.what_happened)}</div>
+          </td>
+          <td>
+            <div style="font-size: 0.82rem; line-height: 1.4; color: #7F1D1D; background: #FEF2F2; padding: 6px 8px; border-radius: 6px; border: 1px solid #FEE2E2; max-width: 280px;">
+              <strong>Risk Signal:</strong> ${escapeHtml(item.precise_reason)}
+            </div>
+          </td>
+          <td>
+            <div style="font-size: 0.8rem; line-height: 1.4; color: #1E3A8A; background: #EFF6FF; padding: 6px 8px; border-radius: 6px; border: 1px solid #DBEAFE; max-width: 260px;">
+              <i class="fa fa-lightbulb" style="color: #F59E0B;"></i> ${escapeHtml(item.lesson)}
+            </div>
+          </td>
+          <td style="text-align: right; white-space: nowrap;">
+            <button class="btn btn-sm btn-secondary" onclick="useCompanyInStudio('${safeJsName}', '${escapeHtml(item.google_jobs_url).replace(/'/g, "\\\\'")}')">
+              <i class="fa fa-file-pen"></i> Tailor / Track
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join("");
+    return;
+  }
+
+  // Standard Sheet rendering (Master, Ashby, Greenhouse, Lever, Workday)
   tbody.innerHTML = data.items.map((item, idx) => {
     const ats = (item.ats || "").toLowerCase();
     let badgeClass = "badge-other";
@@ -2479,9 +2862,10 @@ function renderPortalTable(data) {
     if (ats.includes("greenhouse")) badgeClass = "badge-greenhouse";
     if (ats.includes("lever")) badgeClass = "badge-lever";
     if (ats.includes("workday")) badgeClass = "badge-workday";
+    if (ats.includes("funded")) badgeClass = "badge-greenhouse";
 
     const jobsHtml = item.open_jobs 
-      ? `<span style="font-weight: 600; color: #047857; font-size: 0.78rem;">${item.open_jobs} open roles</span>`
+      ? `<span style="font-weight: 600; color: #047857; font-size: 0.78rem;">${escapeHtml(item.open_jobs)}</span>`
       : `<span style="color: var(--text-muted); font-size: 0.78rem;">Verified Board</span>`;
 
     const rowIndex = data.start_index + idx;
@@ -3121,8 +3505,9 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
             except (ValueError, TypeError):
                 limit = 25
             q = qs.get("q", [""])[0]
+            month = qs.get("month", [""])[0]
 
-            data = get_sheet_page(sheet_key=sheet, page=page, limit=limit, query=q)
+            data = get_sheet_page(sheet_key=sheet, page=page, limit=limit, query=q, month=month)
             self.send_json(200, data)
 
         elif path == "/api/base_tex":

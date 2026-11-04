@@ -29,12 +29,20 @@ def main():
     items = page_data.get("items", [])
     summaries = get_sheets_summary()
 
+    funded_json = root / "data" / "funded_startups_2026.json"
+    funded_startups = json.loads(funded_json.read_text(encoding="utf-8")) if funded_json.is_file() else []
+
+    failures_json = root / "data" / "startup_failures_2026.json"
+    startup_failures = json.loads(failures_json.read_text(encoding="utf-8")) if failures_json.is_file() else []
+
     static_data_js = f"""
 const IS_GITHUB_PAGES = (window.location.hostname.endsWith('.github.io') || window.location.protocol === 'file:');
 const EMBEDDED_BASE_TEX = {json.dumps(base_tex)};
 const EMBEDDED_PREVIEW_HTML = {json.dumps(preview_html)};
 const EMBEDDED_SUMMARIES = {json.dumps(summaries)};
 const EMBEDDED_ITEMS = {json.dumps(items)};
+const EMBEDDED_FUNDED_STARTUPS = {json.dumps(funded_startups)};
+const EMBEDDED_FAILURES = {json.dumps(startup_failures)};
 """
 
     static_html = HTML_PAGE.replace("/* GITHUB_PAGES_EMBEDDED_DATA */", static_data_js.strip())

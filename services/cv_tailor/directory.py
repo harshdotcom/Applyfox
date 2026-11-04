@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 """
-directory.py - Fast on-demand paginated loader for multi-portal ATS career boards.
-Supports Master (7,008), Ashby (3,212), Greenhouse (1,894), Lever (1,522), and Workday (380).
+directory.py - Fast on-demand paginated loader for multi-portal ATS career boards
+and 2026 Startup Funding & Failures Intelligence.
+Supports:
+  - Master Directory (7,406 total companies across all ATS boards & funded startups)
+  - Ashby Portals (3,212)
+  - Greenhouse Portals (1,894)
+  - Lever Portals (1,522)
+  - Workday Portals (380)
+  - 2026 Funded Startups (480 Series A-D rounds, month-wise filtered)
+  - 2026 Failures & Distress (23 startup post-mortems with market risk lessons)
 """
 
 import csv
+import json
 import math
 import re
 import urllib.parse
+from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -16,11 +26,12 @@ SHEETS = {
     "master": {
         "key": "master",
         "title": "Master Directory",
-        "subtitle": "All Platforms Aggregated",
+        "subtitle": "All Platforms & Startups Aggregated",
         "path": Path("data/all_companies_master.csv"),
         "ats_default": "all",
         "badge_color": "neutral",
         "icon": "fa-globe",
+        "kind": "standard",
     },
     "ashby": {
         "key": "ashby",
@@ -30,6 +41,7 @@ SHEETS = {
         "ats_default": "ashby",
         "badge_color": "purple",
         "icon": "fa-bolt",
+        "kind": "standard",
     },
     "greenhouse": {
         "key": "greenhouse",
@@ -39,6 +51,7 @@ SHEETS = {
         "ats_default": "greenhouse",
         "badge_color": "emerald",
         "icon": "fa-seedling",
+        "kind": "standard",
     },
     "lever": {
         "key": "lever",
@@ -48,6 +61,7 @@ SHEETS = {
         "ats_default": "lever",
         "badge_color": "sky",
         "icon": "fa-sliders",
+        "kind": "standard",
     },
     "workday": {
         "key": "workday",
@@ -57,6 +71,27 @@ SHEETS = {
         "ats_default": "workday",
         "badge_color": "amber",
         "icon": "fa-building",
+        "kind": "standard",
+    },
+    "funded_startups": {
+        "key": "funded_startups",
+        "title": "Funded Startups 2026",
+        "subtitle": "Series A-D Rounds Month-Wise (Jan - Nov 2026)",
+        "path": Path("data/funded_startups_2026.json"),
+        "ats_default": "funded-2026",
+        "badge_color": "emerald",
+        "icon": "fa-rocket",
+        "kind": "funded_startups",
+    },
+    "startup_failures": {
+        "key": "startup_failures",
+        "title": "Failures & Distress 2026",
+        "subtitle": "Startup Post-Mortems & Risk Signals",
+        "path": Path("data/startup_failures_2026.json"),
+        "ats_default": "distressed",
+        "badge_color": "rose",
+        "icon": "fa-triangle-exclamation",
+        "kind": "startup_failures",
     },
 }
 
@@ -80,6 +115,101 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
     if not config or not config["path"].is_file():
         return []
 
+    kind = config.get("kind", "standard")
+
+    # 1. Funded Startups (JSON)
+    if kind == "funded_startups":
+        try:
+            raw_data = json.loads(config["path"].read_text(encoding="utf-8"))
+            items = []
+            for item in raw_data:
+                comp = item.get("name", "").strip()
+                if not comp:
+                    continue
+                safe_query = urllib.parse.quote(comp)
+                safe_slug = item.get("slug") or _clean_slug(comp)
+                website = item.get("website", "").strip()
+                board_url = website if website else f"https://www.google.com/search?q={safe_query}+jobs+careers"
+                round_val = item.get("round", "")
+                amount_val = item.get("amount", "")
+                open_jobs_label = f"{round_val} ({amount_val})" if round_val and amount_val else (round_val or amount_val or "Funded 2026")
+
+                items.append({
+                    "id": item.get("id"),
+                    "name": comp,
+                    "ats": "funded-2026",
+                    "slug": safe_slug,
+                    "kind": "funded_startups",
+                    "website": website,
+                    "country": item.get("country", ""),
+                    "region": item.get("region", ""),
+                    "sector": item.get("sector", ""),
+                    "what_they_build": item.get("what_they_build", ""),
+                    "round": round_val,
+                    "amount": amount_val,
+                    "amount_usd_m": item.get("amount_usd_m", ""),
+                    "announced_date": item.get("announced_date", ""),
+                    "month": item.get("month", "Month not disclosed"),
+                    "lead_investors": item.get("lead_investors", ""),
+                    "valuation": item.get("valuation", ""),
+                    "total_funding": item.get("total_funding", ""),
+                    "status": item.get("status", "Active"),
+                    "failed_reason": item.get("failed_reason", ""),
+                    "outlook": item.get("outlook", ""),
+                    "outlook_reasoning": item.get("outlook_reasoning", ""),
+                    "source": item.get("source", ""),
+                    "open_jobs": open_jobs_label,
+                    "board_url": board_url,
+                    "glassdoor_url": item.get("glassdoor_url") or f"https://www.glassdoor.com/Search/results.htm?keyword={safe_query}",
+                    "levels_url": item.get("levels_url") or f"https://www.levels.fyi/companies/{safe_slug}/salaries",
+                    "google_jobs_url": item.get("google_jobs_url") or f"https://www.google.com/search?q={safe_query}+jobs+careers",
+                })
+            _SHEET_CACHE[sheet_key] = items
+            return items
+        except Exception as e:
+            print(f"Error loading funded_startups: {e}")
+            return []
+
+    # 2. Startup Failures (JSON)
+    if kind == "startup_failures":
+        try:
+            raw_data = json.loads(config["path"].read_text(encoding="utf-8"))
+            items = []
+            for item in raw_data:
+                comp = item.get("name", "").strip()
+                if not comp:
+                    continue
+                safe_query = urllib.parse.quote(comp)
+                safe_slug = item.get("slug") or _clean_slug(comp)
+                funding_before = item.get("funding_before_failure", "")
+
+                items.append({
+                    "id": item.get("id"),
+                    "name": comp,
+                    "ats": "distressed",
+                    "slug": safe_slug,
+                    "kind": "startup_failures",
+                    "country": item.get("country", ""),
+                    "sector": item.get("sector", ""),
+                    "funding_before_failure": funding_before,
+                    "when_date": item.get("when_date", ""),
+                    "what_happened": item.get("what_happened", ""),
+                    "precise_reason": item.get("precise_reason", ""),
+                    "lesson": item.get("lesson", ""),
+                    "source": item.get("source", ""),
+                    "open_jobs": funding_before[:35] if funding_before else "Distressed 2026",
+                    "board_url": item.get("google_jobs_url") or f"https://www.google.com/search?q={safe_query}+startup+news",
+                    "glassdoor_url": item.get("glassdoor_url") or f"https://www.glassdoor.com/Search/results.htm?keyword={safe_query}",
+                    "levels_url": item.get("levels_url") or f"https://www.levels.fyi/companies/{safe_slug}/salaries",
+                    "google_jobs_url": item.get("google_jobs_url") or f"https://www.google.com/search?q={safe_query}+startup+news",
+                })
+            _SHEET_CACHE[sheet_key] = items
+            return items
+        except Exception as e:
+            print(f"Error loading startup_failures: {e}")
+            return []
+
+    # 3. Standard CSV Sheets
     items: List[Dict[str, Any]] = []
     with open(config["path"], encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -93,7 +223,6 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
             open_jobs = (row.get("open_jobs") or "").strip()
             board_url = (row.get("board_url") or "").strip()
 
-            # Generate Glassdoor & Levels.fyi search links
             safe_query = urllib.parse.quote(name)
             safe_slug = _clean_slug(name)
             glassdoor_url = f"https://www.glassdoor.com/Search/results.htm?keyword={safe_query}"
@@ -105,6 +234,7 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
                 "name": name,
                 "ats": ats,
                 "slug": slug,
+                "kind": "standard",
                 "open_jobs": open_jobs if open_jobs else None,
                 "board_url": board_url,
                 "glassdoor_url": glassdoor_url,
@@ -117,18 +247,34 @@ def _load_sheet(sheet_key: str) -> List[Dict[str, Any]]:
 
 
 def get_sheets_summary() -> List[Dict[str, Any]]:
-    """Return summary metadata for all supported portal sheets."""
+    """Return summary metadata for all supported portal and startup sheets."""
     summaries = []
     for key, cfg in SHEETS.items():
         items = _load_sheet(key)
-        summaries.append({
+        summary: Dict[str, Any] = {
             "key": key,
             "title": cfg["title"],
             "subtitle": cfg["subtitle"],
             "badge_color": cfg["badge_color"],
             "icon": cfg["icon"],
+            "kind": cfg.get("kind", "standard"),
             "total_count": len(items),
-        })
+        }
+
+        # If funded startups, include month breakdown
+        if cfg.get("kind") == "funded_startups":
+            month_counts = Counter([it.get("month") for it in items if it.get("month")])
+            ordered_months = [
+                "Jan 2026", "Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026",
+                "Jul 2026", "Aug 2026", "Sep 2026", "Oct 2026", "Nov 2026", "Month not disclosed"
+            ]
+            months_data = [{"name": "All Months", "count": len(items)}]
+            for m in ordered_months:
+                if m in month_counts:
+                    months_data.append({"name": m, "count": month_counts[m]})
+            summary["months"] = months_data
+
+        summaries.append(summary)
     return summaries
 
 
@@ -136,29 +282,59 @@ def get_sheet_page(
     sheet_key: str = "master",
     page: int = 1,
     limit: int = 25,
-    query: str = ""
+    query: str = "",
+    month: str = ""
 ) -> Dict[str, Any]:
     """
     Retrieve a single paginated slice of companies for the requested sheet.
-    Only the requested page slice is returned to keep network payloads under ~15KB.
+    Supports month filtering for funded startups and multi-field search.
     """
     if sheet_key not in SHEETS:
         sheet_key = "master"
 
     items = _load_sheet(sheet_key)
     cfg = SHEETS[sheet_key]
+    kind = cfg.get("kind", "standard")
+
+    filtered = items
+
+    # Apply month filter if funded startups
+    if kind == "funded_startups" and month and month.lower() not in ("all", "all months"):
+        m_lower = month.strip().lower()
+        filtered = [it for it in filtered if it.get("month", "").lower() == m_lower]
 
     # Apply search filter if query is present
     q = query.strip().lower()
     if q:
-        filtered = [
-            item for item in items
-            if q in item["name"].lower()
-            or q in item["slug"].lower()
-            or q in item["ats"].lower()
-        ]
-    else:
-        filtered = items
+        if kind == "funded_startups":
+            filtered = [
+                it for it in filtered
+                if q in it.get("name", "").lower()
+                or q in it.get("sector", "").lower()
+                or q in it.get("country", "").lower()
+                or q in it.get("round", "").lower()
+                or q in it.get("lead_investors", "").lower()
+                or q in it.get("what_they_build", "").lower()
+                or q in it.get("region", "").lower()
+                or q in it.get("month", "").lower()
+            ]
+        elif kind == "startup_failures":
+            filtered = [
+                it for it in filtered
+                if q in it.get("name", "").lower()
+                or q in it.get("sector", "").lower()
+                or q in it.get("country", "").lower()
+                or q in it.get("what_happened", "").lower()
+                or q in it.get("precise_reason", "").lower()
+                or q in it.get("lesson", "").lower()
+            ]
+        else:
+            filtered = [
+                it for it in filtered
+                if q in it.get("name", "").lower()
+                or q in it.get("slug", "").lower()
+                or q in it.get("ats", "").lower()
+            ]
 
     total = len(filtered)
     limit = max(5, min(limit, 100))
@@ -173,6 +349,7 @@ def get_sheet_page(
         "sheet_key": sheet_key,
         "sheet_title": cfg["title"],
         "sheet_subtitle": cfg["subtitle"],
+        "kind": kind,
         "total_in_sheet": len(items),
         "total_filtered": total,
         "page": page,
@@ -182,6 +359,6 @@ def get_sheet_page(
         "has_prev": page > 1,
         "start_index": start + 1 if total > 0 else 0,
         "end_index": min(end, total),
+        "month_filter": month,
         "items": page_items,
     }
-

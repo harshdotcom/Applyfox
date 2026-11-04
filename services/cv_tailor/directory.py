@@ -23,6 +23,26 @@ from typing import Any, Dict, List, Optional
 
 
 SHEETS = {
+    "funded_startups": {
+        "key": "funded_startups",
+        "title": "2026 Funded Startups",
+        "subtitle": "Series A-D Rounds Month-Wise (Jan - Nov 2026)",
+        "path": Path("data/funded_startups_2026.json"),
+        "ats_default": "funded-2026",
+        "badge_color": "amber",
+        "icon": "fa-rocket",
+        "kind": "funded_startups",
+    },
+    "startup_failures": {
+        "key": "startup_failures",
+        "title": "Failures & Distress 2026",
+        "subtitle": "Startup Post-Mortems & Risk Signals",
+        "path": Path("data/startup_failures_2026.json"),
+        "ats_default": "distressed",
+        "badge_color": "rose",
+        "icon": "fa-triangle-exclamation",
+        "kind": "startup_failures",
+    },
     "master": {
         "key": "master",
         "title": "Master Directory",
@@ -72,26 +92,6 @@ SHEETS = {
         "badge_color": "amber",
         "icon": "fa-building",
         "kind": "standard",
-    },
-    "funded_startups": {
-        "key": "funded_startups",
-        "title": "Funded Startups 2026",
-        "subtitle": "Series A-D Rounds Month-Wise (Jan - Nov 2026)",
-        "path": Path("data/funded_startups_2026.json"),
-        "ats_default": "funded-2026",
-        "badge_color": "emerald",
-        "icon": "fa-rocket",
-        "kind": "funded_startups",
-    },
-    "startup_failures": {
-        "key": "startup_failures",
-        "title": "Failures & Distress 2026",
-        "subtitle": "Startup Post-Mortems & Risk Signals",
-        "path": Path("data/startup_failures_2026.json"),
-        "ats_default": "distressed",
-        "badge_color": "rose",
-        "icon": "fa-triangle-exclamation",
-        "kind": "startup_failures",
     },
 }
 

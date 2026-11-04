@@ -525,6 +525,10 @@ HTML_PAGE = """<!DOCTYPE html>
   }
   .stat-item {
     text-align: center;
+    transition: transform 0.15s ease;
+  }
+  .stat-item:hover {
+    transform: translateY(-2px);
   }
   .stat-num {
     font-family: 'Newsreader', serif;
@@ -922,6 +926,18 @@ HTML_PAGE = """<!DOCTYPE html>
   .btn-success:hover {
     background: #047857;
     border-color: #047857;
+  }
+  .btn-amber {
+    background: #D97706;
+    color: #FFFFFF;
+    border-color: #D97706;
+    box-shadow: 0 1px 3px rgba(217, 119, 6, 0.25);
+  }
+  .btn-amber:hover {
+    background: #B45309;
+    border-color: #B45309;
+    color: #FFFFFF;
+    transform: translateY(-1px);
   }
   .btn-secondary {
     background: #FFFFFF;
@@ -1715,8 +1731,11 @@ HTML_PAGE = """<!DOCTYPE html>
           <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
             <i class="fa fa-wand-magic-sparkles"></i> <span>Studio &amp; Tailor</span>
           </button>
-          <button class="tab-btn" id="navBtn-portals" onclick="switchView('portals')">
-            <i class="fa fa-table-list"></i> <span>Directory &amp; Startups (7,406)</span>
+          <button class="tab-btn" id="navBtn-startups" onclick="openStartupsView()">
+            <i class="fa fa-rocket" style="color: #D97706;"></i> <span>2026 Startups (480)</span>
+          </button>
+          <button class="tab-btn" id="navBtn-portals" onclick="openPortalsView()">
+            <i class="fa fa-table-list"></i> <span>Directory (7,406)</span>
           </button>
           <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
             <i class="fa fa-clipboard-check"></i> <span>Tracker (<span id="appCount">0</span>)</span>
@@ -1753,10 +1772,10 @@ HTML_PAGE = """<!DOCTYPE html>
           <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
             <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
           </button>
-          <button class="btn btn-secondary btn-lg" onclick="switchView('portals'); switchPortalSheet('funded_startups');">
+          <button class="btn btn-amber btn-lg" onclick="openStartupsView()">
             <i class="fa fa-rocket"></i> Explore 480 Funded Startups
           </button>
-          <button class="btn btn-secondary btn-lg" onclick="switchView('portals')">
+          <button class="btn btn-secondary btn-lg" onclick="openPortalsView()">
             <i class="fa fa-table-list"></i> Explore 7,406 Portal Sheets
           </button>
           <button class="btn btn-secondary btn-lg" onclick="switchView('tracker')">
@@ -1792,19 +1811,19 @@ HTML_PAGE = """<!DOCTYPE html>
 
       <!-- Platform Statistics Strip -->
       <div class="stats-strip">
-        <div class="stat-item">
+        <div class="stat-item" onclick="openStartupsView()" style="cursor: pointer;" title="Explore 480 Startups funded in 2026">
+          <div class="stat-num" style="color: #D97706;"><i class="fa fa-rocket" style="font-size: 0.8em; margin-right: 4px;"></i>480</div>
+          <div class="stat-label" style="color: var(--text-primary); font-weight: 700;">2026 Funded Startups &rarr;</div>
+        </div>
+        <div class="stat-item" onclick="openFailuresView()" style="cursor: pointer;" title="Explore 23 Startup Failure Post-Mortems">
+          <div class="stat-num" style="color: #E11D48;"><i class="fa fa-triangle-exclamation" style="font-size: 0.8em; margin-right: 4px;"></i>23</div>
+          <div class="stat-label" style="color: var(--text-primary); font-weight: 700;">Failure Case Studies &rarr;</div>
+        </div>
+        <div class="stat-item" onclick="openPortalsView()" style="cursor: pointer;" title="Browse all 7,406 verified companies">
           <div class="stat-num">7,406</div>
           <div class="stat-label">Verified Companies &amp; Boards</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">480</div>
-          <div class="stat-label">2026 Funded Startups</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">23</div>
-          <div class="stat-label">Failure Case Studies</div>
-        </div>
-        <div class="stat-item">
+        <div class="stat-item" onclick="switchPortalSheet('ashby'); switchView('portals');" style="cursor: pointer;" title="Browse Ashby career boards">
           <div class="stat-num">3,212</div>
           <div class="stat-label">Ashby Portals</div>
         </div>
@@ -1944,16 +1963,17 @@ HTML_PAGE = """<!DOCTYPE html>
             <div class="footer-heading">WORKSPACE NAVIGATION</div>
             <ul class="footer-links">
               <li><a href="#" onclick="switchView('tailor'); return false;"><i class="fa fa-wand-magic-sparkles"></i> CV Studio &amp; Tailor</a></li>
-              <li><a href="#" onclick="switchView('portals'); return false;"><i class="fa fa-table-list"></i> Directory &amp; Startups (7,406)</a></li>
+              <li><a href="#" onclick="openStartupsView(); return false;"><i class="fa fa-rocket" style="color: #D97706;"></i> 2026 Startups Tracker (480)</a></li>
+              <li><a href="#" onclick="openPortalsView(); return false;"><i class="fa fa-table-list"></i> Directory Sheets (7,406)</a></li>
               <li><a href="#" onclick="switchView('tracker'); return false;"><i class="fa fa-clipboard-check"></i> Applications Tracker</a></li>
               <li><a href="#" onclick="switchView('base-cv'); return false;"><i class="fa fa-file-code"></i> Base LaTeX main.tex</a></li>
             </ul>
 
             <div class="footer-heading" style="margin-top: 22px;">CAREER PORTALS &amp; STARTUPS</div>
             <ul class="footer-links">
-              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('master'); return false;"><i class="fa fa-globe"></i> Master Sheet (7,406)</a></li>
-              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('funded_startups'); return false;"><i class="fa fa-rocket"></i> 2026 Funded Startups (480)</a></li>
-              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('startup_failures'); return false;"><i class="fa fa-triangle-exclamation"></i> Failures &amp; Distress (23)</a></li>
+              <li><a href="#" onclick="openStartupsView(); return false;"><i class="fa fa-rocket" style="color: #D97706;"></i> 2026 Funded Startups (480)</a></li>
+              <li><a href="#" onclick="openFailuresView(); return false;"><i class="fa fa-triangle-exclamation" style="color: #E11D48;"></i> Failures &amp; Distress (23)</a></li>
+              <li><a href="#" onclick="openPortalsView(); return false;"><i class="fa fa-globe"></i> Master Sheet (7,406)</a></li>
               <li><a href="#" onclick="switchView('portals'); switchPortalSheet('ashby'); return false;"><i class="fa fa-bolt"></i> Ashby Boards (3,212)</a></li>
               <li><a href="#" onclick="switchView('portals'); switchPortalSheet('greenhouse'); return false;"><i class="fa fa-seedling"></i> Greenhouse Portals (1,894)</a></li>
               <li><a href="#" onclick="switchView('portals'); switchPortalSheet('lever'); return false;"><i class="fa fa-sliders"></i> Lever Boards (1,522)</a></li>
@@ -2307,7 +2327,7 @@ let TRACKED_APPLICATIONS = [];
 let CURRENT_PDF_PREVIEW_URL = "";
 
 // Directory Sheets State
-let CURRENT_SHEET_KEY = "master";
+let CURRENT_SHEET_KEY = "funded_startups";
 let CURRENT_PAGE = 1;
 let CURRENT_LIMIT = 25;
 let CURRENT_QUERY = "";
@@ -2343,9 +2363,10 @@ function switchView(viewName) {
     if (btn) btn.classList.add("active");
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (viewName === 'portals') {
-    const btn = document.getElementById("navBtn-portals");
+    const activeTabId = (CURRENT_SHEET_KEY === 'funded_startups' || CURRENT_SHEET_KEY === 'startup_failures') ? 'navBtn-startups' : 'navBtn-portals';
+    const btn = document.getElementById(activeTabId) || document.getElementById("navBtn-portals");
     if (btn) btn.classList.add("active");
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (viewName === 'tracker') {
     const btn = document.getElementById("navBtn-tracker");
@@ -2357,6 +2378,30 @@ function switchView(viewName) {
     if (btn) btn.classList.add("active");
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+}
+
+function openStartupsView() {
+  CURRENT_SHEET_KEY = 'funded_startups';
+  CURRENT_PAGE = 1;
+  CURRENT_MONTH = "";
+  switchView('portals');
+  renderPortalSheetsSummary(PORTAL_SUMMARIES);
+}
+
+function openFailuresView() {
+  CURRENT_SHEET_KEY = 'startup_failures';
+  CURRENT_PAGE = 1;
+  CURRENT_MONTH = "";
+  switchView('portals');
+  renderPortalSheetsSummary(PORTAL_SUMMARIES);
+}
+
+function openPortalsView() {
+  CURRENT_SHEET_KEY = 'master';
+  CURRENT_PAGE = 1;
+  CURRENT_MONTH = "";
+  switchView('portals');
+  renderPortalSheetsSummary(PORTAL_SUMMARIES);
 }
 
 // Subtabs in CV Studio
@@ -2557,6 +2602,12 @@ function switchPortalSheet(sheetKey) {
   CURRENT_SHEET_KEY = sheetKey;
   CURRENT_PAGE = 1;
   CURRENT_MONTH = "";
+  const btns = document.querySelectorAll(".nav-tabs .tab-btn");
+  btns.forEach(b => b.classList.remove("active"));
+  const activeTabId = (CURRENT_SHEET_KEY === 'funded_startups' || CURRENT_SHEET_KEY === 'startup_failures') ? 'navBtn-startups' : 'navBtn-portals';
+  const activeTab = document.getElementById(activeTabId);
+  if (activeTab) activeTab.classList.add("active");
+
   renderPortalSheetsSummary(PORTAL_SUMMARIES);
   loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
 }
@@ -2935,7 +2986,7 @@ function renderPortalPagination(data) {
 
 function gotoPortalPage(page) {
   CURRENT_PAGE = page;
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH);
 }
 
 function useCompanyInStudio(name, url) {

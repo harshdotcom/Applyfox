@@ -1,0 +1,23 @@
+[
+  {
+    "run_at": "2026-11-05T17:27:38.349650+00:00",
+    "status": "SUCCESS",
+    "companies": 7225,
+    "roles": 36288,
+    "next_sync": "Sunday, Nov 08, 2026"
+  },
+  {
+    "run_at": "2026-11-05T17:23:45.837303+00:00",
+    "status": "SUCCESS",
+    "companies": 7225,
+    "roles": 36288,
+    "next_sync": "Sunday, Nov 08, 2026"
+  },
+  {
+    "run_at": "2026-11-05T16:58:54.980193+00:00",
+    "status": "SUCCESS",
+    "companies": 7225,
+    "roles": 36288,
+    "next_sync": "Sunday, Nov 08, 2026"
+  }
+]

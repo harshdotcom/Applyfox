@@ -1,0 +1,51 @@
+name: Routine Weekly Update & Sync
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC (weekend routine update)
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allows one-click manual execution from GitHub Actions UI
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "weekly-update"
+  cancel-in-progress: false
+
+jobs:
+  update-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Applyfox Weekly Routine Update
+        run: |
+          python3 scripts/routine_weekly_update.py
+
+      - name: Commit and Push refreshed data and pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ index.html docs/
+          if git diff --cached --quiet; then
+            echo "No changes detected. Repository is up-to-date."
+          else
+            git commit -m "chore(sync): automated weekly routine update and pages refresh"
+            git push origin main
+          fi

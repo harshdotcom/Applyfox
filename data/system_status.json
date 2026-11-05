@@ -1,0 +1,25 @@
+{
+  "status": "Healthy & Operational",
+  "last_sync_timestamp": "2026-11-05T17:27:38.349650+00:00",
+  "last_sync_date": "Nov 05, 2026",
+  "last_sync_human": "Thursday, Nov 05, 2026 at 17:27 UTC",
+  "schedule": "Every Sunday at 00:00 UTC",
+  "next_scheduled_sync": "Sunday, Nov 08, 2026",
+  "total_companies_monitored": 7225,
+  "funded_startups_count": 480,
+  "total_roles_indexed": 36288,
+  "disciplines": [
+    "Software & AI Engineering",
+    "Graphic & UI/UX Design",
+    "IT & Cloud Systems",
+    "Legal & Compliance",
+    "Product & Operations"
+  ],
+  "ats_platforms_monitored": [
+    "Ashby",
+    "Greenhouse",
+    "Lever",
+    "Workday",
+    "Direct Portals"
+  ]
+}

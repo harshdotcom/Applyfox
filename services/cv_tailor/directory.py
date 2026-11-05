@@ -314,11 +314,14 @@ def get_sheet_page(
     limit: int = 25,
     query: str = "",
     month: str = "",
-    role: str = ""
+    role: str = "",
+    work_mode: str = "",
+    level: str = ""
 ) -> Dict[str, Any]:
     """
     Retrieve a single paginated slice of companies for the requested sheet.
-    Supports month filtering for funded startups, role/discipline filtering, and multi-field search.
+    Supports month filtering, role/discipline, work mode (remote/hybrid/onsite),
+    seniority level, and multi-field search.
     """
     if sheet_key not in SHEETS:
         sheet_key = "master"
@@ -335,15 +338,40 @@ def get_sheet_page(
         filtered = [it for it in filtered if it.get("month", "").lower() == m_lower]
 
     # Apply role / job title / discipline filter
-    if role and role.strip().lower() not in ("all", "all roles", "all job titles", "all titles"):
+    if role and role.strip().lower() not in ("all", "all roles", "all job titles", "all titles", "all disciplines"):
         r_lower = role.strip().lower()
         filtered = [
             it for it in filtered
             if any(
-                r_lower in ro.get("title", "").lower() or r_lower in ro.get("department", "").lower()
+                r_lower in ro.get("title", "").lower()
+                or r_lower in ro.get("department", "").lower()
+                or ro.get("department", "").lower() in r_lower
+                or any(word in ro.get("department", "").lower() or word in ro.get("title", "").lower() for word in r_lower.split() if len(word) > 3)
                 for ro in it.get("roles", [])
             )
-            or (isinstance(it.get("roles"), str) and r_lower in it.get("roles", "").lower())
+            or (isinstance(it.get("roles"), str) and (r_lower in it.get("roles", "").lower() or it.get("roles", "").lower() in r_lower))
+        ]
+
+    # Apply work mode filter (remote, hybrid, onsite)
+    if work_mode and work_mode.strip().lower() not in ("all", "all modes", "all locations"):
+        w_lower = work_mode.strip().lower()
+        filtered = [
+            it for it in filtered
+            if any(
+                w_lower in ro.get("location", "").lower()
+                for ro in it.get("roles", [])
+            )
+        ]
+
+    # Apply seniority level filter (entry, mid, senior, lead, staff, director)
+    if level and level.strip().lower() not in ("all", "all levels", "all seniorities"):
+        l_lower = level.strip().lower()
+        filtered = [
+            it for it in filtered
+            if any(
+                l_lower in ro.get("level", "").lower()
+                for ro in it.get("roles", [])
+            )
         ]
 
     # Apply search filter if query is present
@@ -404,5 +432,7 @@ def get_sheet_page(
         "end_index": min(end, total),
         "month_filter": month,
         "role_filter": role,
+        "work_mode_filter": work_mode,
+        "level_filter": level,
         "items": page_items,
     }

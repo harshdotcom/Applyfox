@@ -1550,6 +1550,113 @@ HTML_PAGE = """<!DOCTYPE html>
     color: var(--text-primary);
   }
 
+  .role-search-link {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    margin-left: 2px;
+    padding: 1px 3px;
+    border-radius: 3px;
+    opacity: 0.65;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .role-search-link:hover {
+    opacity: 1;
+    color: var(--accent-emerald);
+    background: rgba(43, 83, 41, 0.08);
+  }
+
+  /* Work Mode Filter Pills */
+  .mode-pill {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+  .mode-pill:hover {
+    border-color: var(--border-dark);
+    color: var(--text-primary);
+  }
+  .mode-pill.active {
+    background: #44403C;
+    color: #FFFFFF;
+    border-color: #44403C;
+    font-weight: 600;
+  }
+
+  /* Sync Freshness Badge */
+  .sync-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 11px;
+    border-radius: var(--radius-pill);
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    color: #166534;
+    font-size: 0.74rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .sync-badge:hover {
+    background: #DCFCE7;
+    border-color: #86EFAC;
+    transform: translateY(-1px);
+  }
+  .sync-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22C55E;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+    animation: syncPulse 2s infinite;
+  }
+  @keyframes syncPulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+
+  /* Outreach & Referral Pitch Generator */
+  .outreach-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  .outreach-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .outreach-body {
+    background: #FAF8F5;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    font-family: inherit;
+  }
+
   /* Pagination Bar */
   .pagination-bar {
     display: flex;
@@ -2592,6 +2699,7 @@ HTML_PAGE = """<!DOCTYPE html>
               <button class="subtab-btn" id="subtabBtn-pdf" onclick="switchSubTab('pdf')"><i class="fa fa-file-pdf"></i> Compiled LaTeX PDF</button>
               <button class="subtab-btn" id="subtabBtn-diff" onclick="switchSubTab('diff')"><i class="fa fa-code-compare"></i> Section Diffs</button>
               <button class="subtab-btn" id="subtabBtn-tex" onclick="switchSubTab('tex')"><i class="fa fa-code"></i> LaTeX Source</button>
+              <button class="subtab-btn" id="subtabBtn-outreach" onclick="switchSubTab('outreach')"><i class="fa fa-paper-plane"></i> Outreach &amp; Recruiter DMs</button>
             </div>
 
             <!-- Subtab 1: Visual Paper Preview -->
@@ -2617,6 +2725,24 @@ HTML_PAGE = """<!DOCTYPE html>
               </div>
               <textarea id="tailoredTexArea" class="tex-code" style="height: 650px;"></textarea>
             </div>
+
+            <!-- Subtab 5: Outreach & Referral Pitch -->
+            <div id="subtab-outreach" style="display: none;">
+              <div style="margin-bottom: 16px; padding: 12px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px;">
+                <div style="font-weight: 600; font-size: 0.88rem; color: var(--text-primary); margin-bottom: 4px;">
+                  <i class="fa fa-paper-plane" style="color: var(--accent-emerald);"></i> 1-Click Cold Email &amp; Recruiter Outreach
+                </div>
+                <div style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;">
+                  Direct outreach to engineering leads, design managers, and recruiters dramatically outperforms portal applications alone. These templates are dynamically aligned with the candidate skills and company target.
+                </div>
+              </div>
+
+              <div id="outreachContentContainer">
+                <div style="text-align: center; color: var(--text-muted); padding: 40px;">
+                  Tailor a CV or select a company to generate outreach templates.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2631,6 +2757,10 @@ HTML_PAGE = """<!DOCTYPE html>
           <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>ATS Portals &amp; 2026 Startup Sheets (7,406 Companies)</strong>
         </div>
         <div class="workspace-meta">
+          <div class="sync-badge" onclick="openSystemStatusModal()" title="Click to view Routine Sync Schedule & Data Freshness">
+            <span class="sync-dot"></span>
+            <span>Live Sync &bull; Sundays 00:00 UTC</span>
+          </div>
           <span class="chip chip-skill"><i class="fa fa-chart-line"></i> Levels.fyi Integrated</span>
           <span class="chip chip-score"><i class="fa fa-rocket"></i> 2026 Funded Tracker</span>
         </div>
@@ -2684,6 +2814,17 @@ HTML_PAGE = """<!DOCTYPE html>
               <i class="fa fa-cubes"></i> <span>Product &amp; Ops</span>
             </button>
           </div>
+
+          <!-- Work Mode Pills (Remote, Hybrid, Onsite) -->
+          <div style="display: flex; gap: 6px; align-items: center; margin-top: 10px; flex-wrap: wrap; padding-top: 8px; border-top: 1px dashed #E7E5E4;">
+            <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-right: 4px;">
+              <i class="fa fa-location-dot" style="color: var(--accent-emerald);"></i> Work Mode:
+            </span>
+            <button class="mode-pill active" onclick="filterByWorkMode('')" data-mode="">All Locations</button>
+            <button class="mode-pill" onclick="filterByWorkMode('Remote')" data-mode="Remote">🌐 Remote Only</button>
+            <button class="mode-pill" onclick="filterByWorkMode('Hybrid')" data-mode="Hybrid">🏢 Hybrid</button>
+            <button class="mode-pill" onclick="filterByWorkMode('Onsite')" data-mode="Onsite">📍 Onsite</button>
+          </div>
         </div>
 
         <!-- Search & Control Bar -->
@@ -2696,7 +2837,7 @@ HTML_PAGE = """<!DOCTYPE html>
           <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
             <div style="display: flex; align-items: center; gap: 6px;">
               <span style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap;"><i class="fa fa-user-tag" style="color: var(--accent-emerald);"></i> Job Title:</span>
-              <select id="portalRoleSelect" onchange="onPortalRoleChange(this.value)" style="width: auto; max-width: 250px; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
+              <select id="portalRoleSelect" onchange="onPortalRoleChange(this.value)" style="width: auto; max-width: 230px; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
                 <option value="">All Job Titles</option>
                 <optgroup label="Software &amp; AI Engineering">
                   <option value="Software &amp; AI">All Software &amp; AI Roles</option>
@@ -2736,6 +2877,18 @@ HTML_PAGE = """<!DOCTYPE html>
                   <option value="Product Operations &amp; Strategy Lead">Product Operations Lead</option>
                   <option value="BizOps &amp; Growth Operations Associate">BizOps &amp; Strategy Lead</option>
                 </optgroup>
+              </select>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap;"><i class="fa fa-layer-group" style="color: var(--accent-emerald);"></i> Seniority:</span>
+              <select id="portalLevelSelect" onchange="onPortalLevelChange(this.value)" style="width: auto; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
+                <option value="">All Seniorities</option>
+                <option value="Entry">Entry / Junior</option>
+                <option value="Mid">Mid-Level</option>
+                <option value="Senior">Senior</option>
+                <option value="Lead">Lead / Staff / Principal</option>
+                <option value="Director">Executive / Lead</option>
               </select>
             </div>
 
@@ -2867,8 +3020,11 @@ let CURRENT_LIMIT = 25;
 let CURRENT_QUERY = "";
 let CURRENT_MONTH = "";
 let CURRENT_ROLE = "";
+let CURRENT_WORK_MODE = "";
+let CURRENT_LEVEL = "";
 let SEARCH_DEBOUNCE_TIMER = null;
 let PORTAL_SUMMARIES = [];
+let CURRENT_OUTREACH_TEMPLATES = null;
 
 // Initialize
 window.addEventListener("DOMContentLoaded", () => {
@@ -2901,7 +3057,7 @@ function switchView(viewName) {
     const activeTabId = (CURRENT_SHEET_KEY === 'funded_startups' || CURRENT_SHEET_KEY === 'startup_failures') ? 'navBtn-startups' : 'navBtn-portals';
     const btn = document.getElementById(activeTabId) || document.getElementById("navBtn-portals");
     if (btn) btn.classList.add("active");
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (viewName === 'tracker') {
     const btn = document.getElementById("navBtn-tracker");
@@ -2962,11 +3118,36 @@ function filterByRole(roleName) {
     }
   });
 
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
 }
 
 function onPortalRoleChange(val) {
   filterByRole(val);
+}
+
+function filterByWorkMode(mode) {
+  CURRENT_WORK_MODE = (mode === "All Locations" || mode === "All") ? "" : mode;
+  CURRENT_PAGE = 1;
+
+  const pills = document.querySelectorAll(".mode-pill");
+  pills.forEach(p => {
+    const m = p.getAttribute("data-mode") || "";
+    if (m === CURRENT_WORK_MODE) {
+      p.classList.add("active");
+    } else {
+      p.classList.remove("active");
+    }
+  });
+
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
+}
+
+function onPortalLevelChange(val) {
+  CURRENT_LEVEL = (val === "All Seniorities" || val === "All") ? "" : val;
+  CURRENT_PAGE = 1;
+  const select = document.getElementById("portalLevelSelect");
+  if (select) select.value = val;
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
 }
 
 function searchByRole(roleQuery) {
@@ -2990,6 +3171,8 @@ function switchSubTab(subTabName) {
   document.getElementById("subtab-pdf").style.display = (subTabName === 'pdf') ? 'block' : 'none';
   document.getElementById("subtab-diff").style.display = (subTabName === 'diff') ? 'block' : 'none';
   document.getElementById("subtab-tex").style.display = (subTabName === 'tex') ? 'block' : 'none';
+  const outreachEl = document.getElementById("subtab-outreach");
+  if (outreachEl) outreachEl.style.display = (subTabName === 'outreach') ? 'block' : 'none';
 
   document.querySelectorAll(".subtab-btn").forEach(btn => btn.classList.remove("active"));
   const btn = document.getElementById("subtabBtn-" + subTabName);
@@ -3000,7 +3183,285 @@ function switchSubTab(subTabName) {
     if (!frame.src || frame.src === "about:blank" || frame.src.endsWith("#empty")) {
       loadCompiledPdfPreview();
     }
+  } else if (subTabName === 'outreach') {
+    renderOutreachTab();
   }
+}
+
+// Outreach & Recruiter DM Pitch Generator
+function generateOutreachTemplates(company, jobTitle, matchedSkills, matchScore) {
+  const safeComp = company || "Target Company";
+  const safeTitle = jobTitle || "Software Engineer";
+  const skillsList = (matchedSkills && matchedSkills.length > 0) ? matchedSkills.slice(0, 4).join(", ") : "Cloud Architectures, Agentic AI, and Full-Stack Systems";
+  const score = matchScore ? `${matchScore}%` : "95%+";
+
+  const emailSubject = `Application & Introduction: ${safeTitle} - Harsh Jha (${score} match)`;
+  const emailBody = `Hi Team,
+
+I hope you're having a productive week.
+
+I recently reviewed the ${safeTitle} opening at ${safeComp} and was immediately drawn to your engineering direction. With 2.5+ years building production-grade agentic AI, low-latency microservices, and distributed cloud workflows, I've developed key strengths directly aligned with your tech stack (${skillsList}).
+
+A few highlights relevant to ${safeComp}:
+• Production AI & Cloud: Built VitaTrack.ai and agentic LLM pipelines handling high-throughput semantic retrieval and tool execution.
+• Scalable Systems: Deep hands-on experience across Python, Go, TypeScript, FastAPI, PostgreSQL, and Docker/K8s.
+• High Ownership: IIT Indore alumnus focused on clean, maintainable, resilient code with end-to-end delivery.
+
+I've attached my tailored LaTeX CV for your review. Would you or the engineering hiring lead be open to a 10-minute introductory conversation next week?
+
+Best regards,
+Harsh Jha
+IIT Indore Alumnus • Senior AI Engineer
+LinkedIn: linkedin.com/in/harshjha-iiti
+GitHub: github.com/jhaharsh03`;
+
+  const linkedinDm = `Hi [Name], I noticed you're leading talent/engineering at ${safeComp}. I recently tailored my CV for the ${safeTitle} opening—my background in ${skillsList} aligns closely with what the team is building. Would love to connect and share my portfolio!`;
+
+  const recruiterNote = `Hello [Recruiter Name],
+
+I hope this finds you well. I just submitted my tailored application for the ${safeTitle} position at ${safeComp}.
+
+Given my strong track record in ${skillsList} and building scalable agentic systems, I believe I can make an immediate impact on the team's key milestones this quarter.
+
+I'd welcome the chance to briefly introduce myself and learn more about the interview timeline. Thank you for your time and consideration!
+
+Warm regards,
+Harsh Jha (linkedin.com/in/harshjha-iiti)`;
+
+  CURRENT_OUTREACH_TEMPLATES = {
+    company: safeComp,
+    title: safeTitle,
+    emailSubject: emailSubject,
+    emailBody: emailBody,
+    linkedinDm: linkedinDm,
+    recruiterNote: recruiterNote
+  };
+}
+
+function renderOutreachTab() {
+  const container = document.getElementById("outreachContentContainer");
+  if (!container) return;
+
+  const comp = document.getElementById("companyName")?.value.trim() || (CURRENT_TAILORED_RESULT?.company) || "";
+  const title = document.getElementById("jobTitle")?.value.trim() || (CURRENT_TAILORED_RESULT?.job_title) || "";
+  const skills = CURRENT_TAILORED_RESULT?.analysis?.top_priorities || ["Python", "Go", "Docker", "REST APIs"];
+  const score = CURRENT_TAILORED_RESULT?.analysis?.match_score || 92;
+
+  if (!comp) {
+    container.innerHTML = `
+      <div style="text-align: center; color: var(--text-muted); padding: 40px; background: #FAF8F5; border-radius: 8px; border: 1px dashed var(--border-subtle);">
+        <i class="fa fa-paper-plane" style="font-size: 2rem; color: var(--border-dark); margin-bottom: 12px; display: block;"></i>
+        <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">No Target Company Selected</div>
+        <div style="font-size: 0.82rem;">Select a company from the Directory or enter a company name in Studio to generate outreach messages.</div>
+      </div>
+    `;
+    return;
+  }
+
+  generateOutreachTemplates(comp, title, skills, score);
+  const t = CURRENT_OUTREACH_TEMPLATES;
+
+  container.innerHTML = `
+    <!-- Outreach Card 1: Cold Email to Hiring Manager -->
+    <div class="outreach-card">
+      <div class="outreach-header">
+        <div>
+          <span style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">
+            <i class="fa fa-envelope" style="color: var(--accent-emerald);"></i> 1. Direct Cold Email to Hiring Lead
+          </span>
+          <span style="font-size: 0.74rem; color: var(--text-muted); margin-left: 6px;">(Best for engineering managers / directors)</span>
+        </div>
+        <button class="btn btn-sm btn-secondary" onclick="copyOutreachTemplate('email')">
+          <i class="fa fa-copy"></i> Copy Full Email
+        </button>
+      </div>
+      <div style="font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">
+        Subject: <span style="color: var(--text-primary); font-family: monospace;">${escapeHtml(t.emailSubject)}</span>
+      </div>
+      <div class="outreach-body">${escapeHtml(t.emailBody)}</div>
+    </div>
+
+    <!-- Outreach Card 2: LinkedIn Connection Request -->
+    <div class="outreach-card">
+      <div class="outreach-header">
+        <div>
+          <span style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">
+            <i class="fa-brands fa-linkedin" style="color: #0A66C2;"></i> 2. LinkedIn Connection Note (&lt; 300 chars)
+          </span>
+          <span style="font-size: 0.74rem; color: var(--text-muted); margin-left: 6px;">(Optimal for adding hiring managers on LinkedIn)</span>
+        </div>
+        <button class="btn btn-sm btn-secondary" onclick="copyOutreachTemplate('linkedin')">
+          <i class="fa fa-copy"></i> Copy Note
+        </button>
+      </div>
+      <div class="outreach-body">${escapeHtml(t.linkedinDm)}</div>
+      <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 6px; text-align: right;">${t.linkedinDm.length} / 300 characters</div>
+    </div>
+
+    <!-- Outreach Card 3: Recruiter InMail / Talent Partner DM -->
+    <div class="outreach-card">
+      <div class="outreach-header">
+        <div>
+          <span style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">
+            <i class="fa fa-user-tie" style="color: #6366F1;"></i> 3. Recruiter &amp; Talent Partner Direct Message
+          </span>
+          <span style="font-size: 0.74rem; color: var(--text-muted); margin-left: 6px;">(For in-house technical recruiters)</span>
+        </div>
+        <button class="btn btn-sm btn-secondary" onclick="copyOutreachTemplate('recruiter')">
+          <i class="fa fa-copy"></i> Copy Message
+        </button>
+      </div>
+      <div class="outreach-body">${escapeHtml(t.recruiterNote)}</div>
+    </div>
+  `;
+}
+
+function copyOutreachTemplate(kind) {
+  if (!CURRENT_OUTREACH_TEMPLATES) return;
+  if (kind === 'email') {
+    const full = CURRENT_OUTREACH_TEMPLATES.emailSubject + "\\n\\n" + CURRENT_OUTREACH_TEMPLATES.emailBody;
+    copyTextToClipboard(full, "Cold Email copied to clipboard!");
+  } else if (kind === 'linkedin') {
+    copyTextToClipboard(CURRENT_OUTREACH_TEMPLATES.linkedinDm, "LinkedIn connection note copied!");
+  } else if (kind === 'recruiter') {
+    copyTextToClipboard(CURRENT_OUTREACH_TEMPLATES.recruiterNote, "Recruiter message copied!");
+  }
+}
+
+function copyTextToClipboard(text, successMsg = "Copied to clipboard!") {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(successMsg);
+    }).catch(() => {
+      fallbackCopyText(text, successMsg);
+    });
+  } else {
+    fallbackCopyText(text, successMsg);
+  }
+}
+
+function fallbackCopyText(text, successMsg) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    showToast(successMsg);
+  } catch (e) {
+    showToast("Failed to copy");
+  }
+  document.body.removeChild(ta);
+}
+
+// 1-Click Role Bookmark
+async function quickBookmarkRole(company, title, url) {
+  const bookmarkData = {
+    company: company,
+    job_title: title || "Open Role",
+    job_url: url || "",
+    status: "Bookmarked",
+    notes: "Saved via directory quick bookmark."
+  };
+
+  try {
+    const res = await fetch("/api/bookmark", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bookmarkData)
+    });
+    if (res.ok) {
+      showToast(`🔖 Bookmarked ${company} - ${bookmarkData.job_title} in Tracker!`);
+      loadTrackerData();
+      return;
+    }
+  } catch (e) {
+    // Fallback for static GitHub pages using localStorage
+  }
+
+  // LocalStorage fallback for GitHub Pages
+  try {
+    let saved = JSON.parse(localStorage.getItem("applyfox_bookmarks") || "[]");
+    saved.unshift({
+      ...bookmarkData,
+      id: "bm_" + Date.now(),
+      created_at: new Date().toISOString()
+    });
+    localStorage.setItem("applyfox_bookmarks", JSON.stringify(saved));
+    showToast(`🔖 Bookmarked ${company} - ${bookmarkData.job_title} (saved locally)!`);
+  } catch (e) {
+    showToast(`🔖 Bookmarked ${company}!`);
+  }
+}
+
+// System Status Modal
+function openSystemStatusModal() {
+  const overlay = document.getElementById("companyModalOverlay");
+  const body = document.getElementById("companyModalBody");
+  if (!overlay || !body) return;
+
+  body.innerHTML = `
+    <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <span class="sync-dot" style="width: 10px; height: 10px;"></span>
+        <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">
+          Applyfox Routine Update Pipeline
+        </h2>
+        <span class="sync-badge" style="cursor: default;">
+          <span class="sync-dot"></span> Live Sync &bull; Sundays 00:00 UTC
+        </span>
+      </div>
+      <div style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px;">
+        Automated weekend routine sync engine powered by GitHub Actions &amp; Python automation.
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 20px;">
+      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Sync Cadence</div>
+        <div style="font-size: 0.95rem; font-weight: 700; color: #166534; margin-top: 4px;">Every Sunday 00:00 UTC</div>
+      </div>
+      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Companies Tracked</div>
+        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">7,406 Companies</div>
+      </div>
+      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Indexed Open Roles</div>
+        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">36,288 Roles</div>
+      </div>
+      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Supported Fields</div>
+        <div style="font-size: 0.95rem; font-weight: 700; color: var(--accent-emerald); margin-top: 4px;">5 Disciplines</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 8px 0;">Routine Update Pipeline Stages</h4>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+          <strong>Stage 1: Multi-Discipline Role Enrichment</strong> &bull; Scrapes &amp; verifies open roles across Software &amp; AI, UI/UX Design, IT Infrastructure, Legal, and Operations.
+        </div>
+        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+          <strong>Stage 2: 2026 Funding &amp; Distress Audits</strong> &bull; Ingests newest Series A&ndash;D funding rounds, lead investors, and company health signals.
+        </div>
+        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+          <strong>Stage 3: Automated Static Compilation</strong> &bull; Rebuilds single-file, zero-dependency bundles (<code>index.html</code> and <code>docs/index.html</code>) for instant edge delivery.
+        </div>
+        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+          <strong>Stage 4: GitHub Actions Deployment</strong> &bull; Automatically commits fresh data and triggers GitHub Pages deployment with zero downtime.
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+      <button class="btn btn-secondary" onclick="closeCompanyModal()">Close</button>
+      <a class="btn btn-primary" href="https://github.com/harshdotcom/Applyfox/actions" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-code-branch"></i> View GitHub Actions Runs &rarr;
+      </a>
+    </div>
+  `;
+  overlay.classList.add("active");
+  document.body.style.overflow = "hidden";
 }
 
 async function loadCompiledPdfPreview() {
@@ -3175,7 +3636,7 @@ function filterByMonth(monthName) {
   if (summary && summary.months) {
     renderMonthFilterPills(summary.months);
   }
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
 }
 
 function switchPortalSheet(sheetKey) {
@@ -3189,7 +3650,7 @@ function switchPortalSheet(sheetKey) {
   if (activeTab) activeTab.classList.add("active");
 
   renderPortalSheetsSummary(PORTAL_SUMMARIES);
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
 }
 
 function onPortalSearchInput(val) {
@@ -3197,18 +3658,18 @@ function onPortalSearchInput(val) {
   SEARCH_DEBOUNCE_TIMER = setTimeout(() => {
     CURRENT_QUERY = val.trim();
     CURRENT_PAGE = 1;
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
   }, 250);
 }
 
 function onPortalLimitChange(val) {
   CURRENT_LIMIT = parseInt(val, 10) || 25;
   CURRENT_PAGE = 1;
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
 }
 
 function renderPortalTableHeader(kind) {
-  const thead = document.querySelector("#portalTable thead");
+  const thead = document.querySelector("#portalTable head") || document.querySelector("#portalTable thead");
   if (!thead) return;
   if (kind === "funded_startups") {
     thead.innerHTML = `
@@ -3249,7 +3710,7 @@ function renderPortalTableHeader(kind) {
   }
 }
 
-async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", role = "") {
+async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", role = "", workMode = "", level = "") {
   const tbody = document.getElementById("portalTableBody");
   tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);"><i class="fa fa-spinner fa-spin"></i> Loading ${escapeHtml(sheetKey)} sheet page ${page}...</td></tr>`;
 
@@ -3271,7 +3732,9 @@ async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", rol
       limit: limit,
       q: query || "",
       month: month || "",
-      role: role || ""
+      role: role || "",
+      work_mode: workMode || "",
+      level: level || ""
     });
     const res = await fetch(`/api/portals?${params.toString()}`);
     if (!res.ok) throw new Error("API not reachable");
@@ -3282,11 +3745,11 @@ async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", rol
     renderPortalTable(data);
     renderPortalPagination(data);
   } catch (e) {
-    handleStaticPortalFallback(sheetKey, page, limit, query, month, role);
+    handleStaticPortalFallback(sheetKey, page, limit, query, month, role, workMode, level);
   }
 }
 
-function handleStaticPortalFallback(sheetKey, page, limit, query, month, role = "") {
+function handleStaticPortalFallback(sheetKey, page, limit, query, month, role = "", workMode = "", level = "") {
   let filtered = [];
   let title = "Directory Sheets";
   let kind = "standard";
@@ -3344,11 +3807,33 @@ function handleStaticPortalFallback(sheetKey, page, limit, query, month, role = 
         return i.roles.some(ro => {
           const t = (ro.title || '').toLowerCase();
           const d = (ro.department || '').toLowerCase();
-          return t.includes(rLower) || d.includes(rLower);
+          return t.includes(rLower) || d.includes(rLower) || rLower.includes(d) || rLower.split(' ').some(w => w.length > 3 && (t.includes(w) || d.includes(w)));
         });
       }
       if (typeof i.roles === 'string') {
         return i.roles.toLowerCase().includes(rLower);
+      }
+      return false;
+    });
+  }
+
+  // Apply Work Mode Filter (Remote, Hybrid, Onsite)
+  if (workMode && workMode.trim().toLowerCase() !== 'all' && workMode.trim().toLowerCase() !== 'all locations' && workMode.trim().toLowerCase() !== 'all modes') {
+    const wLower = workMode.trim().toLowerCase();
+    filtered = filtered.filter(i => {
+      if (Array.isArray(i.roles)) {
+        return i.roles.some(ro => (ro.location || '').toLowerCase().includes(wLower));
+      }
+      return false;
+    });
+  }
+
+  // Apply Seniority Level Filter (Entry, Mid, Senior, Lead, Director)
+  if (level && level.trim().toLowerCase() !== 'all' && level.trim().toLowerCase() !== 'all levels' && level.trim().toLowerCase() !== 'all seniorities') {
+    const lLower = level.trim().toLowerCase();
+    filtered = filtered.filter(i => {
+      if (Array.isArray(i.roles)) {
+        return i.roles.some(ro => (ro.level || '').toLowerCase().includes(lLower));
       }
       return false;
     });
@@ -3450,7 +3935,7 @@ function renderPortalTable(data) {
                     const safeRoleJs = safeTitle.replace(/'/g, "\\'");
                     const isMatch = CURRENT_ROLE && (titleStr.toLowerCase().includes(CURRENT_ROLE.toLowerCase()) || (r.department || '').toLowerCase().includes(CURRENT_ROLE.toLowerCase()));
                     const highlightClass = isMatch ? "highlighted" : "";
-                    return `<span class="role-tag-pill ${highlightClass}" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" title="1-Click Tailor CV for ${safeTitle}"><i class="fa fa-briefcase" style="font-size: 0.65rem; opacity: 0.7;"></i> ${safeTitle}</span>`;
+                    return `<span class="role-tag-pill ${highlightClass}" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" title="1-Click Tailor CV for ${safeTitle}"><i class="fa fa-briefcase" style="font-size: 0.65rem; opacity: 0.7;"></i> ${safeTitle}</span><a class="role-search-link" href="https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + titleStr + ' job posting')}" target="_blank" rel="noopener noreferrer" title="Search Google for ${safeTitle} opening" onclick="event.stopPropagation();"><i class="fa fa-arrow-up-right-from-square"></i></a>`;
                   }).join("")}
                   ${remaining > 0 ? `<span class="role-tag-more" onclick="openCompanyModal('${safeItemData}')" title="View all ${sRolesList.length} open roles in dossier">+${remaining} roles</span>` : ''}
                 </div>
@@ -3554,7 +4039,7 @@ function renderPortalTable(data) {
             const safeRoleJs = safeTitle.replace(/'/g, "\\'");
             const isMatch = CURRENT_ROLE && (titleStr.toLowerCase().includes(CURRENT_ROLE.toLowerCase()) || (r.department || '').toLowerCase().includes(CURRENT_ROLE.toLowerCase()));
             const highlightClass = isMatch ? "highlighted" : "";
-            return `<span class="role-tag-pill ${highlightClass}" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" title="1-Click Tailor CV for ${safeTitle}"><i class="fa fa-briefcase" style="font-size: 0.65rem; opacity: 0.7;"></i> ${safeTitle}</span>`;
+            return `<span class="role-tag-pill ${highlightClass}" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" title="1-Click Tailor CV for ${safeTitle}"><i class="fa fa-briefcase" style="font-size: 0.65rem; opacity: 0.7;"></i> ${safeTitle}</span><a class="role-search-link" href="https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + titleStr + ' job posting')}" target="_blank" rel="noopener noreferrer" title="Search Google for ${safeTitle} opening" onclick="event.stopPropagation();"><i class="fa fa-arrow-up-right-from-square"></i></a>`;
           }).join("")}
           ${remaining > 0 ? `<span class="role-tag-more" onclick="openCompanyModal('${safeItemData}')" title="Click to view all ${rolesList.length} open roles in dossier">+${remaining} more</span>` : ''}
         </div>
@@ -3639,7 +4124,7 @@ function renderPortalPagination(data) {
 
 function gotoPortalPage(page) {
   CURRENT_PAGE = page;
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE);
+  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
 }
 
 function useCompanyInStudio(name, url, roleTitle = "") {
@@ -3762,6 +4247,7 @@ async function handleTailor() {
     }
 
     CURRENT_TAILORED_RESULT = data;
+    generateOutreachTemplates(company, title, data.analysis?.top_priorities, data.analysis?.match_score);
 
     // Display Output
     document.getElementById("emptyState").style.display = "none";
@@ -3845,6 +4331,7 @@ function simulateStaticTailor(company, title, jd) {
   };
 
   CURRENT_TAILORED_RESULT = simData;
+  generateOutreachTemplates(company, title, simData.analysis.top_priorities, simData.analysis.match_score);
   document.getElementById("emptyState").style.display = "none";
   document.getElementById("outputContent").style.display = "block";
   document.getElementById("actionDownloadButtons").style.display = "flex";
@@ -4216,9 +4703,17 @@ function openCompanyModal(encodedData) {
                     <span style="color: var(--text-muted);">&bull; ${level} &bull; ${loc}</span>
                   </div>
                 </div>
-                <button class="btn btn-sm btn-primary" onclick="closeCompanyModal(); useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" style="padding: 4px 10px; font-size: 0.76rem; white-space: nowrap;">
-                  <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
-                </button>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <button class="btn btn-sm btn-primary" onclick="closeCompanyModal(); useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" style="padding: 4px 10px; font-size: 0.76rem; white-space: nowrap;">
+                    <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+                  </button>
+                  <button class="btn btn-sm btn-secondary" onclick="quickBookmarkRole('${safeJsName}', '${safeRoleJs}', '${safeJsUrl}')" style="padding: 4px 8px; font-size: 0.76rem; white-space: nowrap;" title="Quick Bookmark this role in Applications Tracker">
+                    <i class="fa fa-bookmark"></i>
+                  </button>
+                  <a class="btn btn-sm btn-secondary" href="https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + titleStr + ' job posting')}" target="_blank" rel="noopener noreferrer" style="padding: 4px 8px; font-size: 0.76rem; white-space: nowrap;" title="Search Job on Google">
+                    <i class="fa fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
               </div>
             `;
           }).join("")}
@@ -4465,9 +4960,22 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
             q = qs.get("q", [""])[0]
             month = qs.get("month", [""])[0]
             role = qs.get("role", [""])[0]
+            work_mode = qs.get("work_mode", [""])[0]
+            level = qs.get("level", [""])[0]
 
-            data = get_sheet_page(sheet_key=sheet, page=page, limit=limit, query=q, month=month, role=role)
+            data = get_sheet_page(sheet_key=sheet, page=page, limit=limit, query=q, month=month, role=role, work_mode=work_mode, level=level)
             self.send_json(200, data)
+
+        elif path == "/api/system_status":
+            status_file = Path("data/system_status.json")
+            if status_file.is_file():
+                self.send_json(200, json.loads(status_file.read_text(encoding="utf-8")))
+            else:
+                self.send_json(200, {
+                    "status": "Healthy & Operational",
+                    "schedule": "Every Sunday at 00:00 UTC",
+                    "total_roles_indexed": 36288
+                })
 
         elif path == "/api/base_tex":
             if BASE_TEX_PATH.is_file():
@@ -4654,6 +5162,29 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
                     referral_contact=ref_contact,
                     notes=notes,
                     preview_html=preview_html
+                )
+                self.send_json(200, record)
+            except Exception as e:
+                self.send_json(500, {"error": str(e)})
+
+        elif path == "/api/bookmark":
+            company = payload.get("company", "").strip()
+            title = payload.get("job_title", "").strip()
+            url = payload.get("job_url", "").strip()
+            notes = payload.get("notes", "Quick bookmarked role").strip()
+            if not company:
+                self.send_json(400, {"error": "Company is required"})
+                return
+
+            try:
+                record = record_application(
+                    company=company,
+                    job_title=title or "Open Role",
+                    tailored_tex="% Bookmarked role",
+                    metadata={"source": "quick_bookmark"},
+                    job_url=url,
+                    status="Bookmarked",
+                    notes=notes
                 )
                 self.send_json(200, record)
             except Exception as e:

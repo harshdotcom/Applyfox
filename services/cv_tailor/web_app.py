@@ -2708,13 +2708,13 @@ HTML_PAGE = """<!DOCTYPE html>
       <div class="hero-section">
         <div class="hero-pill">
           <span class="hero-dot"></span>
-          <span>BUILT FOR CANDIDATES &bull; 37,193 LIVE OPENINGS &bull; 7,406 VERIFIED BOARDS &bull; 480 FUNDED STARTUPS</span>
+          <span>MULTI-DISCIPLINE CAREER PLATFORM &bull; DESIGN, TECH, LEGAL, IT &amp; OPS &bull; 37,193 VERIFIED ROLES</span>
         </div>
         <h1 class="hero-title">
-          Land your next tech role <span class="hero-accent">with speed, clarity &amp; precision.</span>
+          Land your next career-defining role <span class="hero-accent">across Tech, Design, Legal &amp; Beyond.</span>
         </h1>
         <p class="hero-subtitle">
-          Don't let your dream job get lost in the ATS black hole. Discover 37,000+ open positions directly from verified company boards, tailor an authentic Overleaf-grade LaTeX CV in seconds, and reach hiring managers before the crowd.
+          Whether you design brand systems, counsel growth companies, build intelligent software, manage cloud security, or lead product operations &mdash; Applyfox indexes 37,000+ verified positions directly from official career boards. Tailor an Ivy-League LaTeX CV in seconds, skip the ghost jobs, and get hired faster.
         </p>
 
         <!-- Candidate Job Search Command Bar -->
@@ -3082,8 +3082,8 @@ HTML_PAGE = """<!DOCTYPE html>
       <!-- Feature Grid: What Applyfox Does -->
       <div class="section-heading">
         <span class="section-tag">ENGINEERED FOR PRODUCTION</span>
-        <h2 class="section-title">Everything you need to land top tech roles</h2>
-        <p class="section-desc">Applyfox is an end-to-end local platform that combines real LaTeX typesetting, career board intelligence, and meticulous application tracking.</p>
+        <h2 class="section-title">Everything you need to land your next high-impact role</h2>
+        <p class="section-desc">Applyfox is an end-to-end platform that combines verified career board intelligence across design, legal, tech, and operations with real LaTeX typesetting and outreach tools.</p>
       </div>
 
       <div class="feature-grid">

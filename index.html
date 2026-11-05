@@ -431,12 +431,33 @@
   .candidate-edge-icon {
     width: 44px;
     height: 44px;
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.15rem;
     margin-bottom: 16px;
+    background: #F4F8F3;
+    color: #2B5329;
+    border: 1px solid #DCE7DC;
+    transition: all 0.2s ease;
+  }
+  .candidate-edge-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: #2B5329;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+  }
+  .candidate-edge-card:hover .candidate-edge-icon {
+    background: #2B5329;
+    color: #FFFFFF;
+    border-color: #2B5329;
+  }
+  .candidate-edge-card:hover .candidate-edge-icon svg {
+    stroke: #FFFFFF;
   }
   .candidate-edge-title {
     font-size: 1.05rem;
@@ -454,12 +475,15 @@
   .candidate-edge-highlight {
     font-size: 0.78rem;
     font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 6px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
     display: inline-flex;
     align-items: center;
     gap: 6px;
     width: fit-content;
+    background: #F4F8F3;
+    color: #2B5329;
+    border: 1px solid #DCE7DC;
   }
 
   /* Candidate Studio Showcase Cards */
@@ -837,10 +861,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.15rem;
+    flex-shrink: 0;
+    background: #F4F8F3;
+    color: #2B5329;
+    border: 1px solid #DCE7DC;
+    transition: all 0.2s ease;
+  }
+  .role-icon-box svg {
+    width: 20px;
+    height: 20px;
+    stroke: #2B5329;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+  }
+  .role-card:hover .role-icon-box {
+    background: #2B5329;
+    color: #FFFFFF;
+    border-color: #2B5329;
+  }
+  .role-card:hover .role-icon-box svg {
+    stroke: #FFFFFF;
+  }
+  .chip-svg {
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 5px;
+    stroke: currentColor;
+    fill: none;
     flex-shrink: 0;
   }
-  .icon-rose { background: #FFF1F2; color: #E11D48; }
   .role-card-title {
     font-family: 'Newsreader', serif;
     font-size: 1.25rem;
@@ -2625,13 +2677,13 @@
           </div>
           <div class="hero-trending-chips">
             <span class="hero-trending-label"><i class="fa fa-fire"></i> Quick Jump:</span>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Legal')">⚖️ Legal &amp; Compliance</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('UI UX')">🎨 UI/UX Designer</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Full Stack')">💻 Full Stack &amp; AI</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('IT Cloud')">☁️ IT &amp; Cloud</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Product')">📊 Product Lead</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Remote')">🌐 Remote Only</button>
-            <button class="hero-trending-chip chip-amber" onclick="openStartupsView()">🚀 2026 Funded Startups</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Legal')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h18"></path></svg> Legal &amp; Compliance</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('UI UX')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> UI/UX Designer</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Full Stack')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> Full Stack &amp; AI</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('IT Cloud')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"></rect><rect x="2" y="14" width="20" height="8" rx="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> IT &amp; Cloud</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Product')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 7v7"></path><path d="M12 7v4"></path><path d="M16 7v9"></path></svg> Product Lead</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Remote')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Remote Only</button>
+            <button class="hero-trending-chip" onclick="openStartupsView()"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg> 2026 Funded Startups</button>
           </div>
         </div>
 
@@ -2686,52 +2738,75 @@
       <div class="candidate-edge-grid">
         <div class="candidate-edge-card">
           <div>
-            <div class="candidate-edge-icon icon-emerald"><i class="fa fa-bullseye"></i></div>
+            <div class="candidate-edge-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="6" r="6"></circle>
+                <circle cx="12" cy="2" r="2"></circle>
+              </svg>
+            </div>
             <h3 class="candidate-edge-title">100% Direct ATS Boards (Zero Ghost Jobs)</h3>
             <p class="candidate-edge-desc">
               Never waste hours applying to stale 6-month-old reposts. Applyfox indexes live career boards on Ashby, Greenhouse, Lever, and Workday, plus 480 newly funded 2026 startups with fresh hiring budgets.
             </p>
           </div>
-          <span class="candidate-edge-highlight" style="background: #ECFDF5; color: #047857;">
+          <span class="candidate-edge-highlight">
             <i class="fa fa-check-double"></i> 7,406 Verified Boards
           </span>
         </div>
 
         <div class="candidate-edge-card">
           <div>
-            <div class="candidate-edge-icon icon-purple"><i class="fa fa-wand-magic-sparkles"></i></div>
+            <div class="candidate-edge-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+              </svg>
+            </div>
             <h3 class="candidate-edge-title">Honest ATS Keyword Alignment</h3>
             <p class="candidate-edge-desc">
               Match the exact terminology and taxonomy of the target Job Description in your Profile, Technical Skills, and Project headers without fabricating claims or lying about your real experience.
             </p>
           </div>
-          <span class="candidate-edge-highlight" style="background: #FAF5FF; color: #6B21A8;">
+          <span class="candidate-edge-highlight">
             <i class="fa fa-shield-halved"></i> 100% Authentic Verification
           </span>
         </div>
 
         <div class="candidate-edge-card">
           <div>
-            <div class="candidate-edge-icon icon-sky"><i class="fa fa-file-pdf"></i></div>
+            <div class="candidate-edge-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <line x1="10" y1="9" x2="8" y2="9"></line>
+              </svg>
+            </div>
             <h3 class="candidate-edge-title">Overleaf-Grade LaTeX Typesetting</h3>
             <p class="candidate-edge-desc">
               Stand out from generic Canva and Word templates. Typeset with genuine standalone XeTeX for Ivy-League micro-typography and 100% accurate machine-readability that ATS parsers love.
             </p>
           </div>
-          <span class="candidate-edge-highlight" style="background: #F0F9FF; color: #0369A1;">
+          <span class="candidate-edge-highlight">
             <i class="fa fa-bolt"></i> 1-Page Exact Fit in &lt; 2.0s
           </span>
         </div>
 
         <div class="candidate-edge-card">
           <div>
-            <div class="candidate-edge-icon icon-amber"><i class="fa fa-paper-plane"></i></div>
+            <div class="candidate-edge-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </div>
             <h3 class="candidate-edge-title">1-Click Hiring Manager Outreach</h3>
             <p class="candidate-edge-desc">
               Skip the 400-applicant line. Instantly generate tailored cold emails and LinkedIn connection pitches customized to the company's recent milestones, tech stack, and hiring leads.
             </p>
           </div>
-          <span class="candidate-edge-highlight" style="background: #FEF3C7; color: #92400E;">
+          <span class="candidate-edge-highlight">
             <i class="fa fa-envelope-open-text"></i> 5x Reply Rate Boost
           </span>
         </div>
@@ -2814,7 +2889,12 @@
         <div class="role-card" onclick="searchByRole('engineer')">
           <div>
             <div class="role-card-header">
-              <div class="role-icon-box icon-purple"><i class="fa fa-code"></i></div>
+              <div class="role-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
               <div>
                 <h3 class="role-card-title">Software &amp; AI Engineers <span class="role-card-salary">$165k &ndash; $240k</span></h3>
                 <div class="role-card-meta">Full Stack &bull; Backend &bull; GenAI &bull; Cloud Infrastructure</div>
@@ -2833,7 +2913,13 @@
         <div class="role-card" onclick="searchByRole('design')">
           <div>
             <div class="role-card-header">
-              <div class="role-icon-box icon-rose"><i class="fa fa-palette"></i></div>
+              <div class="role-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
+              </div>
               <div>
                 <h3 class="role-card-title">Graphic &amp; UI/UX Designers <span class="role-card-salary">$130k &ndash; $185k</span></h3>
                 <div class="role-card-meta">Product Design &bull; Brand Identity &bull; UI/UX &bull; Design Systems</div>
@@ -2852,7 +2938,14 @@
         <div class="role-card" onclick="searchByRole('IT')">
           <div>
             <div class="role-card-header">
-              <div class="role-icon-box icon-sky"><i class="fa fa-server"></i></div>
+              <div class="role-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+              </div>
               <div>
                 <h3 class="role-card-title">IT, Cloud &amp; Security <span class="role-card-salary">$140k &ndash; $210k</span></h3>
                 <div class="role-card-meta">DevOps &bull; SysAdmin &bull; Cloud Architect &bull; InfoSec / SRE</div>
@@ -2871,7 +2964,15 @@
         <div class="role-card" onclick="searchByRole('legal')">
           <div>
             <div class="role-card-header">
-              <div class="role-icon-box icon-amber"><i class="fa fa-scale-balanced"></i></div>
+              <div class="role-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                  <path d="M7 21h10"></path>
+                  <path d="M12 3v18"></path>
+                  <path d="M3 7h18"></path>
+                </svg>
+              </div>
               <div>
                 <h3 class="role-card-title">Legal, Policy &amp; Compliance <span class="role-card-salary">$185k &ndash; $275k</span></h3>
                 <div class="role-card-meta">In-House Counsel &bull; Regulatory &bull; Commercial Contracts &bull; Privacy</div>
@@ -2890,7 +2991,14 @@
         <div class="role-card" onclick="searchByRole('product')">
           <div>
             <div class="role-card-header">
-              <div class="role-icon-box icon-emerald"><i class="fa fa-chart-pie"></i></div>
+              <div class="role-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  <path d="M8 7v7"></path>
+                  <path d="M12 7v4"></path>
+                  <path d="M16 7v9"></path>
+                </svg>
+              </div>
               <div>
                 <h3 class="role-card-title">Product &amp; Operations <span class="role-card-salary">$145k &ndash; $220k</span></h3>
                 <div class="role-card-meta">Product Manager &bull; TPM &bull; BizOps &bull; Growth Operations</div>
@@ -3137,11 +3245,11 @@
                 <label for="jobTitle">Job Title / Role</label>
                 <input type="text" id="jobTitle" placeholder="e.g. Senior Software Engineer, UI/UX Designer, Legal Counsel...">
                 <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;">
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Software & AI Engineer')">💻 Software / AI</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Graphic & UI/UX Designer')">🎨 Graphic / Design</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('IT Systems & Cloud Infrastructure Specialist')">🛡️ IT &amp; Cloud</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Corporate Legal Counsel & Compliance')">⚖️ Legal &amp; Compliance</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Technical Product Manager')">📈 Product</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Software & AI Engineer')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> Software / AI</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Graphic & UI/UX Designer')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> Graphic / Design</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('IT Systems & Cloud Infrastructure Specialist')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"></rect><rect x="2" y="14" width="20" height="8" rx="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> IT &amp; Cloud</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Corporate Legal Counsel & Compliance')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h18"></path></svg> Legal &amp; Compliance</button>
+                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Technical Product Manager')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 7v7"></path><path d="M12 7v4"></path><path d="M16 7v9"></path></svg> Product</button>
                 </div>
               </div>
               <div class="form-group">
@@ -3363,9 +3471,9 @@
               <i class="fa fa-location-dot" style="color: var(--accent-emerald);"></i> Work Mode:
             </span>
             <button class="mode-pill active" onclick="filterByWorkMode('')" data-mode="">All Locations</button>
-            <button class="mode-pill" onclick="filterByWorkMode('Remote')" data-mode="Remote">🌐 Remote Only</button>
-            <button class="mode-pill" onclick="filterByWorkMode('Hybrid')" data-mode="Hybrid">🏢 Hybrid</button>
-            <button class="mode-pill" onclick="filterByWorkMode('Onsite')" data-mode="Onsite">📍 Onsite</button>
+            <button class="mode-pill" onclick="filterByWorkMode('Remote')" data-mode="Remote"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Remote Only</button>
+            <button class="mode-pill" onclick="filterByWorkMode('Hybrid')" data-mode="Hybrid"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line><line x1="9" y1="18" x2="9" y2="18.01"></line><line x1="15" y1="18" x2="15" y2="18.01"></line><line x1="9" y1="14" x2="9" y2="14.01"></line><line x1="15" y1="14" x2="15" y2="14.01"></line><line x1="9" y1="10" x2="9" y2="10.01"></line><line x1="15" y1="10" x2="15" y2="10.01"></line><line x1="9" y1="6" x2="9" y2="6.01"></line><line x1="15" y1="6" x2="15" y2="6.01"></line></svg> Hybrid</button>
+            <button class="mode-pill" onclick="filterByWorkMode('Onsite')" data-mode="Onsite"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Onsite</button>
           </div>
         </div>
 
@@ -3448,12 +3556,12 @@
         <!-- Trending Quick Search Chips -->
         <div class="quick-chips-row">
           <span class="quick-chip-label"><i class="fa fa-fire"></i> Quick Search:</span>
-          <button class="quick-chip" onclick="applyQuickSearch('Legal')">⚖️ Legal &amp; Compliance</button>
-          <button class="quick-chip" onclick="applyQuickSearch('UI UX')">🎨 UI/UX Designer</button>
-          <button class="quick-chip" onclick="applyQuickSearch('IT Cloud')">☁️ IT &amp; Cloud</button>
-          <button class="quick-chip" onclick="applyQuickSearch('AI Engineer')">🤖 AI &amp; LLMs</button>
-          <button class="quick-chip" onclick="applyQuickSearch('Product Manager')">📊 Product Lead</button>
-          <button class="quick-chip" onclick="applyQuickSearch('Remote')">🌐 Remote Only</button>
+          <button class="quick-chip" onclick="applyQuickSearch('Legal')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h18"></path></svg> Legal &amp; Compliance</button>
+          <button class="quick-chip" onclick="applyQuickSearch('UI UX')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> UI/UX Designer</button>
+          <button class="quick-chip" onclick="applyQuickSearch('IT Cloud')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"></rect><rect x="2" y="14" width="20" height="8" rx="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> IT &amp; Cloud</button>
+          <button class="quick-chip" onclick="applyQuickSearch('AI Engineer')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> AI &amp; LLMs</button>
+          <button class="quick-chip" onclick="applyQuickSearch('Product Manager')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 7v7"></path><path d="M12 7v4"></path><path d="M16 7v9"></path></svg> Product Lead</button>
+          <button class="quick-chip" onclick="applyQuickSearch('Remote')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Remote Only</button>
         </div>
 
         <!-- Paginated Table -->
@@ -3969,7 +4077,7 @@ async function quickBookmarkRole(company, title, url) {
       body: JSON.stringify(bookmarkData)
     });
     if (res.ok) {
-      showToast(`🔖 Bookmarked ${company} - ${bookmarkData.job_title} in Tracker!`);
+      showToast(`Bookmarked ${company} - ${bookmarkData.job_title} in Tracker!`);
       loadTrackerData();
       return;
     }
@@ -3986,9 +4094,9 @@ async function quickBookmarkRole(company, title, url) {
       created_at: new Date().toISOString()
     });
     localStorage.setItem("applyfox_bookmarks", JSON.stringify(saved));
-    showToast(`🔖 Bookmarked ${company} - ${bookmarkData.job_title} (saved locally)!`);
+    showToast(`Bookmarked ${company} - ${bookmarkData.job_title} (saved locally)!`);
   } catch (e) {
-    showToast(`🔖 Bookmarked ${company}!`);
+    showToast(`Bookmarked ${company}!`);
   }
 }
 

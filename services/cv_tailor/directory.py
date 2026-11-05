@@ -375,37 +375,8 @@ def get_sheet_page(
         ]
 
     # Apply search filter if query is present
-    q = query.strip().lower()
-    if q:
-        if kind == "funded_startups":
-            filtered = [
-                it for it in filtered
-                if q in it.get("name", "").lower()
-                or q in it.get("sector", "").lower()
-                or q in it.get("country", "").lower()
-                or q in it.get("round", "").lower()
-                or q in it.get("lead_investors", "").lower()
-                or q in it.get("what_they_build", "").lower()
-                or q in it.get("region", "").lower()
-                or q in it.get("month", "").lower()
-            ]
-        elif kind == "startup_failures":
-            filtered = [
-                it for it in filtered
-                if q in it.get("name", "").lower()
-                or q in it.get("sector", "").lower()
-                or q in it.get("country", "").lower()
-                or q in it.get("what_happened", "").lower()
-                or q in it.get("precise_reason", "").lower()
-                or q in it.get("lesson", "").lower()
-            ]
-        else:
-            filtered = [
-                it for it in filtered
-                if q in it.get("name", "").lower()
-                or q in it.get("slug", "").lower()
-                or q in it.get("ats", "").lower()
-            ]
+    if query and query.strip():
+        filtered = [it for it in filtered if _matches_company_search(it, query, kind)]
 
     total = len(filtered)
     limit = max(5, min(limit, 5000))
@@ -435,4 +406,230 @@ def get_sheet_page(
         "work_mode_filter": work_mode,
         "level_filter": level,
         "items": page_items,
+    }
+
+
+def _normalize_search_text(text: str) -> str:
+    """Normalize text by replacing special characters and punctuation with spaces."""
+    return re.sub(r"[^a-zA-Z0-9\s]", " ", (text or "").lower())
+
+
+def _matches_company_search(item: Dict[str, Any], query: str, kind: str) -> bool:
+    """
+    Intelligent tokenized search matching company metadata, sector, what they build,
+    and all active open positions (titles, departments, seniority, work mode).
+    """
+    if not query or not query.strip():
+        return True
+
+    q_norm = _normalize_search_text(query)
+    tokens = [t for t in q_norm.split() if t]
+    if not tokens:
+        return True
+
+    comp_parts = [
+        item.get("name", ""),
+        item.get("slug", ""),
+        item.get("ats", ""),
+        item.get("sector", ""),
+        item.get("what_they_build", ""),
+        item.get("lead_investors", ""),
+        item.get("country", ""),
+        item.get("round", ""),
+        item.get("what_happened", ""),
+        item.get("precise_reason", ""),
+        item.get("lesson", "")
+    ]
+    comp_norm = _normalize_search_text(" ".join(str(p) for p in comp_parts if p))
+
+    roles = item.get("roles", [])
+    role_norms = []
+    if isinstance(roles, list):
+        for r in roles:
+            if isinstance(r, dict):
+                r_text = f"{r.get('title', '')} {r.get('department', '')} {r.get('level', '')} {r.get('location', '')}"
+                role_norms.append(_normalize_search_text(r_text))
+            elif isinstance(r, str):
+                role_norms.append(_normalize_search_text(r))
+    elif isinstance(roles, str):
+        role_norms.append(_normalize_search_text(roles))
+
+    if q_norm in comp_norm:
+        return True
+    if any(q_norm in rn for rn in role_norms):
+        return True
+    if all(t in comp_norm for t in tokens):
+        return True
+    if any(all(t in rn for t in tokens) for rn in role_norms):
+        return True
+
+    # Domain synonyms and intent mapping
+    if any(t in ("ui", "ux", "uiux", "design", "designer", "graphic", "figma", "frontend") for t in tokens):
+        if any("ui" in rn or "ux" in rn or "design" in rn or "graphic" in rn for rn in role_norms):
+            return True
+    if any(t in ("legal", "law", "lawyer", "counsel", "compliance", "contracts", "attorney", "regulatory") for t in tokens):
+        if any("legal" in rn or "compliance" in rn or "counsel" in rn or "contracts" in rn for rn in role_norms):
+            return True
+    if any(t in ("it", "sysadmin", "devops", "cloud", "infra", "infrastructure", "security", "sre", "network") for t in tokens):
+        if any("it" in rn.split() or "cloud" in rn or "systems" in rn or "security" in rn or "infrastructure" in rn for rn in role_norms):
+            return True
+    if any(t in ("pm", "product", "ops", "operations", "tpm", "program", "scrum", "agile") for t in tokens):
+        if any("product" in rn or "operations" in rn or "program" in rn for rn in role_norms):
+            return True
+    if any(t in ("ai", "ml", "engineer", "software", "backend", "fullstack", "python", "developer", "golang", "react") for t in tokens):
+        if any("software" in rn or "engineer" in rn or "developer" in rn or "ai" in rn.split() for rn in role_norms):
+            return True
+
+    return False
+
+
+_FLAT_ROLES_CACHE: Optional[List[Dict[str, Any]]] = None
+
+def _get_all_roles() -> List[Dict[str, Any]]:
+    global _FLAT_ROLES_CACHE
+    if _FLAT_ROLES_CACHE is not None:
+        return _FLAT_ROLES_CACHE
+
+    companies = _load_sheet("master")
+    flat = []
+    for it in companies:
+        c_name = it.get("name", "")
+        c_slug = it.get("slug", "")
+        c_ats = it.get("ats", "")
+        c_board = it.get("board_url", "")
+        c_levels = it.get("levels_url", "")
+        c_glassdoor = it.get("glassdoor_url", "")
+        roles = it.get("roles", [])
+        if isinstance(roles, list):
+            for idx, r in enumerate(roles):
+                if isinstance(r, dict):
+                    title = r.get("title", "")
+                    dept = r.get("department", "Engineering & AI")
+                    lvl = r.get("level", "Mid-Senior")
+                    loc = r.get("location", "Remote / Hybrid")
+                    rtype = r.get("type", "Full-time")
+
+                    salary = "$160k – $215k"
+                    l_lower = lvl.lower()
+                    if any(x in l_lower for x in ("lead", "staff", "principal")):
+                        salary = "$195k – $265k"
+                    elif any(x in l_lower for x in ("director", "exec", "vp", "head")):
+                        salary = "$240k – $350k"
+                    elif "mid" in l_lower:
+                        salary = "$125k – $165k"
+                    elif any(x in l_lower for x in ("entry", "junior")):
+                        salary = "$95k – $135k"
+
+                    d_lower = dept.lower()
+                    skills = ["Python", "FastAPI", "PostgreSQL", "Docker"]
+                    if "design" in d_lower or "graphic" in d_lower or "ui" in d_lower:
+                        skills = ["Figma", "Design Systems", "Prototyping", "UI/UX"]
+                    elif "legal" in d_lower or "compliance" in d_lower:
+                        skills = ["Commercial Contracts", "Compliance", "IP Law", "Risk Management"]
+                    elif "it" in d_lower or "cloud" in d_lower:
+                        skills = ["AWS/GCP", "Kubernetes", "Linux", "Cybersecurity", "Terraform"]
+                    elif "product" in d_lower or "ops" in d_lower:
+                        skills = ["Product Roadmap", "User Metrics", "Agile", "Cross-functional Leadership"]
+
+                    encoded_comp = urllib.parse.quote_plus(f"{c_name} {title} job")
+                    flat.append({
+                        "id": f"{c_slug}_{idx}",
+                        "title": title,
+                        "company": c_name,
+                        "slug": c_slug,
+                        "ats": c_ats,
+                        "department": dept,
+                        "level": lvl,
+                        "location": loc,
+                        "type": rtype,
+                        "salary_estimate": salary,
+                        "skills": skills,
+                        "board_url": c_board,
+                        "google_jobs_url": f"https://www.google.com/search?q={encoded_comp}",
+                        "levels_url": c_levels,
+                        "glassdoor_url": c_glassdoor
+                    })
+    _FLAT_ROLES_CACHE = flat
+    return _FLAT_ROLES_CACHE
+
+
+def get_roles_page(
+    page: int = 1,
+    limit: int = 25,
+    query: str = "",
+    discipline: str = "",
+    work_mode: str = "",
+    level: str = ""
+) -> Dict[str, Any]:
+    """Retrieve paginated list of individual open roles with multi-dimension filters."""
+    roles = _get_all_roles()
+    filtered = roles
+
+    # Discipline filter
+    if discipline and discipline.strip().lower() not in ("all", "all disciplines", "all roles", "all job titles"):
+        d_lower = discipline.strip().lower()
+        filtered = [
+            r for r in filtered
+            if d_lower in r["department"].lower()
+            or d_lower in r["title"].lower()
+            or r["department"].lower() in d_lower
+            or any(w in r["department"].lower() or w in r["title"].lower() for w in d_lower.split() if len(w) > 3)
+        ]
+
+    # Work mode filter
+    if work_mode and work_mode.strip().lower() not in ("all", "all locations", "all modes"):
+        w_lower = work_mode.strip().lower()
+        filtered = [r for r in filtered if w_lower in r["location"].lower()]
+
+    # Seniority level filter
+    if level and level.strip().lower() not in ("all", "all seniorities", "all levels"):
+        l_lower = level.strip().lower()
+        filtered = [r for r in filtered if l_lower in r["level"].lower()]
+
+    # Query search
+    if query and query.strip():
+        q_norm = _normalize_search_text(query)
+        tokens = [t for t in q_norm.split() if t]
+        if tokens:
+            def _role_matches(r):
+                r_text = _normalize_search_text(f"{r['title']} {r['company']} {r['department']} {r['level']} {r['location']} {r['ats']} {' '.join(r['skills'])}")
+                if q_norm in r_text:
+                    return True
+                if all(t in r_text for t in tokens):
+                    return True
+                if any(t in ("ui", "ux", "uiux", "design", "designer", "graphic", "figma") for t in tokens) and ("ui" in r_text or "ux" in r_text or "design" in r_text):
+                    return True
+                if any(t in ("legal", "law", "lawyer", "counsel", "compliance", "contracts") for t in tokens) and ("legal" in r_text or "compliance" in r_text or "counsel" in r_text or "contracts" in r_text):
+                    return True
+                if any(t in ("it", "sysadmin", "devops", "cloud", "infra", "infrastructure", "security") for t in tokens) and ("it" in r_text.split() or "cloud" in r_text or "systems" in r_text or "security" in r_text):
+                    return True
+                if any(t in ("pm", "product", "ops", "operations", "tpm", "program") for t in tokens) and ("product" in r_text or "operations" in r_text):
+                    return True
+                return False
+            filtered = [r for r in filtered if _role_matches(r)]
+
+    total = len(filtered)
+    limit = max(5, min(limit, 5000))
+    total_pages = max(1, math.ceil(total / limit))
+    page = max(1, min(page, total_pages))
+
+    start = (page - 1) * limit
+    end = start + limit
+    page_items = filtered[start:end]
+
+    return {
+        "kind": "roles_feed",
+        "total_filtered": total,
+        "page": page,
+        "limit": limit,
+        "total_pages": total_pages,
+        "has_next": page < total_pages,
+        "has_prev": page > 1,
+        "start_index": start + 1 if total > 0 else 0,
+        "end_index": min(end, total),
+        "query": query,
+        "discipline_filter": discipline,
+        "work_mode_filter": work_mode,
+        "level_filter": level,
+        "items": page_items
     }

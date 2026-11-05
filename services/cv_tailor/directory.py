@@ -408,7 +408,7 @@ def get_sheet_page(
             ]
 
     total = len(filtered)
-    limit = max(5, min(limit, 100))
+    limit = max(5, min(limit, 5000))
     total_pages = max(1, math.ceil(total / limit))
     page = max(1, min(page, total_pages))
 

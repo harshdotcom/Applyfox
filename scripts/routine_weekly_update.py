@@ -147,3 +147,4 @@ if __name__ == "__main__":
 
     success = run_weekly_update(dry_run=args.dry_run)
     sys.exit(0 if success else 1)
+

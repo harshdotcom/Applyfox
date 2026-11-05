@@ -1,8 +1,8 @@
 {
   "status": "Healthy & Operational",
-  "last_sync_timestamp": "2026-11-05T17:27:38.349650+00:00",
+  "last_sync_timestamp": "2026-11-05T17:42:03.847104+00:00",
   "last_sync_date": "Nov 05, 2026",
-  "last_sync_human": "Thursday, Nov 05, 2026 at 17:27 UTC",
+  "last_sync_human": "Thursday, Nov 05, 2026 at 17:42 UTC",
   "schedule": "Every Sunday at 00:00 UTC",
   "next_scheduled_sync": "Sunday, Nov 08, 2026",
   "total_companies_monitored": 7225,

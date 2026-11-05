@@ -3725,6 +3725,7 @@ async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", rol
     }
   }
 
+  let data = null;
   try {
     const params = new URLSearchParams({
       sheet: sheetKey,
@@ -3738,14 +3739,17 @@ async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", rol
     });
     const res = await fetch(`/api/portals?${params.toString()}`);
     if (!res.ok) throw new Error("API not reachable");
-    const data = await res.json();
+    data = await res.json();
+  } catch (e) {
+    handleStaticPortalFallback(sheetKey, page, limit, query, month, role, workMode, level);
+    return;
+  }
 
+  if (data) {
     const kind = data.kind || (sheetKey === 'funded_startups' ? 'funded_startups' : (sheetKey === 'startup_failures' ? 'startup_failures' : 'standard'));
     renderPortalTableHeader(kind);
     renderPortalTable(data);
     renderPortalPagination(data);
-  } catch (e) {
-    handleStaticPortalFallback(sheetKey, page, limit, query, month, role, workMode, level);
   }
 }
 
@@ -4018,6 +4022,12 @@ function renderPortalTable(data) {
 
   // Standard Sheet rendering (Master, Ashby, Greenhouse, Lever, Workday)
   tbody.innerHTML = data.items.map((item, idx) => {
+    const rowIndex = data.start_index + idx;
+    const safeComp = escapeHtml(item.name || "");
+    const safeJsName = safeComp.replace(/'/g, "\\'");
+    const safeJsUrl = escapeHtml(item.board_url || "").replace(/'/g, "\\'");
+    const safeItemData = encodeURIComponent(JSON.stringify(item));
+
     const ats = (item.ats || "").toLowerCase();
     let badgeClass = "badge-other";
     if (ats.includes("ashby")) badgeClass = "badge-ashby";
@@ -4049,12 +4059,6 @@ function renderPortalTable(data) {
         ? `<span style="font-weight: 600; color: #047857; font-size: 0.78rem;">${escapeHtml(item.open_jobs)}</span>`
         : `<span style="color: var(--text-muted); font-size: 0.78rem;">Verified Board</span>`;
     }
-
-    const rowIndex = data.start_index + idx;
-    const safeComp = escapeHtml(item.name);
-    const safeJsName = safeComp.replace(/'/g, "\\'");
-    const safeJsUrl = escapeHtml(item.board_url || "").replace(/'/g, "\\'");
-    const safeItemData = encodeURIComponent(JSON.stringify(item));
 
     return `
       <tr>

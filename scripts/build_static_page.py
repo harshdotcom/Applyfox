@@ -24,9 +24,18 @@ def main():
     base_tex = base_tex_path.read_text(encoding="utf-8") if base_tex_path.is_file() else ""
     preview_html = render_resume_to_html(base_tex, title_badge="Base Master CV").replace("</script>", "<\\/script>")
 
-    # Ingest 500 verified directory companies across Ashby, Greenhouse, Lever, Workday with full roles
-    page_data = get_sheet_page("master", 1, 500)
-    items = page_data.get("items", [])
+    # Ingest diverse verified directory companies across Ashby, Greenhouse, Lever, Workday with full roles
+    from services.cv_tailor.directory import _load_sheet
+    all_master = _load_sheet("master")
+    by_ats = {}
+    for it in all_master:
+        ats = (it.get("ats") or "").lower()
+        by_ats.setdefault(ats, []).append(it)
+
+    # Take up to 350 companies from each ATS platform
+    items = []
+    for ats, lst in by_ats.items():
+        items.extend(lst[:350])
     summaries = get_sheets_summary()
 
     funded_json = root / "data" / "funded_startups_2026.json"

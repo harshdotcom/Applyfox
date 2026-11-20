@@ -60,6 +60,12 @@ const EMBEDDED_FAILURES = {json.dumps(startup_failures)};
     (root / "index.html").write_text(static_html, encoding="utf-8")
     (root / "docs").mkdir(exist_ok=True)
     (root / "docs" / "index.html").write_text(static_html, encoding="utf-8")
+
+    # Icons + manifest live next to the page (HTML references them as static/...)
+    import shutil
+    static_src = root / "services" / "cv_tailor" / "ui" / "static"
+    for dest in (root / "static", root / "docs" / "static"):
+        shutil.copytree(static_src, dest, dirs_exist_ok=True)
     
     print(f"Successfully generated static GitHub Pages files:")
     print(f"  - {root / 'index.html'} ({len(static_html):,} bytes)")

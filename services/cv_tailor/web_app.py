@@ -63,2637 +63,83 @@ def get_cached_companies() -> List[str]:
 
 
 HTML_PAGE = """<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Applyfox &mdash; The Career Studio for Engineers</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#121210">
+<link rel="icon" href="static/favicon.ico" sizes="48x48">
+<link rel="icon" href="static/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="static/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="static/apple-touch-icon.png">
+<link rel="manifest" href="static/site.webmanifest">
+<script>
+  /* Theme: dark by default (set on <html> above, so it applies even before
+     this runs). A choice made with the toggle is stored and restored here,
+     before first paint, so the page never flashes the wrong theme. */
+  (function () {
+    try {
+      var saved = localStorage.getItem("applyfox-theme");
+      if (saved === "light" || saved === "dark") document.documentElement.setAttribute("data-theme", saved);
+    } catch (e) {}
+    syncThemeColor();
+  })();
+  function syncThemeColor() {
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", currentTheme() === "dark" ? "#121210" : "#f3f2ee");
+  }
+  function currentTheme() {
+    var set = document.documentElement.getAttribute("data-theme");
+    if (set) return set;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function toggleTheme() {
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("applyfox-theme", next); } catch (e) {}
+    syncThemeColor();
+    var btn = document.getElementById("themeToggle");
+    if (btn) btn.setAttribute("aria-label", next === "dark" ? "Switch to light theme" : "Switch to dark theme");
+  }
+</script>
+<title>Applyfox &mdash; Career Studio</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,401,500&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  :root {
-    --bg-warm: #FAF8F5;
-    --card-bg: #FFFFFF;
-    --border-subtle: #E7E5E4;
-    --border-hover: #D6D3D1;
-    --border-dark: #18181B;
-    --text-primary: #1C1917;
-    --text-secondary: #78716C;
-    --text-muted: #A8A29E;
-    --accent-emerald: #0D9488;
-    --accent-emerald-dark: #0F766E;
-    --accent-emerald-light: #CCFBF1;
-    --accent-amber: #D97706;
-    --accent-amber-light: #FEF3C7;
-    --accent-ink: #18181B;
-    --accent-ink-hover: #27272A;
-    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 24px -4px rgba(28, 25, 23, 0.04);
-    --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 16px 32px -4px rgba(28, 25, 23, 0.07);
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-pill: 9999px;
-  }
-
-  * { box-sizing: border-box; }
-
-  html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-    width: 100%;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--bg-warm);
-    background-image: 
-      linear-gradient(to right, rgba(0, 0, 0, 0.032) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.032) 1px, transparent 1px);
-    background-size: 36px 36px;
-    color: var(--text-primary);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* Navigation Bar */
-  header.app-header {
-    background: rgba(250, 248, 245, 0.95);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border-subtle);
-    padding: 10px 24px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-  }
-  .header-inner {
-    max-width: 1540px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-  }
-  .header-brand-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-  .brand-badge {
-    background: var(--accent-amber-light);
-    color: var(--accent-amber);
-    border: 1px solid #FDE68A;
-    padding: 2px 8px;
-    border-radius: var(--radius-pill);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .header-nav-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .nav-tabs {
-    display: flex;
-    gap: 4px;
-    background: #F0EDE8;
-    padding: 4px;
-    border-radius: 12px;
-    border: 1px solid var(--border-subtle);
-    align-items: center;
-  }
-  .tab-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    padding: 7px 14px;
-    border-radius: 8px;
-    font-size: 0.84rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .tab-btn:hover {
-    color: var(--text-primary);
-  }
-  .tab-btn.active {
-    background: #FFFFFF;
-    color: var(--text-primary);
-    font-weight: 600;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  }
-  .desktop-github-btn {
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 12px;
-    font-size: 0.82rem;
-    flex-shrink: 0;
-  }
-  .mobile-github-btn {
-    display: none;
-    text-decoration: none;
-  }
-
-  /* Main Container */
-  main {
-    max-width: 1540px;
-    margin: 0 auto;
-    padding: 20px 28px 48px;
-  }
-
-  /* Workspace Compact Header */
-  .workspace-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0 18px;
-    margin-bottom: 6px;
-    border-bottom: 1px solid #EFECE6;
-  }
-  .workspace-breadcrumb {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .workspace-breadcrumb a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-  }
-  .workspace-breadcrumb a:hover {
-    color: var(--text-primary);
-  }
-  .workspace-breadcrumb strong {
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-  .workspace-meta {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  /* Editorial Hero Header (Landing Page Only) */
-  .hero-section {
-    text-align: center;
-    padding: 56px 20px 32px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  .hero-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-pill);
-    padding: 5px 16px;
-    font-size: 0.74rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    letter-spacing: 0.08em;
-    margin-bottom: 22px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-  }
-  .hero-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent-emerald);
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .hero-title {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: 3.4rem;
-    font-weight: 500;
-    line-height: 1.15;
-    color: var(--text-primary);
-    margin: 0 0 16px;
-    letter-spacing: -0.03em;
-  }
-  .hero-accent {
-    color: var(--accent-emerald);
-    font-style: italic;
-    font-weight: 400;
-  }
-  .hero-subtitle {
-    font-size: 1.12rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    margin: 0 auto 32px;
-    max-width: 720px;
-  }
-  .hero-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 44px;
-  }
-
-  /* Candidate-First Hero Job Search Bar */
-  .hero-search-wrapper {
-    max-width: 840px;
-    margin: 0 auto 36px;
-  }
-  .hero-search-bar {
-    display: flex;
-    align-items: center;
-    background: #FFFFFF;
-    border: 2px solid #E7E5E4;
-    border-radius: 16px;
-    padding: 6px;
-    box-shadow: 0 12px 32px -8px rgba(28, 25, 23, 0.08), 0 2px 6px rgba(28, 25, 23, 0.04);
-    transition: all 0.2s ease;
-  }
-  .hero-search-bar:focus-within {
-    border-color: var(--accent-emerald);
-    box-shadow: 0 16px 40px -8px rgba(43, 83, 41, 0.15), 0 0 0 4px rgba(43, 83, 41, 0.08);
-  }
-  .hero-search-field {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 16px;
-  }
-  .hero-search-field i {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-  }
-  .hero-search-field input {
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 0.98rem;
-    font-family: inherit;
-    color: var(--text-primary);
-    background: transparent;
-    padding: 10px 0;
-  }
-  .hero-search-field input::placeholder {
-    color: #A8A29E;
-  }
-  .hero-search-filter {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 14px;
-    border-left: 1px solid #E7E5E4;
-  }
-  .hero-search-filter i {
-    color: var(--accent-emerald);
-    font-size: 0.9rem;
-  }
-  .hero-search-filter select {
-    border: none;
-    outline: none;
-    font-size: 0.88rem;
-    font-family: inherit;
-    font-weight: 500;
-    color: var(--text-secondary);
-    background: transparent;
-    cursor: pointer;
-    padding: 8px 4px;
-  }
-  .hero-search-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #1C1917;
-    color: #FAF8F5;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 24px;
-    font-size: 0.94rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.18s ease;
-    white-space: nowrap;
-  }
-  .hero-search-btn:hover {
-    background: var(--accent-emerald-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(43, 83, 41, 0.25);
-  }
-  .hero-trending-chips {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 14px;
-  }
-  .hero-trending-label {
-    font-size: 0.76rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .hero-trending-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 5px 12px;
-    border-radius: 20px;
-    background: #FFFFFF;
-    border: 1px solid #D6D3D1;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-  }
-  .hero-trending-chip:hover {
-    background: #F5F5F4;
-    color: var(--text-primary);
-    border-color: #A8A29E;
-    transform: translateY(-1px);
-  }
-  .hero-trending-chip.chip-amber {
-    background: #FEF3C7;
-    border-color: #FDE68A;
-    color: #92400E;
-    font-weight: 600;
-  }
-  .hero-trending-chip.chip-amber:hover {
-    background: #FDE68A;
-    color: #78350F;
-  }
-
-  /* Candidate Edge Pillars */
-  .candidate-edge-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-    margin-top: 28px;
-    margin-bottom: 48px;
-  }
-  .candidate-edge-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: 14px;
-    padding: 24px 20px;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-  }
-  .candidate-edge-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: transparent;
-    transition: background 0.2s ease;
-  }
-  .candidate-edge-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px -4px rgba(28, 25, 23, 0.08);
-    border-color: #D6D3D1;
-  }
-  .candidate-edge-card:hover::before {
-    background: var(--accent-emerald);
-  }
-  .candidate-edge-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    background: #F4F8F3;
-    color: #2B5329;
-    border: 1px solid #DCE7DC;
-    transition: all 0.2s ease;
-  }
-  .candidate-edge-icon svg {
-    width: 20px;
-    height: 20px;
-    stroke: #2B5329;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: stroke 0.2s ease;
-  }
-  .candidate-edge-card:hover .candidate-edge-icon {
-    background: #2B5329;
-    color: #FFFFFF;
-    border-color: #2B5329;
-  }
-  .candidate-edge-card:hover .candidate-edge-icon svg {
-    stroke: #FFFFFF;
-  }
-  .candidate-edge-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 8px;
-    letter-spacing: -0.01em;
-  }
-  .candidate-edge-desc {
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--text-secondary);
-    margin: 0 0 16px;
-  }
-  .candidate-edge-highlight {
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    width: fit-content;
-    background: #F4F8F3;
-    color: #2B5329;
-    border: 1px solid #DCE7DC;
-  }
-
-  /* Candidate Studio Showcase Cards */
-  .candidate-showcase-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 28px 0 44px;
-  }
-  .showcase-step-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .showcase-step-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--border-subtle);
-  }
-  .showcase-badge {
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 3px 8px;
-    border-radius: 6px;
-  }
-  .showcase-badge-emerald { background: #ECFDF5; color: #047857; }
-  .showcase-badge-purple { background: #FAF5FF; color: #6B21A8; }
-  .showcase-badge-amber { background: #FEF3C7; color: #92400E; }
-  .showcase-mock-body {
-    background: #FAF8F5;
-    border: 1px solid #E7E5E4;
-    border-radius: 10px;
-    padding: 14px;
-    font-size: 0.82rem;
-    line-height: 1.5;
-    color: var(--text-primary);
-    margin-bottom: 14px;
-    min-height: 140px;
-  }
-
-  .role-card-salary {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.74rem;
-    font-weight: 700;
-    color: #15803D;
-    background: #F0FDF4;
-    border: 1px solid #BBF7D0;
-    padding: 2px 8px;
-    border-radius: 6px;
-    margin-left: 8px;
-  }
-
-  /* Live Interactive Terminal Card */
-  .terminal-card {
-    background: #18181B;
-    border-radius: 14px;
-    padding: 16px 20px;
-    color: #F4F4F5;
-    margin-bottom: 24px;
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.25);
-  }
-  .terminal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #27272A;
-    margin-bottom: 14px;
-  }
-  .traffic-lights {
-    display: flex;
-    gap: 7px;
-  }
-  .traffic-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  .dot-red { background: #EF4444; }
-  .dot-yellow { background: #F59E0B; }
-  .dot-green { background: #10B981; }
-  .terminal-tag {
-    background: rgba(16, 185, 129, 0.15);
-    color: #34D399;
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    padding: 3px 9px;
-    border-radius: 5px;
-    letter-spacing: 0.04em;
-  }
-  .terminal-body {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: #D4D4D8;
-    background: #09090B;
-    padding: 16px;
-    border-radius: 8px;
-    overflow-x: auto;
-  }
-  .terminal-token-kw { color: #F472B6; }
-  .terminal-token-cmd { color: #60A5FA; }
-  .terminal-token-arg { color: #34D399; }
-  .terminal-token-comment { color: #71717A; font-style: italic; }
-
-  /* Feature Cards Grid */
-  .section-heading {
-    text-align: center;
-    margin: 50px 0 24px;
-  }
-  .section-tag {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-emerald);
-    margin-bottom: 8px;
-    display: block;
-  }
-  .section-title {
-    font-family: 'Newsreader', serif;
-    font-size: 2.2rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin: 0 0 10px;
-    letter-spacing: -0.02em;
-  }
-  .section-desc {
-    font-size: 0.98rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
-  }
-
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-    margin-top: 28px;
-  }
-  .feature-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: 26px;
-    box-shadow: var(--card-shadow);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-  .feature-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--card-shadow-hover);
-    border-color: var(--border-hover);
-  }
-  .feature-icon-wrapper {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    margin-bottom: 18px;
-  }
-  .icon-purple { background: #FAF5FF; color: #7E22CE; border: 1px solid #F3E8FF; }
-  .icon-emerald { background: #ECFDF5; color: #047857; border: 1px solid #D1FAE5; }
-  .icon-sky { background: #F0F9FF; color: #0369A1; border: 1px solid #E0F2FE; }
-  .icon-amber { background: #FFFBEB; color: #B45309; border: 1px solid #FEF3C7; }
-
-  .feature-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 8px;
-    letter-spacing: -0.01em;
-  }
-  .feature-text {
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--text-secondary);
-    margin: 0 0 16px;
-  }
-  .feature-link {
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-  }
-  .feature-link:hover {
-    color: var(--accent-emerald);
-  }
-
-  /* Workflow Steps */
-  .workflow-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 28px;
-  }
-  @media (max-width: 900px) {
-    .workflow-grid { grid-template-columns: 1fr; }
-  }
-  .step-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    position: relative;
-    box-shadow: var(--card-shadow);
-  }
-  .step-num {
-    font-family: 'Newsreader', serif;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #E7E5E4;
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-  .step-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 8px;
-  }
-  .step-text {
-    font-size: 0.86rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    margin: 0;
-  }
-
-  /* Landing Page Dedicated Width & Spacing (Prevents Stretched Content) */
-  #view-home {
-    max-width: 1140px;
-    margin: 0 auto;
-  }
-
-  .stats-strip {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: 24px 28px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    margin: 36px 0 44px;
-    box-shadow: var(--card-shadow);
-  }
-  .stat-item {
-    text-align: center;
-    transition: transform 0.15s ease;
-  }
-  .stat-item:hover {
-    transform: translateY(-2px);
-  }
-  .stat-num {
-    font-family: 'Newsreader', serif;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    line-height: 1.1;
-  }
-  .stat-label {
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    margin-top: 5px;
-  }
-
-  /* Multi-Discipline Discovery & Roles */
-  .discipline-strip {
-    margin-top: 24px;
-    padding-top: 18px;
-    border-top: 1px dashed var(--border-subtle);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 860px;
-  }
-  .discipline-label {
-    font-size: 0.76rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .discipline-pills {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .role-pill {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-primary);
-    padding: 6px 14px;
-    border-radius: var(--radius-pill);
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.16s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-  }
-  .role-pill:hover {
-    background: #F5F5F4;
-    border-color: #D6D3D1;
-    transform: translateY(-1px);
-    color: var(--accent-emerald-dark);
-  }
-
-  .roles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-    margin: 28px 0 44px;
-  }
-  .role-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 24px 22px;
-    box-shadow: var(--card-shadow);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-  .role-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--card-shadow-hover);
-  }
-  .role-card-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 12px;
-  }
-  .role-icon-box {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background: #F4F8F3;
-    color: #2B5329;
-    border: 1px solid #DCE7DC;
-    transition: all 0.2s ease;
-  }
-  .role-icon-box svg {
-    width: 20px;
-    height: 20px;
-    stroke: #2B5329;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: stroke 0.2s ease;
-  }
-  .role-card:hover .role-icon-box {
-    background: #2B5329;
-    color: #FFFFFF;
-    border-color: #2B5329;
-  }
-  .role-card:hover .role-icon-box svg {
-    stroke: #FFFFFF;
-  }
-  .chip-svg {
-    display: inline-block;
-    vertical-align: -2px;
-    margin-right: 5px;
-    stroke: currentColor;
-    fill: none;
-    flex-shrink: 0;
-  }
-  .role-card-title {
-    font-family: 'Newsreader', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0;
-    line-height: 1.2;
-  }
-  .role-card-meta {
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    font-weight: 500;
-    margin-top: 3px;
-  }
-  .role-card-desc {
-    font-size: 0.86rem;
-    line-height: 1.48;
-    color: var(--text-secondary);
-    margin: 0 0 16px 0;
-  }
-  .role-card-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-  }
-  .role-card-tags span {
-    background: #FAF8F5;
-    border: 1px solid var(--border-subtle);
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-  }
-  .role-card-cta {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent-emerald);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    transition: color 0.15s ease;
-  }
-  .role-card:hover .role-card-cta {
-    color: var(--accent-emerald-dark);
-  }
-
-  .role-quick-btn {
-    background: #FAF8F5;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-pill);
-    padding: 3px 10px;
-    font-size: 0.74rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .role-quick-btn:hover {
-    background: #FFFFFF;
-    border-color: var(--accent-emerald);
-    color: var(--accent-emerald-dark);
-  }
-
-  /* Refined Warm CTA Banner */
-  .cta-banner {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: 20px;
-    padding: 56px 36px;
-    text-align: center;
-    margin: 54px 0 40px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 12px 32px -4px rgba(28, 25, 23, 0.05);
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-banner::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #0D9488, #F59E0B, #8B5CF6);
-  }
-  .cta-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #F4FBF9;
-    border: 1px solid #CCFBF1;
-    color: var(--accent-emerald-dark);
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: var(--radius-pill);
-    margin-bottom: 16px;
-  }
-  .cta-title {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: 2.5rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin: 0 0 12px;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-  .cta-title em {
-    font-style: italic;
-    color: var(--accent-emerald);
-  }
-  .cta-sub {
-    font-size: 1.02rem;
-    color: var(--text-secondary);
-    max-width: 580px;
-    margin: 0 auto 28px;
-    line-height: 1.6;
-  }
-  .cta-actions {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  /* Comprehensive App Footer */
-  .app-footer {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: 20px;
-    margin-top: 40px;
-    margin-bottom: 24px;
-    padding: 48px 36px 28px;
-    box-shadow: var(--card-shadow);
-  }
-  .footer-inner {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr 1.3fr;
-    gap: 40px;
-  }
-  @media (max-width: 960px) {
-    .footer-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-  }
-  .footer-col-main .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-  .footer-desc {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    max-width: 340px;
-  }
-  .contrib-card {
-    background: #FAF8F5;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 16px 18px;
-  }
-  .contrib-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .contrib-text {
-    font-size: 0.82rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    margin: 0 0 12px 0;
-  }
-  .contrib-btn {
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.82rem;
-  }
-  .footer-heading {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 14px;
-  }
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .footer-links li {
-    margin-bottom: 9px;
-  }
-  .footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.86rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.15s ease;
-  }
-  .footer-links a:hover {
-    color: var(--accent-emerald-dark);
-  }
-  .creator-card {
-    background: #FAF8F5;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 20px;
-  }
-  .creator-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .creator-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0D9488 0%, #065F46 100%);
-    color: #FFFFFF;
-    font-weight: 700;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.04em;
-    box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
-  }
-  .creator-name {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--text-primary);
-  }
-  .creator-title {
-    font-size: 0.78rem;
-    color: var(--accent-emerald-dark);
-    font-weight: 500;
-  }
-  .creator-bio {
-    font-size: 0.83rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    margin: 0 0 16px 0;
-  }
-  .creator-socials {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .social-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 12px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.15s ease;
-  }
-  .social-linkedin {
-    background: #F0F7FF;
-    color: #0A66C2;
-    border: 1px solid #D0E4FF;
-  }
-  .social-linkedin:hover {
-    background: #0A66C2;
-    color: #FFFFFF;
-  }
-  .social-instagram {
-    background: #FFF1F5;
-    color: #E1306C;
-    border: 1px solid #FFD1DF;
-  }
-  .social-instagram:hover {
-    background: #E1306C;
-    color: #FFFFFF;
-  }
-  .social-github {
-    background: #FFFFFF;
-    color: #18181B;
-    border: 1px solid #E4E4E7;
-  }
-  .social-github:hover {
-    background: #18181B;
-    color: #FFFFFF;
-  }
-  .footer-bottom {
-    margin-top: 36px;
-    padding-top: 20px;
-    border-top: 1px solid #EFECE6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  /* Cards */
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    box-shadow: var(--card-shadow);
-  }
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid #F2EFE9;
-  }
-  .card-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-primary);
-    letter-spacing: -0.01em;
-  }
-
-  /* Tailor 2-Column Grid Layout */
-  .tailor-layout {
-    display: grid;
-    grid-template-columns: 460px 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-  @media (max-width: 1100px) {
-    .tailor-layout { grid-template-columns: 1fr; }
-  }
-
-  /* Forms */
-  .form-group {
-    margin-bottom: 14px;
-  }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  label {
-    display: block;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 6px;
-    letter-spacing: 0.01em;
-  }
-  input[type="text"], input[type="url"], textarea, select {
-    width: 100%;
-    padding: 10px 12px;
-    background: #FFFFFF;
-    border: 1px solid var(--border-hover);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 0.88rem;
-    transition: all 0.15s ease;
-  }
-  input[type="text"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--accent-ink);
-    box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08);
-  }
-  textarea {
-    resize: vertical;
-    min-height: 120px;
-    line-height: 1.45;
-  }
-
-  /* Referral Box */
-  .referral-box {
-    background: #FAF8F5;
-    border: 1px dashed #D6D3D1;
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-top: 6px;
-  }
-  .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    cursor: pointer;
-    user-select: none;
-  }
-
-  /* Action Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 9px 18px;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    border: 1px solid transparent;
-    text-decoration: none;
-  }
-  .btn-lg {
-    padding: 11px 22px;
-    font-size: 0.94rem;
-    border-radius: 10px;
-  }
-  .btn-primary {
-    background: var(--accent-ink);
-    color: #FFFFFF;
-    border-color: var(--accent-ink);
-  }
-  .btn-primary:hover {
-    background: var(--accent-ink-hover);
-    border-color: var(--accent-ink-hover);
-  }
-  .btn-success {
-    background: #059669;
-    color: #FFFFFF;
-    border-color: #059669;
-  }
-  .btn-success:hover {
-    background: #047857;
-    border-color: #047857;
-  }
-  .btn-amber {
-    background: #D97706;
-    color: #FFFFFF;
-    border-color: #D97706;
-    box-shadow: 0 1px 3px rgba(217, 119, 6, 0.25);
-  }
-  .btn-amber:hover {
-    background: #B45309;
-    border-color: #B45309;
-    color: #FFFFFF;
-    transform: translateY(-1px);
-  }
-  .btn-secondary {
-    background: #FFFFFF;
-    color: var(--text-primary);
-    border-color: var(--border-hover);
-  }
-  .btn-secondary:hover {
-    background: #F5F5F4;
-    border-color: #A8A29E;
-  }
-  .btn-sm {
-    padding: 5px 10px;
-    font-size: 0.78rem;
-    border-radius: 6px;
-  }
-  .btn:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-  }
-  .banner-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  /* Results Tabs */
-  .results-tabs {
-    display: flex;
-    gap: 6px;
-    border-bottom: 1px solid var(--border-subtle);
-    margin-bottom: 16px;
-  }
-  .subtab-btn {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: var(--text-secondary);
-    padding: 8px 14px;
-    font-size: 0.84rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .subtab-btn:hover {
-    color: var(--text-primary);
-  }
-  .subtab-btn.active {
-    color: var(--text-primary);
-    border-bottom-color: var(--accent-ink);
-    font-weight: 600;
-  }
-
-  /* Chips */
-  .meta-chips {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 14px;
-  }
-  .chip {
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    font-size: 0.76rem;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .chip-score { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
-  .chip-archetype { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
-  .chip-skill { background: #F5F5F4; color: #44403C; border: 1px solid #E7E5E4; font-weight: 500; }
-
-  /* Frame Previews */
-  .preview-frame-container {
-    background: #E5E5E5;
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    overflow: hidden;
-    height: 780px;
-  }
-  .preview-frame {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  .tex-code {
-    width: 100%;
-    height: 650px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.84rem;
-    background: #FAF8F5;
-    color: #1C1917;
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 14px;
-    line-height: 1.5;
-  }
-
-  /* Diffs */
-  .diff-box {
-    background: #FAF8F5;
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    max-height: 260px;
-    overflow-y: auto;
-    line-height: 1.45;
-  }
-  .diff-line { padding: 1px 4px; border-radius: 3px; }
-  .diff-added { background: rgba(16, 185, 129, 0.15); color: #065F46; }
-  .diff-removed { background: rgba(239, 68, 68, 0.15); color: #991B1B; }
-  .diff-chunk { color: #2563EB; font-weight: 600; }
-  .diff-header { color: #6B7280; }
-
-  /* Portal Directory Sheets */
-  .sheet-tabs-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 20px;
-  }
-  .sheet-pills {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .sheet-pill {
-    padding: 7px 14px;
-    border-radius: var(--radius-pill);
-    font-size: 0.82rem;
-    font-weight: 500;
-    cursor: pointer;
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.15s;
-  }
-  .sheet-pill:hover {
-    border-color: var(--border-dark);
-    color: var(--text-primary);
-  }
-  .sheet-pill.active {
-    background: var(--accent-ink);
-    color: #FFFFFF;
-    border-color: var(--accent-ink);
-    font-weight: 600;
-  }
-  .sheet-pill .count-badge {
-    background: rgba(0, 0, 0, 0.08);
-    padding: 1px 6px;
-    border-radius: 10px;
-    font-size: 0.72rem;
-  }
-  .sheet-pill.active .count-badge {
-    background: rgba(255, 255, 255, 0.2);
-    color: #FFFFFF;
-  }
-
-  /* Search & Controls Bar */
-  .controls-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-  .search-wrapper {
-    position: relative;
-    flex: 1;
-    max-width: 440px;
-  }
-  .search-wrapper i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 0.85rem;
-  }
-  .search-input {
-    padding-left: 34px !important;
-  }
-
-  /* Directory & Tracker Table */
-  .table-container {
-    border: 1px solid var(--border-subtle);
-    border-radius: 10px;
-    overflow-x: auto;
-    background: #FFFFFF;
-  }
-  table.sheet-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.86rem;
-    text-align: left;
-  }
-  table.sheet-table th {
-    background: #FAF8F5;
-    padding: 10px 14px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  table.sheet-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid #F5F3EF;
-    vertical-align: middle;
-  }
-  table.sheet-table tr:hover td {
-    background: #FAF8F5;
-  }
-
-  /* Portal Badges */
-  .portal-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 2px 8px;
-    border-radius: var(--radius-pill);
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: capitalize;
-  }
-  .badge-ashby { background: #FAF5FF; color: #7E22CE; border: 1px solid #F3E8FF; }
-  .badge-greenhouse { background: #ECFDF5; color: #047857; border: 1px solid #D1FAE5; }
-  .badge-lever { background: #F0F9FF; color: #0369A1; border: 1px solid #E0F2FE; }
-  .badge-workday { background: #FFFBEB; color: #B45309; border: 1px solid #FEF3C7; }
-  .badge-other { background: #F5F5F4; color: #57534E; border: 1px solid #E7E5E4; }
-
-  .ext-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-size: 0.8rem;
-    padding: 3px 8px;
-    border-radius: 6px;
-    background: #F5F5F4;
-    border: 1px solid var(--border-subtle);
-    transition: all 0.15s;
-  }
-  .ext-link:hover {
-    background: #E7E5E4;
-    border-color: #D6D3D1;
-  }
-  .intel-link {
-    font-size: 0.72rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 500;
-    margin-right: 4px;
-  }
-  .intel-levels { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
-  .intel-glassdoor { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
-
-  /* Startup Funding & Intelligence Styles */
-  .badge-round {
-    background: #EFF6FF;
-    color: #1D4ED8;
-    border: 1px solid #BFDBFE;
-    font-weight: 600;
-    font-size: 0.72rem;
-    padding: 2px 7px;
-    border-radius: var(--radius-pill);
-    display: inline-block;
-  }
-  .badge-amount {
-    font-weight: 700;
-    color: #047857;
-    font-size: 0.84rem;
-    margin-left: 4px;
-  }
-  .badge-sector {
-    background: #FAF5FF;
-    color: #7E22CE;
-    border: 1px solid #F3E8FF;
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 1px 6px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-  .badge-country {
-    color: var(--text-muted);
-    font-size: 0.74rem;
-  }
-  .badge-fail-funding {
-    color: #DC2626;
-    font-weight: 600;
-    font-size: 0.82rem;
-  }
-
-  /* Month Filter Pills */
-  .month-pills {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-  .month-pill {
-    padding: 4px 11px;
-    border-radius: var(--radius-pill);
-    font-size: 0.74rem;
-    font-weight: 500;
-    cursor: pointer;
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-secondary);
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.15s;
-  }
-  .month-pill:hover {
-    border-color: var(--border-dark);
-    color: var(--text-primary);
-  }
-  .month-pill.active {
-    background: var(--accent-emerald-dark);
-    color: #FFFFFF;
-    border-color: var(--accent-emerald-dark);
-    font-weight: 600;
-  }
-  .month-pill .count-badge {
-    background: rgba(0, 0, 0, 0.07);
-    padding: 1px 5px;
-    border-radius: 8px;
-    font-size: 0.68rem;
-  }
-  .month-pill.active .count-badge {
-    background: rgba(255, 255, 255, 0.25);
-    color: #FFFFFF;
-  }
-  @media (max-width: 768px) {
-    .month-pills {
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      flex-wrap: nowrap;
-      padding-bottom: 4px;
-    }
-    .month-pills::-webkit-scrollbar {
-      display: none;
-    }
-    .month-pill {
-      flex-shrink: 0;
-    }
-  }
-
-  /* Discipline & Role Filter Pills */
-  .discipline-pills {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-  .role-discipline-pill {
-    padding: 5px 12px;
-    border-radius: var(--radius-pill);
-    font-size: 0.75rem;
-    font-weight: 500;
-    cursor: pointer;
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-secondary);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.15s ease;
-  }
-  .role-discipline-pill:hover {
-    border-color: var(--border-dark);
-    color: var(--text-primary);
-    transform: translateY(-1px);
-  }
-  .role-discipline-pill.active {
-    background: var(--text-primary);
-    color: #FFFFFF;
-    border-color: var(--text-primary);
-    font-weight: 600;
-  }
-  .role-discipline-pill i {
-    font-size: 0.72rem;
-    opacity: 0.85;
-  }
-  .role-discipline-pill.active i {
-    opacity: 1;
-    color: #34D399;
-  }
-
-  /* Role Tag Badges in Table */
-  .role-tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    max-width: 320px;
-  }
-  .role-tag-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    padding: 2px 7px;
-    border-radius: 4px;
-    background: #F5F3EF;
-    border: 1px solid #E7E5E4;
-    color: #44403C;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    line-height: 1.3;
-    white-space: nowrap;
-  }
-  .role-tag-pill:hover {
-    background: #EAE6DF;
-    border-color: #A8A29E;
-    color: #1C1917;
-    transform: translateY(-1px);
-  }
-  .role-tag-pill.highlighted {
-    background: #ECFDF5;
-    border-color: #6EE7B7;
-    color: #065F46;
-    font-weight: 600;
-    box-shadow: 0 1px 2px rgba(5, 150, 105, 0.12);
-  }
-  .role-tag-more {
-    font-size: 0.70rem;
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 2px 5px;
-    border-radius: 4px;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .role-tag-more:hover {
-    color: var(--text-primary);
-  }
-
-  .role-search-link {
-    color: var(--text-muted);
-    font-size: 0.65rem;
-    margin-left: 2px;
-    padding: 1px 3px;
-    border-radius: 3px;
-    opacity: 0.65;
-    transition: all 0.15s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-  }
-  .role-search-link:hover {
-    opacity: 1;
-    color: var(--accent-emerald);
-    background: rgba(43, 83, 41, 0.08);
-  }
-
-  /* Work Mode Filter Pills */
-  .mode-pill {
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    cursor: pointer;
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-secondary);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    transition: all 0.15s ease;
-  }
-  .mode-pill:hover {
-    border-color: var(--border-dark);
-    color: var(--text-primary);
-  }
-  .mode-pill.active {
-    background: #44403C;
-    color: #FFFFFF;
-    border-color: #44403C;
-    font-weight: 600;
-  }
-
-  /* Sync Freshness Badge */
-  .sync-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 4px 11px;
-    border-radius: var(--radius-pill);
-    background: #F0FDF4;
-    border: 1px solid #BBF7D0;
-    color: #166534;
-    font-size: 0.74rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .sync-badge:hover {
-    background: #DCFCE7;
-    border-color: #86EFAC;
-    transform: translateY(-1px);
-  }
-  .sync-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #22C55E;
-    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
-    animation: syncPulse 2s infinite;
-  }
-  @keyframes syncPulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
-    70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-  }
-
-  /* Outreach & Referral Pitch Generator */
-  .outreach-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  }
-  .outreach-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .outreach-body {
-    background: #FAF8F5;
-    border: 1px solid var(--border-subtle);
-    border-radius: 6px;
-    padding: 12px 14px;
-    font-size: 0.85rem;
-    line-height: 1.55;
-    color: var(--text-primary);
-    white-space: pre-wrap;
-    font-family: inherit;
-  }
-
-  /* Pagination Bar */
-  .pagination-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    background: #FAF8F5;
-    border-top: 1px solid var(--border-subtle);
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .page-info {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-  }
-  .page-nav {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
-  .page-btn {
-    padding: 5px 10px;
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .page-btn:hover:not(:disabled) {
-    background: #F5F5F4;
-    border-color: #A8A29E;
-  }
-  .page-btn.active {
-    background: var(--accent-ink);
-    color: #FFFFFF;
-    border-color: var(--accent-ink);
-    font-weight: 600;
-  }
-  .page-btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
-
-  /* Toast notification */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: #18181B;
-    color: #FFFFFF;
-    padding: 12px 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    font-size: 0.88rem;
-    display: none;
-    z-index: 1000;
-  }
-
-  /* ======================================================== */
-  /* MOBILE & TABLET RESPONSIVE STYLESYSTEM                   */
-  /* ======================================================== */
-  @media (max-width: 960px) {
-    .footer-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-  }
-
-  @media (max-width: 900px) {
-    header.app-header {
-      padding: 8px 12px;
-    }
-    .header-inner {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 8px;
-    }
-    .header-brand-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-    .desktop-github-btn {
-      display: none !important;
-    }
-    .mobile-github-btn {
-      display: inline-flex !important;
-      align-items: center;
-      gap: 5px;
-      padding: 5px 10px;
-      font-size: 0.78rem;
-    }
-    .header-nav-container {
-      width: 100%;
-      gap: 0;
-    }
-    .nav-tabs {
-      width: 100%;
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding: 3px;
-      border-radius: 10px;
-    }
-    .nav-tabs::-webkit-scrollbar {
-      display: none;
-    }
-    .tab-btn {
-      padding: 6px 11px;
-      font-size: 0.78rem;
-      gap: 5px;
-    }
-    .stats-strip {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      padding: 20px 18px;
-    }
-    .workflow-grid {
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    main {
-      padding: 12px 10px 36px;
-    }
-    .hero-section {
-      padding: 24px 8px 18px;
-    }
-    .hero-pill {
-      font-size: 0.65rem;
-      padding: 4px 10px;
-      letter-spacing: 0.05em;
-      margin-bottom: 14px;
-      line-height: 1.3;
-    }
-    .hero-title {
-      font-size: 2.15rem;
-      line-height: 1.18;
-      margin-bottom: 12px;
-    }
-    .hero-subtitle {
-      font-size: 0.94rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-    .hero-actions {
-      flex-direction: column;
-      width: 100%;
-      gap: 10px;
-      margin-bottom: 26px;
-    }
-    .hero-actions .btn {
-      width: 100%;
-      justify-content: center;
-    }
-    .hero-search-bar {
-      flex-direction: column;
-      padding: 10px;
-      gap: 10px;
-    }
-    .hero-search-field {
-      width: 100%;
-      padding: 4px 6px;
-    }
-    .hero-search-filter {
-      width: 100%;
-      border-left: none;
-      border-top: 1px dashed #E7E5E4;
-      padding: 10px 6px 4px;
-    }
-    .hero-search-btn {
-      width: 100%;
-      justify-content: center;
-    }
-    .candidate-edge-grid {
-      grid-template-columns: 1fr;
-    }
-    .candidate-showcase-grid {
-      grid-template-columns: 1fr;
-    }
-    .section-heading {
-      margin: 36px 0 20px;
-    }
-    .section-title {
-      font-size: 1.7rem;
-      line-height: 1.25;
-    }
-    .section-desc {
-      font-size: 0.88rem;
-    }
-    .feature-grid {
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 20px;
-    }
-    .feature-card {
-      padding: 20px 18px;
-    }
-    .step-card {
-      padding: 20px 18px;
-    }
-    .cta-banner {
-      padding: 32px 18px;
-      border-radius: 14px;
-      margin: 36px 0 28px;
-    }
-    .cta-title {
-      font-size: 1.85rem;
-      line-height: 1.22;
-    }
-    .cta-sub {
-      font-size: 0.9rem;
-      margin-bottom: 22px;
-    }
-    .cta-actions {
-      flex-direction: column;
-      width: 100%;
-      gap: 10px;
-    }
-    .cta-actions .btn {
-      width: 100%;
-      justify-content: center;
-    }
-    .card {
-      padding: 18px 14px;
-      border-radius: 12px;
-    }
-    .card-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .form-row {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    .banner-actions {
-      flex-direction: column;
-      width: 100%;
-      gap: 10px;
-    }
-    .banner-actions .btn {
-      width: 100%;
-      flex: none;
-    }
-    .results-tabs {
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding-bottom: 4px;
-    }
-    .results-tabs::-webkit-scrollbar {
-      display: none;
-    }
-    .subtab-btn {
-      flex-shrink: 0;
-      padding: 7px 11px;
-      font-size: 0.78rem;
-    }
-    .preview-frame-container {
-      height: 520px;
-    }
-    #subtab-pdf {
-      height: 520px !important;
-    }
-    .tex-code {
-      height: 480px !important;
-      font-size: 0.76rem;
-      padding: 10px;
-    }
-    #baseTexContent {
-      height: 520px !important;
-      font-size: 0.76rem;
-      padding: 10px;
-    }
-    .workspace-bar {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .workspace-meta {
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    #actionDownloadButtons {
-      width: 100%;
-      gap: 6px;
-    }
-    #actionDownloadButtons .btn {
-      flex: 1 1 calc(50% - 6px);
-      justify-content: center;
-      padding: 6px 8px;
-      font-size: 0.75rem;
-    }
-    .sheet-pills {
-      width: 100%;
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding-bottom: 6px;
-      flex-wrap: nowrap;
-    }
-    .sheet-pills::-webkit-scrollbar {
-      display: none;
-    }
-    .sheet-pill {
-      flex-shrink: 0;
-      padding: 6px 12px;
-      font-size: 0.78rem;
-    }
-    .controls-bar {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
-    }
-    .search-wrapper {
-      max-width: 100% !important;
-      width: 100%;
-    }
-    .pagination-bar {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 10px;
-    }
-    .page-info {
-      text-align: center;
-      font-size: 0.78rem;
-    }
-    .page-nav {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 3px;
-    }
-    .page-btn {
-      padding: 5px 8px;
-      font-size: 0.76rem;
-    }
-    #trackerSearch {
-      width: 100% !important;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .terminal-card {
-      padding: 12px 14px;
-      border-radius: 10px;
-    }
-    .terminal-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .terminal-body {
-      font-size: 0.72rem;
-      padding: 10px;
-      line-height: 1.45;
-    }
-    .app-footer {
-      padding: 26px 16px 20px;
-      border-radius: 14px;
-      margin-top: 28px;
-    }
-    .creator-card {
-      padding: 16px 14px;
-    }
-    .creator-socials {
-      gap: 6px;
-    }
-    .social-pill {
-      padding: 6px 10px;
-      font-size: 0.75rem;
-    }
-    .footer-bottom {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-      margin-top: 24px;
-      padding-top: 16px;
-    }
-    .footer-bottom-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 1.78rem;
-      line-height: 1.2;
-    }
-    .hero-subtitle {
-      font-size: 0.88rem;
-    }
-    .stats-strip {
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 16px 12px;
-      margin: 24px 0 32px;
-    }
-    .stat-num {
-      font-size: 1.65rem;
-    }
-    .stat-label {
-      font-size: 0.68rem;
-    }
-    .toast {
-      bottom: 14px;
-      right: 14px;
-      left: 14px;
-      font-size: 0.8rem;
-      padding: 10px 14px;
-      text-align: center;
-    }
-  }
-
-  /* Company Detail Modal & Dossier ("Company Page") */
-  .company-name-clickable {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 0.94rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.15s ease;
-  }
-  .company-name-clickable:hover {
-    color: var(--accent-emerald-dark);
-  }
-  .company-name-clickable span {
-    border-bottom: 1px dashed #A8A29E;
-  }
-  .company-name-clickable:hover span {
-    border-bottom-color: var(--accent-emerald);
-  }
-
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(28, 25, 23, 0.45);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-  }
-  .modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .modal-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
-    width: 100%;
-    max-width: 680px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.25);
-    transform: translateY(12px) scale(0.98);
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 28px;
-    position: relative;
-  }
-  .modal-overlay.active .modal-card {
-    transform: translateY(0) scale(1);
-  }
-  .modal-close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: #F5F5F4;
-    border: 1px solid var(--border-subtle);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    transition: all 0.15s ease;
-  }
-  .modal-close-btn:hover {
-    background: #E7E5E4;
-    color: var(--text-primary);
-  }
-
-  /* Directory Mode Switcher (Companies vs Live Roles Feed) */
-  .view-mode-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 16px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .view-mode-toggle {
-    display: inline-flex;
-    background: #EFECE6;
-    padding: 4px;
-    border-radius: 12px;
-    border: 1px solid var(--border-subtle);
-    gap: 4px;
-  }
-  .toggle-mode-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 9px;
-    border: none;
-    background: transparent;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.18s ease;
-  }
-  .toggle-mode-btn:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.5);
-  }
-  .toggle-mode-btn.active {
-    background: #FFFFFF;
-    color: var(--text-primary);
-    box-shadow: 0 2px 6px rgba(28, 25, 23, 0.08);
-  }
-  .toggle-mode-btn .badge-count {
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 10px;
-    background: #E7E5E4;
-    color: var(--text-secondary);
-  }
-  .toggle-mode-btn.active .badge-count {
-    background: #F5F5F4;
-    color: var(--text-primary);
-  }
-  .toggle-mode-btn .badge-count-emerald {
-    background: #D1FAE5 !important;
-    color: #065F46 !important;
-  }
-  .view-mode-hint {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* Quick Trending Search Chips */
-  .quick-chips-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px dashed #E7E5E4;
-  }
-  .quick-chip-label {
-    font-size: 0.73rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    margin-right: 4px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .quick-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: #FFFFFF;
-    border: 1px solid #D6D3D1;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-  }
-  .quick-chip:hover {
-    background: #F5F5F4;
-    color: var(--text-primary);
-    border-color: #A8A29E;
-    transform: translateY(-1px);
-  }
-  .quick-chip.active {
-    background: #1C1917;
-    color: #FAF8F5;
-    border-color: #1C1917;
-  }
-
-  /* Live Roles Feed Specific Styles */
-  .role-feed-title {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 0.92rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .role-feed-company {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-  .salary-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: #15803D;
-    background: #F0FDF4;
-    border: 1px solid #BBF7D0;
-    padding: 2px 7px;
-    border-radius: 6px;
-    white-space: nowrap;
-  }
-  .skill-pill-sm {
-    display: inline-block;
-    font-size: 0.68rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    background: #F5F5F4;
-    border: 1px solid #E7E5E4;
-    border-radius: 4px;
-    padding: 1px 6px;
-    margin-right: 4px;
-    margin-top: 3px;
-    white-space: nowrap;
-  }
-  .role-tag-pill.match-highlight {
-    background: #ECFDF5 !important;
-    border-color: #10B981 !important;
-    color: #065F46 !important;
-    font-weight: 700 !important;
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
-    animation: pulseHighlight 2s infinite ease-in-out;
-  }
-  @keyframes pulseHighlight {
-    0%, 100% { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
-    50% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.35); }
-  }
+/*__APP_CSS__*/
 </style>
 </head>
 <body>
 
-  <!-- Top Header Navigation -->
   <header class="app-header">
     <div class="header-inner">
-      <div class="header-brand-row">
-        <div class="brand" onclick="switchView('home')" title="Applyfox Home">
-          <span style="font-size: 1.3rem;">🦊</span>
-          <span>Applyfox</span>
-          <span class="brand-badge">STUDIO &bull; SHEETS</span>
-        </div>
-        <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary mobile-github-btn" title="Contribute on GitHub">
-          <i class="fa-brands fa-github"></i> <span>GitHub</span>
-        </a>
-      </div>
+      <button type="button" class="brand" onclick="switchView('home')" title="Applyfox home" aria-label="Applyfox home"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><defs><mask id="af-cut-header"><rect width="32" height="32" fill="#fff"/><path d="M10.5 17 L14.5 21 L22 13.5" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><path d="M5 4.5 L12.5 11 H19.5 L27 4.5 V17 L16 28 L5 17 Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" mask="url(#af-cut-header)"/></svg><span>Apply<em>fox</em></span></button>
 
       <div class="header-nav-container">
-        <nav class="nav-tabs" aria-label="Main Navigation">
-          <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">
-            <i class="fa fa-sparkles"></i> <span>Overview</span>
-          </button>
-          <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">
-            <i class="fa fa-wand-magic-sparkles"></i> <span>Studio &amp; Tailor</span>
-          </button>
-          <button class="tab-btn" id="navBtn-startups" onclick="openStartupsView()">
-            <i class="fa fa-rocket" style="color: #D97706;"></i> <span>2026 Startups (480)</span>
-          </button>
-          <button class="tab-btn" id="navBtn-portals" onclick="openPortalsView()">
-            <i class="fa fa-table-list"></i> <span>Directory (7,406)</span>
-          </button>
-          <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">
-            <i class="fa fa-clipboard-check"></i> <span>Tracker (<span id="appCount">0</span>)</span>
-          </button>
-          <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">
-            <i class="fa fa-file-code"></i> <span>Base main.tex</span>
-          </button>
+        <nav class="nav-tabs" aria-label="Main navigation">
+          <button class="tab-btn active" id="navBtn-home" onclick="switchView('home')">Overview</button>
+          <button class="tab-btn" id="navBtn-tailor" onclick="switchView('tailor')">CV Studio</button>
+          <button class="tab-btn" id="navBtn-startups" onclick="openStartupsView()">Startups <span class="tab-count">480</span></button>
+          <button class="tab-btn" id="navBtn-portals" onclick="openPortalsView()">Directory <span class="tab-count">7,406</span></button>
+          <button class="tab-btn" id="navBtn-tracker" onclick="switchView('tracker')">Tracker <span class="tab-count" id="appCount">0</span></button>
+          <button class="tab-btn" id="navBtn-base-cv" onclick="switchView('base-cv')">Base CV</button>
         </nav>
-        <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary desktop-github-btn" title="Contribute on GitHub">
-          <i class="fa-brands fa-github"></i> <span>GitHub</span>
+      </div>
+
+      <div class="header-actions">
+        <nav class="header-links" aria-label="Elsewhere">
+          <a href="https://harshdotcom.github.io/AI-Systems/" target="_blank" rel="noopener" title="The Central Library — free books on building systems">Library <span aria-hidden="true">&nearr;</span></a>
+          <a href="https://harshdotcom.github.io/AI-Systems/harsh-jha.html" target="_blank" rel="noopener me" title="About Harsh Jha">About <span aria-hidden="true">&nearr;</span></a>
+        </nav>
+        <button type="button" id="themeToggle" class="icon-btn theme-toggle" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light / dark theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Applyfox on GitHub" aria-label="Applyfox on GitHub">
+          <i class="fa-brands fa-github"></i>
         </a>
       </div>
     </div>
@@ -2701,745 +147,396 @@ HTML_PAGE = """<!DOCTYPE html>
 
   <main>
     <!-- ========================================== -->
-    <!-- VIEW 0: HOME / PRODUCT OVERVIEW FRONTPAGE   -->
+    <!-- VIEW 0: HOME                               -->
     <!-- ========================================== -->
     <div id="view-home">
-      <!-- Candidate-Centric Hero Section -->
-      <div class="hero-section">
-        <div class="hero-pill">
-          <span class="hero-dot"></span>
-          <span>MULTI-DISCIPLINE CAREER PLATFORM &bull; DESIGN, TECH, LEGAL, IT &amp; OPS &bull; 37,193 VERIFIED ROLES</span>
-        </div>
-        <h1 class="hero-title">
-          Land your next career-defining role <span class="hero-accent">across Tech, Design, Legal &amp; Beyond.</span>
-        </h1>
+
+      <section class="hero-section">
+        <span class="eyebrow">Open-source career studio &middot; 37,193 verified roles</span>
+        <h1 class="hero-title">Find the role. Tailor the CV. <em>Track every application.</em></h1>
         <p class="hero-subtitle">
-          Whether you design brand systems, counsel growth companies, build intelligent software, manage cloud security, or lead product operations &mdash; Applyfox indexes 37,000+ verified positions directly from official career boards. Tailor an Ivy-League LaTeX CV in seconds, skip the ghost jobs, and get hired faster.
+          Applyfox indexes open positions straight from official career boards across engineering, design, IT, legal and operations &mdash; then typesets a LaTeX CV aligned to the job description you paste in.
         </p>
 
-        <!-- Candidate Job Search Command Bar -->
         <div class="hero-search-wrapper">
           <div class="hero-search-bar">
             <div class="hero-search-field">
               <i class="fa fa-magnifying-glass"></i>
-              <input type="text" id="homeSearchInput" placeholder="What role are you looking for? (e.g. Legal Counsel, UI/UX Designer, Full Stack, DevOps...)" onkeydown="if(event.key === 'Enter') executeHomeSearch()">
+              <input type="text" id="homeSearchInput" placeholder="Search roles, e.g. Product Designer" onkeydown="if(event.key === 'Enter') executeHomeSearch()">
             </div>
             <div class="hero-search-filter">
-              <i class="fa fa-briefcase"></i>
-              <select id="homeSearchDiscipline">
-                <option value="">All Disciplines</option>
+              <select id="homeSearchDiscipline" aria-label="Discipline">
+                <option value="">All disciplines</option>
                 <option value="Software & AI">Software &amp; AI</option>
-                <option value="Graphic & UI/UX">Graphic &amp; UI/UX</option>
+                <option value="Graphic & UI/UX">Design &amp; UI/UX</option>
                 <option value="IT & Cloud">IT &amp; Cloud</option>
                 <option value="Legal & Compliance">Legal &amp; Compliance</option>
                 <option value="Product & Operations">Product &amp; Ops</option>
               </select>
             </div>
-            <button class="hero-search-btn" onclick="executeHomeSearch()">
-              <span>Search 37k+ Roles</span> <i class="fa fa-arrow-right"></i>
-            </button>
+            <button class="btn btn-primary hero-search-btn" onclick="executeHomeSearch()">Search roles</button>
           </div>
           <div class="hero-trending-chips">
-            <span class="hero-trending-label"><i class="fa fa-fire"></i> Quick Jump:</span>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Legal')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h18"></path></svg> Legal &amp; Compliance</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('UI UX')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> UI/UX Designer</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Full Stack')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> Full Stack &amp; AI</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('IT Cloud')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"></rect><rect x="2" y="14" width="20" height="8" rx="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> IT &amp; Cloud</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Product')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 7v7"></path><path d="M12 7v4"></path><path d="M16 7v9"></path></svg> Product Lead</button>
-            <button class="hero-trending-chip" onclick="quickJumpSearch('Remote')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Remote Only</button>
-            <button class="hero-trending-chip" onclick="openStartupsView()"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg> 2026 Funded Startups</button>
+            <span class="hero-trending-label">Popular</span>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Legal')">Legal &amp; Compliance</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('UI UX')">UI/UX Designer</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Full Stack')">Full Stack</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('IT Cloud')">IT &amp; Cloud</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Product')">Product</button>
+            <button class="hero-trending-chip" onclick="quickJumpSearch('Remote')">Remote</button>
           </div>
         </div>
 
-        <!-- Primary Action Gateway -->
         <div class="hero-actions">
-          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
-            <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio (Tailor per JD) &rarr;
-          </button>
-          <button class="btn btn-secondary btn-lg" onclick="openRolesFeedView()">
-            <i class="fa fa-briefcase"></i> Browse 37,193 Live Roles Feed
-          </button>
-          <button class="btn btn-amber btn-lg" onclick="openStartupsView()">
-            <i class="fa fa-rocket"></i> Explore 480 Funded Startups
-          </button>
-          <button class="btn btn-secondary btn-lg" onclick="switchView('tracker')">
-            <i class="fa fa-clipboard-check"></i> Private Application Tracker
-          </button>
+          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">Open CV Studio</button>
+          <button class="arrow-link" onclick="openStartupsView()">Explore 2026 funded startups <span aria-hidden="true">&rarr;</span></button>
         </div>
-      </div>
+      </section>
 
-      <!-- Live Platform Metrics Strip -->
       <div class="stats-strip">
-        <div class="stat-item" onclick="openRolesFeedView()" style="cursor: pointer;" title="Browse all 37,193 open positions">
-          <div class="stat-num" style="color: #047857;"><i class="fa fa-briefcase" style="font-size: 0.8em; margin-right: 4px;"></i>37,193</div>
-          <div class="stat-label" style="color: var(--text-primary); font-weight: 700;">Live Open Positions &rarr;</div>
-        </div>
-        <div class="stat-item" onclick="openStartupsView()" style="cursor: pointer;" title="Explore 480 Startups funded in 2026">
-          <div class="stat-num" style="color: #D97706;"><i class="fa fa-rocket" style="font-size: 0.8em; margin-right: 4px;"></i>480</div>
-          <div class="stat-label" style="color: var(--text-primary); font-weight: 700;">2026 Funded Startups &rarr;</div>
-        </div>
-        <div class="stat-item" onclick="openPortalsView()" style="cursor: pointer;" title="Browse all 7,406 verified companies">
+        <button class="stat-item" onclick="openRolesFeedView()" title="Browse all open positions">
+          <div class="stat-num">37,193</div>
+          <div class="stat-label">Open positions</div>
+        </button>
+        <button class="stat-item" onclick="openPortalsView()" title="Browse the company directory">
           <div class="stat-num">7,406</div>
-          <div class="stat-label">Verified Career Boards</div>
-        </div>
-        <div class="stat-item" onclick="openFailuresView()" style="cursor: pointer;" title="Explore 23 Startup Failure Post-Mortems">
-          <div class="stat-num" style="color: #E11D48;"><i class="fa fa-shield-halved" style="font-size: 0.8em; margin-right: 4px;"></i>23</div>
-          <div class="stat-label" style="color: var(--text-primary); font-weight: 700;">Risk &amp; Failure Studies &rarr;</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">&lt; 2.0s</div>
-          <div class="stat-label">Overleaf LaTeX Compile</div>
-        </div>
+          <div class="stat-label">Verified career boards</div>
+        </button>
+        <button class="stat-item" onclick="openStartupsView()" title="Startups funded in 2026">
+          <div class="stat-num">480</div>
+          <div class="stat-label">Startups funded in 2026</div>
+        </button>
+        <button class="stat-item" onclick="openFailuresView()" title="Startup failure post-mortems">
+          <div class="stat-num">23</div>
+          <div class="stat-label">Failure post-mortems</div>
+        </button>
       </div>
 
-      <!-- Section 1: The Candidate Edge (Why Job Seekers Win with Applyfox) -->
-      <div class="section-heading" style="margin-top: 54px;">
-        <span class="section-tag">BUILT FOR THE CANDIDATE</span>
-        <h2 class="section-title">Why job seekers win with Applyfox</h2>
-        <p class="section-desc">Traditional job hunting is broken: ghost jobs, spam aggregators, and automated ATS rejection. Applyfox gives you the unfair advantage.</p>
-      </div>
-
-      <div class="candidate-edge-grid">
-        <div class="candidate-edge-card">
-          <div>
-            <div class="candidate-edge-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="6" r="6"></circle>
-                <circle cx="12" cy="2" r="2"></circle>
-              </svg>
-            </div>
-            <h3 class="candidate-edge-title">100% Direct ATS Boards (Zero Ghost Jobs)</h3>
-            <p class="candidate-edge-desc">
-              Never waste hours applying to stale 6-month-old reposts. Applyfox indexes live career boards on Ashby, Greenhouse, Lever, and Workday, plus 480 newly funded 2026 startups with fresh hiring budgets.
-            </p>
-          </div>
-          <span class="candidate-edge-highlight">
-            <i class="fa fa-check-double"></i> 7,406 Verified Boards
-          </span>
+      <!-- 01 · How it works -->
+      <section class="home-section">
+        <div class="section-aside">
+          <span class="section-index">01</span>
+          <h2 class="section-title">How it works</h2>
+          <p class="section-desc">From a job posting to a sent application in three steps.</p>
         </div>
-
-        <div class="candidate-edge-card">
-          <div>
-            <div class="candidate-edge-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
-              </svg>
-            </div>
-            <h3 class="candidate-edge-title">Honest ATS Keyword Alignment</h3>
-            <p class="candidate-edge-desc">
-              Match the exact terminology and taxonomy of the target Job Description in your Profile, Technical Skills, and Project headers without fabricating claims or lying about your real experience.
-            </p>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">01</span>
+            <h3 class="step-title">Discover</h3>
+            <p class="step-text">Search live roles indexed directly from Ashby, Greenhouse, Lever and Workday boards &mdash; no aggregators, no stale reposts.</p>
           </div>
-          <span class="candidate-edge-highlight">
-            <i class="fa fa-shield-halved"></i> 100% Authentic Verification
-          </span>
+          <div class="step">
+            <span class="step-num">02</span>
+            <h3 class="step-title">Tailor</h3>
+            <p class="step-text">Paste the job description. Your profile, skills and project headers are re-aligned to its terminology without inventing experience.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <h3 class="step-title">Apply &amp; track</h3>
+            <p class="step-text">Compile a one-page LaTeX PDF, draft a note to the hiring manager, and archive the exact version you sent.</p>
+          </div>
         </div>
+      </section>
 
-        <div class="candidate-edge-card">
-          <div>
-            <div class="candidate-edge-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <line x1="10" y1="9" x2="8" y2="9"></line>
-              </svg>
-            </div>
-            <h3 class="candidate-edge-title">Overleaf-Grade LaTeX Typesetting</h3>
-            <p class="candidate-edge-desc">
-              Stand out from generic Canva and Word templates. Typeset with genuine standalone XeTeX for Ivy-League micro-typography and 100% accurate machine-readability that ATS parsers love.
-            </p>
-          </div>
-          <span class="candidate-edge-highlight">
-            <i class="fa fa-bolt"></i> 1-Page Exact Fit in &lt; 2.0s
-          </span>
+      <!-- 02 · Disciplines -->
+      <section class="home-section">
+        <div class="section-aside">
+          <span class="section-index">02</span>
+          <h2 class="section-title">Every discipline</h2>
+          <p class="section-desc">Roles are classified across five fields. Pick one to open the filtered feed.</p>
         </div>
-
-        <div class="candidate-edge-card">
-          <div>
-            <div class="candidate-edge-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </div>
-            <h3 class="candidate-edge-title">1-Click Hiring Manager Outreach</h3>
-            <p class="candidate-edge-desc">
-              Skip the 400-applicant line. Instantly generate tailored cold emails and LinkedIn connection pitches customized to the company's recent milestones, tech stack, and hiring leads.
-            </p>
-          </div>
-          <span class="candidate-edge-highlight">
-            <i class="fa fa-envelope-open-text"></i> 5x Reply Rate Boost
-          </span>
-        </div>
-      </div>
-
-      <!-- Section 2: Interactive Candidate Studio Showcase -->
-      <div class="section-heading" style="margin-top: 36px;">
-        <span class="section-tag">FROM APPLICATION TO INTERVIEW</span>
-        <h2 class="section-title">See how Applyfox transforms your job application</h2>
-        <p class="section-desc">Experience the end-to-end workflow designed to take you from a raw Job Description to an executive-ready application package.</p>
-      </div>
-
-      <div class="candidate-showcase-grid">
-        <div class="showcase-step-card">
-          <div>
-            <div class="showcase-step-header">
-              <span style="font-weight: 700; font-size: 0.85rem; color: var(--text-primary);"><i class="fa fa-file-lines" style="color: #6366F1; margin-right: 6px;"></i> STEP 1: TARGET JD</span>
-              <span class="showcase-badge showcase-badge-purple">RAW REQUIREMENTS</span>
-            </div>
-            <div class="showcase-mock-body">
-              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Senior Product Designer (UI/UX)</div>
-              <div style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;">
-                &bull; 4+ years leading design systems &amp; Figma UI/UX architecture.<br>
-                &bull; Proven track record conducting user research &amp; design tokens.<br>
-                &bull; Cross-functional collaboration with engineering &amp; product.
-              </div>
-            </div>
-          </div>
-          <div style="font-size: 0.78rem; color: var(--text-muted);"><i class="fa fa-arrow-down"></i> Analyzed in 0.4s by Applyfox parser</div>
-        </div>
-
-        <div class="showcase-step-card">
-          <div>
-            <div class="showcase-step-header">
-              <span style="font-weight: 700; font-size: 0.85rem; color: var(--text-primary);"><i class="fa fa-chart-line" style="color: #10B981; margin-right: 6px;"></i> STEP 2: ATS ALIGNMENT</span>
-              <span class="showcase-badge showcase-badge-emerald">98% ATS MATCH</span>
-            </div>
-            <div class="showcase-mock-body">
-              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
-                <span class="skill-pill-sm" style="background: #ECFDF5; border-color: #A7F3D0; color: #065F46; font-weight: 600;">✓ Figma Tokens</span>
-                <span class="skill-pill-sm" style="background: #ECFDF5; border-color: #A7F3D0; color: #065F46; font-weight: 600;">✓ Design Systems</span>
-                <span class="skill-pill-sm" style="background: #ECFDF5; border-color: #A7F3D0; color: #065F46; font-weight: 600;">✓ User Metrics</span>
-                <span class="skill-pill-sm" style="background: #ECFDF5; border-color: #A7F3D0; color: #065F46; font-weight: 600;">✓ Agile Sprints</span>
-              </div>
-              <div style="font-size: 0.76rem; color: var(--text-secondary); background: #FFFFFF; padding: 8px; border-radius: 6px; border: 1px solid #E7E5E4;">
-                <strong>Typeset Resume:</strong> Single-page LaTeX with bold metric outcomes (+34% user retention, 12 design token systems).
-              </div>
-            </div>
-          </div>
-          <div style="font-size: 0.78rem; color: #047857; font-weight: 600;"><i class="fa fa-circle-check"></i> 100% Machine-Readable PDF</div>
-        </div>
-
-        <div class="showcase-step-card">
-          <div>
-            <div class="showcase-step-header">
-              <span style="font-weight: 700; font-size: 0.85rem; color: var(--text-primary);"><i class="fa fa-paper-plane" style="color: #D97706; margin-right: 6px;"></i> STEP 3: DIRECT OUTREACH</span>
-              <span class="showcase-badge showcase-badge-amber">SKIP THE LINE</span>
-            </div>
-            <div class="showcase-mock-body">
-              <div style="font-size: 0.74rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">Subject: Senior Product Designer — Harsh Jha</div>
-              <div style="font-size: 0.75rem; color: var(--text-primary); line-height: 1.4; background: #FFFFFF; padding: 8px; border-radius: 6px; border: 1px solid #E7E5E4;">
-                "Hi Alex, saw your recent Series B announcement! I've spent 4+ years scaling multi-platform Figma design systems with 99.9% adoption. Attached is my tailored resume..."
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-sm btn-primary" onclick="switchView('tailor')" style="width: 100%; justify-content: center;">
-            <i class="fa fa-wand-magic-sparkles"></i> Try With Your Resume &rarr;
+        <div class="discipline-index">
+          <button class="discipline-row" onclick="searchByRole('Software &amp; AI')">
+            <span class="discipline-name">Software &amp; AI</span>
+            <span class="discipline-focus">Full stack, backend, ML, cloud infrastructure</span>
+            <span class="discipline-pay">$165k&ndash;240k</span>
+            <span class="discipline-go" aria-hidden="true">&rarr;</span>
+          </button>
+          <button class="discipline-row" onclick="searchByRole('Graphic &amp; UI/UX')">
+            <span class="discipline-name">Design &amp; UI/UX</span>
+            <span class="discipline-focus">Product design, brand identity, design systems</span>
+            <span class="discipline-pay">$130k&ndash;185k</span>
+            <span class="discipline-go" aria-hidden="true">&rarr;</span>
+          </button>
+          <button class="discipline-row" onclick="searchByRole('IT &amp; Cloud')">
+            <span class="discipline-name">IT, Cloud &amp; Security</span>
+            <span class="discipline-focus">DevOps, SRE, systems administration, InfoSec</span>
+            <span class="discipline-pay">$140k&ndash;210k</span>
+            <span class="discipline-go" aria-hidden="true">&rarr;</span>
+          </button>
+          <button class="discipline-row" onclick="searchByRole('Legal &amp; Compliance')">
+            <span class="discipline-name">Legal &amp; Compliance</span>
+            <span class="discipline-focus">In-house counsel, commercial contracts, privacy</span>
+            <span class="discipline-pay">$185k&ndash;275k</span>
+            <span class="discipline-go" aria-hidden="true">&rarr;</span>
+          </button>
+          <button class="discipline-row" onclick="searchByRole('Product &amp; Operations')">
+            <span class="discipline-name">Product &amp; Operations</span>
+            <span class="discipline-focus">Product management, TPM, BizOps, growth</span>
+            <span class="discipline-pay">$145k&ndash;220k</span>
+            <span class="discipline-go" aria-hidden="true">&rarr;</span>
           </button>
         </div>
-      </div>
+      </section>
 
-      <!-- Multi-Discipline Roles Grid: Built for Tech, Design, IT & Legal -->
-      <div class="section-heading" style="margin-top: 54px;">
-        <span class="section-tag">MULTI-DISCIPLINE CAREER DISCOVERY</span>
-        <h2 class="section-title">Built for every profession across modern tech</h2>
-        <p class="section-desc">Applyfox indexes career boards and funded startups hiring across engineering, creative design, IT systems, corporate law, and business operations.</p>
-      </div>
-
-      <div class="roles-grid">
-        <div class="role-card" onclick="searchByRole('engineer')">
-          <div>
-            <div class="role-card-header">
-              <div class="role-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-              </div>
-              <div>
-                <h3 class="role-card-title">Software &amp; AI Engineers <span class="role-card-salary">$165k &ndash; $240k</span></h3>
-                <div class="role-card-meta">Full Stack &bull; Backend &bull; GenAI &bull; Cloud Infrastructure</div>
-              </div>
-            </div>
-            <p class="role-card-desc">
-              Find 16,000+ verified career boards hiring for Python, Go, TypeScript, LLM agents, and distributed microservices with instant ATS keyword alignment.
-            </p>
-            <div class="role-card-tags">
-              <span>LangChain</span><span>Kubernetes</span><span>FastAPI</span><span>Vector DB</span>
-            </div>
-          </div>
-          <span class="role-card-cta">Browse 16,000+ Engineering Roles &rarr;</span>
+      <!-- 03 · What's inside -->
+      <section class="home-section">
+        <div class="section-aside">
+          <span class="section-index">03</span>
+          <h2 class="section-title">What&rsquo;s inside</h2>
+          <p class="section-desc">Local-first. Your CVs and applications never leave your machine.</p>
         </div>
-
-        <div class="role-card" onclick="searchByRole('design')">
-          <div>
-            <div class="role-card-header">
-              <div class="role-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                  <line x1="3" y1="9" x2="21" y2="9"></line>
-                  <line x1="9" y1="21" x2="9" y2="9"></line>
-                </svg>
-              </div>
-              <div>
-                <h3 class="role-card-title">Graphic &amp; UI/UX Designers <span class="role-card-salary">$130k &ndash; $185k</span></h3>
-                <div class="role-card-meta">Product Design &bull; Brand Identity &bull; UI/UX &bull; Design Systems</div>
-              </div>
-            </div>
-            <p class="role-card-desc">
-              Explore 15,100+ fast-growing startups and product teams hiring brand designers, UI/UX specialists, and design system creators across Figma and Adobe.
-            </p>
-            <div class="role-card-tags">
-              <span>Figma</span><span>Design Systems</span><span>Brand Identity</span><span>UI/UX</span>
-            </div>
-          </div>
-          <span class="role-card-cta">Browse 15,100+ Design Roles &rarr;</span>
+        <div class="feature-list">
+          <button class="feature-item" onclick="switchView('tailor')">
+            <div class="feature-title">LaTeX engine <span aria-hidden="true">&rarr;</span></div>
+            <p class="feature-text">An embedded Tectonic XeTeX compiler produces real PDFs with clean typography and working links.</p>
+          </button>
+          <button class="feature-item" onclick="switchView('tailor')">
+            <div class="feature-title">JD-aware tailoring <span aria-hidden="true">&rarr;</span></div>
+            <p class="feature-text">Section-level diffs show exactly what changed in your profile, skills and projects.</p>
+          </button>
+          <button class="feature-item" onclick="openStartupsView()">
+            <div class="feature-title">Funding &amp; risk intelligence <span aria-hidden="true">&rarr;</span></div>
+            <p class="feature-text">480 startups that raised in 2026, month by month, alongside 23 failure post-mortems.</p>
+          </button>
+          <button class="feature-item" onclick="openPortalsView()">
+            <div class="feature-title">Company directory <span aria-hidden="true">&rarr;</span></div>
+            <p class="feature-text">7,406 career boards with salary and review links for every company.</p>
+          </button>
+          <button class="feature-item" onclick="switchView('tracker')">
+            <div class="feature-title">Application tracker <span aria-hidden="true">&rarr;</span></div>
+            <p class="feature-text">Every application is logged with the exact .tex and .pdf you sent.</p>
+          </button>
+          <button class="feature-item" onclick="switchView('tailor')">
+            <div class="feature-title">Outreach drafts <span aria-hidden="true">&rarr;</span></div>
+            <p class="feature-text">Cold email, LinkedIn and recruiter notes written for the specific company and role.</p>
+          </button>
         </div>
+      </section>
 
-        <div class="role-card" onclick="searchByRole('IT')">
-          <div>
-            <div class="role-card-header">
-              <div class="role-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="8" rx="2"></rect>
-                  <rect x="2" y="14" width="20" height="8" rx="2"></rect>
-                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                </svg>
-              </div>
-              <div>
-                <h3 class="role-card-title">IT, Cloud &amp; Security <span class="role-card-salary">$140k &ndash; $210k</span></h3>
-                <div class="role-card-meta">DevOps &bull; SysAdmin &bull; Cloud Architect &bull; InfoSec / SRE</div>
-              </div>
-            </div>
-            <p class="role-card-desc">
-              Track 8,400+ infrastructure, corporate IT, cloud architecture, and cybersecurity openings across Series A&ndash;D funded startups and global enterprises.
-            </p>
-            <div class="role-card-tags">
-              <span>AWS / GCP</span><span>SOC 2</span><span>Linux</span><span>Cybersecurity</span>
-            </div>
-          </div>
-          <span class="role-card-cta">Browse 8,400+ IT &amp; Cloud Roles &rarr;</span>
+      <!-- 04 · Further reading -->
+      <section class="home-section">
+        <div class="section-aside">
+          <span class="section-index">04</span>
+          <h2 class="section-title">Further reading</h2>
+          <p class="section-desc">More from the author of Applyfox.</p>
         </div>
-
-        <div class="role-card" onclick="searchByRole('legal')">
-          <div>
-            <div class="role-card-header">
-              <div class="role-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                  <path d="M7 21h10"></path>
-                  <path d="M12 3v18"></path>
-                  <path d="M3 7h18"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="role-card-title">Legal, Policy &amp; Compliance <span class="role-card-salary">$185k &ndash; $275k</span></h3>
-                <div class="role-card-meta">In-House Counsel &bull; Regulatory &bull; Commercial Contracts &bull; Privacy</div>
-              </div>
-            </div>
-            <p class="role-card-desc">
-              Discover 7,400+ in-house legal counsel, regulatory policy, commercial contracts, and data privacy (GDPR/CCPA) roles in funded tech startups.
-            </p>
-            <div class="role-card-tags">
-              <span>Commercial Law</span><span>Privacy / GDPR</span><span>IP Licensing</span><span>Risk Analysis</span>
-            </div>
-          </div>
-          <span class="role-card-cta">Browse 7,400+ Legal Roles &rarr;</span>
+        <div class="discipline-index">
+          <a class="discipline-row" href="https://harshdotcom.github.io/AI-Systems/" target="_blank" rel="noopener">
+            <span class="discipline-name">The Central Library</span>
+            <span class="discipline-focus">Seventeen free books on AI engineering, backends, cloud and distributed systems</span>
+            <span class="discipline-pay">3,000 chapters</span>
+            <span class="discipline-go" aria-hidden="true">&nearr;</span>
+          </a>
+          <a class="discipline-row" href="https://harshdotcom.github.io/AI-Systems/harsh-jha.html" target="_blank" rel="noopener me">
+            <span class="discipline-name">About Harsh Jha</span>
+            <span class="discipline-focus">Experience, projects and reading across generative AI and backend engineering</span>
+            <span class="discipline-pay">Profile</span>
+            <span class="discipline-go" aria-hidden="true">&nearr;</span>
+          </a>
         </div>
+      </section>
 
-        <div class="role-card" onclick="searchByRole('product')">
-          <div>
-            <div class="role-card-header">
-              <div class="role-icon-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                  <path d="M8 7v7"></path>
-                  <path d="M12 7v4"></path>
-                  <path d="M16 7v9"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="role-card-title">Product &amp; Operations <span class="role-card-salary">$145k &ndash; $220k</span></h3>
-                <div class="role-card-meta">Product Manager &bull; TPM &bull; BizOps &bull; Growth Operations</div>
-              </div>
-            </div>
-            <p class="role-card-desc">
-              Connect with 6,800+ companies seeking product leaders, operations strategists, and growth managers to drive customer acquisition and scale.
-            </p>
-            <div class="role-card-tags">
-              <span>Roadmapping</span><span>User Metrics</span><span>Cross-Functional</span><span>BizOps</span>
-            </div>
-          </div>
-          <span class="role-card-cta">Browse 6,800+ Product &amp; Ops Roles &rarr;</span>
-        </div>
-      </div>
-
-      <!-- Feature Grid: What Applyfox Does -->
-      <div class="section-heading">
-        <span class="section-tag">ENGINEERED FOR PRODUCTION</span>
-        <h2 class="section-title">Everything you need to land your next high-impact role</h2>
-        <p class="section-desc">Applyfox is an end-to-end platform that combines verified career board intelligence across design, legal, tech, and operations with real LaTeX typesetting and outreach tools.</p>
-      </div>
-
-      <div class="feature-grid">
-        <div class="feature-card" onclick="switchView('tailor')">
-          <div>
-            <div class="feature-icon-wrapper icon-purple"><i class="fa fa-file-pdf"></i></div>
-            <h3 class="feature-title">Overleaf-Grade LaTeX Engine</h3>
-            <p class="feature-text">Embedded standalone Tectonic XeTeX engine that compiles genuine binary PDFs directly from LaTeX source code. Zero HTML print artifacts, pristine typography, and clickable hyperref links.</p>
-          </div>
-          <span class="feature-link">Open Studio &rarr;</span>
-        </div>
-
-        <div class="feature-card" onclick="switchView('tailor')">
-          <div>
-            <div class="feature-icon-wrapper icon-emerald"><i class="fa fa-wand-magic-sparkles"></i></div>
-            <h3 class="feature-title">Intelligent JD-Tailored Sections</h3>
-            <p class="feature-text">Analyzes any target job description and precisely re-aligns PROFILE, TECHNICAL SKILLS, and project tech stack headers while strictly preserving authentic candidate background.</p>
-          </div>
-          <span class="feature-link">Tailor a CV &rarr;</span>
-        </div>
-
-        <div class="feature-card" onclick="switchView('portals'); switchPortalSheet('funded_startups');">
-          <div>
-            <div class="feature-icon-wrapper icon-emerald" style="background: #ECFDF5; color: #047857;"><i class="fa fa-rocket"></i></div>
-            <h3 class="feature-title">2026 Startup Funding &amp; Risk Intelligence</h3>
-            <p class="feature-text">Track 480 tech startups that raised Series A-D funding in 2026 month-by-month (Jan&ndash;Nov), alongside 23 failure post-mortems with risk signals and engineering lessons.</p>
-          </div>
-          <span class="feature-link">Explore 480 Startups &rarr;</span>
-        </div>
-
-        <div class="feature-card" onclick="switchView('portals')">
-          <div>
-            <div class="feature-icon-wrapper icon-sky"><i class="fa fa-table-list"></i></div>
-            <h3 class="feature-title">Multi-Portal Career Sheets</h3>
-            <p class="feature-text">Explore 7,406 career boards with instant server-side pagination across Ashby, Greenhouse, Lever, and Workday, integrated with direct Levels.fyi salary data and Glassdoor reviews.</p>
-          </div>
-          <span class="feature-link">Browse Sheets &rarr;</span>
-        </div>
-
-        <div class="feature-card" onclick="switchView('tracker')">
-          <div>
-            <div class="feature-icon-wrapper icon-amber"><i class="fa fa-clipboard-check"></i></div>
-            <h3 class="feature-title">Master Tracker &amp; Version Vault</h3>
-            <p class="feature-text">Automatically records every application in your master sheet and archives the exact tailored .tex and compiled .pdf for seamless interview preparation.</p>
-          </div>
-          <span class="feature-link">View Tracker &rarr;</span>
-        </div>
-      </div>
-
-      <!-- 3-Step Candidate Workflow -->
-      <div class="section-heading" style="margin-top: 60px;">
-        <span class="section-tag">SEAMLESS WORKFLOW</span>
-        <h2 class="section-title">How candidates land offers with Applyfox</h2>
-      </div>
-
-      <div class="workflow-grid">
-        <div class="step-card">
-          <div class="step-num">01</div>
-          <h4 class="step-title">Discover Verified Opening</h4>
-          <p class="step-text">Search 37,000+ live positions or 7,406 verified boards without aggregator spam or stale listings.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">02</div>
-          <h4 class="step-title">1-Click Tailor &amp; ATS Check</h4>
-          <p class="step-text">Paste the JD. Inspect instant keyword alignment diffs for Profile, Skills, and Projects with 100% authentic backing.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">03</div>
-          <h4 class="step-title">Pitch &amp; Master Track</h4>
-          <p class="step-text">Compile an authentic Overleaf-grade LaTeX PDF, copy custom hiring manager DMs, and auto-archive in your tracker.</p>
-        </div>
-      </div>
-
-      <!-- Refined Warm CTA Banner -->
       <div class="cta-banner">
-        <div class="cta-pill">
-          <i class="fa fa-sparkles"></i> TAKE CONTROL OF YOUR JOB SEARCH
-        </div>
-        <h2 class="cta-title">Ready to tailor your CV <em>and land your next role?</em></h2>
-        <p class="cta-sub">Join software engineers, product designers, cloud architects, and legal counsel landing offers with Applyfox.</p>
+        <h2 class="cta-title">Your next application, <em>properly typeset.</em></h2>
         <div class="cta-actions">
-          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">
-            <i class="fa fa-wand-magic-sparkles"></i> Launch CV Studio &rarr;
-          </button>
-          <button class="btn btn-secondary btn-lg" onclick="openRolesFeedView()">
-            <i class="fa fa-briefcase"></i> Explore 37,193 Open Roles
-          </button>
+          <button class="btn btn-primary btn-lg" onclick="switchView('tailor')">Open CV Studio</button>
+          <button class="btn btn-secondary btn-lg" onclick="openRolesFeedView()">Browse open roles</button>
         </div>
       </div>
 
-      <!-- ========================================== -->
-      <!-- FOOTER: CREATOR & OPEN SOURCE CONTRIBUTION -->
-      <!-- ========================================== -->
       <footer class="app-footer">
         <div class="footer-inner">
-          <!-- Col 1: Brand & Open Source Contributions -->
-          <div class="footer-col footer-col-main">
-            <div class="footer-brand">
-              <span style="font-size: 1.4rem;">🦊</span>
-              <span style="font-weight: 700; font-size: 1.15rem; color: var(--text-primary); letter-spacing: -0.02em;">Applyfox</span>
-              <span class="brand-badge">STUDIO &bull; SHEETS</span>
-            </div>
-            <p class="footer-desc">
-              An open-source, local-first career intelligence platform and Overleaf-grade LaTeX CV studio engineered for engineers, designers, IT specialists, and modern tech professionals.
-            </p>
-
-            <div class="contrib-card">
-              <div class="contrib-header">
-                <i class="fa-brands fa-github" style="font-size: 1.15rem; color: #18181B;"></i>
-                <span style="font-weight: 600; font-size: 0.88rem; color: #18181B;">Open Source Contributions</span>
-              </div>
-              <p class="contrib-text">
-                Applyfox is open-source! We welcome community contributions &mdash; add new ATS career boards, improve CV tailoring algorithms, or submit LaTeX templates.
-              </p>
-              <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary contrib-btn">
-                <i class="fa-solid fa-code-fork"></i> Star &amp; Contribute on GitHub &rarr;
-              </a>
-            </div>
+          <div>
+            <div class="footer-brand"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><defs><mask id="af-cut-footer"><rect width="32" height="32" fill="#fff"/><path d="M10.5 17 L14.5 21 L22 13.5" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><path d="M5 4.5 L12.5 11 H19.5 L27 4.5 V17 L16 28 L5 17 Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" mask="url(#af-cut-footer)"/></svg><span>Applyfox</span></div>
+            <p class="footer-desc">An open-source, local-first career studio for engineers, designers, IT specialists, lawyers and operators. Contributions welcome on <a href="https://github.com/harshdotcom/Applyfox" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
           </div>
 
-          <!-- Col 2: Workspace & Portal Links -->
-          <div class="footer-col">
-            <div class="footer-heading">WORKSPACE NAVIGATION</div>
+          <div>
+            <div class="footer-heading">Workspace</div>
             <ul class="footer-links">
-              <li><a href="#" onclick="switchView('tailor'); return false;"><i class="fa fa-wand-magic-sparkles"></i> CV Studio &amp; Tailor</a></li>
-              <li><a href="#" onclick="openStartupsView(); return false;"><i class="fa fa-rocket" style="color: #D97706;"></i> 2026 Startups Tracker (480)</a></li>
-              <li><a href="#" onclick="openPortalsView(); return false;"><i class="fa fa-table-list"></i> Directory Sheets (7,406)</a></li>
-              <li><a href="#" onclick="switchView('tracker'); return false;"><i class="fa fa-clipboard-check"></i> Applications Tracker</a></li>
-              <li><a href="#" onclick="switchView('base-cv'); return false;"><i class="fa fa-file-code"></i> Base LaTeX main.tex</a></li>
-            </ul>
-
-            <div class="footer-heading" style="margin-top: 22px;">CAREER PORTALS &amp; STARTUPS</div>
-            <ul class="footer-links">
-              <li><a href="#" onclick="openStartupsView(); return false;"><i class="fa fa-rocket" style="color: #D97706;"></i> 2026 Funded Startups (480)</a></li>
-              <li><a href="#" onclick="openFailuresView(); return false;"><i class="fa fa-triangle-exclamation" style="color: #E11D48;"></i> Failures &amp; Distress (23)</a></li>
-              <li><a href="#" onclick="openPortalsView(); return false;"><i class="fa fa-globe"></i> Master Sheet (7,406)</a></li>
-              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('ashby'); return false;"><i class="fa fa-bolt"></i> Ashby Boards (3,212)</a></li>
-              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('greenhouse'); return false;"><i class="fa fa-seedling"></i> Greenhouse Portals (1,894)</a></li>
-              <li><a href="#" onclick="switchView('portals'); switchPortalSheet('lever'); return false;"><i class="fa fa-sliders"></i> Lever Boards (1,522)</a></li>
+              <li><a href="#" onclick="switchView('tailor'); return false;">CV Studio</a></li>
+              <li><a href="#" onclick="switchView('tracker'); return false;">Application tracker</a></li>
+              <li><a href="#" onclick="switchView('base-cv'); return false;">Base CV source</a></li>
+              <li><a href="#" onclick="openRolesFeedView(); return false;">Open roles feed</a></li>
             </ul>
           </div>
 
-          <!-- Col 3: Creator Attribution & Profiles -->
-          <div class="footer-col footer-col-creator">
-            <div class="footer-heading">CRAFTED &amp; ENGINEERED BY</div>
-            <div class="creator-card">
-              <div class="creator-header">
-                <div class="creator-avatar">HJ</div>
-                <div>
-                  <div class="creator-name">Harsh Jha</div>
-                  <div class="creator-title">IIT Indore Alumnus &bull; Senior AI Engineer</div>
-                </div>
-              </div>
-              <p class="creator-bio">
-                Senior AI Engineer building scalable cloud-native architectures, agentic AI systems, and developer tools.
-              </p>
-              
-              <div class="creator-socials">
-                <a href="https://www.linkedin.com/in/harshjha-iiti/" target="_blank" rel="noopener noreferrer" class="social-pill social-linkedin" title="Connect on LinkedIn">
-                  <i class="fa-brands fa-linkedin"></i>
-                  <span>LinkedIn</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
-                </a>
-                <a href="https://www.instagram.com/jhaharsh03/" target="_blank" rel="noopener noreferrer" class="social-pill social-instagram" title="Follow on Instagram">
-                  <i class="fa-brands fa-instagram"></i>
-                  <span>Instagram</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
-                </a>
-                <a href="https://github.com/jhaharsh03" target="_blank" rel="noopener noreferrer" class="social-pill social-github" title="Follow on GitHub">
-                  <i class="fa-brands fa-github"></i>
-                  <span>GitHub</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>
-                </a>
-              </div>
-            </div>
+          <div>
+            <div class="footer-heading">Directory</div>
+            <ul class="footer-links">
+              <li><a href="#" onclick="openStartupsView(); return false;">Funded startups <span class="count">480</span></a></li>
+              <li><a href="#" onclick="openFailuresView(); return false;">Failures &amp; distress <span class="count">23</span></a></li>
+              <li><a href="#" onclick="openAtsSheet('ashby'); return false;">Ashby <span class="count">3,212</span></a></li>
+              <li><a href="#" onclick="openAtsSheet('greenhouse'); return false;">Greenhouse <span class="count">1,894</span></a></li>
+              <li><a href="#" onclick="openAtsSheet('lever'); return false;">Lever <span class="count">1,522</span></a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-heading">Made by</div>
+            <a class="creator-name" href="https://harshdotcom.github.io/AI-Systems/harsh-jha.html" target="_blank" rel="noopener me">Harsh Jha</a>
+            <div class="creator-title">AI Lead &middot; Formee Holdings</div>
+            <ul class="footer-links">
+              <li><a href="https://harshdotcom.github.io/AI-Systems/harsh-jha.html" target="_blank" rel="noopener me">About &nearr;</a></li>
+              <li><a href="https://harshdotcom.github.io/AI-Systems/" target="_blank" rel="noopener">The Central Library &nearr;</a></li>
+              <li><a href="https://www.linkedin.com/in/harshjha-iiti/" target="_blank" rel="noopener noreferrer">LinkedIn &nearr;</a></li>
+              <li><a href="https://github.com/jhaharsh03" target="_blank" rel="noopener noreferrer">GitHub &nearr;</a></li>
+              <li><a href="https://www.instagram.com/jhaharsh03/" target="_blank" rel="noopener noreferrer">Instagram &nearr;</a></li>
+            </ul>
           </div>
         </div>
 
-        <!-- Footer Bottom Copyright & Meta -->
         <div class="footer-bottom">
-          <div>
-            &copy; 2026 Applyfox &bull; Designed &amp; Developed by <strong>Harsh Jha</strong> &bull; Open Source under MIT License.
-          </div>
-          <div class="footer-bottom-badges">
-            <span class="chip chip-skill"><i class="fa-solid fa-bolt"></i> Tectonic XeTeX Engine</span>
-            <span class="chip chip-score"><i class="fa-solid fa-shield-halved"></i> 100% Local &amp; Private</span>
-          </div>
+          <span>&copy; 2026 Applyfox &middot; MIT License</span>
+          <span>Runs locally &middot; Tectonic XeTeX</span>
         </div>
       </footer>
     </div>
 
     <!-- ========================================== -->
-    <!-- VIEW 1: CV STUDIO & TAILOR WORKSPACE       -->
+    <!-- VIEW 1: CV STUDIO                          -->
     <!-- ========================================== -->
     <div id="view-tailor" style="display: none;">
       <div class="workspace-bar">
         <div class="workspace-breadcrumb">
-          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>CV Studio &amp; Tailor</strong>
+          <span class="eyebrow"><a href="#" onclick="switchView('home'); return false;">Applyfox</a> / Studio</span>
+          <h1 class="workspace-title">CV Studio</h1>
         </div>
         <div class="workspace-meta">
-          <span class="chip chip-skill"><i class="fa fa-user"></i> Harsh Jha (IIT Indore)</span>
-          <span class="chip chip-score"><i class="fa fa-bolt"></i> Tectonic XeTeX Engine Active</span>
+          <span class="meta-item">Harsh Jha &middot; IIT Indore</span>
+          <span class="meta-item"><span class="sync-dot"></span> Tectonic XeTeX ready</span>
         </div>
       </div>
 
       <div class="tailor-layout">
-        <!-- Left Column: Input Form -->
+        <!-- Left: job details -->
         <div class="card">
           <div class="card-header">
-            <div class="card-title"><i class="fa fa-pen-to-square"></i> Job Application Details</div>
-            <span style="font-size: 0.8rem; color: var(--text-secondary);">Targeted ATS Alignment</span>
+            <div class="card-title">Job details</div>
+            <span class="card-kicker">Step 1 of 2</span>
           </div>
 
           <form id="tailorForm" onsubmit="event.preventDefault(); handleTailor();">
             <div class="form-group">
-              <label for="companyName">Target Company Name *</label>
-              <input type="text" id="companyName" placeholder="e.g. Infrrd, Stripe, OpenAI, Notion..." list="companyList" required>
+              <label for="companyName">Company</label>
+              <input type="text" id="companyName" placeholder="e.g. Stripe, OpenAI, Notion" list="companyList" required>
               <datalist id="companyList"></datalist>
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="jobTitle">Job Title / Role</label>
-                <input type="text" id="jobTitle" placeholder="e.g. Senior Software Engineer, UI/UX Designer, Legal Counsel...">
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;">
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Software & AI Engineer')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> Software / AI</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Graphic & UI/UX Designer')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> Graphic / Design</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('IT Systems & Cloud Infrastructure Specialist')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"></rect><rect x="2" y="14" width="20" height="8" rx="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> IT &amp; Cloud</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Corporate Legal Counsel & Compliance')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h18"></path></svg> Legal &amp; Compliance</button>
-                  <button type="button" class="role-quick-btn" onclick="setRolePreset('Technical Product Manager')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 7v7"></path><path d="M12 7v4"></path><path d="M16 7v9"></path></svg> Product</button>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="jobUrl">Job Posting / ATS URL</label>
-                <input type="text" id="jobUrl" placeholder="https://jobs.ashbyhq.com/...">
+            <div class="form-group">
+              <label for="jobTitle">Role</label>
+              <input type="text" id="jobTitle" placeholder="e.g. Senior Software Engineer">
+              <div class="role-presets">
+                <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Software & AI Engineer')">Software / AI</button>
+                <button type="button" class="role-quick-btn" onclick="setRolePreset('Senior Graphic & UI/UX Designer')">Design</button>
+                <button type="button" class="role-quick-btn" onclick="setRolePreset('IT Systems & Cloud Infrastructure Specialist')">IT &amp; Cloud</button>
+                <button type="button" class="role-quick-btn" onclick="setRolePreset('Corporate Legal Counsel & Compliance')">Legal</button>
+                <button type="button" class="role-quick-btn" onclick="setRolePreset('Technical Product Manager')">Product</button>
               </div>
             </div>
 
-            <!-- Referral Section -->
+            <div class="form-group">
+              <label for="jobUrl">Posting URL</label>
+              <input type="text" id="jobUrl" placeholder="https://jobs.ashbyhq.com/&hellip;">
+            </div>
+
             <div class="referral-box">
               <label class="checkbox-label">
                 <input type="checkbox" id="hasReferral" onchange="toggleReferralFields()">
-                <span><i class="fa fa-user-tag" style="color: var(--accent-emerald);"></i> I have an Employee Referral for this job</span>
+                <span>I have an employee referral</span>
               </label>
-              <div id="referralFields" style="display: none; margin-top: 10px;">
+              <div id="referralFields" style="display: none; margin-top: 14px;">
                 <div class="form-row">
                   <div class="form-group" style="margin-bottom: 0;">
-                    <label for="referralName">Referrer Name</label>
-                    <input type="text" id="referralName" placeholder="e.g. Alex Doe">
+                    <label for="referralName">Referrer name</label>
+                    <input type="text" id="referralName" placeholder="Alex Doe">
                   </div>
                   <div class="form-group" style="margin-bottom: 0;">
-                    <label for="referralContact">Referrer Email / LinkedIn</label>
+                    <label for="referralContact">Email or LinkedIn</label>
                     <input type="text" id="referralContact" placeholder="alex@company.com">
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group" style="margin-top: 14px;">
-              <label for="jdText">Paste Job Description (JD) *</label>
-              <textarea id="jdText" placeholder="Paste the job requirements, responsibilities, and required tech stack here..." required></textarea>
+            <div class="form-group">
+              <label for="jdText">Job description</label>
+              <textarea id="jdText" placeholder="Paste the requirements, responsibilities and stack&hellip;" required></textarea>
             </div>
 
             <div class="form-group">
-              <label for="appNotes">Personal Application Notes (Optional)</label>
-              <input type="text" id="appNotes" placeholder="e.g. Recruiter message sent on LinkedIn, applied via Ashby portal">
+              <label for="appNotes">Notes <span style="text-transform: none; letter-spacing: 0; color: var(--ink-faint);">(optional)</span></label>
+              <input type="text" id="appNotes" placeholder="e.g. Messaged recruiter on LinkedIn">
             </div>
 
             <div class="banner-actions">
-              <button type="button" id="btnTailor" class="btn btn-primary" style="flex: 1;" onclick="handleTailor()">
-                <i class="fa fa-wand-magic-sparkles"></i> 1. Tailor CV
-              </button>
-              <button type="button" id="btnSaveApp" class="btn btn-success" style="flex: 1;" onclick="handleSaveApplication()">
-                <i class="fa fa-floppy-disk"></i> 2. Save &amp; Track Job
-              </button>
+              <button type="button" id="btnTailor" class="btn btn-primary" style="flex: 1;" onclick="handleTailor()">Tailor CV</button>
+              <button type="button" id="btnSaveApp" class="btn btn-secondary" style="flex: 1;" onclick="handleSaveApplication()">Save to tracker</button>
             </div>
           </form>
         </div>
 
-        <!-- Right Column: Studio Output & Preview -->
+        <!-- Right: output -->
         <div class="card" id="resultsCard" style="min-height: 600px;">
           <div class="card-header">
-            <div class="card-title"><i class="fa fa-eye"></i> Tailored CV Studio Preview</div>
+            <div class="card-title">Preview</div>
             <div id="actionDownloadButtons" style="display: none; gap: 8px; flex-wrap: wrap;">
-              <button id="btnDownloadPdf" class="btn btn-primary btn-sm" onclick="downloadPdf()"><i class="fa fa-file-pdf"></i> Download PDF</button>
-              <button class="btn btn-secondary btn-sm" onclick="recompilePdf()"><i class="fa fa-arrows-rotate"></i> Recompile TeX</button>
-              <button class="btn btn-secondary btn-sm" onclick="downloadTex()"><i class="fa fa-download"></i> Download .tex</button>
-              <button class="btn btn-secondary btn-sm" onclick="copyTex()"><i class="fa fa-copy"></i> Copy TeX</button>
+              <button id="btnDownloadPdf" class="btn btn-primary btn-sm" onclick="downloadPdf()">Download PDF</button>
+              <button class="btn btn-secondary btn-sm" onclick="recompilePdf()">Recompile</button>
+              <button class="btn btn-secondary btn-sm" onclick="downloadTex()">.tex</button>
+              <button class="btn btn-secondary btn-sm" onclick="copyTex()">Copy</button>
             </div>
           </div>
 
-          <div id="emptyState" style="text-align: center; padding: 90px 20px; color: var(--text-secondary);">
-            <i class="fa fa-file-invoice" style="font-size: 3rem; margin-bottom: 14px; opacity: 0.35;"></i>
-            <h3 style="margin: 0 0 6px 0; color: var(--text-primary); font-family: 'Newsreader', serif; font-size: 1.6rem;">No CV tailored yet</h3>
-            <p style="margin: 0 0 16px 0; font-size: 0.92rem; max-width: 480px; margin-left: auto; margin-right: auto;">Enter target company and job description on the left (or pick a company from the <strong>Portal Sheets</strong> tab) and click <strong>1. Tailor CV</strong>.</p>
-            <button class="btn btn-secondary btn-sm" onclick="loadBaseCvInStudio()">
-              <i class="fa fa-eye"></i> Preview Base CV Right Now
-            </button>
+          <div id="emptyState" class="empty-state">
+            <h3>Nothing tailored yet</h3>
+            <p>Add a company and paste a job description, then choose <em>Tailor CV</em>. You can also pick a company from the Directory.</p>
+            <button class="btn btn-secondary btn-sm" onclick="loadBaseCvInStudio()">Preview base CV</button>
           </div>
 
           <div id="outputContent" style="display: none;">
-            <!-- Metadata Bar -->
             <div class="meta-chips">
               <span class="chip chip-score" id="scoreBadge">Match: 0%</span>
               <span class="chip chip-archetype" id="archetypeBadge">Archetype: -</span>
               <span id="prioritySkillsChips" style="display: flex; gap: 6px; flex-wrap: wrap;"></span>
             </div>
 
-            <!-- Subtabs -->
-            <div class="results-tabs">
-              <button class="subtab-btn active" id="subtabBtn-preview" onclick="switchSubTab('preview')"><i class="fa fa-file-lines"></i> Visual Paper Preview</button>
-              <button class="subtab-btn" id="subtabBtn-pdf" onclick="switchSubTab('pdf')"><i class="fa fa-file-pdf"></i> Compiled LaTeX PDF</button>
-              <button class="subtab-btn" id="subtabBtn-diff" onclick="switchSubTab('diff')"><i class="fa fa-code-compare"></i> Section Diffs</button>
-              <button class="subtab-btn" id="subtabBtn-tex" onclick="switchSubTab('tex')"><i class="fa fa-code"></i> LaTeX Source</button>
-              <button class="subtab-btn" id="subtabBtn-outreach" onclick="switchSubTab('outreach')"><i class="fa fa-paper-plane"></i> Outreach &amp; Recruiter DMs</button>
+            <div class="results-tabs" style="margin-bottom: 18px;">
+              <button class="subtab-btn active" id="subtabBtn-preview" onclick="switchSubTab('preview')">Paper</button>
+              <button class="subtab-btn" id="subtabBtn-pdf" onclick="switchSubTab('pdf')">PDF</button>
+              <button class="subtab-btn" id="subtabBtn-diff" onclick="switchSubTab('diff')">Changes</button>
+              <button class="subtab-btn" id="subtabBtn-tex" onclick="switchSubTab('tex')">LaTeX</button>
+              <button class="subtab-btn" id="subtabBtn-outreach" onclick="switchSubTab('outreach')">Outreach</button>
             </div>
 
-            <!-- Subtab 1: Visual Paper Preview -->
             <div id="subtab-preview" class="preview-frame-container">
               <iframe id="cvPreviewFrame" class="preview-frame"></iframe>
             </div>
 
-            <!-- Subtab 2: Compiled LaTeX PDF -->
-            <div id="subtab-pdf" style="display: none; height: 780px; background: #525659; border-radius: 8px; overflow: hidden;">
+            <div id="subtab-pdf" style="display: none; height: 780px; overflow: hidden;">
               <iframe id="pdfPreviewFrame" style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
 
-            <!-- Subtab 3: Diffs -->
             <div id="subtab-diff" style="display: none;">
               <div id="diffViewContainer"></div>
             </div>
 
-            <!-- Subtab 4: TeX Code -->
             <div id="subtab-tex" style="display: none;">
-              <div style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 0.82rem; color: var(--text-secondary);"><i class="fa fa-pencil"></i> You can edit this LaTeX source directly and click <strong>Recompile TeX</strong> to update both previews.</span>
-                <button class="btn btn-primary btn-sm" onclick="recompilePdf()"><i class="fa fa-arrows-rotate"></i> Recompile TeX</button>
+              <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <span class="hint">Edit the source directly, then recompile to refresh both previews.</span>
+                <button class="btn btn-primary btn-sm" onclick="recompilePdf()">Recompile</button>
               </div>
               <textarea id="tailoredTexArea" class="tex-code" style="height: 650px;"></textarea>
             </div>
 
-            <!-- Subtab 5: Outreach & Referral Pitch -->
             <div id="subtab-outreach" style="display: none;">
-              <div style="margin-bottom: 16px; padding: 12px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px;">
-                <div style="font-weight: 600; font-size: 0.88rem; color: var(--text-primary); margin-bottom: 4px;">
-                  <i class="fa fa-paper-plane" style="color: var(--accent-emerald);"></i> 1-Click Cold Email &amp; Recruiter Outreach
-                </div>
-                <div style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45;">
-                  Direct outreach to engineering leads, design managers, and recruiters dramatically outperforms portal applications alone. These templates are dynamically aligned with the candidate skills and company target.
-                </div>
+              <div class="notice">
+                <strong>Outreach drafts</strong>
+                A short, specific note to the hiring lead usually outperforms a portal application on its own. These drafts are written for the company and role above.
               </div>
-
               <div id="outreachContentContainer">
-                <div style="text-align: center; color: var(--text-muted); padding: 40px;">
-                  Tailor a CV or select a company to generate outreach templates.
-                </div>
+                <div class="hint" style="text-align: center; padding: 40px;">Tailor a CV or choose a company to generate drafts.</div>
               </div>
             </div>
           </div>
@@ -3448,277 +545,188 @@ HTML_PAGE = """<!DOCTYPE html>
     </div>
 
     <!-- ========================================== -->
-    <!-- VIEW 2: PORTAL SHEETS WORKSPACE            -->
+    <!-- VIEW 2: DIRECTORY & STARTUPS               -->
     <!-- ========================================== -->
     <div id="view-portals" style="display: none;">
       <div class="workspace-bar">
         <div class="workspace-breadcrumb">
-          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>ATS Portals &amp; 2026 Startup Sheets (7,406 Companies)</strong>
+          <span class="eyebrow"><a href="#" onclick="switchView('home'); return false;">Applyfox</a> / Directory</span>
+          <h1 class="workspace-title">Companies &amp; open roles</h1>
         </div>
         <div class="workspace-meta">
-          <div class="sync-badge" onclick="openSystemStatusModal()" title="Click to view Routine Sync Schedule & Data Freshness">
+          <button class="sync-badge" onclick="openSystemStatusModal()" title="Sync schedule and data freshness">
             <span class="sync-dot"></span>
-            <span>Live Sync &bull; Sundays 00:00 UTC</span>
-          </div>
-          <span class="chip chip-skill"><i class="fa fa-chart-line"></i> Levels.fyi Integrated</span>
-          <span class="chip chip-score"><i class="fa fa-rocket"></i> 2026 Funded Tracker</span>
+            <span>Synced weekly &middot; Sundays 00:00 UTC</span>
+          </button>
         </div>
       </div>
 
-      <div class="card">
-        <!-- Directory Mode Switcher (Companies View vs Live Roles Feed) -->
-        <div class="view-mode-bar">
-          <div class="view-mode-toggle">
-            <button class="toggle-mode-btn active" id="btnModeCompanies" onclick="switchDirectoryMode('companies')">
-              <i class="fa fa-building"></i> <span>Companies &amp; ATS Boards</span> <span class="badge-count" id="countModeCompanies">7,406</span>
-            </button>
-            <button class="toggle-mode-btn" id="btnModeRoles" onclick="switchDirectoryMode('roles')">
-              <i class="fa fa-briefcase"></i> <span>Live Open Roles Feed</span> <span class="badge-count badge-count-emerald" id="countModeRoles">37,193</span>
-            </button>
-          </div>
-          <div class="view-mode-hint" id="viewModeHint">
-            <i class="fa fa-sparkles" style="color: var(--accent-emerald);"></i> <span>Browse 7,406 verified company boards or jump straight into 37,000+ open positions across Engineering, Design, IT, &amp; Legal.</span>
-          </div>
+      <nav class="dir-tabs" id="directoryTabs" role="tablist" aria-label="Directory sections">
+        <button class="dir-tab" role="tab" data-tab="startups" onclick="selectDirectoryTab('startups')">Startups <span class="dir-count" data-count="funded_startups">480</span></button>
+        <button class="dir-tab" role="tab" data-tab="failures" onclick="selectDirectoryTab('failures')">Failures <span class="dir-count" data-count="startup_failures">23</span></button>
+        <button class="dir-tab" role="tab" data-tab="companies" onclick="selectDirectoryTab('companies')">Companies <span class="dir-count" data-count="master">7,406</span></button>
+        <button class="dir-tab" role="tab" data-tab="roles" onclick="selectDirectoryTab('roles')">Open roles <span class="dir-count">37,193</span></button>
+      </nav>
+
+      <div class="filter-bar">
+        <div class="search-wrapper">
+          <i class="fa fa-magnifying-glass"></i>
+          <input type="text" id="portalSearch" class="search-input" placeholder="Search" aria-label="Search" oninput="onPortalSearchInput(this.value)">
         </div>
-
-        <!-- Sheet Selector Pills -->
-        <div class="sheet-tabs-container" id="sheetTabsContainer">
-          <div class="sheet-pills" id="sheetPillsContainer">
-            <!-- Rendered dynamically via JS -->
-          </div>
+        <div class="filter-selects">
+          <select id="portalRoleSelect" class="filter-select" onchange="filterByRole(this.value)" aria-label="Role">
+            <option value="">Any role</option>
+            <optgroup label="Software &amp; AI Engineering">
+                <option value="Software &amp; AI">All Software &amp; AI Roles</option>
+                <option value="Senior Full Stack Engineer">Senior Full Stack Engineer</option>
+                <option value="Senior Backend Engineer">Senior Backend Engineer</option>
+                <option value="AI &amp; Machine Learning Engineer">AI &amp; Machine Learning Engineer</option>
+                <option value="Senior AI Research Engineer">Senior AI Research Engineer</option>
+                <option value="Frontend Systems Engineer">Frontend Systems Engineer</option>
+                <option value="Staff Cloud &amp; DevOps Engineer">Staff Cloud &amp; DevOps Engineer</option>
+                <option value="Mobile Engineer">Mobile Engineer</option>
+            </optgroup>
+            <optgroup label="Graphic &amp; UI/UX Design">
+                <option value="Graphic &amp; UI/UX">All Design &amp; Creative Roles</option>
+                <option value="Senior Product Designer">Senior Product Designer (UI/UX)</option>
+                <option value="Graphic &amp; Brand Identity Designer">Graphic &amp; Brand Designer</option>
+                <option value="Lead UI/UX Designer">Lead UI/UX Designer</option>
+                <option value="Visual &amp; Marketing Content Designer">Visual &amp; Marketing Designer</option>
+                <option value="Design Systems Specialist">Design Systems Specialist</option>
+            </optgroup>
+            <optgroup label="IT &amp; Cloud Systems">
+                <option value="IT &amp; Cloud">All IT &amp; Cloud Roles</option>
+                <option value="IT Systems Administrator">IT Systems Administrator</option>
+                <option value="Cloud Infrastructure &amp; SRE">Cloud Infrastructure &amp; SRE</option>
+                <option value="Enterprise IT &amp; Network Security">Enterprise IT &amp; Security</option>
+                <option value="Corporate IT Support Specialist">Corporate IT Support</option>
+            </optgroup>
+            <optgroup label="Legal &amp; Compliance">
+                <option value="Legal &amp; Compliance">All Legal &amp; Compliance Roles</option>
+                <option value="Corporate Legal Counsel">Corporate Legal Counsel</option>
+                <option value="Commercial Contracts &amp; Licensing">Commercial Contracts Manager</option>
+                <option value="Regulatory &amp; Privacy Compliance">Regulatory &amp; Privacy Compliance</option>
+                <option value="Intellectual Property &amp; Technology Counsel">IP &amp; Technology Counsel</option>
+            </optgroup>
+            <optgroup label="Product &amp; Operations">
+                <option value="Product &amp; Operations">All Product &amp; Ops Roles</option>
+                <option value="Senior Technical Product Manager">Senior Technical Product Manager</option>
+                <option value="Product Operations &amp; Strategy Lead">Product Operations Lead</option>
+                <option value="BizOps &amp; Growth Operations Associate">BizOps &amp; Strategy Lead</option>
+            </optgroup>
+          </select>
+          <select id="portalLevelSelect" class="filter-select" onchange="onPortalLevelChange(this.value)" aria-label="Seniority">
+            <option value="">Any seniority</option>
+            <option value="Entry">Entry / Junior</option>
+            <option value="Mid">Mid-level</option>
+            <option value="Senior">Senior</option>
+            <option value="Lead">Lead / Staff</option>
+            <option value="Director">Executive</option>
+          </select>
+          <select id="portalModeSelect" class="filter-select" onchange="filterByWorkMode(this.value)" aria-label="Work mode">
+            <option value="">Any work mode</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Onsite">Onsite</option>
+          </select>
+          <select id="portalMonthSelect" class="filter-select" onchange="filterByMonth(this.value)" aria-label="Funding month" hidden>
+            <option value="">Any month</option>
+          </select>
+          <select id="portalAtsSelect" class="filter-select" onchange="switchPortalSheet(this.value)" aria-label="Applicant tracking system" hidden>
+            <option value="master">All ATS</option>
+            <option value="ashby">Ashby</option>
+            <option value="greenhouse">Greenhouse</option>
+            <option value="lever">Lever</option>
+            <option value="workday">Workday</option>
+          </select>
+          <button type="button" class="filter-clear" id="filterClear" onclick="clearAllFilters()" hidden>Clear</button>
         </div>
+      </div>
 
-        <!-- Month Filter Pills (Visible when 2026 Funded Startups is active) -->
-        <div id="monthFilterContainer" style="display: none; margin-bottom: 16px; padding: 12px 14px; background: #FAF8F5; border-radius: 10px; border: 1px dashed #D6D3D1;">
-          <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-            <i class="fa fa-calendar" style="color: var(--accent-emerald);"></i> <span>Filter 2026 Funding Rounds by Month:</span>
-          </div>
-          <div class="month-pills" id="monthPillsContainer">
-            <!-- Rendered dynamically via JS -->
-          </div>
-        </div>
-
-        <!-- Discipline & Role Filter Bar -->
-        <div id="roleFilterContainer" style="margin-bottom: 16px; padding: 12px 14px; background: #FAF8F5; border-radius: 10px; border: 1px solid #E7E5E4;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-            <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
-              <i class="fa fa-briefcase" style="color: var(--accent-emerald);"></i> <span>Filter Open Roles by Discipline / Profession:</span>
-            </div>
-            <div style="font-size: 0.74rem; color: var(--text-muted);">
-              Click any role badge to instantly pre-fill CV Studio
-            </div>
-          </div>
-          <div class="discipline-pills" id="disciplinePillsContainer">
-            <button class="role-discipline-pill active" onclick="filterByRole('')" data-discipline="">
-              <i class="fa fa-border-all"></i> <span>All Disciplines</span>
-            </button>
-            <button class="role-discipline-pill" onclick="filterByRole('Software & AI')" data-discipline="Software & AI">
-              <i class="fa fa-code"></i> <span>Software &amp; AI</span>
-            </button>
-            <button class="role-discipline-pill" onclick="filterByRole('Graphic & UI/UX')" data-discipline="Graphic & UI/UX">
-              <i class="fa fa-pen-nib"></i> <span>Graphic &amp; UI/UX</span>
-            </button>
-            <button class="role-discipline-pill" onclick="filterByRole('IT & Cloud')" data-discipline="IT & Cloud">
-              <i class="fa fa-server"></i> <span>IT &amp; Cloud</span>
-            </button>
-            <button class="role-discipline-pill" onclick="filterByRole('Legal & Compliance')" data-discipline="Legal & Compliance">
-              <i class="fa fa-scale-balanced"></i> <span>Legal &amp; Compliance</span>
-            </button>
-            <button class="role-discipline-pill" onclick="filterByRole('Product & Operations')" data-discipline="Product & Operations">
-              <i class="fa fa-cubes"></i> <span>Product &amp; Ops</span>
-            </button>
-          </div>
-
-          <!-- Work Mode Pills (Remote, Hybrid, Onsite) -->
-          <div style="display: flex; gap: 6px; align-items: center; margin-top: 10px; flex-wrap: wrap; padding-top: 8px; border-top: 1px dashed #E7E5E4;">
-            <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-right: 4px;">
-              <i class="fa fa-location-dot" style="color: var(--accent-emerald);"></i> Work Mode:
-            </span>
-            <button class="mode-pill active" onclick="filterByWorkMode('')" data-mode="">All Locations</button>
-            <button class="mode-pill" onclick="filterByWorkMode('Remote')" data-mode="Remote"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Remote Only</button>
-            <button class="mode-pill" onclick="filterByWorkMode('Hybrid')" data-mode="Hybrid"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line><line x1="9" y1="18" x2="9" y2="18.01"></line><line x1="15" y1="18" x2="15" y2="18.01"></line><line x1="9" y1="14" x2="9" y2="14.01"></line><line x1="15" y1="14" x2="15" y2="14.01"></line><line x1="9" y1="10" x2="9" y2="10.01"></line><line x1="15" y1="10" x2="15" y2="10.01"></line><line x1="9" y1="6" x2="9" y2="6.01"></line><line x1="15" y1="6" x2="15" y2="6.01"></line></svg> Hybrid</button>
-            <button class="mode-pill" onclick="filterByWorkMode('Onsite')" data-mode="Onsite"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Onsite</button>
-          </div>
-        </div>
-
-        <!-- Search & Control Bar -->
-        <div class="controls-bar">
-          <div class="search-wrapper">
-            <i class="fa fa-magnifying-glass"></i>
-            <input type="text" id="portalSearch" class="search-input" placeholder="Search companies, startups, sectors, or rounds..." oninput="onPortalSearchInput(this.value)">
-          </div>
-
-          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <span style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap;"><i class="fa fa-user-tag" style="color: var(--accent-emerald);"></i> Job Title:</span>
-              <select id="portalRoleSelect" onchange="onPortalRoleChange(this.value)" style="width: auto; max-width: 230px; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
-                <option value="">All Job Titles</option>
-                <optgroup label="Software &amp; AI Engineering">
-                  <option value="Software &amp; AI">All Software &amp; AI Roles</option>
-                  <option value="Senior Full Stack Engineer">Senior Full Stack Engineer</option>
-                  <option value="Senior Backend Engineer">Senior Backend Engineer</option>
-                  <option value="AI &amp; Machine Learning Engineer">AI &amp; Machine Learning Engineer</option>
-                  <option value="Senior AI Research Engineer">Senior AI Research Engineer</option>
-                  <option value="Frontend Systems Engineer">Frontend Systems Engineer</option>
-                  <option value="Staff Cloud &amp; DevOps Engineer">Staff Cloud &amp; DevOps Engineer</option>
-                  <option value="Mobile Engineer">Mobile Engineer</option>
-                </optgroup>
-                <optgroup label="Graphic &amp; UI/UX Design">
-                  <option value="Graphic &amp; UI/UX">All Design &amp; Creative Roles</option>
-                  <option value="Senior Product Designer">Senior Product Designer (UI/UX)</option>
-                  <option value="Graphic &amp; Brand Identity Designer">Graphic &amp; Brand Designer</option>
-                  <option value="Lead UI/UX Designer">Lead UI/UX Designer</option>
-                  <option value="Visual &amp; Marketing Content Designer">Visual &amp; Marketing Designer</option>
-                  <option value="Design Systems Specialist">Design Systems Specialist</option>
-                </optgroup>
-                <optgroup label="IT &amp; Cloud Systems">
-                  <option value="IT &amp; Cloud">All IT &amp; Cloud Roles</option>
-                  <option value="IT Systems Administrator">IT Systems Administrator</option>
-                  <option value="Cloud Infrastructure &amp; SRE">Cloud Infrastructure &amp; SRE</option>
-                  <option value="Enterprise IT &amp; Network Security">Enterprise IT &amp; Security</option>
-                  <option value="Corporate IT Support Specialist">Corporate IT Support</option>
-                </optgroup>
-                <optgroup label="Legal &amp; Compliance">
-                  <option value="Legal &amp; Compliance">All Legal &amp; Compliance Roles</option>
-                  <option value="Corporate Legal Counsel">Corporate Legal Counsel</option>
-                  <option value="Commercial Contracts &amp; Licensing">Commercial Contracts Manager</option>
-                  <option value="Regulatory &amp; Privacy Compliance">Regulatory &amp; Privacy Compliance</option>
-                  <option value="Intellectual Property &amp; Technology Counsel">IP &amp; Technology Counsel</option>
-                </optgroup>
-                <optgroup label="Product &amp; Operations">
-                  <option value="Product &amp; Operations">All Product &amp; Ops Roles</option>
-                  <option value="Senior Technical Product Manager">Senior Technical Product Manager</option>
-                  <option value="Product Operations &amp; Strategy Lead">Product Operations Lead</option>
-                  <option value="BizOps &amp; Growth Operations Associate">BizOps &amp; Strategy Lead</option>
-                </optgroup>
-              </select>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <span style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap;"><i class="fa fa-layer-group" style="color: var(--accent-emerald);"></i> Seniority:</span>
-              <select id="portalLevelSelect" onchange="onPortalLevelChange(this.value)" style="width: auto; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
-                <option value="">All Seniorities</option>
-                <option value="Entry">Entry / Junior</option>
-                <option value="Mid">Mid-Level</option>
-                <option value="Senior">Senior</option>
-                <option value="Lead">Lead / Staff / Principal</option>
-                <option value="Director">Executive / Lead</option>
-              </select>
-            </div>
-
-            <div style="display: flex; gap: 6px; align-items: center;">
-              <span style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap;">Per page:</span>
-              <select id="portalLimitSelect" onchange="onPortalLimitChange(this.value)" style="width: auto; padding: 6px 10px; font-size: 0.82rem; border-radius: 8px; border: 1px solid #D6D3D1; background: #FFF;">
-                <option value="25" selected>25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Trending Quick Search Chips -->
-        <div class="quick-chips-row">
-          <span class="quick-chip-label"><i class="fa fa-fire"></i> Quick Search:</span>
-          <button class="quick-chip" onclick="applyQuickSearch('Legal')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h18"></path></svg> Legal &amp; Compliance</button>
-          <button class="quick-chip" onclick="applyQuickSearch('UI UX')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> UI/UX Designer</button>
-          <button class="quick-chip" onclick="applyQuickSearch('IT Cloud')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"></rect><rect x="2" y="14" width="20" height="8" rx="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> IT &amp; Cloud</button>
-          <button class="quick-chip" onclick="applyQuickSearch('AI Engineer')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> AI &amp; LLMs</button>
-          <button class="quick-chip" onclick="applyQuickSearch('Product Manager')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 7v7"></path><path d="M12 7v4"></path><path d="M16 7v9"></path></svg> Product Lead</button>
-          <button class="quick-chip" onclick="applyQuickSearch('Remote')"><svg class="chip-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Remote Only</button>
-        </div>
-
-        <!-- Paginated Table -->
-        <div class="table-container">
-          <table class="sheet-table" id="portalTable">
-            <thead>
-              <tr>
-                <th style="width: 50px;">#</th>
-                <th>Company Name</th>
-                <th>Portal / ATS</th>
-                <th>Open Roles</th>
-                <th>Career Board</th>
-                <th>Intelligence Links</th>
-                <th style="text-align: right;">Action</th>
-              </tr>
-            </thead>
-            <tbody id="portalTableBody">
-              <tr>
-                <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                  <i class="fa fa-spinner fa-spin"></i> Loading directory sheet...
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- Pagination Footer -->
-          <div class="pagination-bar" id="portalPaginationBar">
-            <div class="page-info" id="portalPageInfo">Showing 0 of 0</div>
-            <div class="page-nav" id="portalPageNav"></div>
-          </div>
+      <div class="table-container">
+        <table class="sheet-table" id="portalTable">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>Company</th>
+              <th>ATS</th>
+              <th>Open roles</th>
+              <th>Careers</th>
+              <th>Research</th>
+              <th style="text-align: right;"></th>
+            </tr>
+          </thead>
+          <tbody id="portalTableBody">
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 40px;">Loading&hellip;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination-bar" id="portalPaginationBar">
+        <div class="page-info" id="portalPageInfo">Showing 0 of 0</div>
+        <div class="pagination-right">
+          <select id="portalLimitSelect" class="filter-select filter-select-sm" onchange="onPortalLimitChange(this.value)" aria-label="Rows per page">
+            <option value="25" selected>25 per page</option>
+            <option value="50">50 per page</option>
+            <option value="100">100 per page</option>
+          </select>
+          <div class="page-nav" id="portalPageNav"></div>
         </div>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- VIEW 3: APPLICATIONS TRACKER WORKSPACE      -->
+    <!-- VIEW 3: APPLICATION TRACKER                -->
     <!-- ========================================== -->
     <div id="view-tracker" style="display: none;">
       <div class="workspace-bar">
         <div class="workspace-breadcrumb">
-          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>Applications Tracker ("The Sheet")</strong>
+          <span class="eyebrow"><a href="#" onclick="switchView('home'); return false;">Applyfox</a> / Tracker</span>
+          <h1 class="workspace-title">Applications</h1>
         </div>
         <div class="workspace-meta">
-          <a href="/api/export_csv" class="btn btn-secondary btn-sm" style="text-decoration: none;"><i class="fa fa-file-csv"></i> Export CSV</a>
+          <input type="text" id="trackerSearch" placeholder="Search company or title" oninput="filterTrackerTable()" style="width: 240px; height: 34px;">
+          <a href="/api/export_csv" class="btn btn-secondary btn-sm">Export CSV</a>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><i class="fa fa-table"></i> Master Tracked Applications</div>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="trackerSearch" placeholder="Search company or title..." oninput="filterTrackerTable()" style="width: 250px; padding: 6px 10px;">
-          </div>
-        </div>
-
-        <div class="table-container">
-          <table class="sheet-table" id="trackerTable">
-            <thead>
-              <tr>
-                <th>Date Applied</th>
-                <th>Company</th>
-                <th>Job Title</th>
-                <th>Status</th>
-                <th>Referral</th>
-                <th>Match Score</th>
-                <th>Key Skills Targeted</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="trackerTableBody">
-              <tr><td colspan="8" style="text-align: center; color: var(--text-secondary); padding: 40px;">No job applications tracked yet.</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="table-container">
+        <table class="sheet-table" id="trackerTable">
+          <thead>
+            <tr>
+              <th>Applied</th>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Referral</th>
+              <th>Match</th>
+              <th>Key skills</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="trackerTableBody">
+            <tr><td colspan="8" style="text-align: center; padding: 40px;">No applications tracked yet.</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- VIEW 4: BASE CV LATEX SOURCE WORKSPACE     -->
+    <!-- VIEW 4: BASE CV SOURCE                     -->
     <!-- ========================================== -->
     <div id="view-base-cv" style="display: none;">
       <div class="workspace-bar">
         <div class="workspace-breadcrumb">
-          <a href="#" onclick="switchView('home')">Applyfox</a> / <strong>Base CV LaTeX Source &mdash; data/main.tex</strong>
+          <span class="eyebrow"><a href="#" onclick="switchView('home'); return false;">Applyfox</a> / Base CV</span>
+          <h1 class="workspace-title">main.tex</h1>
         </div>
         <div class="workspace-meta">
-          <span class="chip chip-skill"><i class="fa fa-graduation-cap"></i> IIT Indore</span>
+          <span class="meta-item mono">data/main.tex &middot; read-only</span>
         </div>
       </div>
 
-      <div class="card">
-        <textarea id="baseTexContent" class="tex-code" style="height: 750px;" readonly></textarea>
-      </div>
+      <textarea id="baseTexContent" class="tex-code" style="height: 750px;" readonly></textarea>
     </div>
   </main>
 
@@ -3732,6 +740,9 @@ HTML_PAGE = """<!DOCTYPE html>
     </div>
   </div>
 
+<script>
+/*__SELECT_JS__*/
+</script>
 <script>
 /* GITHUB_PAGES_EMBEDDED_DATA */
 let CURRENT_TAILORED_RESULT = null;
@@ -3780,10 +791,10 @@ function switchView(viewName) {
     if (btn) btn.classList.add("active");
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (viewName === 'portals') {
-    const activeTabId = (CURRENT_SHEET_KEY === 'funded_startups' || CURRENT_SHEET_KEY === 'startup_failures') ? 'navBtn-startups' : 'navBtn-portals';
+    const activeTabId = (CURRENT_DIRECTORY_MODE !== 'roles' && (CURRENT_SHEET_KEY === 'funded_startups' || CURRENT_SHEET_KEY === 'startup_failures')) ? 'navBtn-startups' : 'navBtn-portals';
     const btn = document.getElementById(activeTabId) || document.getElementById("navBtn-portals");
     if (btn) btn.classList.add("active");
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
+    refreshDirectoryView();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (viewName === 'tracker') {
     const btn = document.getElementById("navBtn-tracker");
@@ -3797,36 +808,11 @@ function switchView(viewName) {
   }
 }
 
-function openStartupsView() {
-  CURRENT_SHEET_KEY = 'funded_startups';
-  CURRENT_PAGE = 1;
-  CURRENT_MONTH = "";
-  switchView('portals');
-  renderPortalSheetsSummary(PORTAL_SUMMARIES);
-}
-
-function openFailuresView() {
-  CURRENT_SHEET_KEY = 'startup_failures';
-  CURRENT_PAGE = 1;
-  CURRENT_MONTH = "";
-  switchView('portals');
-  renderPortalSheetsSummary(PORTAL_SUMMARIES);
-}
-
-function openPortalsView() {
-  CURRENT_SHEET_KEY = 'master';
-  CURRENT_PAGE = 1;
-  CURRENT_MONTH = "";
-  switchView('portals');
-  switchDirectoryMode('companies');
-  renderPortalSheetsSummary(PORTAL_SUMMARIES);
-}
-
-function openRolesFeedView() {
-  CURRENT_PAGE = 1;
-  switchView('portals');
-  switchDirectoryMode('roles');
-}
+function openStartupsView() { setDirectoryTab('startups'); switchView('portals'); }
+function openFailuresView() { setDirectoryTab('failures'); switchView('portals'); }
+function openPortalsView()  { setDirectoryTab('companies'); CURRENT_SHEET_KEY = 'master'; switchView('portals'); }
+function openRolesFeedView() { setDirectoryTab('roles'); switchView('portals'); }
+function openAtsSheet(key)  { setDirectoryTab('companies'); CURRENT_SHEET_KEY = key; switchView('portals'); }
 
 function executeHomeSearch() {
   const query = (document.getElementById("homeSearchInput")?.value || "").trim();
@@ -3834,18 +820,8 @@ function executeHomeSearch() {
   
   CURRENT_QUERY = query;
   CURRENT_ROLE = discipline;
-  CURRENT_PAGE = 1;
-  CURRENT_DIRECTORY_MODE = "roles";
-
+  setDirectoryTab('roles');
   switchView('portals');
-  
-  const pSearch = document.getElementById("portalSearch");
-  if (pSearch) pSearch.value = CURRENT_QUERY;
-  
-  const pSelect = document.getElementById("portalRoleSelect");
-  if (pSelect) pSelect.value = CURRENT_ROLE;
-  
-  switchDirectoryMode('roles');
   
   const msg = query ? `Showing live openings matching "${query}"` : "Viewing 37,000+ open roles";
   showToast(msg);
@@ -3857,68 +833,16 @@ function quickJumpSearch(term) {
   executeHomeSearch();
 }
 
-function searchByRole(roleQuery) {
-  CURRENT_PAGE = 1;
+function searchByRole(discipline) {
+  CURRENT_ROLE = discipline;
+  setDirectoryTab('roles');
   switchView('portals');
-  switchDirectoryMode('roles');
-  filterByRole(roleQuery);
-  showToast(`Filtered open roles for ${roleQuery}`);
 }
 
-function filterByRole(roleName) {
-  CURRENT_ROLE = (roleName === "All Disciplines" || roleName === "All Job Titles") ? "" : roleName;
-  CURRENT_PAGE = 1;
-
-  // Sync role select dropdown
-  const select = document.getElementById("portalRoleSelect");
-  if (select) {
-    select.value = CURRENT_ROLE;
-  }
-
-  // Sync discipline pills active state
-  const pills = document.querySelectorAll("#disciplinePillsContainer .role-discipline-pill");
-  pills.forEach(p => {
-    const disc = p.getAttribute("data-discipline") || "";
-    if (CURRENT_ROLE === "" && disc === "") {
-      p.classList.add("active");
-    } else if (CURRENT_ROLE !== "" && (disc === CURRENT_ROLE || CURRENT_ROLE.includes(disc))) {
-      p.classList.add("active");
-    } else {
-      p.classList.remove("active");
-    }
-  });
-
-  refreshDirectoryView();
-}
-
-function onPortalRoleChange(val) {
-  filterByRole(val);
-}
-
-function filterByWorkMode(mode) {
-  CURRENT_WORK_MODE = (mode === "All Locations" || mode === "All") ? "" : mode;
-  CURRENT_PAGE = 1;
-
-  const pills = document.querySelectorAll(".mode-pill");
-  pills.forEach(p => {
-    const m = p.getAttribute("data-mode") || "";
-    if (m === CURRENT_WORK_MODE) {
-      p.classList.add("active");
-    } else {
-      p.classList.remove("active");
-    }
-  });
-
-  refreshDirectoryView();
-}
-
-function onPortalLevelChange(val) {
-  CURRENT_LEVEL = (val === "All Seniorities" || val === "All") ? "" : val;
-  CURRENT_PAGE = 1;
-  const select = document.getElementById("portalLevelSelect");
-  if (select) select.value = val;
-  refreshDirectoryView();
-}
+function filterByRole(role)       { CURRENT_ROLE = role || "";      CURRENT_PAGE = 1; refreshDirectoryView(); }
+function onPortalRoleChange(val)   { filterByRole(val); }
+function filterByWorkMode(mode)    { CURRENT_WORK_MODE = mode || ""; CURRENT_PAGE = 1; refreshDirectoryView(); }
+function onPortalLevelChange(val)  { CURRENT_LEVEL = val || "";      CURRENT_PAGE = 1; refreshDirectoryView(); }
 
 function setRolePreset(title) {
   const input = document.getElementById("jobTitle");
@@ -4013,7 +937,7 @@ function renderOutreachTab() {
 
   if (!comp) {
     container.innerHTML = `
-      <div style="text-align: center; color: var(--text-muted); padding: 40px; background: #FAF8F5; border-radius: 8px; border: 1px dashed var(--border-subtle);">
+      <div style="text-align: center; color: var(--text-muted); padding: 40px; background: var(--bg-raised); border-radius: 8px; border: 1px dashed var(--border-subtle);">
         <i class="fa fa-paper-plane" style="font-size: 2rem; color: var(--border-dark); margin-bottom: 12px; display: block;"></i>
         <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">No Target Company Selected</div>
         <div style="font-size: 0.82rem;">Select a company from the Directory or enter a company name in Studio to generate outreach messages.</div>
@@ -4040,7 +964,7 @@ function renderOutreachTab() {
         </button>
       </div>
       <div style="font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">
-        Subject: <span style="color: var(--text-primary); font-family: monospace;">${escapeHtml(t.emailSubject)}</span>
+        Subject: <span style="color: var(--text-primary); font-family: var(--font-mono);">${escapeHtml(t.emailSubject)}</span>
       </div>
       <div class="outreach-body">${escapeHtml(t.emailBody)}</div>
     </div>
@@ -4050,7 +974,7 @@ function renderOutreachTab() {
       <div class="outreach-header">
         <div>
           <span style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">
-            <i class="fa-brands fa-linkedin" style="color: #0A66C2;"></i> 2. LinkedIn Connection Note (&lt; 300 chars)
+            <i class="fa-brands fa-linkedin" style="color: var(--ink-subtle);"></i> 2. LinkedIn Connection Note (&lt; 300 chars)
           </span>
           <span style="font-size: 0.74rem; color: var(--text-muted); margin-left: 6px;">(Optimal for adding hiring managers on LinkedIn)</span>
         </div>
@@ -4067,7 +991,7 @@ function renderOutreachTab() {
       <div class="outreach-header">
         <div>
           <span style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">
-            <i class="fa fa-user-tie" style="color: #6366F1;"></i> 3. Recruiter &amp; Talent Partner Direct Message
+            <i class="fa fa-user-tie" style="color: var(--ink-subtle);"></i> 3. Recruiter &amp; Talent Partner Direct Message
           </span>
           <span style="font-size: 0.74rem; color: var(--text-muted); margin-left: 6px;">(For in-house technical recruiters)</span>
         </div>
@@ -4168,7 +1092,7 @@ function openSystemStatusModal() {
     <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
         <span class="sync-dot" style="width: 10px; height: 10px;"></span>
-        <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">
+        <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">
           Applyfox Routine Update Pipeline
         </h2>
         <span class="sync-badge" style="cursor: default;">
@@ -4181,19 +1105,19 @@ function openSystemStatusModal() {
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 20px;">
-      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+      <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
         <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Sync Cadence</div>
-        <div style="font-size: 0.95rem; font-weight: 700; color: #166534; margin-top: 4px;">Every Sunday 00:00 UTC</div>
+        <div style="font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-top: 4px;">Every Sunday 00:00 UTC</div>
       </div>
-      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+      <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
         <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Companies Tracked</div>
         <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">7,406 Companies</div>
       </div>
-      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+      <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
         <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Indexed Open Roles</div>
         <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">36,288 Roles</div>
       </div>
-      <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+      <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
         <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Supported Fields</div>
         <div style="font-size: 0.95rem; font-weight: 700; color: var(--accent-emerald); margin-top: 4px;">5 Disciplines</div>
       </div>
@@ -4202,16 +1126,16 @@ function openSystemStatusModal() {
     <div style="margin-bottom: 20px;">
       <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 8px 0;">Routine Update Pipeline Stages</h4>
       <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+        <div style="padding: 10px 14px; background: var(--bg-raised); border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
           <strong>Stage 1: Multi-Discipline Role Enrichment</strong> &bull; Scrapes &amp; verifies open roles across Software &amp; AI, UI/UX Design, IT Infrastructure, Legal, and Operations.
         </div>
-        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+        <div style="padding: 10px 14px; background: var(--bg-raised); border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
           <strong>Stage 2: 2026 Funding &amp; Distress Audits</strong> &bull; Ingests newest Series A&ndash;D funding rounds, lead investors, and company health signals.
         </div>
-        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+        <div style="padding: 10px 14px; background: var(--bg-raised); border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
           <strong>Stage 3: Automated Static Compilation</strong> &bull; Rebuilds single-file, zero-dependency bundles (<code>index.html</code> and <code>docs/index.html</code>) for instant edge delivery.
         </div>
-        <div style="padding: 10px 14px; background: #FAF8F5; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
+        <div style="padding: 10px 14px; background: var(--bg-raised); border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 0.82rem;">
           <strong>Stage 4: GitHub Actions Deployment</strong> &bull; Automatically commits fresh data and triggers GitHub Pages deployment with zero downtime.
         </div>
       </div>
@@ -4343,78 +1267,163 @@ async function loadPortalSheetsSummary() {
   }
 }
 
-function renderPortalSheetsSummary(summaries) {
-  const container = document.getElementById("sheetPillsContainer");
-  if (!container || !Array.isArray(summaries)) return;
-  container.innerHTML = summaries.map(s => {
-    const activeClass = (s.key === CURRENT_SHEET_KEY) ? "active" : "";
-    return `
-      <button class="sheet-pill ${activeClass}" onclick="switchPortalSheet('${s.key}')">
-        <i class="fa ${s.icon}"></i>
-        <span>${s.title}</span>
-        <span class="count-badge">${s.total_count.toLocaleString()}</span>
-      </button>
-    `;
-  }).join("");
+/* ------------------------------------------------------------------
+   Directory: one tab row + one filter row.
+   The CURRENT_* variables are the single source of truth; every control
+   changes state and calls refreshDirectoryView(), which syncs the UI from
+   that state and issues exactly one request.
+------------------------------------------------------------------ */
+const ATS_SHEETS = ["master", "ashby", "greenhouse", "lever", "workday"];
 
-  const activeSummary = summaries.find(s => s.key === CURRENT_SHEET_KEY);
-  if (activeSummary && activeSummary.months) {
-    renderMonthFilterPills(activeSummary.months);
-  } else {
-    const wrapper = document.getElementById("monthFilterContainer");
-    if (wrapper) wrapper.style.display = 'none';
-  }
+function currentDirectoryTab() {
+  if (CURRENT_DIRECTORY_MODE === "roles") return "roles";
+  if (CURRENT_SHEET_KEY === "funded_startups") return "startups";
+  if (CURRENT_SHEET_KEY === "startup_failures") return "failures";
+  return "companies";
 }
 
-function renderMonthFilterPills(months) {
-  const container = document.getElementById("monthPillsContainer");
-  const wrapper = document.getElementById("monthFilterContainer");
-  if (!wrapper || !container) return;
-
-  if (CURRENT_SHEET_KEY !== 'funded_startups') {
-    wrapper.style.display = 'none';
-    return;
-  }
-
-  wrapper.style.display = 'block';
-  if (!months || !Array.isArray(months)) {
-    container.innerHTML = '';
-    return;
-  }
-
-  container.innerHTML = months.map(m => {
-    const isActive = (CURRENT_MONTH === m.name || (CURRENT_MONTH === "" && m.name === "All Months")) ? "active" : "";
-    return `
-      <button class="month-pill ${isActive}" onclick="filterByMonth('${m.name}')">
-        <span>${escapeHtml(m.name)}</span>
-        <span class="count-badge">${m.count}</span>
-      </button>
-    `;
-  }).join("");
-}
-
-function filterByMonth(monthName) {
-  CURRENT_MONTH = (monthName === "All Months") ? "" : monthName;
+// Change tab state without loading (callers load once afterwards).
+function setDirectoryTab(tab) {
   CURRENT_PAGE = 1;
-  const summary = PORTAL_SUMMARIES.find(s => s.key === 'funded_startups');
-  if (summary && summary.months) {
-    renderMonthFilterPills(summary.months);
+  if (tab === "roles") {
+    CURRENT_DIRECTORY_MODE = "roles";
+    return;
   }
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
+  CURRENT_DIRECTORY_MODE = "companies";
+  const next = tab === "startups" ? "funded_startups"
+             : tab === "failures" ? "startup_failures"
+             : (ATS_SHEETS.includes(CURRENT_SHEET_KEY) ? CURRENT_SHEET_KEY : "master");
+  if (next !== "funded_startups") CURRENT_MONTH = "";   // month only exists on Startups
+  CURRENT_SHEET_KEY = next;
 }
 
+function selectDirectoryTab(tab) {
+  setDirectoryTab(tab);
+  refreshDirectoryView();
+}
+
+// Kept for existing callers (footer links, company modal, etc.)
+function switchDirectoryMode(mode) {
+  selectDirectoryTab(mode === "roles" ? "roles" : (currentDirectoryTab() === "roles" ? "companies" : currentDirectoryTab()));
+}
 function switchPortalSheet(sheetKey) {
+  CURRENT_DIRECTORY_MODE = "companies";
   CURRENT_SHEET_KEY = sheetKey;
+  if (sheetKey !== "funded_startups") CURRENT_MONTH = "";
   CURRENT_PAGE = 1;
-  CURRENT_MONTH = "";
-  const btns = document.querySelectorAll(".nav-tabs .tab-btn");
-  btns.forEach(b => b.classList.remove("active"));
-  const activeTabId = (CURRENT_SHEET_KEY === 'funded_startups' || CURRENT_SHEET_KEY === 'startup_failures') ? 'navBtn-startups' : 'navBtn-portals';
-  const activeTab = document.getElementById(activeTabId);
-  if (activeTab) activeTab.classList.add("active");
+  refreshDirectoryView();
+}
+function filterByMonth(month) {
+  CURRENT_MONTH = (month === "All Months") ? "" : (month || "");
+  CURRENT_PAGE = 1;
+  refreshDirectoryView();
+}
+function applyQuickSearch(term) {
+  CURRENT_QUERY = term || "";
+  CURRENT_PAGE = 1;
+  refreshDirectoryView();
+}
+function renderPortalSheetsSummary() { syncDirectoryControls(); }
 
-  renderPortalSheetsSummary(PORTAL_SUMMARIES);
-  loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
+function clearAllFilters() {
+  CURRENT_QUERY = "";
+  CURRENT_ROLE = "";
+  CURRENT_WORK_MODE = "";
+  CURRENT_LEVEL = "";
+  CURRENT_MONTH = "";
+  if (ATS_SHEETS.includes(CURRENT_SHEET_KEY)) CURRENT_SHEET_KEY = "master";
+  const input = document.getElementById("portalSearch");
+  if (input) input.value = "";
+  CURRENT_PAGE = 1;
+  refreshDirectoryView();
+}
+
+// Failed/distressed startups have no roles, so role / seniority / work-mode
+// filters would always return zero rows there. They are hidden and not sent.
+function tabUsesRoleFilters(tab) { return tab !== "failures"; }
+
+function setSelectValue(id, value, defaultValue = "") {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const v = value || defaultValue;
+  if (v && !Array.from(el.options).some(o => o.value === v)) {
+    el.add(new Option(v, v));   // never show "Any" while a filter is actually applied
+  }
+  el.value = v;
+  el.classList.toggle("is-set", v !== defaultValue);
+}
+
+function setHidden(id, hidden) {
+  const el = document.getElementById(id);
+  if (el) el.hidden = hidden;
+}
+
+let MONTH_OPTIONS_KEY = "";
+function renderMonthOptions() {
+  const el = document.getElementById("portalMonthSelect");
+  const summary = PORTAL_SUMMARIES.find(s => s.key === "funded_startups");
+  if (!el || !summary || !Array.isArray(summary.months)) return;
+  const months = summary.months.filter(m => m.name !== "All Months");
+  const key = months.map(m => m.name + m.count).join("|");
+  if (key === MONTH_OPTIONS_KEY) return;
+  MONTH_OPTIONS_KEY = key;
+  el.innerHTML = `<option value="">Any month</option>` +
+    months.map(m => `<option value="${escapeHtml(m.name)}">${escapeHtml(m.name)} &middot; ${m.count}</option>`).join("");
+}
+
+function syncDirectoryControls() {
+  const tab = currentDirectoryTab();
+
+  // Tabs + live counts
+  document.querySelectorAll("#directoryTabs .dir-tab").forEach(b => {
+    const on = b.dataset.tab === tab;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-selected", on ? "true" : "false");
+  });
+  document.querySelectorAll("#directoryTabs [data-count]").forEach(el => {
+    const s = PORTAL_SUMMARIES.find(x => x.key === el.dataset.count);
+    if (s) el.textContent = Number(s.total_count).toLocaleString();
+  });
+
+  // Main nav: Startups/Failures live under "Startups", the rest under "Directory"
+  document.querySelectorAll(".nav-tabs .tab-btn").forEach(b => b.classList.remove("active"));
+  const navBtn = document.getElementById((tab === "startups" || tab === "failures") ? "navBtn-startups" : "navBtn-portals");
+  if (navBtn && document.getElementById("view-portals").style.display !== "none") navBtn.classList.add("active");
+
+  // Which filters apply to this tab
+  const roleFilters = tabUsesRoleFilters(tab);
+  setHidden("portalRoleSelect", !roleFilters);
+  setHidden("portalLevelSelect", !roleFilters);
+  setHidden("portalModeSelect", !roleFilters);
+  setHidden("portalMonthSelect", tab !== "startups");
+  setHidden("portalAtsSelect", tab !== "companies");
+
+  renderMonthOptions();
+  setSelectValue("portalRoleSelect", CURRENT_ROLE);
+  setSelectValue("portalLevelSelect", CURRENT_LEVEL);
+  setSelectValue("portalModeSelect", CURRENT_WORK_MODE);
+  setSelectValue("portalMonthSelect", CURRENT_MONTH);
+  setSelectValue("portalAtsSelect", ATS_SHEETS.includes(CURRENT_SHEET_KEY) ? CURRENT_SHEET_KEY : "master", "master");
+  setSelectValue("portalLimitSelect", String(CURRENT_LIMIT), "25");
+
+  // Search box mirrors state (but never fights the user mid-typing)
+  const input = document.getElementById("portalSearch");
+  if (input) {
+    if (document.activeElement !== input) input.value = CURRENT_QUERY;
+    input.placeholder = {
+      startups: "Search startups, sectors or investors",
+      failures: "Search companies, reasons or sectors",
+      companies: "Search companies",
+      roles: "Search roles, companies or skills",
+    }[tab];
+  }
+
+  // "Clear" appears only when something is actually filtering this tab
+  const active = !!CURRENT_QUERY
+    || (roleFilters && !!(CURRENT_ROLE || CURRENT_LEVEL || CURRENT_WORK_MODE))
+    || (tab === "startups" && !!CURRENT_MONTH)
+    || (tab === "companies" && CURRENT_SHEET_KEY !== "master");
+  setHidden("filterClear", !active);
 }
 
 function onPortalSearchInput(val) {
@@ -4432,71 +1441,18 @@ function onPortalLimitChange(val) {
   refreshDirectoryView();
 }
 
-function switchDirectoryMode(mode) {
-  CURRENT_DIRECTORY_MODE = mode;
-  CURRENT_PAGE = 1;
-
-  const btnCompanies = document.getElementById("btnModeCompanies");
-  const btnRoles = document.getElementById("btnModeRoles");
-  const sheetTabs = document.getElementById("sheetTabsContainer");
-  const monthContainer = document.getElementById("monthFilterContainer");
-  const searchInput = document.getElementById("portalSearch");
-  const hintEl = document.getElementById("viewModeHint");
-
-  if (mode === "roles") {
-    if (btnRoles) btnRoles.classList.add("active");
-    if (btnCompanies) btnCompanies.classList.remove("active");
-    if (sheetTabs) sheetTabs.style.display = "none";
-    if (monthContainer) monthContainer.style.display = "none";
-    if (searchInput) searchInput.placeholder = "Search 37,000+ open roles by title (e.g. Legal Counsel, UI/UX Designer, Cloud Engineer), company, or skills...";
-    if (hintEl) hintEl.innerHTML = `<i class="fa fa-sparkles" style="color: var(--accent-emerald);"></i> <span>Viewing Live Open Roles Feed &bull; 1-click tailored CV, cold outreach, and direct application links.</span>`;
-  } else {
-    if (btnCompanies) btnCompanies.classList.add("active");
-    if (btnRoles) btnRoles.classList.remove("active");
-    if (sheetTabs) sheetTabs.style.display = "block";
-    const activeSummary = PORTAL_SUMMARIES.find(s => s.key === CURRENT_SHEET_KEY);
-    if (monthContainer && activeSummary && activeSummary.months) {
-      monthContainer.style.display = "block";
-    }
-    if (searchInput) {
-      if (CURRENT_SHEET_KEY === 'funded_startups') {
-        searchInput.placeholder = "Search 480 funded startups by name, sector (e.g. AI), round, or investor...";
-      } else if (CURRENT_SHEET_KEY === 'startup_failures') {
-        searchInput.placeholder = "Search failed / distressed startups by name, reason, lesson, or sector...";
-      } else {
-        searchInput.placeholder = "Search companies by name, slug, or portal...";
-      }
-    }
-    if (hintEl) hintEl.innerHTML = `<i class="fa fa-building" style="color: var(--accent-emerald);"></i> <span>Viewing Verified Company Directory &bull; Explore ATS boards, company dossiers, and active hiring teams.</span>`;
-  }
-
-  refreshDirectoryView();
-}
-
-function applyQuickSearch(term) {
-  const input = document.getElementById("portalSearch");
-  if (input) input.value = term;
-  CURRENT_QUERY = term;
-  CURRENT_PAGE = 1;
-
-  // Highlight matching quick chip
-  const chips = document.querySelectorAll(".quick-chip");
-  chips.forEach(c => {
-    if (term && c.textContent.toLowerCase().includes(term.toLowerCase().split(" ")[0])) {
-      c.classList.add("active");
-    } else {
-      c.classList.remove("active");
-    }
-  });
-
-  refreshDirectoryView();
-}
-
 function refreshDirectoryView() {
-  if (CURRENT_DIRECTORY_MODE === "roles") {
-    loadRolesFeedPage(CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
+  syncDirectoryControls();
+  const tab = currentDirectoryTab();
+  const roleFilters = tabUsesRoleFilters(tab);
+  const role  = roleFilters ? CURRENT_ROLE : "";
+  const mode  = roleFilters ? CURRENT_WORK_MODE : "";
+  const level = roleFilters ? CURRENT_LEVEL : "";
+  if (tab === "roles") {
+    loadRolesFeedPage(CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, role, mode, level);
   } else {
-    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, CURRENT_MONTH, CURRENT_ROLE, CURRENT_WORK_MODE, CURRENT_LEVEL);
+    const month = (tab === "startups") ? CURRENT_MONTH : "";
+    loadPortalSheetPage(CURRENT_SHEET_KEY, CURRENT_PAGE, CURRENT_LIMIT, CURRENT_QUERY, month, role, mode, level);
   }
 }
 
@@ -4535,12 +1491,12 @@ function renderRolesFeedTableHeader() {
   thead.innerHTML = `
     <tr>
       <th style="width: 50px;">#</th>
-      <th style="min-width: 220px;">Role Title &amp; Seniority</th>
-      <th>Company &amp; ATS</th>
+      <th style="min-width: 220px;">Role</th>
+      <th>Company</th>
       <th>Department</th>
-      <th>Location &amp; Work Mode</th>
-      <th style="min-width: 190px;">Est. Compensation &amp; Skills</th>
-      <th style="text-align: right; min-width: 170px;">Instant Actions</th>
+      <th>Location</th>
+      <th style="min-width: 150px;">Est. pay</th>
+      <th style="text-align: right; min-width: 170px;"></th>
     </tr>
   `;
 }
@@ -4553,7 +1509,7 @@ function renderRolesFeedTable(data) {
         <td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 50px;">
           <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px;">No open roles found matching "<strong>${escapeHtml(CURRENT_QUERY || CURRENT_ROLE || CURRENT_WORK_MODE || '')}</strong>"</div>
           <div style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 14px;">Try searching for broader keywords like <em>Legal</em>, <em>UI UX</em>, <em>DevOps</em>, or clear your filters.</div>
-          <button class="btn btn-sm btn-secondary" onclick="applyQuickSearch('')">Clear Filters</button>
+          <button class="btn btn-sm btn-secondary" onclick="clearAllFilters()">Clear filters</button>
         </td>
       </tr>
     `;
@@ -4599,7 +1555,7 @@ function renderRolesFeedTable(data) {
 
     return `
       <tr>
-        <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
+        <td style="color: var(--text-muted); font-size: 0.78rem; font-family: var(--font-mono);">${rowIndex}</td>
         <td>
           <div class="role-feed-title">
             <span style="font-weight: 600; color: var(--text-primary); cursor: pointer;" onclick="useCompanyInStudio('${safeJsComp}', '${safeBoardUrl}', '${safeJsTitle}')" title="Tailor CV for this position">${safeTitle}</span>
@@ -4635,8 +1591,8 @@ function renderRolesFeedTable(data) {
         </td>
         <td style="text-align: right; white-space: nowrap;">
           <div style="display: flex; gap: 4px; justify-content: flex-end; align-items: center;">
-            <button class="btn btn-sm btn-primary" onclick="useCompanyInStudio('${safeJsComp}', '${safeBoardUrl}', '${safeJsTitle}')" title="Pre-fill CV Studio for this exact role">
-              <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+            <button class="btn btn-sm btn-secondary" onclick="useCompanyInStudio('${safeJsComp}', '${safeBoardUrl}', '${safeJsTitle}')" title="Pre-fill CV Studio for this exact role">
+              Tailor CV
             </button>
             <button class="btn btn-sm btn-secondary" onclick="openOutreachForRole('${safeJsComp}', '${safeJsTitle}', '${safeBoardUrl}')" title="Generate Hiring Manager Outreach">
               <i class="fa fa-paper-plane"></i>
@@ -4855,7 +1811,7 @@ function matchesCompanyStatic(item, query, kind) {
 function sortAndRenderRolesHtml(rolesList, item, safeJsName, safeJsUrl, safeItemData) {
   if (!rolesList || rolesList.length === 0) {
     return item.open_jobs 
-      ? `<span style="font-weight: 600; color: #047857; font-size: 0.78rem;">${escapeHtml(item.open_jobs)}</span>`
+      ? `<span style="font-weight: 600; color: var(--ink); font-size: 0.78rem;">${escapeHtml(item.open_jobs)}</span>`
       : `<span style="color: var(--text-muted); font-size: 0.78rem;">Verified Board</span>`;
   }
 
@@ -4911,36 +1867,36 @@ function renderPortalTableHeader(kind) {
     thead.innerHTML = `
       <tr>
         <th style="width: 50px;">#</th>
-        <th>Startup &amp; Sector</th>
-        <th>Round &amp; Capital</th>
-        <th style="min-width: 220px;">What They Are Building &amp; Open Roles</th>
-        <th>Month &amp; Lead Investors</th>
-        <th>Intelligence</th>
-        <th style="text-align: right;">Action</th>
+        <th>Startup</th>
+        <th>Round</th>
+        <th style="min-width: 260px;">Building &middot; open roles</th>
+        <th>Announced</th>
+        <th>Research</th>
+        <th style="text-align: right;"></th>
       </tr>
     `;
   } else if (kind === "startup_failures") {
     thead.innerHTML = `
       <tr>
         <th style="width: 50px;">#</th>
-        <th>Company &amp; Sector</th>
-        <th>Pre-Failure Capital</th>
-        <th>When &amp; What Happened</th>
-        <th style="min-width: 200px;">Precise Reason</th>
-        <th style="min-width: 180px;">Key Lesson</th>
-        <th style="text-align: right;">Action</th>
+        <th>Company</th>
+        <th>Raised</th>
+        <th>What happened</th>
+        <th style="min-width: 200px;">Reason</th>
+        <th style="min-width: 180px;">Lesson</th>
+        <th style="text-align: right;"></th>
       </tr>
     `;
   } else {
     thead.innerHTML = `
       <tr>
         <th style="width: 50px;">#</th>
-        <th>Company Name</th>
-        <th>Portal / ATS</th>
-        <th style="min-width: 200px;">Active Open Roles</th>
-        <th>Career Board</th>
-        <th>Intelligence Links</th>
-        <th style="text-align: right;">Action</th>
+        <th>Company</th>
+        <th>ATS</th>
+        <th style="min-width: 240px;">Open roles</th>
+        <th>Careers</th>
+        <th>Research</th>
+        <th style="text-align: right;"></th>
       </tr>
     `;
   }
@@ -4953,11 +1909,11 @@ async function loadPortalSheetPage(sheetKey, page, limit, query, month = "", rol
   const searchInput = document.getElementById("portalSearch");
   if (searchInput) {
     if (sheetKey === 'funded_startups') {
-      searchInput.placeholder = "Search 480 funded startups by name, sector (e.g. AI), round, or investor...";
+      searchInput.placeholder = "Search startups, sectors, rounds or investors";
     } else if (sheetKey === 'startup_failures') {
-      searchInput.placeholder = "Search failed / distressed startups by name, reason, lesson, or sector...";
+      searchInput.placeholder = "Search by company, reason or sector";
     } else {
-      searchInput.placeholder = "Search companies by name, slug, or portal...";
+      searchInput.placeholder = "Search companies or ATS";
     }
   }
 
@@ -4996,13 +1952,13 @@ function handleStaticPortalFallback(sheetKey, page, limit, query, month, role = 
     tbody.innerHTML = `
       <tr>
         <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);">
-          <div style="font-size: 1.05rem; font-weight: 600; color: #DC2626; margin-bottom: 8px;">
+          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent); margin-bottom: 8px;">
             <i class="fa fa-triangle-exclamation"></i> Server Connection Reconnecting
           </div>
           <div style="font-size: 0.84rem; margin-bottom: 16px; color: var(--text-secondary);">
             The local Applyfox backend server is starting or reloading.
           </div>
-          <button class="btn btn-sm btn-primary" onclick="loadPortalSheetPage('${sheetKey}', ${page}, ${limit}, '${query}')">
+          <button class="btn btn-sm btn-primary" onclick="refreshDirectoryView()">
             <i class="fa fa-rotate-right"></i> Retry Connection
           </button>
         </td>
@@ -5138,13 +2094,13 @@ function renderPortalTable(data) {
 
       const companyPageBtn = `
         <a class="ext-link" href="${escapeHtml(companyPageUrl)}" target="_blank" rel="noopener noreferrer" style="margin-right: 4px;" title="Open ${safeComp} official company page / careers">
-          <i class="fa fa-globe" style="font-size: 0.72rem;"></i> <span>Company Page</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.65rem;"></i>
+          <i class="fa fa-globe" style="font-size: 0.72rem;"></i> <span>Website</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.65rem;"></i>
         </a>
       `;
 
       return `
         <tr>
-          <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
+          <td style="color: var(--text-muted); font-size: 0.78rem; font-family: var(--font-mono);">${rowIndex}</td>
           <td>
             <div class="company-name-clickable" onclick="openCompanyModal('${safeItemData}')" title="Click to view full ${safeComp} company profile & dossier">
               <span>${safeComp}</span>
@@ -5175,15 +2131,15 @@ function renderPortalTable(data) {
           <td style="white-space: nowrap;">
             ${companyPageBtn}
             <a class="intel-link intel-levels" href="${escapeHtml(item.levels_url)}" target="_blank" rel="noopener noreferrer" title="View salaries on Levels.fyi">
-              <i class="fa fa-chart-line"></i> Salaries
+              Salaries
             </a>
             <a class="intel-link intel-glassdoor" href="${escapeHtml(item.glassdoor_url)}" target="_blank" rel="noopener noreferrer" title="View reviews on Glassdoor">
-              <i class="fa fa-star"></i> Reviews
+              Reviews
             </a>
           </td>
           <td style="text-align: right; white-space: nowrap;">
-            <button class="btn btn-sm btn-primary" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
-              <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+            <button class="btn btn-sm btn-secondary" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
+              Tailor CV
             </button>
           </td>
         </tr>
@@ -5198,16 +2154,16 @@ function renderPortalTable(data) {
       const safeComp = escapeHtml(item.name);
       const safeJsName = safeComp.replace(/'/g, "\\'");
       const safeItemData = encodeURIComponent(JSON.stringify(item));
-      const sectorBadge = item.sector ? `<span class="badge-sector" style="background: #FFF1F2; color: #BE123C; border-color: #FECDD3;">${escapeHtml(item.sector)}</span>` : "";
+      const sectorBadge = item.sector ? `<span class="badge-sector" style="background: transparent; color: var(--accent); border-color: transparent;">${escapeHtml(item.sector)}</span>` : "";
       const countryText = item.country ? `<span class="badge-country"><i class="fa-solid fa-location-dot" style="font-size: 0.68rem;"></i> ${escapeHtml(item.country)}</span>` : "";
 
       return `
         <tr>
-          <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
+          <td style="color: var(--text-muted); font-size: 0.78rem; font-family: var(--font-mono);">${rowIndex}</td>
           <td>
             <div class="company-name-clickable" onclick="openCompanyModal('${safeItemData}')" title="Click to view full ${safeComp} failure dossier & profile">
-              <span style="color: #991B1B;"><i class="fa fa-skull-crossbones" style="font-size: 0.8rem; opacity: 0.7; margin-right: 4px;"></i>${safeComp}</span>
-              <i class="fa fa-circle-info" style="font-size: 0.72rem; color: #DC2626;"></i>
+              <span style="color: var(--accent);"><i class="fa fa-skull-crossbones" style="font-size: 0.8rem; opacity: 0.7; margin-right: 4px;"></i>${safeComp}</span>
+              <i class="fa fa-circle-info" style="font-size: 0.72rem; color: var(--accent);"></i>
             </div>
             <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 3px;">
               ${sectorBadge}
@@ -5222,18 +2178,18 @@ function renderPortalTable(data) {
             <div style="font-size: 0.82rem; line-height: 1.4; color: var(--text-primary); max-width: 280px;">${escapeHtml(item.what_happened)}</div>
           </td>
           <td>
-            <div style="font-size: 0.82rem; line-height: 1.4; color: #7F1D1D; background: #FEF2F2; padding: 6px 8px; border-radius: 6px; border: 1px solid #FEE2E2; max-width: 280px;">
-              <strong>Risk Signal:</strong> ${escapeHtml(item.precise_reason)}
+            <div style="font-size: 0.82rem; line-height: 1.4; color: var(--accent); background: transparent; padding: 6px 8px; border-radius: 6px; border: 0; border-left: 2px solid var(--accent); border-radius: 0; max-width: 280px;">
+              ${escapeHtml(item.precise_reason)}
             </div>
           </td>
           <td>
-            <div style="font-size: 0.8rem; line-height: 1.4; color: #1E3A8A; background: #EFF6FF; padding: 6px 8px; border-radius: 6px; border: 1px solid #DBEAFE; max-width: 260px;">
-              <i class="fa fa-lightbulb" style="color: #F59E0B;"></i> ${escapeHtml(item.lesson)}
+            <div style="font-size: 0.8rem; line-height: 1.4; color: var(--ink); background: transparent; padding: 6px 8px; border-radius: 6px; border: 0; border-left: 2px solid var(--ink); border-radius: 0; max-width: 260px;">
+              <i class="fa fa-lightbulb" style="color: var(--ink-subtle);"></i> ${escapeHtml(item.lesson)}
             </div>
           </td>
           <td style="text-align: right; white-space: nowrap;">
             <button class="btn btn-sm btn-secondary" onclick="useCompanyInStudio('${safeJsName}', '${escapeHtml(item.google_jobs_url).replace(/'/g, "\\\\'")}')">
-              <i class="fa fa-file-pen"></i> Tailor / Track
+              Tailor
             </button>
           </td>
         </tr>
@@ -5262,13 +2218,13 @@ function renderPortalTable(data) {
 
     return `
       <tr>
-        <td style="color: var(--text-muted); font-size: 0.78rem; font-family: monospace;">${rowIndex}</td>
+        <td style="color: var(--text-muted); font-size: 0.78rem; font-family: var(--font-mono);">${rowIndex}</td>
         <td>
           <div class="company-name-clickable" onclick="openCompanyModal('${safeItemData}')" title="Click to view full ${safeComp} company profile & details">
             <span>${safeComp}</span>
             <i class="fa fa-circle-info" style="font-size: 0.72rem; color: var(--accent-emerald);"></i>
           </div>
-          <div style="font-size: 0.74rem; color: var(--text-muted); font-family: monospace;">slug: ${escapeHtml(item.slug || '')}</div>
+          <div style="font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono);">slug: ${escapeHtml(item.slug || '')}</div>
         </td>
         <td>
           <span class="portal-badge ${badgeClass}"><i class="fa fa-tag"></i> ${escapeHtml((item.ats || 'ATS').toUpperCase())}</span>
@@ -5276,20 +2232,20 @@ function renderPortalTable(data) {
         <td>${rolesHtml}</td>
         <td>
           <a class="ext-link" href="${escapeHtml(item.board_url)}" target="_blank" rel="noopener noreferrer" title="Open ${safeComp} official company page & careers">
-            <i class="fa fa-globe" style="font-size: 0.72rem;"></i> <span>Company Page</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.68rem;"></i>
+            <i class="fa fa-globe" style="font-size: 0.72rem;"></i> <span>Website</span> <i class="fa fa-arrow-up-right-from-square" style="font-size: 0.68rem;"></i>
           </a>
         </td>
         <td style="white-space: nowrap;">
           <a class="intel-link intel-levels" href="${escapeHtml(item.levels_url)}" target="_blank" rel="noopener noreferrer" title="View salaries on Levels.fyi">
-            <i class="fa fa-chart-line"></i> Levels.fyi
+            Salaries
           </a>
           <a class="intel-link intel-glassdoor" href="${escapeHtml(item.glassdoor_url)}" target="_blank" rel="noopener noreferrer" title="View reviews on Glassdoor">
-            <i class="fa fa-star"></i> Glassdoor
+            Reviews
           </a>
         </td>
         <td style="text-align: right; white-space: nowrap;">
-          <button class="btn btn-sm btn-primary" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
-            <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+          <button class="btn btn-sm btn-secondary" onclick="useCompanyInStudio('${safeJsName}', '${safeJsUrl}')">
+            Tailor CV
           </button>
         </td>
       </tr>
@@ -5564,7 +2520,7 @@ function simulateStaticTailor(company, title, jd) {
 }
 
 function renderDiffLines(diffStr) {
-  if (!diffStr || !diffStr.trim()) return '<div style="color: #64748b; padding: 4px;">No changes made to this section.</div>';
+  if (!diffStr || !diffStr.trim()) return '<div style="color: var(--ink-subtle); padding: 4px;">No changes made to this section.</div>';
   return diffStr.split('\\n').map(line => {
     let cls = 'diff-context';
     if (line.startsWith('+')) cls = 'diff-added';
@@ -5899,7 +2855,7 @@ function openCompanyModal(encodedData) {
             const level = escapeHtml(r.level || "Mid-Senior");
             const loc = escapeHtml(r.location || "Remote / Hybrid");
             return `
-              <div style="display: flex; justify-content: space-between; align-items: center; background: #FAF8F5; border: 1px solid var(--border-subtle); padding: 9px 12px; border-radius: 8px; gap: 10px; flex-wrap: wrap;">
+              <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-raised); border: 1px solid var(--border-subtle); padding: 9px 12px; border-radius: 8px; gap: 10px; flex-wrap: wrap;">
                 <div>
                   <div style="font-weight: 600; font-size: 0.86rem; color: var(--text-primary);">${safeTitle}</div>
                   <div style="font-size: 0.73rem; color: var(--text-secondary); margin-top: 2px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
@@ -5909,7 +2865,7 @@ function openCompanyModal(encodedData) {
                 </div>
                 <div style="display: flex; gap: 6px; align-items: center;">
                   <button class="btn btn-sm btn-primary" onclick="closeCompanyModal(); useCompanyInStudio('${safeJsName}', '${safeJsUrl}', '${safeRoleJs}')" style="padding: 4px 10px; font-size: 0.76rem; white-space: nowrap;">
-                    <i class="fa fa-wand-magic-sparkles"></i> Tailor CV
+                    Tailor CV
                   </button>
                   <button class="btn btn-sm btn-secondary" onclick="quickBookmarkRole('${safeJsName}', '${safeRoleJs}', '${safeJsUrl}')" style="padding: 4px 8px; font-size: 0.76rem; white-space: nowrap;" title="Quick Bookmark this role in Applications Tracker">
                     <i class="fa fa-bookmark"></i>
@@ -5932,10 +2888,10 @@ function openCompanyModal(encodedData) {
     html = `
       <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-          <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: #991B1B; margin: 0;">
+          <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 600; color: var(--accent); margin: 0;">
             <i class="fa fa-skull-crossbones" style="font-size: 1.2rem; opacity: 0.85; margin-right: 4px;"></i>${safeComp}
           </h2>
-          <span class="badge-sector" style="background: #FFF1F2; color: #BE123C; border-color: #FECDD3;">${escapeHtml(item.sector || 'Tech')}</span>
+          <span class="badge-sector" style="background: transparent; color: var(--accent); border-color: transparent;">${escapeHtml(item.sector || 'Tech')}</span>
           <span class="badge-fail-funding">${escapeHtml(item.funding_before_failure || 'Disclosed Capital')}</span>
         </div>
         <div style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary);">
@@ -5945,22 +2901,22 @@ function openCompanyModal(encodedData) {
 
       <div style="margin-bottom: 18px;">
         <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 8px 0;">What Happened</h4>
-        <div style="background: #FAF8F5; border: 1px solid var(--border-subtle); padding: 14px 16px; border-radius: 8px; font-size: 0.92rem; line-height: 1.5; color: var(--text-primary);">
+        <div style="background: var(--bg-raised); border: 1px solid var(--border-subtle); padding: 14px 16px; border-radius: 8px; font-size: 0.92rem; line-height: 1.5; color: var(--text-primary);">
           ${escapeHtml(item.what_happened || 'Startup encountered severe market headwinds.')}
         </div>
       </div>
 
       <div style="margin-bottom: 18px;">
-        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #991B1B; margin: 0 0 8px 0;">Precise Distress Signal / Root Cause</h4>
-        <div style="background: #FEF2F2; border: 1px solid #FEE2E2; padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.5; color: #7F1D1D;">
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin: 0 0 8px 0;">Precise Distress Signal / Root Cause</h4>
+        <div style="background: transparent; border: 0; border-left: 2px solid var(--accent); border-radius: 0; padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.5; color: var(--accent);">
           <strong>Risk Analysis:</strong> ${escapeHtml(item.precise_reason || 'Premature scaling or capital depletion.')}
         </div>
       </div>
 
       <div style="margin-bottom: 22px;">
-        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1E3A8A; margin: 0 0 8px 0;">Post-Mortem Engineering Lesson</h4>
-        <div style="background: #EFF6FF; border: 1px solid #DBEAFE; padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.5; color: #1E3A8A;">
-          <i class="fa fa-lightbulb" style="color: #F59E0B; margin-right: 4px;"></i><strong>Lesson:</strong> ${escapeHtml(item.lesson || 'Maintain strong capital discipline and genuine PMF.')}
+        <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink); margin: 0 0 8px 0;">Post-Mortem Engineering Lesson</h4>
+        <div style="background: transparent; border: 0; border-left: 2px solid var(--ink); border-radius: 0; padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.5; color: var(--ink);">
+          <i class="fa fa-lightbulb" style="color: var(--ink-subtle); margin-right: 4px;"></i><strong>Lesson:</strong> ${escapeHtml(item.lesson || 'Maintain strong capital discipline and genuine PMF.')}
         </div>
       </div>
 
@@ -5969,10 +2925,10 @@ function openCompanyModal(encodedData) {
           <i class="fa fa-newspaper" style="color: var(--accent-emerald);"></i> <span>Company Page / News ↗</span>
         </a>
         <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.levels_url || '')}" target="_blank" rel="noopener noreferrer">
-          <i class="fa fa-chart-line" style="color: #6366F1;"></i> <span>Levels.fyi ↗</span>
+          <i class="fa fa-chart-line" style="color: var(--ink-subtle);"></i> <span>Levels.fyi ↗</span>
         </a>
         <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.glassdoor_url || '')}" target="_blank" rel="noopener noreferrer">
-          <i class="fa fa-star" style="color: #059669;"></i> <span>Glassdoor ↗</span>
+          <i class="fa fa-star" style="color: var(--ink);"></i> <span>Glassdoor ↗</span>
         </a>
       </div>
 
@@ -5988,7 +2944,7 @@ function openCompanyModal(encodedData) {
     html = `
       <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-          <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">${safeComp}</h2>
+          <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">${safeComp}</h2>
           ${item.round ? `<span class="badge-round" style="font-size: 0.8rem; padding: 4px 10px;">${escapeHtml(item.round)}</span>` : ''}
           ${item.amount ? `<span class="badge-amount" style="font-size: 0.8rem; padding: 4px 10px;">${escapeHtml(item.amount)}</span>` : ''}
         </div>
@@ -6001,28 +2957,28 @@ function openCompanyModal(encodedData) {
 
       <div style="margin-bottom: 20px;">
         <h4 style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 8px 0;">What They Are Building</h4>
-        <div style="font-size: 0.94rem; line-height: 1.55; color: var(--text-primary); background: #FAF8F5; padding: 14px 16px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="font-size: 0.94rem; line-height: 1.55; color: var(--text-primary); background: var(--bg-raised); padding: 14px 16px; border-radius: 8px; border: 1px solid var(--border-subtle);">
           ${escapeHtml(item.what_they_build || 'High-growth technology startup.')}
         </div>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
-        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
           <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Lead Investors</div>
           <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml(item.lead_investors || 'Not disclosed / Syndicate')}</div>
         </div>
-        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
           <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Valuation / Capital</div>
           <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml(item.valuation && item.valuation !== 'N/D' ? item.valuation : (item.amount || 'Undisclosed'))}</div>
         </div>
-        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
           <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Market Outlook</div>
           <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml(item.outlook || 'Active Growth')}</div>
         </div>
       </div>
 
       ${item.outlook_reasoning ? `
-        <div style="margin-bottom: 20px; padding: 10px 14px; background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; font-size: 0.82rem; color: #92400E;">
+        <div style="margin-bottom: 20px; padding: 10px 14px; background: transparent; border: 1px solid var(--rule); border-radius: 8px; font-size: 0.82rem; color: var(--ink);">
           <strong>Intelligence Signal:</strong> ${escapeHtml(item.outlook_reasoning)}
         </div>
       ` : ''}
@@ -6036,10 +2992,10 @@ function openCompanyModal(encodedData) {
             <i class="fa fa-globe" style="color: var(--accent-emerald);"></i> <span>Official Company Page ↗</span>
           </a>
           <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.levels_url || '')}" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-chart-line" style="color: #6366F1;"></i> <span>Levels.fyi Salaries ↗</span>
+            <i class="fa fa-chart-line" style="color: var(--ink-subtle);"></i> <span>Levels.fyi Salaries ↗</span>
           </a>
           <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.glassdoor_url || '')}" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-star" style="color: #059669;"></i> <span>Glassdoor Reviews ↗</span>
+            <i class="fa fa-star" style="color: var(--ink);"></i> <span>Glassdoor Reviews ↗</span>
           </a>
           <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.google_jobs_url || '')}" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-magnifying-glass" style="color: var(--accent-amber);"></i> <span>Google Jobs Search ↗</span>
@@ -6059,20 +3015,20 @@ function openCompanyModal(encodedData) {
     html = `
       <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-          <h2 style="font-family: 'Newsreader', serif; font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">${safeComp}</h2>
+          <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 600; color: var(--text-primary); margin: 0;">${safeComp}</h2>
           <span class="portal-badge badge-greenhouse"><i class="fa fa-tag"></i> ${(item.ats || 'ATS').toUpperCase()}</span>
         </div>
-        <div style="font-size: 0.78rem; color: var(--text-muted); font-family: monospace; margin-top: 6px;">slug: ${escapeHtml(item.slug || '')}</div>
+        <div style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 6px;">slug: ${escapeHtml(item.slug || '')}</div>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 22px;">
-        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
           <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">ATS Platform</div>
           <div style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-top: 4px;">${escapeHtml((item.ats || 'Direct Portal').toUpperCase())}</div>
         </div>
-        <div style="background: #FAF8F5; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <div style="background: var(--bg-raised); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
           <div style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);">Open Roles Status</div>
-          <div style="font-size: 0.9rem; font-weight: 600; color: #047857; margin-top: 4px;">${escapeHtml(item.open_jobs || 'Verified Career Board')}</div>
+          <div style="font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-top: 4px;">${escapeHtml(item.open_jobs || 'Verified Career Board')}</div>
         </div>
       </div>
 
@@ -6085,10 +3041,10 @@ function openCompanyModal(encodedData) {
             <i class="fa fa-globe" style="color: var(--accent-emerald);"></i> <span>Official Company / Career Portal ↗</span>
           </a>
           <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.levels_url || '')}" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-chart-line" style="color: #6366F1;"></i> <span>Levels.fyi Salaries ↗</span>
+            <i class="fa fa-chart-line" style="color: var(--ink-subtle);"></i> <span>Levels.fyi Salaries ↗</span>
           </a>
           <a class="btn btn-secondary btn-sm" href="${escapeHtml(item.glassdoor_url || '')}" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-star" style="color: #059669;"></i> <span>Glassdoor Reviews ↗</span>
+            <i class="fa fa-star" style="color: var(--ink);"></i> <span>Glassdoor Reviews ↗</span>
           </a>
         </div>
       </div>
@@ -6121,6 +3077,17 @@ document.addEventListener("keydown", (e) => {
 </html>
 """
 
+_APP_CSS_PATH = Path(__file__).resolve().parent / "ui" / "app.css"
+STATIC_DIR = Path(__file__).resolve().parent / "ui" / "static"
+STATIC_TYPES = {
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".ico": "image/x-icon",
+    ".webmanifest": "application/manifest+json",
+}
+HTML_PAGE = HTML_PAGE.replace("/*__APP_CSS__*/", _APP_CSS_PATH.read_text(encoding="utf-8"))
+HTML_PAGE = HTML_PAGE.replace("/*__SELECT_JS__*/", (Path(__file__).resolve().parent / "ui" / "select.js").read_text(encoding="utf-8"))
+
 
 class CVAppRequestHandler(BaseHTTPRequestHandler):
     """HTTP request handler implementing REST API and UI serving."""
@@ -6141,6 +3108,9 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
             self.wfile.write(HTML_PAGE.encode("utf-8"))
+
+        elif path == "/favicon.ico" or path.startswith("/static/"):
+            self.serve_static_asset("favicon.ico" if path == "/favicon.ico" else path[len("/static/"):])
 
         elif path == "/api/companies":
             comps = get_cached_companies()
@@ -6506,6 +3476,23 @@ class CVAppRequestHandler(BaseHTTPRequestHandler):
 
         else:
             self.send_json(404, {"error": "Endpoint not found"})
+
+    def serve_static_asset(self, name: str):
+        """Serve a file from ui/static (icons, manifest). Only plain filenames that
+        exist in that folder are served — no subpaths, so no directory traversal."""
+        asset = STATIC_DIR / name
+        if "/" in name or "\\" in name or name.startswith(".") or not asset.is_file():
+            self.send_response(404)
+            self.end_headers()
+            return
+        ctype = STATIC_TYPES.get(asset.suffix.lower()) or mimetypes.guess_type(name)[0] or "application/octet-stream"
+        body = asset.read_bytes()
+        self.send_response(200)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "public, max-age=86400")
+        self.end_headers()
+        self.wfile.write(body)
 
     def send_json(self, status_code: int, data: Any):
         self.send_response(status_code)

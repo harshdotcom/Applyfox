@@ -21,8 +21,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application files
 COPY . .
 
-# Ensure standalone Tectonic binary is executable
-RUN chmod +x bin/tectonic
+# bin/ is gitignored, so a fresh clone (what every cloud host builds from) has no
+# LaTeX engine. Download the standalone Tectonic build for this CPU if it's missing.
+ARG TECTONIC_VERSION=0.15.0
+RUN if [ ! -x bin/tectonic ]; then \
+      mkdir -p bin && \
+      ARCH="$(uname -m)" && \
+      curl -fsSL "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/tectonic-${TECTONIC_VERSION}-${ARCH}-unknown-linux-musl.tar.gz" \
+        | tar -xz -C bin tectonic; \
+    fi && chmod +x bin/tectonic && bin/tectonic --version
 
 # Persistent data directory for applications tracker sheet & archives
 VOLUME ["/app/data"]

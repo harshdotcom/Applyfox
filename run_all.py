@@ -99,13 +99,33 @@ def build_unified_master():
                     "board_url": r.get("board_url", "").strip()
                 })
 
+    out_file = Path("data/all_companies_master.csv")
+    fieldnames = ["name", "ats", "slug_or_id", "open_jobs", "board_url"]
+
+    # Preserve what this crawler doesn't own: rows from other sources (e.g. the
+    # funded-2026 / distressed startups added by scripts/ingest_startup_tracker.py)
+    # and any extra columns such as `roles`. Rebuilding from the four ATS CSVs
+    # alone used to silently drop ~400 startups from the directory.
+    crawled_ats = {"greenhouse", "lever", "workday", "ashby"}
+    if out_file.is_file():
+        with open(out_file, encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            existing = list(reader)
+            extra_cols = [c for c in (reader.fieldnames or []) if c not in fieldnames]
+        fieldnames += extra_cols
+        prior = {(r.get("name", "").lower(), r.get("ats", "").lower()): r for r in existing}
+        for row in all_rows:
+            old = prior.get((row["name"].lower(), row["ats"]))
+            for col in extra_cols:
+                row[col] = (old or {}).get(col, "")
+        all_rows.extend(r for r in existing if r.get("ats", "").lower() not in crawled_ats)
+
     # Sort alphabetically by company name
     all_rows.sort(key=lambda x: x["name"].lower())
 
-    out_file = Path("data/all_companies_master.csv")
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with open(out_file, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=["name", "ats", "slug_or_id", "open_jobs", "board_url"])
+        w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
         w.writerows(all_rows)
 
@@ -123,6 +143,8 @@ def main():
                     help="Skip open job counts for faster board-only validation")
     ap.add_argument("--workers", type=int, default=8, help="Parallel worker threads")
     ap.add_argument("--rate", type=float, default=8.0, help="Max requests per second")
+    ap.add_argument("--recheck-days", type=int, default=None,
+                    help="Re-validate boards last checked more than N days ago (each crawler defaults to 30)")
     args = ap.parse_args()
 
     Path("data").mkdir(exist_ok=True)
@@ -140,6 +162,8 @@ def main():
         cmd = [sys.executable, script, "--workers", str(args.workers), "--rate", str(args.rate)]
         if args.jobs:
             cmd.append("--jobs")
+        if args.recheck_days is not None:
+            cmd.extend(["--recheck-days", str(args.recheck_days)])
         cmd.extend(info["default_args"])
 
         print(f"\n>>> Running {ats.upper()} discovery ({script})...")

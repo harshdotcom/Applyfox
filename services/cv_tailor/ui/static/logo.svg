@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>Applyfox</title>
+  <!-- A fox head whose face is a check mark: the fox is the brand, the check is "applied". -->
+  <defs>
+    <mask id="cut"><rect width="32" height="32" fill="#fff"/><path d="M10.5 17 L14.5 21 L22 13.5" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></mask>
+  </defs>
+  <path d="M5 4.5 L12.5 11 H19.5 L27 4.5 V17 L16 28 L5 17 Z" fill="#16150f" stroke="#16150f" stroke-width="1.5" stroke-linejoin="round" mask="url(#cut)"/>
+</svg>

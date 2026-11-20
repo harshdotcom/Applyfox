@@ -16,6 +16,7 @@ concurrency:
 jobs:
   update-and-sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 180
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,6 +34,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # Live data: re-validates every Greenhouse / Lever / Ashby / Workday board and
+      # refreshes open-job counts (~25 min). Boards checked within the last 6 days are
+      # skipped, so a manual re-run the same week is cheap. A failing ATS shouldn't
+      # block the rest of the refresh, hence continue-on-error.
+      - name: Crawl live ATS boards
+        run: python3 run_all.py --workers 8 --recheck-days 6
+        timeout-minutes: 120
+        continue-on-error: true
 
       - name: Run Applyfox Weekly Routine Update
         run: |

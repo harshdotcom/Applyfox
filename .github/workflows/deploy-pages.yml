@@ -3,6 +3,11 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: ["main"]
+  # The weekly sync pushes with GITHUB_TOKEN, and GitHub deliberately doesn't fire
+  # `push` workflows for those commits — so redeploy when the sync finishes instead.
+  workflow_run:
+    workflows: ["Routine Weekly Update & Sync"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +21,8 @@ concurrency:
 
 jobs:
   deploy:
+    # Skip the redeploy if the sync itself failed.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

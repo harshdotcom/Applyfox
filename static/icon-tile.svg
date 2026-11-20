@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- App-icon tile: ink square, paper mark. The mark sits in the central ~62%
+       so it survives Android's circular "maskable" crop and iOS corner rounding. -->
+  <rect width="32" height="32" fill="#16150f"/>
+  <defs>
+    <mask id="cut"><rect x="-32" y="-32" width="96" height="96" fill="#fff"/><path d="M10.5 17 L14.5 21 L22 13.5" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></mask>
+  </defs>
+  <g transform="translate(16 16.6) scale(.62) translate(-16 -16.25)">
+    <path d="M5 4.5 L12.5 11 H19.5 L27 4.5 V17 L16 28 L5 17 Z" fill="#eceae2" stroke="#eceae2" stroke-width="1.5" stroke-linejoin="round" mask="url(#cut)"/>
+  </g>
+</svg>
